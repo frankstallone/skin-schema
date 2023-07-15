@@ -4,15 +4,15 @@ import type { ImageAsset, Slug } from "@sanity/types";
 import groq from "groq";
 
 if (
-  !import.meta.env.PUBLIC_SANITY_PROJECT_ID ||
-  !import.meta.env.PUBLIC_SANITY_DATASET
+  !import.meta.env.SANITY_STUDIO_PROJECT_ID ||
+  !import.meta.env.SANITY_STUDIO_DATASET
 ) {
   throw new Error("Did you forget to run sanity init --env?");
 }
 
 export const client = createClient({
-  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
-  dataset: import.meta.env.PUBLIC_SANITY_DATASET,
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: import.meta.env.SANITY_STUDIO_DATASET,
   useCdn: false, // `false` if you want to ensure fresh data
   apiVersion: "2023-03-20", // date of setup
 });

@@ -14,17 +14,16 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule) => Rule.required(),
       options: {
         source: 'title',
         maxLength: 96,
       },
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      type: 'text',
-      rows: 4,
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: {type: 'author'},
     }),
     defineField({
       name: 'mainImage',
@@ -35,11 +34,23 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'category'}}],
+    }),
+    defineField({
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
     }),
   ],
+
   preview: {
     select: {
       title: 'title',
