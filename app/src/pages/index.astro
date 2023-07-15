@@ -5,9 +5,13 @@ import Layout from "../layouts/Layout.astro";
 import { getPosts } from "../utils/sanity";
 
 const posts = await getPosts();
+const meta = {
+  title: "Home",
+  description: "Welcome to Skin Schema, a blog about skin care",
+};
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout meta={meta}>
   <section>
     {posts.length ? posts.map((post) => <Card post={post} />) : <Welcome />}
   </section>
