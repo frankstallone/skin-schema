@@ -1,6 +1,5 @@
 ---
 import Card from "../components/Card.astro";
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 import { getPosts } from "../utils/sanity";
 
@@ -13,6 +12,6 @@ const meta = {
 
 <Layout meta={meta}>
   <section>
-    {posts.length ? posts.map((post) => <Card post={post} />) : <Welcome />}
+    {posts.length ? posts.map((post) => <Card post={post} />) : null}
   </section>
 </Layout>
