@@ -10,7 +10,7 @@ interface Props {
 const { post } = Astro.props;
 ---
 
-<div class="card">
+<div>
   {
     post.mainImage ? (
       <img
@@ -21,7 +21,7 @@ const { post } = Astro.props;
       <div />
     )
   }
-  <div>
+  <div class="flow prose">
     <h3>
       <a href={`/post/${post.slug.current}`}>
         {post.title}
