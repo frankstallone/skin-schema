@@ -43,6 +43,7 @@ coverage/
 
 # Dotenv and similar local-only files
 *.local
+*.unlighthouse
 
 # Local Netlify folder
 .netlify
