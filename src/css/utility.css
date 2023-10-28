@@ -1308,6 +1308,6 @@ Utilities for controlling the display box type of an element. */
 .hero {
   height: 60vh;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 75%),
+    linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 75%);
   background-size: cover;
 }
