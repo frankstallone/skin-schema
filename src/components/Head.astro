@@ -1,0 +1,53 @@
+---
+import "../css/reset.css";
+import "../css/global.css";
+import "../css/publicsans.css";
+import "../css/variables.css";
+import "../css/blocks/box.css";
+import "../css/blocks/card.css";
+import "../css/blocks/center.css";
+import "../css/blocks/grid.css";
+import "../css/blocks/prose.css";
+import "../css/blocks/cluster.css";
+import "../css/blocks/cover.css";
+import "../css/blocks/reel.css";
+import "../css/blocks/stack.css";
+import "../css/blocks/switcher.css";
+import "../css/utilities/content.css";
+import "../css/utilities/flow.css";
+import "../css/utilities/icon.css";
+import "../css/utilities/region.css";
+import "../css/utilities/wrapper.css";
+import "../css/utility.css";
+import "../css/exceptions.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: URL | string;
+  image?: string;
+}
+
+const { title, description, canonicalURL, image } = Astro.props;
+
+const metaDescription = description || "Skin Schema blog post";
+// TODO: Add og-image.png to static folder
+const ogImage = image || "/media/og-image.png";
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content={metaDescription} />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Sitemap -->
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalURL} />
+  <meta name="generator" content={Astro.generator} />
+  <!-- Open Graph -->
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content={metaDescription} />
+  <meta name="title" content={title} />
+  <title>{title}</title>
+</head>

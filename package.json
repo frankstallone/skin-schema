@@ -1,8 +1,19 @@
 {
-  "name": "sanity-template-astro-clean",
+  "name": "skin-schema",
+  "type": "module",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
-    "postinstall": "echo '\u001b[0;31mThis is not a monorepo. Run commands in /app and /studio individually.\u001b[0m'"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.2.1",
+    "@astrojs/sitemap": "^3.0.2",
+    "astro": "^3.4.0",
+    "astro-purgecss": "^3.2.1",
+    "typescript": "^5.2.2"
   }
 }
