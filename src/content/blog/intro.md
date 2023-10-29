@@ -1,8 +1,8 @@
 ---
 isDraft: false
-title: 'From 0 to 0.5'
+title: "From 0 to 0.5"
 publishDate: 10-28-2023
-description: 'From 0 to 0.5'
+description: "Success is often portrayed as an abstract destination. How to measure it? Or understand that you are on the right path? My analytical mind wants to measure everything, all the time, and my personal story is no exception. Math wasn’t my best friend… until it was."
 # image: /media/newsletter/a-beginners-guide-to-digital-accessibility.png
 ---
 

@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BlogLayout from "../layouts/BlogLayout.astro";
-import Header from "../components/Header.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -23,7 +22,6 @@ const { Content } = await entry.render();
     canonicalURL: `https://skinschema.com/${entry.slug}/`,
   }}
 >
-<Header />
   <article
     class="region wrapper flow prose overflow-hidden mx-auto"
     style="--measure: 85ch"

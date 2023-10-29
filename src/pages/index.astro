@@ -23,7 +23,7 @@ const allPosts = (await getCollection("blog")).sort(
     <section class="region wrapper flow prose" style="--measure: 75ch;">
       {
         allPosts.map((post) => (
-          <div class="box flow prose rounded" style="--spot-color: var(--gray200)">
+          <div class="box flow prose rounded" style="--spot-color: rgba(242, 242, 242, .4);; --padding: var(--space-2xl);">
             <h2>
               <a href={`/${post.slug}/`}>
                 {post.data.title}
