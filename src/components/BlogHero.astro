@@ -1,0 +1,16 @@
+---
+import Header from './Header.astro';
+const { title } = Astro.props;
+---
+
+<div id="hero" style="--cover-padding: 0;">
+  <Header />
+  <div class="region wrapper">
+    <div class="box flex flex-col justify-center flow prose text-center">
+      <h1 class="step-5 mx-auto">{title}</h1>
+      <h2 class="font-weight-base step-3 mx-auto">
+        Natural beauty routine tips
+      </h2>
+    </div>
+  </div>
+</div>
