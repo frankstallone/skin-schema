@@ -2,7 +2,7 @@
 
 /* Main navigation buttons */
 .button a {
-  color: var(--gray300);
+  color: var(--gray1200);
   font-size: var(--step-1);
   display: inline-block;
   text-decoration: none;
@@ -11,7 +11,7 @@
 .button a:hover,
 .button a:focus,
 .button a:active {
-  color: var(--blue200);
+  color: var(--gray1200);
   text-decoration: underline;
   text-decoration-thickness: max(0.15em, 1px);
 }
@@ -557,71 +557,71 @@ Utilities for setting the width of an element. */
 
 /* Region */
 
-.region[data-padding='l'] {
+.region[data-padding="l"] {
   --region-space-top: var(--space-l-2xl);
   --region-space-bottom: var(--space-l-2xl);
 }
 
 /* Box */
 
-.box[data-padding='xl'] {
+.box[data-padding="xl"] {
   --padding: var(--space-xl);
 }
 
-.box[data-padding='2xl'] {
+.box[data-padding="2xl"] {
   --padding: var(--space-2xl);
 }
 
-.box[data-padding='3xl'] {
+.box[data-padding="3xl"] {
   --padding: var(--space-3xl);
 }
 
 /* Switcher */
 
-.switcher[data-gap='none'] {
+.switcher[data-gap="none"] {
   --gap: 0;
 }
 
-.switcher[data-trenshold='xl'] {
+.switcher[data-trenshold="xl"] {
   --threshold: 50rem;
 }
 
 /* Wrapper */
 
-.wrapper[data-layout='md'] {
+.wrapper[data-layout="md"] {
   --measure: 100ch;
 }
 
 /* Reel */
 
-.reel[data-gap='m-l'] {
+.reel[data-gap="m-l"] {
   --grid-gap: var(--space-m-l);
 }
 
 /* Card */
 
-.card[data-layout='full'] {
+.card[data-layout="full"] {
   --max-width: auto;
 }
 
 /* Grid */
 
-.grid[data-layout='50-50'] {
+.grid[data-layout="50-50"] {
   --grid-placement: auto-fit;
 }
 
-.grid[data-rows='masonry'] {
+.grid[data-rows="masonry"] {
   align-items: start;
   grid-template-rows: masonry;
 }
 
 /* Cover */
 
-.cover > [data-margin-block-start='none'] {
+.cover > [data-margin-block-start="none"] {
   margin-block-start: 0;
 }
 
-.cover > [data-margin-block-end='none'] {
+.cover > [data-margin-block-end="none"] {
   margin-block-end: 0;
 }
 
@@ -872,6 +872,10 @@ Utilities for controlling the alignment of text. */
   font-family: var(--font-display);
 }
 
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 .step--2 {
   font-size: var(--step--2);
 }
@@ -906,7 +910,7 @@ Utilities for controlling the alignment of text. */
 /* General */
 
 .color-loud {
-  color: var(--blue500);
+  color: var(--skin500);
 }
 
 .inset-0 {
@@ -1011,13 +1015,13 @@ Utilities for controlling the alignment of text. */
 /* Spot colors */
 
 .spot-color-primary {
-  --spot-color: var(--blue100);
-  --spot-color-text: var(--blue700);
+  --spot-color: var(--skin100);
+  --spot-color-text: var(--skin700);
 }
 
 .spot-color-primary-dark {
-  --spot-color: var(--blue800);
-  --spot-color-text: var(--blue200);
+  --spot-color: var(--skin800);
+  --spot-color-text: var(--skin200);
 }
 
 .section__inner {
@@ -1289,25 +1293,64 @@ Utilities for controlling the display box type of an element. */
   display: none;
 }
 
-.product-image {
-  transition: all 0.3s ease-in-out;
+/* Font Weight
+Utilities for controlling the font weight of an element. */
+
+.font-extrathin {
+  font-weight: 75;
 }
 
-.product-image:hover {
-  scale: 1.1;
-  rotate: 5deg;
-  filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.25));
+.font-thin {
+  font-weight: 100;
 }
 
-.grid div:nth-child(even) .product-image:hover {
-  rotate: -5deg;
+.font-extralight {
+  font-weight: 200;
 }
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-black {
+  font-weight: 900;
+}
+
+/* Custom */
 
 /* Hero */
 
 .hero {
   height: 60vh;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 75%);
+  background: linear-gradient(
+    180deg,
+    rgba(237, 191, 188, 1) 0%,
+    rgba(237, 191, 188, 0) 75%
+  );
   background-size: cover;
+}
+
+/* Main */
+#main > * {
+  margin-inline: auto;
 }
