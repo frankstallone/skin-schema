@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
-import BlogLayout from "../layouts/BlogLayout.astro";
+import { getCollection } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getCollection('blog');
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -24,7 +24,7 @@ const { Content } = await entry.render();
 >
   <article
     class="region wrapper flow prose overflow-hidden mx-auto"
-    style="--measure: 85ch"
+    style="--measure: 75ch"
     id="main"
   >
     <Content />

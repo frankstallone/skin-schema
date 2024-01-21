@@ -1,52 +1,52 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 // TODO: Create better meta tags for home page
 ---
 
 <Layout
   meta={{
-    title: "Skin Schema | Home",
-    description: "Skin Schema",
+    title: 'Skin Schema | Home',
+    description: 'Skin Schema',
   }}
 >
   <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
   <main>
     <Header />
-    <div class="hero flex flex-col justify-center items-center">
-      <h1>Skin Schema</h1>
+    <div class="wrapper" style="--measure: 75ch;">
+      <h1>Natural beauty routine tips</h1>
     </div>
-    <section class="region wrapper flow prose" style="--measure: 75ch;">
+    <section class="region wrapper" style="--measure: 75ch;" id="main">
+      <h2 class="step-1">From the blog</h2>
       {
         allPosts.map((post) => (
-          <div class="box flow prose rounded" style="--spot-color: rgba(242, 242, 242, .4);; --padding: var(--space-2xl);">
-            <h2>
-              <a href={`/${post.slug}/`}>
-                {post.data.title}
-              </a>
-            </h2>
+          <div
+            class="region flow prose"
+            style="--spot-color: var(--whiteMink);"
+          >
+            <h3>
+              <a href={`/${post.slug}/`}>{post.data.title}</a>
+            </h3>
             <p>
               <small
                 class="uppercase step--2 font-mono font-thin"
-                style="color: var(--gray800);"
+                style="color: var(--skin500);"
               >
                 {new Date(post.data.publishDate).toLocaleDateString(undefined, {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
                 })}
               </small>
             </p>
             <p>{post.data.description}</p>
             <p>
-              <a href={`/${post.slug}/`}>
-                Read more &hellip;
-              </a>
+              <a href={`/${post.slug}/`}>Read more &hellip;</a>
             </p>
           </div>
         ))
