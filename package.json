@@ -13,11 +13,11 @@
     "@astrojs/check": "^0.4.1",
     "@astrojs/sitemap": "^3.0.5",
     "astro": "^4.2.1",
-    "astro-purgecss": "^3.2.1",
+    "astro-purgecss": "^4.1.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.1"
+    "prettier": "^3.2.4",
+    "prettier-plugin-astro": "^0.13.0"
   }
 }
