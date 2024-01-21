@@ -21,12 +21,12 @@ const allPosts = (await getCollection('blog')).sort(
       <h1>Natural beauty routine tips</h1>
     </div>
     <section class="region wrapper" style="--measure: 75ch;" id="main">
-      <h2 class="step-1">From the blog</h2>
+      <p class="uppercase step--2 font-mono">From the blog</p>
       {
         allPosts.map((post) => (
           <div
             class="region flow prose"
-            style="--spot-color: var(--whiteMink);"
+            style="--spot-color: var(--whiteMink); --region-space-top: var(--space-l-xl)"
           >
             <h3>
               <a href={`/${post.slug}/`}>{post.data.title}</a>

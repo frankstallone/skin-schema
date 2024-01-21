@@ -101,7 +101,7 @@ a:hover {
 /* Baseline for default links */
 a:not([class]) {
   /* Relatively sized thickness and offset */
-  text-decoration-thickness: max(0.08em, 1px);
+  text-decoration-thickness: max(0.05em, 1px);
   text-underline-offset: 0.15em;
 }
 
