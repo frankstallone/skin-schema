@@ -66,6 +66,10 @@ h3 {
   max-inline-size: 30ch;
 }
 
+strong {
+  font-weight: var(--font-emphasis-weight);
+}
+
 /* More generic elements */
 blockquote:not([class]) {
   font-size: var(--step-2);
