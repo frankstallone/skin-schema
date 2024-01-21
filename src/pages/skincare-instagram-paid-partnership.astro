@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout
+  meta={{
+    title: 'Skin Schema | Home',
+    description: 'Skin Schema',
+  }}
+>
+  <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
+  <main>
+    <Header />
+    <div class="wrapper" style="--measure: 75ch;">
+      <h1>Instagram paid partnership</h1>
+    </div>
+    <section
+      class="region wrapper flow prose"
+      style="--measure: 75ch;"
+      id="main"
+    >
+      <h2>Skincare company collaboration opportunities</h2>
+      <p>
+        I am looking to partner with skincare companies that are looking to help
+        people achieve their skincare goals. There is value in purity. I only
+        work with companies, products, and services I believe in. That means the
+        everything from the ingredients to the brand persona.
+      </p>
+      <h3>Process</h3>
+      <ol>
+        <li>We have a discovery call to see if we are a good fit</li>
+        <li>I'll create options for your unique products and services</li>
+        <li>You receive high quality content</li>
+      </ol>
+    </section>
+  </main>
+</Layout>

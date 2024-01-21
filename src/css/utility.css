@@ -1,16 +1,16 @@
 /* Utility classes */
 
 /* Main navigation buttons */
-.button a {
+.button {
   color: var(--gray1200);
   font-size: var(--step--0);
   display: inline-block;
   text-decoration: none;
 }
 
-.button a:hover,
-.button a:focus,
-.button a:active {
+.button:hover,
+.button:focus,
+.button:active {
   color: var(--gray1200);
   text-decoration: underline;
   text-decoration-thickness: max(0.1em, 1px);
