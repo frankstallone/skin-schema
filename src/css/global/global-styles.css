@@ -6,7 +6,7 @@
 */
 
 body {
-  @apply font-medium text-gray-1200;
+  @apply font-medium text-gray-1200 m-zero;
   background: var(--color-light);
   color: var(--color-gray-1200);
   font-size: var(--size-step-0);
