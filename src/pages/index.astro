@@ -17,25 +17,26 @@ const allPosts = (await getCollection('blog')).sort(
   <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
   <main>
     <Header />
-    <div class="wrapper" style="--measure: 75ch;">
-      <h1>Natural beauty routine tips</h1>
+    <div class="wrapper region">
+      <h1 class="mt-zero">Natural beauty routine tips</h1>
     </div>
-    <section class="region wrapper" style="--measure: 75ch;" id="main">
-      <p class="uppercase step--2 font-mono">From the blog</p>
+    <section class="wrapper" id="main">
       {
         allPosts.map((post) => (
           <div
             class="region flow prose"
-            style="--spot-color: var(--whiteMink); --region-space-top: var(--space-l-xl)"
+            style="--region-space: var(--space-s-m);"
           >
-            <h3>
-              <a href={`/${post.slug}/`}>{post.data.title}</a>
-            </h3>
-            <p>
-              <small
-                class="uppercase step--2 font-mono font-thin"
-                style="color: var(--skin500);"
-              >
+            <p class="font-mono font-semibold mt-zero text-gray-900">
+              From the blog
+            </p>
+            <h2>
+              <a class="button" href={`/${post.slug}/`}>
+                {post.data.title}
+              </a>
+            </h2>
+            <p class="mt-zero">
+              <small class="font-mono text-gray-900">
                 {new Date(post.data.publishDate).toLocaleDateString(undefined, {
                   weekday: 'long',
                   year: 'numeric',

@@ -1,0 +1,19 @@
+/*
+BOX
+More info: https://every-layout.dev/layouts/box/#the-generator
+*/
+
+.box {
+  padding: var(--space-s-m);
+  color: var(--color-gray-1200);
+  background-color: white;
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-1200);
+}

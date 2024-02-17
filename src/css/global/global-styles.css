@@ -1,0 +1,106 @@
+/* 
+  Global styles 
+
+  Low-specificity, global styles that apply to the whole 
+  project: https://cube.fyi/css.html
+*/
+
+body {
+  @apply font-medium text-gray-1200;
+  background: var(--color-light);
+  color: var(--color-gray-1200);
+  font-size: var(--size-step-0);
+  font-family: var(--font-base);
+  line-height: var(--leading-standard);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-medium;
+  letter-spacing: calc(var(--leading-tighter) * 0.01ch);
+}
+
+h1 {
+  @apply text-step-5;
+  max-inline-size: 50ch;
+}
+
+h2 {
+  @apply text-step-4;
+}
+
+h3 {
+  @apply text-step-3;
+}
+
+/* Baseline for default links */
+a {
+  @apply underline hover:no-underline text-gray-1200;
+}
+
+a:not([class]) {
+  /* Relatively sized thickness and offset */
+  text-decoration-thickness: max(0.08em, 1px);
+  text-underline-offset: 0.15em;
+}
+
+p,
+li,
+blockquote:not([class]) {
+  max-inline-size: 50ch;
+}
+blockquote:not([class]) {
+  @apply text-step-2 ml-zero pl-xs-s;
+  border-left: max(0.08em, 1px) solid var(--color-gray-1200);
+}
+
+svg {
+  height: 0.8lh;
+  width: auto;
+  flex: none;
+}
+
+[role='list'] {
+  padding: 0;
+}
+
+/* Scroll padding allowance below focused elements 
+  to ensure they are clearly in view */
+:focus {
+  scroll-padding-block-end: 8vh;
+}
+
+:focus-visible {
+  --outline-size: max(2px, 0.15em);
+
+  outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid)
+    var(--outline-color, currentColor);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+/* Scroll padding allowance above anchor links */
+:target {
+  scroll-padding-block-start: 2rem;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Base selection styles that invert whatever colours are rendered */
+::selection {
+  background: var(--color-dark);
+  color: var(--color-light);
+}
+
+@layer components {
+  .button {
+    @apply no-underline hover:underline visited:text-gray-1200;
+    text-decoration-thickness: max(0.08em, 1px);
+    text-underline-offset: 0.15em;
+  }
+}

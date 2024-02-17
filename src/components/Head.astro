@@ -1,26 +1,5 @@
 ---
-import "../css/reset.css";
-import "../css/global.css";
-import "../css/geist.css";
-import "../css/variables.css";
-import "../css/blocks/box.css";
-import "../css/blocks/card.css";
-import "../css/blocks/center.css";
-import "../css/blocks/grid.css";
-import "../css/blocks/prose.css";
-import "../css/blocks/cluster.css";
-import "../css/blocks/cover.css";
-import "../css/blocks/reel.css";
-import "../css/blocks/stack.css";
-import "../css/blocks/switcher.css";
-import "../css/utilities/content.css";
-import "../css/utilities/flow.css";
-import "../css/utilities/icon.css";
-import "../css/utilities/region.css";
-import "../css/utilities/wrapper.css";
-import "../css/utility.css";
-import "../css/exceptions.css";
-
+import '../css/global.css';
 interface Props {
   title?: string;
   description?: string;
@@ -30,9 +9,9 @@ interface Props {
 
 const { title, description, canonicalURL, image } = Astro.props;
 
-const metaDescription = description || "Skin Schema blog post";
+const metaDescription = description || 'Skin Schema blog post';
 // TODO: Add og-image.png to static folder
-const ogImage = image || "/media/og-image.png";
+const ogImage = image || '/media/og-image.png';
 ---
 
 <head>

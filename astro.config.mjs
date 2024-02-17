@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
-import purgecss from 'astro-purgecss';
+import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://skinschema.com',
-    integrations: [
-        purgecss(),
-        sitemap(),
-    ]
+  site: 'https://skinschema.com',
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    sitemap(),
+  ],
 });
