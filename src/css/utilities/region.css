@@ -1,10 +1,7 @@
-/**
- * REGION
- * Add consistent vertical padding to create regions of content
- * Can either be configured by setting --region-space or use a default from the space scale
- */
+/* 
+REGION UTILITY
+Consistent block padding for page sections
+*/
 .region {
-  padding-top: var(--region-space-top, var(--space-2xl-3xl));
-  padding-bottom: var(--region-space-bottom, var(--space-2xl-3xl));
-  background-color: var(--spot-color, transparent);
+  padding-block: var(--region-space, var(--space-xl-2xl));
 }
