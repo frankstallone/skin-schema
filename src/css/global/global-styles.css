@@ -39,7 +39,7 @@ h3 {
 
 /* Baseline for default links */
 a {
-  @apply underline hover:no-underline;
+  @apply underline hover:no-underline text-gray-1200;
 }
 
 a:not([class]) {
