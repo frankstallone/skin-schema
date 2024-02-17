@@ -3,6 +3,14 @@
   "description": "Ratio-based leading/line-height values",
   "items": [
     {
+      "name": "Tighter",
+      "value": 0.5
+    },
+    {
+      "name": "Tight",
+      "value": 0.75
+    },
+    {
       "name": "Flat",
       "value": 1
     },

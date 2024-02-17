@@ -1,13 +1,12 @@
 /*
 BOX
 More info: https://every-layout.dev/layouts/box/#the-generator
-
 */
 
 .box {
   padding: var(--space-s-m);
-  color: var(--color-dark);
-  background-color: var(--color-light);
+  color: var(--color-gray-1200);
+  background-color: white;
 }
 
 .box * {
@@ -15,6 +14,6 @@ More info: https://every-layout.dev/layouts/box/#the-generator
 }
 
 .box.invert {
-  color: var(--color-light);
-  background-color: var(--color-dark);
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-1200);
 }
