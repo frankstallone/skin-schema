@@ -1,6 +1,10 @@
 ---
+import Picture from 'astro/components/Picture.astro';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import promo01 from '../assets/paid-partnership/2023-Creative-Minds-14.jpg';
+import promo02 from '../assets/paid-partnership/2023-Creative-Minds-40.jpg';
+import promo03 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revision-3.jpg';
 ---
 
 <Layout
@@ -15,6 +19,44 @@ import Header from '../components/Header.astro';
     <div class="wrapper">
       <h1>Instagram paid partnership</h1>
     </div>
+    <ul class="grid" role="list" data-layout="thirds">
+      <li class="flex items-center">
+        <Picture
+          src={promo01}
+          widths={[700, 1000, 1500]}
+          alt="Instagram paid partnership high quality image"
+          style="height: auto;"
+          quality={80}
+          format="avif"
+          decoding="sync"
+          loading="eager"
+        />
+      </li>
+      <li class="flex items-center">
+        <Picture
+          src={promo02}
+          widths={[700, 1000, 1500]}
+          alt="Instagram paid partnership high quality image"
+          style="height: auto;"
+          quality={80}
+          format="avif"
+          decoding="sync"
+          loading="eager"
+        />
+      </li>
+      <li class="flex items-center">
+        <Picture
+          src={promo03}
+          widths={[700, 1000, 1500]}
+          alt="Instagram paid partnership high quality image"
+          style="height: auto;"
+          quality={80}
+          format="avif"
+          decoding="sync"
+          loading="eager"
+        />
+      </li>
+    </ul>
     <section class="region wrapper flow prose" id="main">
       <h2>Skincare company collaboration opportunities</h2>
       <p>
@@ -29,9 +71,9 @@ import Header from '../components/Header.astro';
         <li>You receive high quality content</li>
       </ol>
     </section>
-    <section class="region box">
+    <section class="box">
       <ul role="list" class="grid" data-layout="thirds">
-        <li class="box flow prose">
+        <li class="box flow prose bg-gray-200">
           <h3>Schema Premium</h3>
           <p>
             Research, narrative writing, creating catchy captions and provide
@@ -77,10 +119,10 @@ import Header from '../components/Header.astro';
             <li>Evening routine</li>
             <li>Weekend routine</li>
           </ol>
-          <p class="step-3">$1,500</p>
+          <p class="text-step-3 font-extrabold text-center">$1,500</p>
         </li>
 
-        <li class="box flow prose" style="--spot-color: var(--skin200);">
+        <li class="box flow prose bg-gray-200">
           <h3>Schema Plus</h3>
           <p>
             Research, narrative writing, creating catchy captions and provide
@@ -109,9 +151,9 @@ import Header from '../components/Header.astro';
             <li>Evening routine</li>
             <li>Weekend routine</li>
           </ol>
-          <p class="step-3">$800</p>
+          <p class="text-step-3 font-extrabold text-center">$800</p>
         </li>
-        <li class="box flow prose" style="--spot-color: var(--skin200);">
+        <li class="box flow prose bg-gray-200">
           <h3>Schema Basic</h3>
           <p>Reel video delivery. Three reels for two themes.</p>
           <p>
@@ -137,14 +179,14 @@ import Header from '../components/Header.astro';
             <li>Evening routine</li>
             <li>Weekend routine</li>
           </ol>
-          <p class="step-3">$500</p>
+          <p class="text-step-3 font-extrabold text-center">$500</p>
         </li>
       </ul>
     </section>
     <hgroup class="wrapper flow prose">
       <h2>Featured work</h2>
     </hgroup>
-    <section class="region box">
+    <section class="box">
       <blockquote
         class="instagram-media"
         data-instgrm-captioned

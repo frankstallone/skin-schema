@@ -20,8 +20,8 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-medium;
-  letter-spacing: calc(var(--leading-tighter) * 0.01ch);
+  @apply font-black;
+  letter-spacing: calc(var(--leading-tighter) * -0.05ch);
 }
 
 h1 {

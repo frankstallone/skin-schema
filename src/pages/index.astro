@@ -8,7 +8,7 @@ const allPosts = (await getCollection('blog')).sort(
 );
 // TODO: Create better meta tags for home page
 
-import hero from '../assets/2023-Creative-Minds-29-web.jpg';
+import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
 
 const optimizedBackground = await getImage({ src: hero, format: 'webp' });
 ---
@@ -23,10 +23,16 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
   <main>
     <Header />
     <div
+      class=""
       style={`background-image: url(${optimizedBackground.src}); background-size: cover; padding-block: var(--space-3xl-4xl); background-position: center;`}
     >
       <div class="wrapper region">
-        <h1 class="mt-zero text-gray-400">Natural beauty routine tips</h1>
+        <h1
+          class="mt-zero text-gray-100 font-black uppercase"
+          style="max-inline-size: 18ch; letter-spacing: calc(var(--leading-tighter) * -0.05ch);"
+        >
+          Natural beauty routine tips
+        </h1>
       </div>
     </div>
     <section class="wrapper" id="main">
@@ -37,6 +43,14 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             style="--region-space: var(--space-s-m);"
           >
             <p class="font-mono font-semibold mt-zero text-gray-900">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                fill="currentColor"
+                class="icon text-skin-400"
+              >
+                <path d="M368.4 18.3c21.9-21.9 57.3-21.9 79.2 0l46.1 46.1c21.9 21.9 21.9 57.3 0 79.2l-71 71L412.2 225 371.6 374.1c-4.8 17.8-18.1 32-35.5 38.1L72 505c-18.5 6.5-39.1 1.8-52.9-12S.5 458.5 7 440L99.8 175.9c6.1-17.4 20.3-30.6 38.1-35.5L287 99.8l10.4-10.4 71-71zM296.9 146.8L150.5 186.7c-2.5 .7-4.6 2.6-5.4 5.1L62.5 426.9 164.7 324.7c-3-6.3-4.7-13.3-4.7-20.7c0-26.5 21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48c-7.4 0-14.4-1.7-20.7-4.7L85.1 449.5l235.1-82.6c2.5-.9 4.4-2.9 5.1-5.4l39.9-146.4-68.3-68.3z" />
+              </svg>
               From the blog
             </p>
             <h2>
@@ -46,6 +60,14 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             </h2>
             <p class="mt-zero">
               <small class="font-mono text-gray-900">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  fill="currentColor"
+                  class="icon text-skin-400"
+                >
+                  <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+                </svg>
                 {new Date(post.data.publishDate).toLocaleDateString(undefined, {
                   weekday: 'long',
                   year: 'numeric',
