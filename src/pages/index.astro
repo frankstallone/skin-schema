@@ -23,14 +23,13 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
   <main>
     <Header />
     <div
-      class=""
-      style={`background-image: url(${optimizedBackground.src}), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-      background-blend-mode: overlay; background-size: cover; padding-block: var(--space-3xl-4xl); background-position: center;`}
+      class="bg-cover bg-center bg-blend-overlay py-3xl-4xl"
+      style={`background-image: url(${optimizedBackground.src}), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));`}
     >
       <div class="wrapper region">
         <h1
-          class="mt-zero text-gray-100 font-black uppercase"
-          style="max-inline-size: 18ch; letter-spacing: calc(var(--leading-tighter) * -0.05ch);"
+          class="mt-zero text-gray-100 font-black uppercase tracking-tight"
+          style="max-inline-size: 18ch;"
         >
           Natural beauty routine tips
         </h1>
@@ -65,10 +64,7 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             </h2>
             <p class="mt-zero">
               <small class="font-mono text-gray-900 text-step-000">
-                <span
-                  class="bg-gray-200 py-3xs px-2xs"
-                  style="border-radius: 9999px;"
-                >
+                <span class="bg-gray-200 py-3xs px-2xs rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
