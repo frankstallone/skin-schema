@@ -20,8 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-black;
-  letter-spacing: calc(var(--leading-tighter) * -0.05ch);
+  @apply font-black tracking-tight;
 }
 
 h1 {
