@@ -1,7 +1,7 @@
 {
   "name": "skin-schema",
   "type": "module",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "author": "Frank Stallone <frank@stallone.dev>",
   "description": "Website for Skin Schema",
   "scripts": {
