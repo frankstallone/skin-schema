@@ -42,20 +42,25 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             High-quality images showcasing products in a light, airy, and
             minimalistic style.
           </p>
+
           <div
             class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
           >
-            <div class="flex flex-col justify-between items-center p-2xs">
+            <div class="flex flex-col grow justify-between items-center p-2xs">
               <div class="flex justify-center items-center font-semibold">
                 <button class="button" aria-label="Add more photos">+</button>
-                <div class="text-step-1 px-xs">1</div>
+                <div class="text-step-1 px-s">1</div>
                 <button class="button" aria-label="Remove photos">-</button>
               </div>
               <p class="text-step-000 font-semibold mt-zero">Photo(s)</p>
             </div>
-            <div class="flex flex-col justify-between items-center p-2xs">
-              <h4 class="mt-zero text-step-1 font-semibold">1</h4>
-              <p class="text-step-000 font-semibold mt-zero">Week turnaround</p>
+            <div class="flex flex-col justify-center items-center p-2xs">
+              <div>
+                <h4 class="mt-zero text-step-1 font-semibold">1</h4>
+                <p class="text-step-000 font-semibold mt-zero">
+                  Week turnaround
+                </p>
+              </div>
             </div>
           </div>
           <h4 class="text-center font-semibold text-step-4">$100</h4>
@@ -66,6 +71,39 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             Engaging short videos tailored for Instagram & TikTok, perfect for
             capturing audience attention quickly.
           </p>
+
+          <div
+            class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
+          >
+            <div class="flex flex-col p-2xs grow">
+              <fieldset
+                class="flex flex-col gap-xs justify-center font-semibold p-zero"
+              >
+                <legend class="sr-only">Photos</legend>
+                <div class="flex gap-2xs">
+                  <input id="photos-1" type="radio" name="photos" />
+                  <label for="photos-1" class="text-step-00">1 photo</label>
+                </div>
+                <div class="flex gap-2xs">
+                  <input id="photos-3" type="radio" name="photos" />
+                  <label for="photos-3" class="text-step-00">3 photos</label>
+                </div>
+                <div class="flex gap-2xs">
+                  <input id="photos-5" type="radio" name="photos" />
+                  <label for="photos-5" class="text-step-00">5 photos</label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="flex flex-col gap-s justify-center items-center p-2xs">
+              <div>
+                <h4 class="mt-zero text-step-2 font-semibold">1</h4>
+                <p class="text-step-000 font-semibold mt-zero">
+                  Week turnaround
+                </p>
+              </div>
+            </div>
+          </div>
+          <h4 class="text-center font-semibold text-step-4">$100</h4>
         </li>
         <li class="box flow prose border border-gray-600">
           <h3 class="mt-zero">Inspiration and Vlog Content</h3>
