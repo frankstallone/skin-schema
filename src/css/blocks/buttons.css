@@ -1,5 +1,5 @@
 .button {
-  background: var(--color-gray-600);
-  padding: 0 var(--space-2xs);
-  border-radius: 0.5rem;
+  @apply no-underline hover:underline visited:text-gray-1200;
+  text-decoration-thickness: max(0.08em, 1px);
+  text-underline-offset: 0.15em;
 }
