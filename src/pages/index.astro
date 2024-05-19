@@ -51,7 +51,6 @@ const options = [
     },
   },
 ];
-// console.log(options.map((option) => option.service));
 ---
 
 <Layout
@@ -81,7 +80,7 @@ const options = [
       <ul class="grid" role="list" data-layout="thirds">
         {
           options.map((option) => (
-            <PriceCard client:load service={option.service} />
+            <PriceCard client:idle service={option.service} />
           ))
         }
       </ul>
