@@ -1,6 +1,5 @@
 ---
 import { getImage } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 
@@ -112,6 +111,29 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             care routine and day-to-day product usage, connecting on a personal
             level with the audience.
           </p>
+          <div
+            class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
+          >
+            <div class="flex flex-col grow justify-between items-center p-2xs">
+              <div class="flex justify-center items-center font-semibold">
+                <select>
+                  <option>1</option>
+                  <option>3</option>
+                  <option>5</option>
+                </select>
+              </div>
+              <p class="text-step-000 font-semibold mt-zero">Photo(s)</p>
+            </div>
+            <div class="flex flex-col justify-center items-center p-2xs">
+              <div>
+                <h4 class="mt-zero text-step-1 font-semibold">1</h4>
+                <p class="text-step-000 font-semibold mt-zero">
+                  Week turnaround
+                </p>
+              </div>
+            </div>
+          </div>
+          <h4 class="text-center font-semibold text-step-4">$100</h4>
         </li>
       </ul>
     </section>
