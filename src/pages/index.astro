@@ -6,8 +6,52 @@ import Header from '../components/Header.astro';
 // TODO: Create better meta tags for home page
 
 import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
+import PriceCard from '../components/PriceCard';
 
 const optimizedBackground = await getImage({ src: hero, format: 'webp' });
+
+const options = [
+  {
+    service: {
+      title: 'Photography',
+      description:
+        'High-quality images showcasing products in a light, airy, and minimalistic style.',
+      type: 'Photo',
+      packages: [
+        { amount: 1, price: '$100', weekTurnaround: 1 },
+        { amount: 3, price: '$300', weekTurnaround: 2 },
+        { amount: 5, price: '$500', weekTurnaround: 3 },
+      ],
+    },
+  },
+  {
+    service: {
+      title: 'Short form video',
+      description:
+        'Engaging short videos tailored for Instagram & TikTok, perfect for capturing audience attention quickly.',
+      type: 'UGC Video',
+      packages: [
+        { amount: 1, price: '$200', weekTurnaround: 1 },
+        { amount: 3, price: '$500', weekTurnaround: 2 },
+        { amount: 5, price: '$700', weekTurnaround: 3 },
+      ],
+    },
+  },
+  {
+    service: {
+      title: 'Inspirational vlog content',
+      description:
+        'Personalized content that shares lifestyle tips, inspirations, self care routine and day-to-day product usage, connecting on a personal level with the audience.',
+      type: 'UGC Video',
+      packages: [
+        { amount: 1, price: '$300', weekTurnaround: 1 },
+        { amount: 3, price: '$600', weekTurnaround: 2 },
+        { amount: 5, price: '$800', weekTurnaround: 3 },
+      ],
+    },
+  },
+];
+// console.log(options.map((option) => option.service));
 ---
 
 <Layout
@@ -35,106 +79,11 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
     <section class="wrapper" id="main">
       <h2>Rate sheet</h2>
       <ul class="grid" role="list" data-layout="thirds">
-        <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero">Professional photography</h3>
-          <p>
-            High-quality images showcasing products in a light, airy, and
-            minimalistic style.
-          </p>
-
-          <div
-            class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
-          >
-            <div class="flex flex-col grow justify-between items-center p-2xs">
-              <div class="flex justify-center items-center font-semibold">
-                <button class="button" aria-label="Add more photos">+</button>
-                <div class="text-step-1 px-s">1</div>
-                <button class="button" aria-label="Remove photos">-</button>
-              </div>
-              <p class="text-step-000 font-semibold mt-zero">Photo(s)</p>
-            </div>
-            <div class="flex flex-col justify-center items-center p-2xs">
-              <div>
-                <h4 class="mt-zero text-step-1 font-semibold">1</h4>
-                <p class="text-step-000 font-semibold mt-zero">
-                  Week turnaround
-                </p>
-              </div>
-            </div>
-          </div>
-          <h4 class="text-center font-semibold text-step-4">$100</h4>
-        </li>
-        <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero">Short form video</h3>
-          <p>
-            Engaging short videos tailored for Instagram & TikTok, perfect for
-            capturing audience attention quickly.
-          </p>
-
-          <div
-            class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
-          >
-            <div class="flex flex-col p-2xs grow">
-              <fieldset
-                class="flex flex-col gap-xs justify-center font-semibold p-zero"
-              >
-                <legend class="sr-only">Photos</legend>
-                <div class="flex gap-2xs">
-                  <input id="photos-1" type="radio" name="photos" />
-                  <label for="photos-1" class="text-step-00">1 photo</label>
-                </div>
-                <div class="flex gap-2xs">
-                  <input id="photos-3" type="radio" name="photos" />
-                  <label for="photos-3" class="text-step-00">3 photos</label>
-                </div>
-                <div class="flex gap-2xs">
-                  <input id="photos-5" type="radio" name="photos" />
-                  <label for="photos-5" class="text-step-00">5 photos</label>
-                </div>
-              </fieldset>
-            </div>
-            <div class="flex flex-col gap-s justify-center items-center p-2xs">
-              <div>
-                <h4 class="mt-zero text-step-2 font-semibold">1</h4>
-                <p class="text-step-000 font-semibold mt-zero">
-                  Week turnaround
-                </p>
-              </div>
-            </div>
-          </div>
-          <h4 class="text-center font-semibold text-step-4">$100</h4>
-        </li>
-        <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero">Inspiration and Vlog Content</h3>
-          <p>
-            Personalized content that shares lifestyle tips, inspirations, self
-            care routine and day-to-day product usage, connecting on a personal
-            level with the audience.
-          </p>
-          <div
-            class="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center"
-          >
-            <div class="flex flex-col grow justify-between items-center p-2xs">
-              <div class="flex justify-center items-center font-semibold">
-                <select>
-                  <option>1</option>
-                  <option>3</option>
-                  <option>5</option>
-                </select>
-              </div>
-              <p class="text-step-000 font-semibold mt-zero">Photo(s)</p>
-            </div>
-            <div class="flex flex-col justify-center items-center p-2xs">
-              <div>
-                <h4 class="mt-zero text-step-1 font-semibold">1</h4>
-                <p class="text-step-000 font-semibold mt-zero">
-                  Week turnaround
-                </p>
-              </div>
-            </div>
-          </div>
-          <h4 class="text-center font-semibold text-step-4">$100</h4>
-        </li>
+        {
+          options.map((option) => (
+            <PriceCard client:load service={option.service} />
+          ))
+        }
       </ul>
     </section>
   </main>
