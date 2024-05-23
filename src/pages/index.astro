@@ -1,7 +1,8 @@
 ---
-import { getImage } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import promo03 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revision-3.jpg';
 
 // TODO: Create better meta tags for home page
 
@@ -13,9 +14,9 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
 const options = [
   {
     service: {
-      title: 'Photography',
+      title: 'Professional Photography of Products',
       description:
-        'High-quality images showcasing products in a light, airy, and minimalistic style.',
+        'High-quality images showcasing your products in a professional, light, airy, and minimalistic style.',
       type: 'Photo',
       packages: [
         { amount: 1, price: '$100', weekTurnaround: 1 },
@@ -26,9 +27,9 @@ const options = [
   },
   {
     service: {
-      title: 'Short form video',
+      title: 'Short Form Product Videos',
       description:
-        'Engaging short videos tailored for Instagram & TikTok, perfect for capturing audience attention quickly.',
+        'Engaging short videos tailored for Instagram & TikTok, designed to captivate and inspire your audience through a feeling of lux serenity. These can be product showcases, unboxings, how-tos, before-and-afters, or any other ideas youd like to see brought to life.',
       type: 'UGC Video',
       packages: [
         { amount: 1, price: '$200', weekTurnaround: 1 },
@@ -39,9 +40,9 @@ const options = [
   },
   {
     service: {
-      title: 'Inspirational vlog content',
+      title: 'Inspiration and Vlog Videos',
       description:
-        'Personalized content that shares lifestyle tips, inspirations, self care routine and day-to-day product usage, connecting on a personal level with the audience.',
+        'Personalized and heartfelt video content produced in studio quality, sharing lifestyle tips, inspiration, self-care routines, and day-to-day product usage.',
       type: 'UGC Video',
       packages: [
         { amount: 1, price: '$300', weekTurnaround: 1 },
@@ -75,8 +76,76 @@ const options = [
         </h1>
       </div>
     </div>
-    <section class="wrapper" id="main">
-      <h2>Rate sheet</h2>
+    <section class="wrapper flow prose" id="main">
+      <ul class="grid" data-layout="50-50" role="list">
+        <li class="flow prose">
+          <h2>Skin Schema's Collaboration Opportunities</h2>
+          <p>
+            Hi, I'm Kseniya 👋🏻 I'm an experienced photographer and videographer,
+            and created Skin Schema to showcase my passion for beauty and
+            skincare through a lens of authenticity and elegance. Having
+            developed a loyal, trusting following, I'm now opening both my
+            experience and feed to collaboration opportunities with a select
+            number of partners. Whether you want to lift your own brand's social
+            media presence with high-quality, captivating visuals, or engage
+            with my devoted, growing beauty audience, I offer the below bespoke
+            collaboration options. Let's create stunning content together.
+          </p>
+          <p>
+            If you'd like to discuss any of these options in more detail, or
+            make a booking, connect with me over…
+          </p>
+        </li>
+        <li class="flex justify-center items-center">
+          <Picture
+            src={promo03}
+            widths={[700, 1000, 1500]}
+            alt="Instagram paid partnership high quality image"
+            class="h-auto max-w-screen-sm object-cover"
+            quality={80}
+            format="avif"
+            decoding="sync"
+            loading="eager"
+          />
+        </li>
+      </ul>
+
+      <h2>Collaboration options</h2>
+      <p>
+        All of my services come in two options - either as content I create for
+        your own use, or content I create and share to my Skin Schema feed.
+      </p>
+      <ul class="grid" data-layout="50-50" role="list">
+        <li class="box flow prose border border-gray-600">
+          <h3 class="mt-zero text-step-00 uppercase font-black">Option 1</h3>
+          <h4 class="mt-2xs text-step-2">For Brand Use</h4>
+          <p>
+            Showcase your products in beautifully curated content designed
+            exclusively for your social media feeds. Each piece will be
+            professionally planned, shot, and edited to feel minimal, airy, and
+            elegant. The finished product will be delivered to you in multiple
+            formats tailored for use across various platforms.
+          </p>
+          <p>
+            You will own the rights to post this content anywhere, anytime,
+            forever - the only requirement is that you tag Skin Schema's
+            Instagram account when you do.
+          </p>
+        </li>
+        <li class="box flow prose border border-gray-600">
+          <h3 class="mt-zero text-step-00 uppercase font-black">Option 2</h3>
+          <h4 class="mt-2xs text-step-2">Shared by Skin Schema</h4>
+          <p>
+            Let your products shine on Skin Schema's Instagram feed, reaching a
+            highly engaged audience that values my genuine beauty insights. This
+            option is perfect for brands looking to benefit from the authentic
+            connection and trust I've earned with my followers, who regularly
+            turn to me for skincare opinions and recommendations.
+          </p>
+        </li>
+      </ul>
+
+      <h2>Services</h2>
       <ul class="grid" role="list" data-layout="thirds">
         {
           options.map((option) => (
