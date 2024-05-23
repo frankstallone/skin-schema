@@ -56,7 +56,7 @@ const options = [
 
 <Layout
   meta={{
-    title: 'Skin Schema | Home',
+    title: 'Skin Schema Instagram skincare influencer',
     description: 'Skin Schema',
   }}
 >
@@ -72,31 +72,36 @@ const options = [
           class="mt-zero text-gray-100 tracking-tight text-balance"
           style="max-inline-size: 18ch;"
         >
-          Paid partnership with Skin Schema
+          Skin Schema's Collaboration Opportunities
         </h1>
       </div>
     </div>
-    <section class="wrapper flow prose" id="main">
+    <section class="wrapper region flow prose" id="main">
       <ul class="grid" data-layout="50-50" role="list">
-        <li class="flow prose">
-          <h2>Skin Schema's Collaboration Opportunities</h2>
-          <p>
+        <li class="flex flex-col justify-center items-center flow prose">
+          <p class="mt-zero">
             Hi, I'm Kseniya 👋🏻 I'm an experienced photographer and videographer,
             and created Skin Schema to showcase my passion for beauty and
-            skincare through a lens of authenticity and elegance. Having
-            developed a loyal, trusting following, I'm now opening both my
-            experience and feed to collaboration opportunities with a select
-            number of partners. Whether you want to lift your own brand's social
-            media presence with high-quality, captivating visuals, or engage
-            with my devoted, growing beauty audience, I offer the below bespoke
-            collaboration options. Let's create stunning content together.
+            skincare through a lens of authenticity and elegance.
           </p>
-          <p>
-            If you'd like to discuss any of these options in more detail, or
-            make a booking, connect with me over…
-          </p>
+          <details-utils close-click-outside class="self-start">
+            <details>
+              <summary class="my-xs">Learn more about me...</summary>
+              <section>
+                Having developed a loyal, trusting following, I'm now opening
+                both my experience and feed to collaboration opportunities with
+                a select number of partners. Whether you want to lift your own
+                brand's social media presence with high-quality, captivating
+                visuals, or engage with my devoted, growing beauty audience, I
+                offer the below bespoke collaboration options. Let's create
+                stunning content together.
+              </section>
+            </details>
+          </details-utils>
         </li>
-        <li class="flex justify-center items-center">
+        <li
+          class="hidden [@media(width>=1199px)]:flex justify-center items-center"
+        >
           <Picture
             src={promo03}
             widths={[700, 1000, 1500]}
@@ -117,7 +122,9 @@ const options = [
       </p>
       <ul class="grid" data-layout="50-50" role="list">
         <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero text-step-00 uppercase font-black">Option 1</h3>
+          <h3 class="mt-zero text-step-00 uppercase font-black text-gray-1100">
+            Option 1
+          </h3>
           <h4 class="mt-2xs text-step-2">For Brand Use</h4>
           <p>
             Showcase your products in beautifully curated content designed
@@ -133,7 +140,9 @@ const options = [
           </p>
         </li>
         <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero text-step-00 uppercase font-black">Option 2</h3>
+          <h3 class="mt-zero text-step-00 uppercase font-black text-gray-1100">
+            Option 2
+          </h3>
           <h4 class="mt-2xs text-step-2">Shared by Skin Schema</h4>
           <p>
             Let your products shine on Skin Schema's Instagram feed, reaching a
@@ -156,3 +165,5 @@ const options = [
     </section>
   </main>
 </Layout>
+
+<script src="@zachleat/details-utils/details-utils.js"></script>
