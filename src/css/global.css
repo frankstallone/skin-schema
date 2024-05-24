@@ -17,6 +17,7 @@ Reference source: https://github.com/Set-Creative-Studio/cube-boilerplate/blob/m
 */
 
 @import 'blocks/buttons.css' layer(components);
+@import 'blocks/mark.css' layer(components);
 @import 'blocks/prose.css' layer(components);
 @import 'components/box.css' layer(components);
 @import 'components/cluster.css' layer(components);
