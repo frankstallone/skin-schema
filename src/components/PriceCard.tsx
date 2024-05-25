@@ -32,11 +32,11 @@ const selectClassNamesOptions = {
   valueContainer: () => 'pr-2xs',
   indicatorSeparator: (state: any) =>
     classNames('bg-gray-600 mr-2xs', state.isFocused ? 'bg-gray-1200' : ''),
-  menu: () => 'mt-2xs border border-gray-800 bg-[white]',
+  menu: () => 'mt-2xs border border-gray-1200 bg-[white]',
   option: (state: any) => {
     return classNames(
       'p-2xs',
-      state.isFocused ? 'bg-gray-200' : '',
+      state.isFocused ? 'bg-gray-100' : '',
       state.isSelected ? 'bg-gray-400' : '',
     );
   },
@@ -73,8 +73,8 @@ const PriceCard = ({ service }: Props) => {
   return (
     <li className="border border-gray-600 flex flex-col justify-between">
       <div className="box flow prose">
-        <h3 className="mt-zero">{service.title}</h3>
-        <p>{service.description}</p>
+        <h3 className="mt-zero text-step-1">{service.title}</h3>
+        <p className="text-step-00">{service.description}</p>
       </div>
       <div className="border-t border-t-gray-600">
         <div className="flex flex-col justify-center items-center p-2xs">
@@ -109,8 +109,8 @@ const PriceCard = ({ service }: Props) => {
             </p>
           </div>
           <div className="flex flex-col justify-center items-center p-2xs">
-            <div>
-              <h4 className="mt-zero text-step-1 font-semibold">
+            <div className="flex flex-col justify-between grow">
+              <h4 className="mt-2xs text-step-0 font-semibold">
                 {
                   service.packages.find(
                     (option) => option.amount === chosenPackage.amount,
