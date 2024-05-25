@@ -71,65 +71,66 @@ const PriceCard = ({ service }: Props) => {
   }));
 
   return (
-    <li className="border border-gray-600">
-      <div className="box flow prose border-b border-b-gray-600">
+    <li className="border border-gray-600 flex flex-col justify-between">
+      <div className="box flow prose">
         <h3 className="mt-zero">{service.title}</h3>
         <p>{service.description}</p>
       </div>
-      <div className="flex flex-col justify-center items-center p-2xs">
-        <div className="flex justify-center items-center font-semibold">
-          <Select
-            defaultValue={distribution}
-            onChange={handleSetDistribution}
-            options={distributionMethods}
-            className="text-step-00"
-            unstyled
-            classNames={selectClassNamesOptions}
-          />
-        </div>
-        <p className="text-step-000 font-semibold mt-2xs">
-          Distribution method
-        </p>
-      </div>
-      <div className="flex divide-x divide-gray-600 border border-gray-600 text-center justify-center">
-        <div className="flex flex-col grow justify-between items-center p-2xs">
+      <div className="border-t border-t-gray-600">
+        <div className="flex flex-col justify-center items-center p-2xs">
           <div className="flex justify-center items-center font-semibold">
             <Select
-              defaultValue={selectablePackages[0]}
-              onChange={handleAmountChange}
-              options={selectablePackages}
+              defaultValue={distribution}
+              onChange={handleSetDistribution}
+              options={distributionMethods}
               className="text-step-00"
               unstyled
               classNames={selectClassNamesOptions}
             />
           </div>
-          <p className="text-step-000 font-semibold mt-zero">
-            {service.type}(s)
+          <p className="text-step-000 font-semibold mt-2xs">
+            Distribution method
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center p-2xs">
-          <div>
-            <h4 className="mt-zero text-step-1 font-semibold">
-              {
-                service.packages.find(
-                  (option) => option.amount === chosenPackage.amount,
-                )?.weekTurnaround
-              }
-            </h4>
-            <p className="text-step-000 font-semibold mt-zero">
-              Week turnaround
+        <div className="flex divide-x divide-gray-600 border-y border-y-gray-600 text-center justify-center">
+          <div className="flex flex-col grow justify-between items-center p-2xs">
+            <div className="flex justify-center items-center font-semibold">
+              <Select
+                defaultValue={selectablePackages[0]}
+                onChange={handleAmountChange}
+                options={selectablePackages}
+                className="text-step-00"
+                unstyled
+                classNames={selectClassNamesOptions}
+              />
+            </div>
+            <p className="text-step-000 font-semibold mt-2xs">
+              {service.type}(s)
             </p>
           </div>
+          <div className="flex flex-col justify-center items-center p-2xs">
+            <div>
+              <h4 className="mt-zero text-step-1 font-semibold">
+                {
+                  service.packages.find(
+                    (option) => option.amount === chosenPackage.amount,
+                  )?.weekTurnaround
+                }
+              </h4>
+              <p className="text-step-000 font-semibold mt-2xs">
+                Week turnaround
+              </p>
+            </div>
+          </div>
         </div>
+        <h4 className="box text-center font-semibold text-step-4 mt-zero">
+          {
+            chosenPackage.price.find(
+              (option) => option.method === distribution.value,
+            )?.value
+          }
+        </h4>
       </div>
-
-      <h4 className="text-center font-semibold text-step-4">
-        {
-          // service.packages.find(
-          //   (option) => option.amount === chosenPackage.amount,
-          // )?.price
-        }
-      </h4>
     </li>
   );
 };
