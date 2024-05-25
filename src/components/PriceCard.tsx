@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import classNames from 'classnames';
 
@@ -23,17 +23,17 @@ export interface Props {
 }
 
 const selectClassNamesOptions = {
-  control: (state) => {
+  control: (state: any) => {
     return classNames(
       'px-2xs border',
       state.isFocused ? 'border-gray-1200' : 'border-gray-600',
     );
   },
   valueContainer: () => 'pr-2xs',
-  indicatorSeparator: (state) =>
+  indicatorSeparator: (state: any) =>
     classNames('bg-gray-600 mr-2xs', state.isFocused ? 'bg-gray-1200' : ''),
   menu: () => 'mt-2xs border border-gray-800 bg-[white]',
-  option: (state) => {
+  option: (state: any) => {
     return classNames(
       'p-2xs',
       state.isFocused ? 'bg-gray-200' : '',
