@@ -10,6 +10,7 @@ import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
 import PriceCard, {
   type Props as PriceCardProps,
 } from '../components/PriceCard';
+import Bundle from '../components/Bundle';
 
 const optimizedBackground = await getImage({ src: hero, format: 'webp' });
 
@@ -235,6 +236,10 @@ const options: PriceCardProps[] = [
           ))
         }
       </ul>
+      <div class="box w-fit mx-auto text-center">
+        <h2>Skin Schema Bundle</h2>
+      </div>
+      <Bundle client:idle />
     </section>
   </main>
 </Layout>
