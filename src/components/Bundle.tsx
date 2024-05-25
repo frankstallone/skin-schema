@@ -2,26 +2,6 @@ import { useState } from 'react';
 import Select from 'react-select';
 import classNames from 'classnames';
 
-export interface DistributionPrice {
-  method: 'you' | 'me';
-  value: string;
-}
-
-export interface Packages {
-  amount: number;
-  price: DistributionPrice[];
-  weekTurnaround: number;
-}
-
-export interface Props {
-  service: {
-    title: string;
-    description: string;
-    type: string;
-    packages: Packages[];
-  };
-}
-
 const selectClassNamesOptions = {
   control: (state: any) => {
     return classNames(
@@ -34,11 +14,7 @@ const selectClassNamesOptions = {
     classNames('bg-gray-600 mr-2xs', state.isFocused ? 'bg-gray-1200' : ''),
   menu: () => 'mt-2xs border border-gray-1200 bg-[white]',
   option: (state: any) => {
-    return classNames(
-      'p-2xs',
-      state.isFocused ? 'bg-gray-100' : '',
-      state.isSelected ? 'bg-gray-400' : '',
-    );
+    return classNames('p-2xs', state.isFocused ? 'bg-skin-200' : '');
   },
 };
 
@@ -53,9 +29,6 @@ const prices = [
 
 const PriceCard = () => {
   const [distribution, setDistribution] = useState(distributionMethods[0]);
-  //   const [price, setPrice] = useState(
-  //     prices.find((option) => option.value === distribution.value),
-  //   );
 
   const handleSetDistribution = (e: any) => {
     setDistribution(e);
