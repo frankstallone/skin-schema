@@ -1,4 +1,4 @@
-.button {
+.link {
   @apply no-underline hover:underline visited:text-gray-1200;
   text-decoration-thickness: max(0.08em, 1px);
   text-underline-offset: 0.15em;
