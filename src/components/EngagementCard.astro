@@ -9,7 +9,7 @@ export interface Props {
 const { avatar, user, age, comment } = Astro.props;
 ---
 
-<div class="flex space-x-2xs max-w-[300px]">
+<div class="flex space-x-2xs w-[300px]">
   <div class="flex">
     <img
       src={avatar.src}
@@ -17,8 +17,8 @@ const { avatar, user, age, comment } = Astro.props;
       class="max-w-[32px] max-h-[32px] rounded-full"
     />
   </div>
-  <div class="flex space-x-2xs">
-    <div class="flex flex-col">
+  <div class="flex space-x-2xs grow">
+    <div class="flex flex-col grow">
       <div class="flex space-x-3xs">
         <span class="text-step-000 font-extrabold">{user}</span>
         <span class="text-step-000 text-gray-1100">{age}</span>

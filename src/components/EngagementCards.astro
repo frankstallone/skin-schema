@@ -71,7 +71,11 @@ const engagementCards = [
 const stuffledEngagementCards = shuffle(engagementCards);
 ---
 
-<ul role="list" class="grid">
+<ul
+  role="list"
+  class="flex flex-col justify-center items-center space-y-m md:space-y-zero md:grid"
+  style="--grid-min-item-size: 300px;"
+>
   {
     stuffledEngagementCards.map((card) => (
       <li>
