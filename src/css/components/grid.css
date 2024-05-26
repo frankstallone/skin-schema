@@ -12,7 +12,9 @@ between each item.
 ideally, as a minimum.
 
 --grid-placement (auto-fill): Set either auto-fit or auto-fill
-to change how empty grid tracks are handled */
+to change how empty grid tracks are handled 
+
+Media query for 50-50 to sync with Tailwind example: [@media(width>=1199px)]:flex */
 
 .grid {
   display: grid;

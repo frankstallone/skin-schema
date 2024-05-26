@@ -68,7 +68,7 @@ const PriceCard = () => {
               defaultValue={distribution}
               onChange={handleSetDistribution}
               options={distributionMethods}
-              className="text-step-00"
+              className="text-step-0"
               unstyled
               classNames={selectClassNamesOptions}
             />

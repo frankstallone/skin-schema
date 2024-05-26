@@ -83,7 +83,7 @@ const PriceCard = ({ service }: Props) => {
               defaultValue={distribution}
               onChange={handleSetDistribution}
               options={distributionMethods}
-              className="text-step-00"
+              className="text-step-0"
               unstyled
               classNames={selectClassNamesOptions}
             />
@@ -99,7 +99,7 @@ const PriceCard = ({ service }: Props) => {
                 defaultValue={selectablePackages[0]}
                 onChange={handleAmountChange}
                 options={selectablePackages}
-                className="text-step-00"
+                className="text-step-0"
                 unstyled
                 classNames={selectClassNamesOptions}
               />
