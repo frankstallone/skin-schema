@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-import promo03 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revision-3.jpg';
+import selfie from '../assets/photograph-of-skin-schema.jpg';
 ---
 
 <section class="wrapper region flow prose" id="main">
@@ -30,10 +30,10 @@ import promo03 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revis
     </li>
     <li class="hidden [@media(width>=1199px)]:flex justify-center items-center">
       <Picture
-        src={promo03}
-        widths={[300, 800, promo03.width]}
-        sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${promo03.width}px`}
-        alt="Instagram paid partnership high quality image"
+        src={selfie}
+        widths={[300, 800, selfie.width]}
+        sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${selfie.width}px`}
+        alt="Photograph of the creator of Skin Schema"
         class="h-auto max-w-screen-sm object-cover"
         quality={80}
         format="avif"
