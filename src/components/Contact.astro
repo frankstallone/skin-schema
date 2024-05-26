@@ -1,0 +1,78 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<section class="wrapper region flow prose" id="Contact">
+  <div class="box w-fit mx-auto text-center">
+    <h2>Let's connect</h2>
+    <p>
+      Looking at my <a href="#Services">services</a> and want to talk? Reach out
+      to me by filling out this form and I'll get back to you as soon as I can.
+    </p>
+  </div>
+  <div class="content">
+    <form
+      name="main"
+      netlify-honeypot="bot-field"
+      class="flex flex-col space-y-m"
+      method="POST"
+      data-netlify="true"
+      action="/"
+    >
+      <div class="stack">
+        <input
+          type="hidden"
+          name="subject"
+          value={`🤖 Form submission: skinschema.com${pathname}`}
+        />
+        <p class="hidden">
+          <label for="bot-field">Do you like delicious treats?</label>
+          <input
+            name="bot-field"
+            id="bot-field"
+            class="border-gray-700 border-1 border-solid"
+          />
+        </p>
+      </div>
+      <span class="stack">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          class="border-gray-700 border-1 border-solid"
+        />
+      </span>
+      <span class="stack">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          class="border-gray-700 border-1 border-solid"
+        />
+      </span>
+      <span class="stack">
+        <label for="tel">Phone number</label>
+        <input
+          id="tel"
+          name="tel"
+          type="tel"
+          class="border-gray-700 border-1 border-solid"
+        />
+      </span>
+      <span class="stack">
+        <label for="message">Message</label>
+        <textarea
+          name="message"
+          id="message"
+          rows="6"
+          required
+          class="border-gray-700 border-1 border-solid"></textarea>
+      </span>
+      <button type="submit" class="button">Submit</button>
+    </form>
+  </div>
+</section>

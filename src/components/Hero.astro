@@ -1,0 +1,19 @@
+---
+import { getImage } from 'astro:assets';
+import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
+const optimizedBackground = await getImage({ src: hero, format: 'webp' });
+---
+
+<div
+  class="bg-cover bg-center bg-blend-overlay py-l-xl"
+  style={`background-image: url(${optimizedBackground.src}), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));`}
+>
+  <div class="wrapper region">
+    <h1
+      class="mt-zero text-gray-100 tracking-tight text-balance"
+      style="max-inline-size: 18ch;"
+    >
+      Skin Schema's Collaboration Opportunities
+    </h1>
+  </div>
+</div>

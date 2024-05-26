@@ -20,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-black tracking-tight;
+  @apply font-bold tracking-tight;
 }
 
 h1 {
@@ -55,6 +55,19 @@ blockquote:not([class]) {
 blockquote:not([class]) {
   @apply text-step-2 ml-zero pl-xs-s;
   border-left: max(0.08em, 1px) solid var(--color-gray-1200);
+}
+
+input,
+textarea {
+  border: 1px solid var(--color-gray-600);
+  padding-block: var(--space-2xs);
+  padding-inline: var(--space-xs);
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid var(--color-gray-800);
+  outline: 2px solid var(--color-gray-900);
 }
 
 svg {
@@ -94,50 +107,4 @@ main:focus {
 ::selection {
   background: var(--color-dark);
   color: var(--color-light);
-}
-
-@layer components {
-  .button {
-    @apply no-underline hover:underline visited:text-gray-1200;
-    text-decoration-thickness: max(0.08em, 1px);
-    text-underline-offset: 0.15em;
-  }
-
-  mark {
-    color: hsl(0 0% 6%);
-  }
-
-  mark {
-    --lightness: 80%;
-    --highlighted: 1;
-    background: transparent;
-  }
-
-  @supports (animation-timeline: view()) {
-    mark {
-      --highlighted: 0;
-      animation: highlight steps(1) both;
-      animation-timeline: view();
-      animation-range: entry 100% cover 10%;
-    }
-  }
-
-  mark span {
-    @apply py-3xs px-2xs;
-    border-radius: 9999px;
-    background: linear-gradient(
-        120deg,
-        hsl(319.15deg 45.63% 79.8% / 50%) 25%,
-        transparent 50%
-      )
-      110% 0 / 210% 100% no-repeat;
-    background-position: calc((1 - var(--highlighted)) * 110%) 0;
-    transition: background-position 1s;
-  }
-
-  @keyframes highlight {
-    to {
-      --highlighted: 1;
-    }
-  }
 }

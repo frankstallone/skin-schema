@@ -1,0 +1,119 @@
+---
+import EngagementCard from '../components/EngagementCard.astro';
+import { shuffle } from '../utils';
+
+import engagementAvatar01 from '/public/media/engagement-avatar-01.jpg';
+import engagementAvatar02 from '/public/media/engagement-avatar-02.jpg';
+import engagementAvatar03 from '/public/media/engagement-avatar-03.jpg';
+import engagementAvatar04 from '/public/media/engagement-avatar-04.jpg';
+import engagementAvatar05 from '/public/media/engagement-avatar-05.jpg';
+import engagementAvatar06 from '/public/media/engagement-avatar-06.jpg';
+import engagementAvatar07 from '/public/media/engagement-avatar-07.jpg';
+import engagementAvatar08 from '/public/media/engagement-avatar-08.jpg';
+import engagementAvatar09 from '/public/media/engagement-avatar-09.jpg';
+import engagementAvatar10 from '/public/media/engagement-avatar-10.jpg';
+import engagementAvatar11 from '/public/media/engagement-avatar-11.jpg';
+
+const engagementCards = [
+  {
+    avatar: engagementAvatar01,
+    user: 'yurbyskanzler',
+    age: '2w',
+    comment: "beautiful video, I'm curious to try this brand 😊✨",
+  },
+  {
+    avatar: engagementAvatar02,
+    user: 'nooriglow',
+    age: '3w',
+    comment: 'Beautifully captured your ritual',
+  },
+  {
+    avatar: engagementAvatar03,
+    user: 'busymumglow',
+    age: '3w',
+    comment: 'Love this, gorgeous video & your skin looks stunning 😍❤️',
+  },
+  {
+    avatar: engagementAvatar04,
+    user: 'ckylatan',
+    age: '4w',
+    comment: 'this was so comforting to watch❤️',
+  },
+  {
+    avatar: engagementAvatar05,
+    user: 'foodbooksjewels_',
+    age: '2w',
+    comment: 'Stunning shots 😍😍 love the last one so much',
+  },
+  {
+    avatar: engagementAvatar06,
+    user: '_bernicel',
+    age: '2w',
+    comment: 'I want this now 😍',
+  },
+  // {
+  //   avatar: engagementAvatar07,
+  //   user: 'notordinaryskincare',
+  //   age: '3w',
+  //   comment: 'Love the design of the bottle! Very elegant',
+  // },
+  {
+    avatar: engagementAvatar07,
+    user: 'notordinaryskincare',
+    age: '4w',
+    comment: 'Love the way you captured these products 🤍',
+  },
+  {
+    avatar: engagementAvatar08,
+    user: 'alexxmillen',
+    age: '1w',
+    comment: 'So natural and glowy!!! 😍😍',
+  },
+  {
+    avatar: engagementAvatar09,
+    user: 'stramnova_',
+    age: '2w',
+    comment: 'Okay thank you, one more product added to my wish list 🫠💸😅',
+  },
+  {
+    avatar: engagementAvatar03,
+    user: 'busymumglow',
+    age: '2w',
+    comment:
+      "Oooh I really like the sound of this! Love that it's a 5 min treatment too so doesn't take up too much time!",
+  },
+  {
+    avatar: engagementAvatar10,
+    user: 'mylena_benn',
+    age: '2w',
+    comment: 'Yeahhh I have to try it 😍',
+  },
+  {
+    avatar: engagementAvatar11,
+    user: 'marthawr',
+    age: '4w',
+    comment: 'Looks great! My winter skin needs this right now!',
+  },
+];
+
+const stuffledEngagementCards = shuffle(engagementCards);
+---
+
+<ul
+  role="list"
+  class="flex flex-col justify-center items-center space-y-m md:space-y-zero md:grid"
+  style="--grid-min-item-size: 300px;"
+>
+  {
+    stuffledEngagementCards.map((card) => (
+      <li>
+        <EngagementCard
+          avatar={card.avatar}
+          user={card.user}
+          age={card.age}
+          comment={card.comment}
+        />
+      </li>
+    ))
+  }
+</ul>

@@ -8,12 +8,3 @@ More info: https://every-layout.dev/layouts/box/#the-generator
   color: var(--color-gray-1200);
   background-color: white;
 }
-
-.box * {
-  color: inherit;
-}
-
-.box.invert {
-  color: var(--color-gray-100);
-  background-color: var(--color-gray-1200);
-}
