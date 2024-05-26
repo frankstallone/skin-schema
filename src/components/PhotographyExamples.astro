@@ -1,0 +1,42 @@
+---
+import { Picture } from 'astro:assets';
+
+import photoExample01 from '../assets/photo-example-01.jpg';
+import photoExample02 from '../assets/photo-example-02.jpg';
+import photoExample03 from '../assets/photo-example-03.jpg';
+---
+
+<div class="wrapper region flow" id="PhotographyExamples">
+  <div class="box w-fit mx-auto text-center">
+    <h2>Photography examples</h2>
+  </div>
+  <div class="reel">
+    <Picture
+      src={photoExample01}
+      widths={[300, 800, photoExample01.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample01.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={photoExample02}
+      widths={[300, 800, photoExample02.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample02.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={photoExample03}
+      widths={[300, 800, photoExample03.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample03.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+  </div>
+</div>

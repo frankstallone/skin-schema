@@ -1,0 +1,24 @@
+---
+import PriceCard, {
+  type Props as PriceCardProps,
+} from '../components/PriceCard';
+import Bundle from '../components/Bundle';
+import { options } from '../data';
+---
+
+<section class="wrapper region flow prose" id="Services">
+  <div class="box w-fit mx-auto text-center">
+    <h2>Services</h2>
+  </div>
+  <ul class="grid" role="list" data-layout="thirds">
+    {
+      options.map((option: PriceCardProps) => (
+        <PriceCard client:idle service={option.service} />
+      ))
+    }
+  </ul>
+  <div class="box w-fit mx-auto text-center">
+    <h3>Skin Schema Bundle</h3>
+  </div>
+  <Bundle client:idle />
+</section>

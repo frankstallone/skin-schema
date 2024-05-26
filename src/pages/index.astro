@@ -1,17 +1,14 @@
 ---
-import { Picture, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import promo03 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revision-3.jpg';
-import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
-import PriceCard, {
-  type Props as PriceCardProps,
-} from '../components/PriceCard';
-import Bundle from '../components/Bundle';
-import { options } from '../data';
-import EngagementCards from '../components/EngagementCards.astro';
 
-const optimizedBackground = await getImage({ src: hero, format: 'webp' });
+import ShortFormExamples from '../components/ShortFormExamples.astro';
+import PhotographyExamples from '../components/PhotographyExamples.astro';
+import EngagementHighlights from '../components/EngagementHighlights.astro';
+import WhoAmI from '../components/WhoAmI.astro';
+import CollaborationOptions from '../components/CollaborationOptions.astro';
+import Services from '../components/Services.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Layout
@@ -23,125 +20,14 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
   <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
   <main>
     <Header />
-    <div
-      class="bg-cover bg-center bg-blend-overlay py-l-xl"
-      style={`background-image: url(${optimizedBackground.src}), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));`}
-    >
-      <div class="wrapper region">
-        <h1
-          class="mt-zero text-gray-100 tracking-tight text-balance"
-          style="max-inline-size: 18ch;"
-        >
-          Skin Schema's Collaboration Opportunities
-        </h1>
-      </div>
-    </div>
-    <section class="wrapper region flow prose" id="main">
-      <ul class="grid" data-layout="50-50" role="list">
-        <li class="flex flex-col justify-start items-center flow prose">
-          <h2 class="-rotate-2 mb-xl">
-            <mark><span>Hi, I'm Kseniya 👋🏻</span></mark>
-          </h2>
-          <p>
-            I'm an experienced photographer and videographer, and created Skin
-            Schema to showcase my passion for beauty and skincare through a lens
-            of authenticity and elegance.
-          </p>
-          <details-utils close-click-outside class="self-start">
-            <details>
-              <summary class="my-xs">Learn more about me...</summary>
-              <section>
-                Having developed a loyal, trusting following, I'm now opening
-                both my experience and feed to collaboration opportunities with
-                a select number of partners. Whether you want to lift your own
-                brand's social media presence with high-quality, captivating
-                visuals, or engage with my devoted, growing beauty audience, I
-                offer the below bespoke collaboration options. Let's create
-                stunning content together.
-              </section>
-            </details>
-          </details-utils>
-        </li>
-        <li
-          class="hidden [@media(width>=1199px)]:flex justify-center items-center"
-        >
-          <Picture
-            src={promo03}
-            widths={[700, 1000, 1500]}
-            alt="Instagram paid partnership high quality image"
-            class="h-auto max-w-screen-sm object-cover"
-            quality={80}
-            format="avif"
-            decoding="sync"
-            loading="eager"
-          />
-        </li>
-      </ul>
-
-      <div class="box w-fit mx-auto text-center">
-        <h2>Collaboration options</h2>
-        <p>
-          All of my services come in two options - either as content I create
-          for your own use, or content I create and share to my Skin Schema
-          feed.
-        </p>
-      </div>
-      <ul class="grid" data-layout="50-50" role="list">
-        <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero text-step-000 uppercase font-black text-gray-1100">
-            Option 1
-          </h3>
-          <h4 class="mt-2xs text-step-2">For Brand Use</h4>
-          <p class="text-step-00">
-            Showcase your products in beautifully curated content designed
-            exclusively for your social media feeds. Each piece will be
-            professionally planned, shot, and edited to feel minimal, airy, and
-            elegant. The finished product will be delivered to you in multiple
-            formats tailored for use across various platforms. †
-          </p>
-        </li>
-        <li class="box flow prose border border-gray-600">
-          <h3 class="mt-zero text-step-000 uppercase font-black text-gray-1100">
-            Option 2
-          </h3>
-          <h4 class="mt-2xs text-step-2">Shared by Skin Schema</h4>
-          <p class="text-step-00">
-            Let your products shine on Skin Schema's Instagram feed, reaching a
-            highly engaged audience that values my genuine beauty insights. This
-            option is perfect for brands looking to benefit from the authentic
-            connection and trust I've earned with my followers, who regularly
-            turn to me for skincare opinions and recommendations.
-          </p>
-        </li>
-      </ul>
-      <p class="text-center mx-auto text-step-000 text-gray-1000">
-        † You will own the rights to post this content anywhere, anytime,
-        forever - the only requirement is that you tag Skin Schema's Instagram
-        account when you do.
-      </p>
-
-      <div class="box w-fit mx-auto text-center">
-        <h2>Services</h2>
-      </div>
-      <ul class="grid" role="list" data-layout="thirds">
-        {
-          options.map((option: PriceCardProps) => (
-            <PriceCard client:idle service={option.service} />
-          ))
-        }
-      </ul>
-      <div class="box w-fit mx-auto text-center">
-        <h3>Skin Schema Bundle</h3>
-      </div>
-      <Bundle client:idle />
-    </section>
-    <section class="wrapper region flow">
-      <div class="box w-fit mx-auto">
-        <h2>Engagement highlights</h2>
-      </div>
-      <EngagementCards />
-    </section>
+    <Hero />
+    <WhoAmI />
+    <CollaborationOptions />
+    <Services />
+    <EngagementHighlights />
+    <PhotographyExamples />
+    <ShortFormExamples />
   </main>
 </Layout>
 
-<script src="@zachleat/details-utils/details-utils.js"></script>
+<script async src="//www.instagram.com/embed.js"></script>
