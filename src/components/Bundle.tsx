@@ -60,9 +60,9 @@ const PriceCard = () => {
             '--switcher-target-container-width': '20rem',
           } as React.CSSProperties
         }
-        className="switcher justify-center items-center divide-x divide-gray-600 border-t border-t-gray-600"
+        className="flex justify-center items-center divide-x divide-gray-600 border-t border-t-gray-600"
       >
-        <div className="flex flex-col justify-center items-center p-2xs">
+        <div className="flex flex-col justify-center items-center p-2xs grow">
           <div className="flex justify-center items-center font-semibold">
             <Select
               defaultValue={distribution}
@@ -77,7 +77,7 @@ const PriceCard = () => {
             Distribution method
           </p>
         </div>
-        <div className="flex flex-col justify-center items-center p-2xs">
+        <div className="flex flex-col justify-center items-center p-l py-2xs">
           <h4 className="text-center font-semibold text-step-4 mt-zero">
             {currentPrice?.label}
           </h4>
