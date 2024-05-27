@@ -29,4 +29,19 @@ const ogImage = image || '/media/og-image.png';
   <meta property="og:image:alt" content={metaDescription} />
   <meta name="title" content={title} />
   <title>{title}</title>
+  <!-- Google tag (gtag.js) -->
+  <script
+    type="text/partytown"
+    is:inline
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-R4BV0D0EME"></script>
+  <script type="text/partytown" is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4BV0D0EME');
+  </script>
 </head>
