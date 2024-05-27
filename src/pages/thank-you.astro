@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Layout
+  meta={{
+    title: 'Skin Schema Instagram skincare influencer',
+    description: 'Skin Schema',
+  }}
+>
+  <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
+  <main>
+    <Header />
+    <Hero heading="Thank you!" />
+    <section class="wrapper region flow prose" id="main">
+      <p>
+        I'll be in touch within the next 24 business hours to discuss more in
+        details.
+      </p>
+    </section>
+  </main>
+</Layout>

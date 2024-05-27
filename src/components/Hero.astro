@@ -2,6 +2,12 @@
 import { getImage } from 'astro:assets';
 import hero from '../assets/2023-Creative-Minds-38-hero.jpg';
 const optimizedBackground = await getImage({ src: hero, format: 'webp' });
+
+interface Props {
+  heading?: string;
+}
+
+const { heading } = Astro.props;
 ---
 
 <div
@@ -13,7 +19,7 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
       class="mt-zero text-gray-100 tracking-tight text-balance"
       style="max-inline-size: 18ch;"
     >
-      Skin Schema's Collaboration Opportunities
+      {heading ? heading : "Skin Schema's Collaboration Opportunities"}
     </h1>
   </div>
 </div>
