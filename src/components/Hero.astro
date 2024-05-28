@@ -5,9 +5,10 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
 
 interface Props {
   heading?: string;
+  subHeading?: string;
 }
 
-const { heading } = Astro.props;
+const { heading, subHeading } = Astro.props;
 ---
 
 <div
@@ -21,5 +22,15 @@ const { heading } = Astro.props;
     >
       {heading ? heading : "Skin Schema's Collaboration Opportunities"}
     </h1>
+    {
+      subHeading && (
+        <h2
+          class="text-gray-100 tracking-tight text-balance text-step-2"
+          style="max-inline-size: 18ch;"
+        >
+          {subHeading}
+        </h2>
+      )
+    }
   </div>
 </div>
