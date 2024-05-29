@@ -4,6 +4,9 @@ import { Picture } from 'astro:assets';
 import photoExample01 from '../assets/photo-example-01.jpg';
 import photoExample02 from '../assets/photo-example-02.jpg';
 import photoExample03 from '../assets/photo-example-03.jpg';
+import photoExample04 from '../assets/photo-example-04.jpg';
+import photoExample05 from '../assets/photo-example-05.jpg';
+import photoExample06 from '../assets/photo-example-06.jpg';
 ---
 
 <div class="wrapper region flow" id="PhotographyExamples">
@@ -33,6 +36,33 @@ import photoExample03 from '../assets/photo-example-03.jpg';
       src={photoExample03}
       widths={[300, 800, photoExample03.width]}
       sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample03.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={photoExample04}
+      widths={[300, 800, photoExample04.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample04.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={photoExample05}
+      widths={[300, 800, photoExample05.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample05.width}px`}
+      alt="Instagram high quality skincare photography example"
+      class="h-auto max-w-screen-sm object-cover"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={photoExample06}
+      widths={[300, 800, photoExample06.width]}
+      sizes={`(max-width: 300px) 300px, (max-width: 800px) 800px,  ${photoExample06.width}px`}
       alt="Instagram high quality skincare photography example"
       class="h-auto max-w-screen-sm object-cover"
       quality={80}
