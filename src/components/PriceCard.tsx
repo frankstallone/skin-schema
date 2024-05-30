@@ -72,7 +72,7 @@ const PriceCard = ({ service }: Props) => {
   }));
 
   return (
-    <li className="border border-gray-600 flex flex-col justify-between">
+    <li className="border border-gray-600 flex flex-col justify-between drop">
       <div className="box flow prose">
         <h3 className="mt-zero text-step-1">{service.title}</h3>
         <p className="text-step-00">{service.description}</p>
