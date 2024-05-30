@@ -86,6 +86,13 @@ const PriceCard = () => {
           </p>
         </div>
       </div>
+      <div className="border-t border-t-gray-600">
+        <div className="box w-fit mx-auto">
+          <a href="/#Contact" className="button">
+            Reach out
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
