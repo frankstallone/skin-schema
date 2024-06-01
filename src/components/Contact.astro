@@ -3,69 +3,74 @@ const pathname = Astro.url.pathname;
 ---
 
 <section class="wrapper region flow prose" id="Contact">
-  <div class="box w-fit mx-auto text-center">
-    <h2>Let's connect</h2>
-    <p>
-      If our approach to beauty and aesthetics align, I'd love to talk more.
-      Just pop your details below, letting me know more about how you'd like to
-      work together. I'll be in touch within 24 hours of receiving your message
-      so we can discuss further. 😊
-    </p>
-  </div>
   <div class="content">
-    <form
-      name="main"
-      netlify-honeypot="bot-field"
-      class="flex flex-col space-y-m"
-      method="POST"
-      data-netlify="true"
-      action="/thank-you/"
-    >
-      <div class="stack">
-        <input
-          type="hidden"
-          name="subject"
-          value={`🤖 Form submission: skinschema.com${pathname}`}
-        />
-        <p class="hidden">
-          <label for="bot-field">Do you like delicious treats?</label>
-          <input
-            name="bot-field"
-            id="bot-field"
-            class="border-gray-700 border-1 border-solid"
-          />
-        </p>
+    <div class="box w-fit mx-auto text-center">
+      <h2>Let's connect</h2>
+      <p>
+        If our approach to beauty and aesthetics align, I'd love to talk more.
+        Just pop your details below, letting me know more about how you'd like
+        to work together. I'll be in touch within 24 hours of receiving your
+        message so we can discuss further. 😊
+      </p>
+    </div>
+    <div class="border border-gray-600 flex flex-col justify-between drop">
+      <div class="box">
+        <form
+          name="main"
+          netlify-honeypot="bot-field"
+          method="POST"
+          data-netlify="true"
+          action="/thank-you/"
+        >
+          <div class="hidden">
+            <input
+              type="hidden"
+              name="subject"
+              value={`🤖 Form submission: skinschema.com${pathname}`}
+            />
+            <span>
+              <label for="bot-field">Do you like delicious treats?</label>
+              <input
+                name="bot-field"
+                id="bot-field"
+                class="border-gray-700 border-1 border-solid"
+              />
+            </span>
+          </div>
+          <div class="flex flex-col space-y-m">
+            <span class="stack mt-zero">
+              <label for="name">Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                class="border-gray-700 border-1 border-solid"
+              />
+            </span>
+            <span class="stack">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                class="border-gray-700 border-1 border-solid"
+              />
+            </span>
+            <span class="stack">
+              <label for="message">How would you like to work together?</label>
+              <textarea
+                name="message"
+                id="message"
+                rows="6"
+                required
+                class="border-gray-700 border-1 border-solid"></textarea>
+            </span>
+            <button type="submit" class="button max-w-full">Submit</button>
+          </div>
+        </form>
       </div>
-      <span class="stack">
-        <label for="name">Name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          class="border-gray-700 border-1 border-solid"
-        />
-      </span>
-      <span class="stack">
-        <label for="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          class="border-gray-700 border-1 border-solid"
-        />
-      </span>
-      <span class="stack">
-        <label for="message">How would you like to work together?</label>
-        <textarea
-          name="message"
-          id="message"
-          rows="6"
-          required
-          class="border-gray-700 border-1 border-solid"></textarea>
-      </span>
-      <button type="submit" class="button">Submit</button>
-    </form>
+    </div>
   </div>
 </section>

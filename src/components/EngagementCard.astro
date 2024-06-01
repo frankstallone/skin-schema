@@ -1,4 +1,6 @@
 ---
+import { Picture } from 'astro:assets';
+
 export interface Props {
   avatar: ImageMetadata;
   user: string;
@@ -11,10 +13,13 @@ const { avatar, user, age, comment } = Astro.props;
 
 <div class="flex space-x-2xs w-[300px]">
   <div class="flex">
-    <img
-      src={avatar.src}
+    <Picture
+      src={avatar}
       alt="Engagement avatar"
-      class="max-w-[32px] max-h-[32px] rounded-full"
+      width={32}
+      height={32}
+      formats={['avif', 'webp']}
+      class="w-[32px] h-[32px] rounded-full max-w-fit"
     />
   </div>
   <div class="flex space-x-2xs grow">
