@@ -95,7 +95,7 @@ const PriceCard = ({ service }: Props) => {
       </div>
       <div className="border-t border-t-gray-600">
         <div className="flex flex-col justify-center items-center p-2xs">
-          <div className="flex justify-center items-center font-semibold">
+          <div className="flex justify-center items-center font-semibold font-mono">
             <Select
               defaultValue={distribution}
               onChange={handleSetDistribution}
@@ -111,7 +111,7 @@ const PriceCard = ({ service }: Props) => {
         </div>
         <div className="flex divide-x divide-gray-600 border-y border-y-gray-600 text-center justify-center">
           <div className="flex flex-col grow justify-between items-center p-2xs">
-            <div className="flex justify-center items-center font-semibold">
+            <div className="flex justify-center items-center font-semibold font-mono">
               <Select
                 defaultValue={selectablePackages[0]}
                 onChange={handleAmountChange}
@@ -127,7 +127,7 @@ const PriceCard = ({ service }: Props) => {
           </div>
           <div className="flex flex-col justify-center items-center p-2xs">
             <div className="flex flex-col justify-between grow">
-              <h4 className="mt-2xs text-step-0 font-semibold">
+              <h4 className="mt-2xs text-step-0 font-semibold font-mono">
                 {
                   service.packages.find(
                     (option) => option.amount === chosenPackage.amount,
@@ -140,7 +140,7 @@ const PriceCard = ({ service }: Props) => {
             </div>
           </div>
         </div>
-        <h4 className="box text-center font-semibold text-step-4 mt-zero">
+        <h4 className="box text-center font-semibold text-step-4 mt-zero font-mono">
           {
             chosenPackage.price.find(
               (option) => option.method === distribution.value,

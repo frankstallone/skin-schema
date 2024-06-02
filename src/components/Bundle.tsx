@@ -63,7 +63,7 @@ const PriceCard = () => {
         className="flex justify-center items-center divide-x divide-gray-600 border-t border-t-gray-600"
       >
         <div className="flex flex-col justify-center items-center p-2xs grow">
-          <div className="flex justify-center items-center font-semibold">
+          <div className="flex justify-center items-center font-semibold font-mono">
             <Select
               defaultValue={distribution}
               onChange={handleSetDistribution}
@@ -78,7 +78,7 @@ const PriceCard = () => {
           </p>
         </div>
         <div className="flex flex-col justify-center items-center p-l py-2xs">
-          <h4 className="text-center font-semibold text-step-4 mt-zero">
+          <h4 className="text-center font-semibold font-mono text-step-4 mt-zero">
             {currentPrice?.label}
           </h4>
           <p className="text-step-000 font-semibold mt-2xs">
