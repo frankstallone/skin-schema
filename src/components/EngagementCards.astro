@@ -99,21 +99,41 @@ const engagementCards = [
 const stuffledEngagementCards = shuffle(engagementCards);
 ---
 
-<ul
-  role="list"
-  class="flex flex-col justify-center items-center space-y-m md:space-y-zero md:grid"
-  style="--grid-min-item-size: 300px;"
->
-  {
-    stuffledEngagementCards.map((card) => (
-      <li>
-        <EngagementCard
-          avatar={card.avatar}
-          user={card.user}
-          age={card.age}
-          comment={card.comment}
-        />
-      </li>
-    ))
-  }
-</ul>
+<div class="flex infinite-scroll-mask select-none overflow-clip gap-l">
+  <ul
+    role="list"
+    class="flex shrink-0 items-center justify-between animate-infinite-scroll gap-l min-w-full"
+  >
+    {
+      stuffledEngagementCards.map((card) => (
+        <li>
+          <EngagementCard
+            avatar={card.avatar}
+            user={card.user}
+            age={card.age}
+            comment={card.comment}
+          />
+        </li>
+      ))
+    }
+  </ul>
+  <!-- Second for infinite scroll -->
+  <ul
+    role="list"
+    class="flex shrink-0 items-center justify-between animate-infinite-scroll gap-l min-w-full"
+    aria-hidden="true"
+  >
+    {
+      stuffledEngagementCards.map((card) => (
+        <li>
+          <EngagementCard
+            avatar={card.avatar}
+            user={card.user}
+            age={card.age}
+            comment={card.comment}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</div>

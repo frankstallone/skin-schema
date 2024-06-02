@@ -1,0 +1,23 @@
+/* Outcomes mask */
+.infinite-scroll-mask {
+  --default-color: var(--color-light);
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    var(--mask-color, var(--default-color)) 128px,
+    var(--mask-color, var(--default-color)) calc(100% - 200px),
+    transparent 100%
+  );
+}
+
+/* Animation */
+.animate-infinite-scroll {
+  animation: infinite-scroll 60s linear infinite;
+}
+
+@keyframes infinite-scroll {
+  to {
+    transform: translateX(calc(-100% - var(--space-l)));
+  }
+}

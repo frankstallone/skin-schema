@@ -16,8 +16,10 @@ Reference source: https://github.com/Set-Creative-Studio/cube-boilerplate/blob/m
 @import-glob 'utilities/*.css'; 
 */
 
+@import 'blocks/animation.css' layer(components);
 @import 'blocks/button.css' layer(components);
 @import 'blocks/drop.css' layer(components);
+@import 'blocks/infinite-scroll.css' layer(components);
 @import 'blocks/link.css' layer(components);
 @import 'blocks/mark.css' layer(components);
 @import 'blocks/prose.css' layer(components);
