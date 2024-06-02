@@ -95,12 +95,12 @@ const PriceCard = ({ service }: Props) => {
       </div>
       <div className="border-t border-t-gray-600">
         <div className="flex flex-col justify-center items-center p-2xs">
-          <div className="flex justify-center items-center font-semibold font-mono">
+          <div className="flex justify-center items-center font-semibold font-mono w-full">
             <Select
               defaultValue={distribution}
               onChange={handleSetDistribution}
               options={distributionMethods}
-              className="text-step-0"
+              className="text-step-0 w-full text-center"
               unstyled
               classNames={selectClassNamesOptions}
             />
