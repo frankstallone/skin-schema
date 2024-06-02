@@ -79,7 +79,7 @@ const PriceCard = ({ service }: Props) => {
         <p className="text-step-00 text-center">
           <a
             href={`#${service.exampleId}`}
-            className="link flex justify-center items-center"
+            className="link flex justify-center items-center font-mono font-semibold"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
