@@ -13,6 +13,7 @@
   padding-inline: var(--space-l);
   text-decoration: none;
   text-align: center;
+  cursor: pointer;
 }
 .button:hover,
 .button:focus,

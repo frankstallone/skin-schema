@@ -109,3 +109,7 @@ main:focus {
   background: var(--color-dark);
   color: var(--color-light);
 }
+
+details:hover {
+  cursor: pointer;
+}
