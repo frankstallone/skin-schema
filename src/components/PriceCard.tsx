@@ -14,6 +14,7 @@ export interface Packages {
 }
 
 export interface Props {
+  id: number;
   service: {
     title: string;
     description: string;
@@ -48,7 +49,7 @@ const distributionMethods = [
   { value: 'me', label: 'Shared by Skin Schema' },
 ];
 
-const PriceCard = ({ service }: Props) => {
+const PriceCard = ({ service }: Props, index) => {
   const [chosenPackage, setChosenPackage] = useState(service.packages[0]);
   const [distribution, setDistribution] = useState(distributionMethods[0]);
 
@@ -103,6 +104,7 @@ const PriceCard = ({ service }: Props) => {
               className="text-step-0 w-full text-center"
               unstyled
               classNames={selectClassNamesOptions}
+              instanceId={index}
             />
           </div>
           <p className="text-step-000 font-semibold mt-2xs">
@@ -119,6 +121,7 @@ const PriceCard = ({ service }: Props) => {
                 className="text-step-0"
                 unstyled
                 classNames={selectClassNamesOptions}
+                instanceId={index}
               />
             </div>
             <p className="text-step-000 font-semibold mt-2xs">
