@@ -103,6 +103,7 @@ const PriceCard = ({ service }: Props) => {
               className="text-step-0 w-full text-center"
               unstyled
               classNames={selectClassNamesOptions}
+              instanceId={service.exampleId}
             />
           </div>
           <p className="text-step-000 font-semibold mt-2xs">
@@ -119,6 +120,7 @@ const PriceCard = ({ service }: Props) => {
                 className="text-step-0"
                 unstyled
                 classNames={selectClassNamesOptions}
+                instanceId={service.exampleId}
               />
             </div>
             <p className="text-step-000 font-semibold mt-2xs">
