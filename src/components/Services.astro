@@ -12,8 +12,8 @@ import { options } from '../data';
   </div>
   <ul class="grid" role="list" data-layout="thirds">
     {
-      options.map((option: PriceCardProps, index) => (
-        <PriceCard client:idle service={option.service} id={index} />
+      options.map((option: PriceCardProps) => (
+        <PriceCard client:idle service={option.service} />
       ))
     }
   </ul>

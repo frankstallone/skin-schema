@@ -14,7 +14,6 @@ export interface Packages {
 }
 
 export interface Props {
-  id: number;
   service: {
     title: string;
     description: string;
