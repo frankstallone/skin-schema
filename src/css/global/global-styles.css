@@ -106,8 +106,8 @@ main:focus {
 
 /* Base selection styles that invert whatever colours are rendered */
 ::selection {
-  background: var(--color-dark);
-  color: var(--color-light);
+  background: var(--color-gray-1200);
+  color: var(--color-gray-100);
 }
 
 details:hover {
