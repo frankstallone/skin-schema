@@ -40,7 +40,7 @@ export const options: PriceCardProps[] = [
     service: {
       title: 'Short Form Product Videos',
       description:
-        'Engaging short videos tailored for Instagram & TikTok, designed to captivate and inspire your audience through a feeling of lux serenity. These can be product showcases, unboxings, how-tos, before-and-afters, or any other ideas youd like to see brought to life.',
+        "Engaging short videos tailored for Instagram & TikTok, designed to captivate and inspire your audience through a feeling of lux serenity. These can be product showcases, unboxings, how-tos, before-and-afters, or any other ideas you'd like to see brought to life.",
       exampleId: 'ShortFormExamples',
       type: 'UGC Video',
       packages: [
