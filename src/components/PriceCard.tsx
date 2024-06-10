@@ -112,20 +112,8 @@ const PriceCard = ({ service }: Props) => {
         </div>
         <div className="flex divide-x divide-gray-600 border-y border-y-gray-600 text-center justify-center">
           <div className="flex flex-col grow justify-between items-center p-2xs">
-            <div className="flex justify-center items-center font-semibold font-mono">
-              <Select
-                defaultValue={selectablePackages[0]}
-                onChange={handleAmountChange}
-                options={selectablePackages}
-                className="text-step-0"
-                unstyled
-                classNames={selectClassNamesOptions}
-                instanceId={service.exampleId}
-              />
-            </div>
-            <p className="text-step-000 font-semibold mt-2xs">
-              {service.type}(s)
-            </p>
+            <h4 className="mt-2xs text-step-0 font-semibold font-mono">1</h4>
+            <p className="text-step-000 font-semibold mt-2xs">{service.type}</p>
           </div>
           <div className="flex flex-col justify-center items-center p-2xs">
             <div className="flex flex-col justify-between grow">
