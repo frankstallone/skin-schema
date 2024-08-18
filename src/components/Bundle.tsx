@@ -23,8 +23,8 @@ const distributionMethods = [
   { value: 'me', label: 'Shared by Skin Schema' },
 ];
 const prices = [
-  { value: 'you', label: '$1000' },
-  { value: 'me', label: '$1200' },
+  { value: 'you', label: '$750' },
+  { value: 'me', label: '$975' },
 ];
 
 const PriceCard = () => {
@@ -44,13 +44,13 @@ const PriceCard = () => {
         <p className="mt-zero">
           Get a suite of extremely high-quality photographic and video content
           that beautifully showcases your brand, a select product, or a range of
-          products. This comprehensive bundle includes:
+          products for <strong>25% off!</strong> This comprehensive bundle
+          includes:
         </p>
         <ul>
-          <li>5 Videos</li>
-          <li>5 Professional Photos</li>
-          <li>2 Hooks</li>
-          <li>1 Call to Action (CTA)</li>
+          <li>1 Inspiration and vlog videos</li>
+          <li>2 Short form product videos</li>
+          <li>3 Professional Photos</li>
         </ul>
       </div>
       <div
