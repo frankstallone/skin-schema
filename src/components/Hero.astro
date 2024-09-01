@@ -7,13 +7,14 @@ interface Props {
 const { heading, subHeading } = Astro.props;
 ---
 
-<div class="relative overflow-clip">
+<div class="wrapper relative overflow-clip" style="--gutter: 0px;">
   <video autoplay loop muted playsinline class="min-w-zero max-w-full">
     <source src="/media/skin-schema-hero.webm" type="video/webm" />
     <source src="/media/skin-schema-hero.mp4" type="video/mp4" />
   </video>
   <div
     class="hidden wrapper region z-20 md:block absolute left-[0px] bottom-[10px] w-full h-full bg-gray-1200 bg-opacity-40"
+    style="--gutter: var(--space-s-l);"
   >
     <h1
       class="mt-zero text-gray-100 tracking-tight text-balance font-mono"
