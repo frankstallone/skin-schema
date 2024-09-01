@@ -12,24 +12,24 @@ export const options: PriceCardProps[] = [
         {
           amount: 1,
           price: [
-            { method: 'you', value: '$100' },
-            { method: 'me', value: '$150' },
+            { method: 'you', value: '$125' },
+            { method: 'me', value: '$200' },
           ],
           weekTurnaround: 1,
         },
         {
           amount: 3,
           price: [
-            { method: 'you', value: '$200' },
-            { method: 'me', value: '$300' },
+            { method: 'you', value: '$250' },
+            { method: 'me', value: '$375' },
           ],
           weekTurnaround: 2,
         },
         {
           amount: 5,
           price: [
-            { method: 'you', value: '$300' },
-            { method: 'me', value: '$450' },
+            { method: 'you', value: '$375' },
+            { method: 'me', value: '$575' },
           ],
           weekTurnaround: 3,
         },
@@ -47,24 +47,24 @@ export const options: PriceCardProps[] = [
         {
           amount: 1,
           price: [
-            { method: 'you', value: '$200' },
-            { method: 'me', value: '$250' },
+            { method: 'you', value: '$250' },
+            { method: 'me', value: '$315' },
           ],
           weekTurnaround: 1,
         },
         {
           amount: 3,
           price: [
-            { method: 'you', value: '$500' },
-            { method: 'me', value: '4600' },
+            { method: 'you', value: '$625' },
+            { method: 'me', value: '$750' },
           ],
           weekTurnaround: 2,
         },
         {
           amount: 5,
           price: [
-            { method: 'you', value: '$700' },
-            { method: 'me', value: '$850' },
+            { method: 'you', value: '$875' },
+            { method: 'me', value: '$1065' },
           ],
           weekTurnaround: 3,
         },
@@ -82,24 +82,24 @@ export const options: PriceCardProps[] = [
         {
           amount: 1,
           price: [
-            { method: 'you', value: '$300' },
-            { method: 'me', value: '$350' },
+            { method: 'you', value: '$375' },
+            { method: 'me', value: '$440' },
           ],
           weekTurnaround: 1,
         },
         {
           amount: 3,
           price: [
-            { method: 'you', value: '$600' },
-            { method: 'me', value: '$700' },
+            { method: 'you', value: '$750' },
+            { method: 'me', value: '$875' },
           ],
           weekTurnaround: 2,
         },
         {
           amount: 5,
           price: [
-            { method: 'you', value: '$800' },
-            { method: 'me', value: '$950' },
+            { method: 'you', value: '$1000' },
+            { method: 'me', value: '$1200' },
           ],
           weekTurnaround: 3,
         },
