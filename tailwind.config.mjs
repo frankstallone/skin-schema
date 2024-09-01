@@ -70,7 +70,6 @@ export default {
   corePlugins: {
     preflight: false,
     textOpacity: false,
-    backgroundOpacity: false,
     borderOpacity: false,
   },
 
