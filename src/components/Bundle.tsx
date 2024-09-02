@@ -23,8 +23,8 @@ const distributionMethods = [
   { value: 'me', label: 'Shared by Skin Schema' },
 ];
 const prices = [
-  { value: 'you', label: '$750' },
-  { value: 'me', label: '$975' },
+  { value: 'you', label: '$935' },
+  { value: 'me', label: '$1670' },
 ];
 
 const PriceCard = () => {
