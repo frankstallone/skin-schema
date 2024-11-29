@@ -1,16 +1,26 @@
 ---
 const pathname = Astro.url.pathname;
+import type { ContactFormProps } from '../lib';
+
+interface Props extends ContactFormProps {}
+
+const { content } = Astro.props;
+
+const title = content.title ? content.title : "Let's connect";
+const description = content.description
+  ? content.description
+  : `If our approach to beauty and aesthetics align, I'd love to talk more. Just pop your details below, letting me know more about how you'd like to work together. I'll be in touch within 24 hours of receiving your message so we can discuss further. 😊`;
+const message = content.message
+  ? content.message
+  : 'How would you like to work together?';
 ---
 
 <section class="wrapper region flow prose" id="Contact">
   <div class="content">
     <div class="box w-fit mx-auto text-center">
-      <h2>Let's connect</h2>
+      <h2>{title}</h2>
       <p>
-        If our approach to beauty and aesthetics align, I'd love to talk more.
-        Just pop your details below, letting me know more about how you'd like
-        to work together. I'll be in touch within 24 hours of receiving your
-        message so we can discuss further. 😊
+        {description}
       </p>
     </div>
     <div class="border border-gray-600 flex flex-col justify-between drop">
@@ -64,7 +74,7 @@ const pathname = Astro.url.pathname;
             </span>
             <span class="stack">
               <label class="font-mono font-semibold text-step-00" for="message"
-                >How would you like to work together?</label
+                >{message}</label
               >
               <textarea
                 name="message"

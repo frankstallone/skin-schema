@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Contact from '../components/Contact.astro';
+
+const contactInfo = {
+  title: 'Reach out',
+  description:
+    "I'm here to help you with any questions you may have. Please fill out the form below and I'll get back to you as soon as possible.",
+  message: 'How can I help you?',
+};
+---
+
+<Layout
+  meta={{
+    title: 'Skin Schema Instagram skincare influencer',
+    description: 'Skin Schema',
+  }}
+>
+  <main>
+    <Header />
+    <Hero
+      heading="Thank you!"
+      subHeading="Below you'll find the details of your order."
+    />
+    <section class="wrapper region flow prose" id="Whats-included">
+      <p class="text-center mx-auto">
+        Let's get you started! Click on the button below to head to the Notion
+        document. There are explicit directions on how to use the document, and
+        download the PDF. Free free to <a href="#Contact"
+          >reach out to me if you have any questions</a
+        >.
+      </p>
+    </section>
+    <Contact content={contactInfo} />
+  </main>
+</Layout>
