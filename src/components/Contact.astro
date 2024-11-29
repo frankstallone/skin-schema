@@ -6,12 +6,12 @@ interface Props extends ContactFormProps {}
 
 const { content } = Astro.props;
 
-const title = content.title ? content.title : "Let's connect";
-const description = content.description
-  ? content.description
+const title = content?.title ? content?.title : "Let's connect";
+const description = content?.description
+  ? content?.description
   : `If our approach to beauty and aesthetics align, I'd love to talk more. Just pop your details below, letting me know more about how you'd like to work together. I'll be in touch within 24 hours of receiving your message so we can discuss further. 😊`;
-const message = content.message
-  ? content.message
+const message = content?.message
+  ? content?.message
   : 'How would you like to work together?';
 ---
 
