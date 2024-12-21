@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout
+  meta={{
+    title: post.data.title,
+    description: post.data.description,
+    image: post.data.image,
+    canonicalURL: `https://skinschema.com/${post.id}/`,
+  }}
+>
+  <article class="region wrapper flow prose overflow-hidden mx-auto" id="main">
+    <Content />
+  </article>
+</BlogLayout>
