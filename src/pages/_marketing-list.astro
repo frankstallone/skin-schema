@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import EngagementHighlights from '../components/EngagementHighlights.astro';
+import WhoAmI from '../components/WhoAmI.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Layout
+  meta={{
+    title: 'Skin Schema finds beauty and serenity in minimalistic self-care.',
+    description:
+      'Committed to uncovering the best in authentic, minimalistic beauty. Tips, routines, and product reviews for a serene self-care experience.',
+  }}
+>
+  <main>
+    <Header />
+    <Hero heading="Content marketing list" subHeading="Skin schema" />
+    <section class="wrapper region flow prose text-center" id="Introduction">
+      <div class="box mx-auto w-fit">
+        <p>
+          For years I created content on Instagram hoping brands would reach out
+          to me for collaboration opportunities. My content quality only got
+          better and better. My engagement grew organically confirming I had
+          something of value.
+        </p>
+        <p>
+          After a while, I realized I was a small fish in a big sea, and
+          something had to change. I took things in my own hands but asked, "How
+          could I stand out?". This is everything I've learned from reaching out
+          to brands and tracking engagements.
+        </p>
+      </div>
+    </section>
+    <section class="wrapper region flow prose text-center" id="Whats-included">
+      <div
+        class="box w-fit mx-auto text-center border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip"
+      >
+        <h2 class="mt-zero">What's included</h2>
+        <p>
+          You'll be getting a full Notion template you can duplicate and make
+          your own. You can get a Notion account for free and start using this
+          today. Prefer not to use Notion? You'll also get a PDF.
+        </p>
+      </div>
+    </section>
+    <section class="wrapper region flow prose text-center" id="Features">
+      <h3>Features</h3>
+      <ul class="cluster pl-zero text-center">
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Brand name
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Website
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Niche
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Brand attributes
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Hero product
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Email address
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Status
+        </li>
+        <li
+          class="list-none bg-gray-400 px-xs py-2xs rounded-xl font-bold uppercase"
+        >
+          Reached out date
+        </li>
+      </ul>
+    </section>
+    <section class="wrapper region flow prose text-center" id="Bonus">
+      <div
+        class="box mx-auto w-fit border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip"
+      >
+        <h3 class="mt-zero">Bonus</h3>
+        <p>
+          Use the New Client Template to keep notes on the each brand and track
+          your invoices. Mark down who your contact is, what status the contract
+          is in, the amount, the date when your sent your content, and the
+          payment due date.
+        </p>
+      </div>
+    </section>
+    <section class="wrapper region flow prose text-center" id="Buy">
+      <div class="box w-fit mx-auto text-center">
+        <a href="#" class="button">Buy now</a>
+      </div>
+    </section>
+    <WhoAmI />
+    <EngagementHighlights />
+  </main>
+</Layout>

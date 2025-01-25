@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 const allPosts = (await getCollection('blog')).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 // TODO: Create better meta tags for home page
 
@@ -42,10 +42,10 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             class="region flow prose"
             style="--region-space: var(--space-s-m);"
           >
-            <div class="border border-gray-600 flex flex-col justify-between drop w-fit mx-auto">
+            <div class="border border-gray-600 flex flex-col justify-between drop w-fit mx-auto rounded-2xl overflow-clip">
               <div class="box">
                 <h2 class="text-step-3 mt-zero">
-                  <a class="link" href={`/${post.slug}/`}>
+                  <a class="link" href={`/${post.id}/`}>
                     {post.data.title}
                   </a>
                 </h2>
@@ -67,14 +67,14 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',
-                        }
+                        },
                       )}
                     </span>
                   </small>
                 </p>
                 <p>{post.data.description}</p>
                 <p>
-                  <a href={`/${post.slug}/`}>Read more &hellip;</a>
+                  <a href={`/${post.id}/`}>Read more &hellip;</a>
                 </p>
               </div>
             </div>

@@ -26,14 +26,14 @@ export interface Props {
 const selectClassNamesOptions = {
   control: (state: any) => {
     return classNames(
-      'px-2xs border',
+      'px-2xs border text-step-00 w-fit mx-auto',
       state.isFocused ? 'border-gray-1200' : 'border-gray-600',
     );
   },
   valueContainer: () => 'pr-2xs',
   indicatorSeparator: (state: any) =>
     classNames('bg-gray-600 mr-2xs', state.isFocused ? 'bg-gray-1200' : ''),
-  menu: () => 'mt-2xs border border-gray-1200 bg-[white]',
+  menu: () => 'mt-3xs border border-gray-1200 bg-[white] text-step-00',
   option: (state: any) => {
     return classNames(
       'p-2xs',
@@ -72,11 +72,11 @@ const PriceCard = ({ service }: Props) => {
   }));
 
   return (
-    <li className="border border-gray-600 flex flex-col justify-between drop">
+    <li className="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip">
       <div className="box flow prose">
         <h3 className="mt-zero text-step-1">{service.title}</h3>
         <p className="text-step-00">{service.description}</p>
-        <p className="text-step-00 text-center">
+        <p className="text-center">
           <a
             href={`#${service.exampleId}`}
             className="link flex justify-center items-center font-mono font-semibold"
@@ -95,12 +95,12 @@ const PriceCard = ({ service }: Props) => {
       </div>
       <div className="border-t border-t-gray-600">
         <div className="flex flex-col justify-center items-center p-2xs">
-          <div className="flex justify-center items-center font-semibold font-mono w-full">
+          <div className="flex justify-center items-center font-semibold w-full">
             <Select
               defaultValue={distribution}
               onChange={handleSetDistribution}
               options={distributionMethods}
-              className="text-step-0 w-full text-center"
+              className="w-full text-center"
               unstyled
               classNames={selectClassNamesOptions}
               instanceId={service.exampleId}

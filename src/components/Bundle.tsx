@@ -39,7 +39,7 @@ const PriceCard = () => {
   );
 
   return (
-    <div className="border border-gray-600 flex flex-col justify-between w-fit mx-auto drop">
+    <div className="border border-gray-600 flex flex-col justify-between w-fit mx-auto drop rounded-2xl overflow-clip">
       <div className="box flow prose text-step-00">
         <p className="mt-zero">
           Get a suite of extremely high-quality photographic and video content

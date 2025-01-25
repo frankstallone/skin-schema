@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require('tailwindcss/plugin');
-const postcss = require('postcss');
-const postcssJs = require('postcss-js');
+import plugin from 'tailwindcss/plugin';
+import postcss from 'postcss';
+import postcssJs from 'postcss-js';
 
-const clampGenerator = require('./src/css-utils/clamp-generator.js');
-const tokensToTailwind = require('./src/css-utils/tokens-to-tailwind.js');
+import clampGenerator from './src/css-utils/clamp-generator.js';
+import tokensToTailwind from './src/css-utils/tokens-to-tailwind.js';
 
 // Raw design tokens
-const colorTokens = require('./src/design-tokens/colors.json');
-const fontTokens = require('./src/design-tokens/fonts.json');
-const spacingTokens = require('./src/design-tokens/spacing.json');
-const textSizeTokens = require('./src/design-tokens/text-sizes.json');
-const textLeadingTokens = require('./src/design-tokens/text-leading.json');
-const textWeightTokens = require('./src/design-tokens/text-weights.json');
-const viewportTokens = require('./src/design-tokens/viewports.json');
+import colorTokens from './src/design-tokens/colors.json';
+import fontTokens from './src/design-tokens/fonts.json';
+import spacingTokens from './src/design-tokens/spacing.json';
+import textSizeTokens from './src/design-tokens/text-sizes.json';
+import textLeadingTokens from './src/design-tokens/text-leading.json';
+import textWeightTokens from './src/design-tokens/text-weights.json';
+import viewportTokens from './src/design-tokens/viewports.json';
 
 // Process design tokens
 const colors = tokensToTailwind(colorTokens.items);

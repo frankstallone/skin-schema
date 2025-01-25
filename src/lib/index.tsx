@@ -107,3 +107,11 @@ export const options: PriceCardProps[] = [
     },
   },
 ];
+
+export type ContactFormProps = {
+  content?: {
+    title: string;
+    description: string;
+    message: string;
+  };
+};
