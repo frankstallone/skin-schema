@@ -49,27 +49,12 @@ const distributionMethods = [
 ];
 
 const PriceCard = ({ service }: Props) => {
-  const [chosenPackage, setChosenPackage] = useState(service.packages[0]);
+  const [chosenPackage] = useState(service.packages[0]);
   const [distribution, setDistribution] = useState(distributionMethods[0]);
-
-  const handleAmountChange = (e: any) => {
-    const selectedAmount = parseInt(e.value);
-    const selectedPackage = service.packages.find(
-      (option) => option.amount === selectedAmount,
-    );
-    if (selectedPackage) {
-      setChosenPackage(selectedPackage);
-    }
-  };
 
   const handleSetDistribution = (e: any) => {
     setDistribution(e);
   };
-
-  const selectablePackages = service.packages.map((option) => ({
-    value: option.amount,
-    label: option.amount,
-  }));
 
   return (
     <li className="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip">

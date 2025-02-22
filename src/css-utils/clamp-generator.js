@@ -1,4 +1,4 @@
-const viewports = require('../design-tokens/viewports.json');
+import viewports from '../design-tokens/viewports.json';
 
 /**
  * Takes an array of tokens and sends back and array of name
@@ -7,10 +7,10 @@ const viewports = require('../design-tokens/viewports.json');
  * @param {array} tokens array of {name: string, min: number, max: number}
  * @returns {array} {name: string, value: string}
  */
-const clampGenerator = tokens => {
+const clampGenerator = (tokens) => {
   const rootSize = 16;
 
-  return tokens.map(({name, min, max}) => {
+  return tokens.map(({ name, min, max }) => {
     if (min === max) {
       return `${min / rootSize}rem`;
     }
@@ -31,9 +31,9 @@ const clampGenerator = tokens => {
       name,
       value: `clamp(${minSize}rem, ${intersection.toFixed(2)}rem + ${(
         slope * 100
-      ).toFixed(2)}vw, ${maxSize}rem)`
+      ).toFixed(2)}vw, ${maxSize}rem)`,
     };
   });
 };
 
-module.exports = clampGenerator;
+export default clampGenerator;
