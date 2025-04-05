@@ -15,7 +15,7 @@ export const options: PriceCardProps[] = [
             { method: 'you', value: '$125' },
             { method: 'me', value: '$200' },
           ],
-          weekTurnaround: 1,
+          weekTurnaround: 2,
         },
         {
           amount: 3,
@@ -50,7 +50,7 @@ export const options: PriceCardProps[] = [
             { method: 'you', value: '$250' },
             { method: 'me', value: '$315' },
           ],
-          weekTurnaround: 1,
+          weekTurnaround: 2,
         },
         {
           amount: 3,
@@ -58,7 +58,7 @@ export const options: PriceCardProps[] = [
             { method: 'you', value: '$625' },
             { method: 'me', value: '$750' },
           ],
-          weekTurnaround: 2,
+          weekTurnaround: 3,
         },
         {
           amount: 5,
@@ -85,7 +85,7 @@ export const options: PriceCardProps[] = [
             { method: 'you', value: '$375' },
             { method: 'me', value: '$440' },
           ],
-          weekTurnaround: 1,
+          weekTurnaround: 2,
         },
         {
           amount: 3,
@@ -93,7 +93,7 @@ export const options: PriceCardProps[] = [
             { method: 'you', value: '$750' },
             { method: 'me', value: '$875' },
           ],
-          weekTurnaround: 2,
+          weekTurnaround: 3,
         },
         {
           amount: 5,
