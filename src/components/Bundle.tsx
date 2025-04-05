@@ -39,58 +39,63 @@ const PriceCard = () => {
   );
 
   return (
-    <div className="border border-gray-600 flex flex-col justify-between w-fit mx-auto drop rounded-2xl overflow-clip">
-      <div className="box flow prose text-step-00">
-        <p className="mt-zero">
-          Get a suite of extremely high-quality photographic and video content
-          that beautifully showcases your brand, a select product, or a range of
-          products for <strong>25% off!</strong> This comprehensive bundle
-          includes:
-        </p>
-        <ul>
-          <li>1 Inspiration and vlog videos</li>
-          <li>2 Short form product videos</li>
-          <li>3 Professional Photos</li>
-        </ul>
+    <div className="wrapper region flow prose" id="Bundle">
+      <div className="box w-fit mx-auto text-center">
+        <h3>Skin Schema Bundle</h3>
       </div>
-      <div
-        style={
-          {
-            '--gutter': 0,
-            '--switcher-target-container-width': '20rem',
-          } as React.CSSProperties
-        }
-        className="flex justify-center items-center divide-x divide-gray-600 border-t border-t-gray-600"
-      >
-        <div className="flex flex-col justify-center items-center p-2xs grow">
-          <div className="flex justify-center items-center font-semibold font-mono w-full">
-            <Select
-              defaultValue={distribution}
-              onChange={handleSetDistribution}
-              options={distributionMethods}
-              className="text-step-0 w-full text-center"
-              unstyled
-              classNames={selectClassNamesOptions}
-            />
+      <div className="border border-gray-600 flex flex-col justify-between w-fit mx-auto drop rounded-2xl overflow-clip">
+        <div className="box flow prose text-step-00">
+          <p className="mt-zero">
+            Get a suite of extremely high-quality photographic and video content
+            that beautifully showcases your brand, a select product, or a range
+            of products for <strong>25% off!</strong> This comprehensive bundle
+            includes:
+          </p>
+          <ul>
+            <li>1 Inspiration and vlog videos</li>
+            <li>2 Short form product videos</li>
+            <li>3 Professional Photos</li>
+          </ul>
+        </div>
+        <div
+          style={
+            {
+              '--gutter': 0,
+              '--switcher-target-container-width': '20rem',
+            } as React.CSSProperties
+          }
+          className="flex justify-center items-center divide-x divide-gray-600 border-t border-t-gray-600"
+        >
+          <div className="flex flex-col justify-center items-center p-2xs grow">
+            <div className="flex justify-center items-center font-semibold font-mono w-full">
+              <Select
+                defaultValue={distribution}
+                onChange={handleSetDistribution}
+                options={distributionMethods}
+                className="text-step-0 w-full text-center"
+                unstyled
+                classNames={selectClassNamesOptions}
+              />
+            </div>
+            <p className="text-step-000 font-semibold mt-2xs">
+              Distribution method
+            </p>
           </div>
-          <p className="text-step-000 font-semibold mt-2xs">
-            Distribution method
-          </p>
+          <div className="flex flex-col justify-center items-center p-l py-2xs">
+            <h4 className="text-center font-semibold font-mono text-step-4 mt-zero">
+              {currentPrice?.label}
+            </h4>
+            <p className="text-step-000 font-semibold mt-2xs">
+              3 week turnaround
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col justify-center items-center p-l py-2xs">
-          <h4 className="text-center font-semibold font-mono text-step-4 mt-zero">
-            {currentPrice?.label}
-          </h4>
-          <p className="text-step-000 font-semibold mt-2xs">
-            3 week turnaround
-          </p>
-        </div>
-      </div>
-      <div className="border-t border-t-gray-600">
-        <div className="box w-fit mx-auto">
-          <a href="/#Contact" className="button">
-            Reach out
-          </a>
+        <div className="border-t border-t-gray-600">
+          <div className="box w-fit mx-auto">
+            <a href="/#Contact" className="button">
+              Reach out
+            </a>
+          </div>
         </div>
       </div>
     </div>

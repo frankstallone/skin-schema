@@ -79,49 +79,6 @@ const PriceCard = ({ service }: Props) => {
         </p>
       </div>
       <div className="border-t border-t-gray-600">
-        <div className="flex flex-col justify-center items-center p-2xs">
-          <div className="flex justify-center items-center font-semibold w-full">
-            <Select
-              defaultValue={distribution}
-              onChange={handleSetDistribution}
-              options={distributionMethods}
-              className="w-full text-center"
-              unstyled
-              classNames={selectClassNamesOptions}
-              instanceId={service.exampleId}
-            />
-          </div>
-          <p className="text-step-000 font-semibold mt-2xs">
-            Distribution method
-          </p>
-        </div>
-        <div className="flex divide-x divide-gray-600 border-y border-y-gray-600 text-center justify-center">
-          <div className="flex flex-col grow justify-between items-center p-2xs">
-            <h4 className="mt-2xs text-step-0 font-semibold font-mono">1</h4>
-            <p className="text-step-000 font-semibold mt-2xs">{service.type}</p>
-          </div>
-          <div className="flex flex-col justify-center items-center p-2xs">
-            <div className="flex flex-col justify-between grow">
-              <h4 className="mt-2xs text-step-0 font-semibold font-mono">
-                {
-                  service.packages.find(
-                    (option) => option.amount === chosenPackage.amount,
-                  )?.weekTurnaround
-                }
-              </h4>
-              <p className="text-step-000 font-semibold mt-2xs">
-                Week turnaround
-              </p>
-            </div>
-          </div>
-        </div>
-        <h4 className="box text-center font-semibold text-step-4 mt-zero font-mono">
-          {
-            chosenPackage.price.find(
-              (option) => option.method === distribution.value,
-            )?.value
-          }
-        </h4>
         <div className="border-t border-t-gray-600">
           <div className="box w-fit mx-auto">
             <a href="/#Contact" className="button">
