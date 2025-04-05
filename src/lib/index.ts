@@ -115,3 +115,33 @@ export type ContactFormProps = {
     message: string;
   };
 };
+
+/**
+ * Type definition for navigation link items
+ */
+export type NavigationLink = {
+  href: string;
+  text: string;
+};
+
+/**
+ * Shared navigation links used across the site
+ */
+export const navigationLinks: NavigationLink[] = [
+  {
+    href: '/#Services',
+    text: 'Services',
+  },
+  {
+    href: '/#RateCard',
+    text: 'Rate Card',
+  },
+  {
+    href: '/blog/',
+    text: 'Blog',
+  },
+  {
+    href: '/#Contact',
+    text: 'Contact',
+  },
+];

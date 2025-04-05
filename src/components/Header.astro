@@ -1,3 +1,7 @@
+---
+import { navigationLinks } from '../lib';
+---
+
 <header class="box">
   <div
     class="cluster font-mono font-black uppercase text-step-000"
@@ -6,18 +10,15 @@
     <a href="/" class="link">Skin Schema</a>
     <nav>
       <ul role="list" class="cluster justify-center" style="margin-block: 0;">
-        <li>
-          <a href="/#Services" class="link">Services</a>
-        </li>
-        <li>
-          <a href="/#RateCard" class="link">Rate Card</a>
-        </li>
-        <li>
-          <a href="/blog/" class="link">Blog</a>
-        </li>
-        <li>
-          <a href="/#Contact" class="link">Contact</a>
-        </li>
+        {
+          navigationLinks.map((link) => (
+            <li>
+              <a href={link.href} class="link">
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
