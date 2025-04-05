@@ -12,6 +12,9 @@ import Contact from '../components/Contact.astro';
 import InspirationalExamples from '../components/InspirationalExamples.astro';
 import WorkedWith from '../components/WorkedWith.astro';
 import RateCard from '../components/RateCard.astro';
+import Bundle from '../components/Bundle.tsx';
+import Addons from '../components/Addons.astro';
+import Collabterms from '../components/Collabterms.astro';
 ---
 
 <Layout
@@ -31,8 +34,11 @@ import RateCard from '../components/RateCard.astro';
     <InspirationalExamples />
     <CollaborationOptions />
     <Services />
-    <WorkedWith />
     <RateCard />
+    <Bundle client:idle />
+    <Addons />
+    <Collabterms />
+    <WorkedWith />
     <EngagementHighlights />
     <Contact />
   </main>
