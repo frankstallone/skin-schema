@@ -137,10 +137,6 @@ export const navigationLinks: NavigationLink[] = [
     text: 'Rate Card',
   },
   {
-    href: '/blog/',
-    text: 'Blog',
-  },
-  {
     href: '/#Contact',
     text: 'Contact',
   },
