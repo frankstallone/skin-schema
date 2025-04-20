@@ -33,3 +33,14 @@
   background-color: var(--color-gray-300);
   color: var(--color-gray-800);
 }
+
+.button.reverse {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-1200);
+}
+.button.reverse:hover,
+.button.reverse:focus,
+.button.reverse:active {
+  background-color: var(--color-gray-1200);
+  color: var(--color-gray-200);
+}

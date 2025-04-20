@@ -13,15 +13,20 @@ const { heading, subHeading } = Astro.props;
     <source src="/media/skin-schema-hero.mp4" type="video/mp4" />
   </video>
   <div
-    class="hidden wrapper region z-20 md:block absolute left-[0px] bottom-[10px] w-full h-full bg-gray-1200 bg-opacity-40"
+    class="wrapper region z-20 absolute left-[0px] bottom-[10px] w-full h-full bg-gray-1200 bg-opacity-40 flow"
     style="--gutter: var(--space-s-l);"
   >
     <h1
-      class="mt-zero text-gray-100 tracking-tight text-balance font-mono"
+      class="text-step-1 md:text-step-5 mt-zero text-gray-100 tracking-tight text-balance font-mono"
       style="max-inline-size: 18ch;"
     >
-      {heading ? heading : "Skin Schema's Collaboration Opportunities"}
+      {
+        heading
+          ? heading
+          : 'Authentic skincare content that builds customer trust'
+      }
     </h1>
+    <a href="/#Contact" class="button reverse mx-auto"> Reach out </a>
     {
       subHeading && (
         <h2
