@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Select from 'react-select';
 import classNames from 'classnames';
 
 export interface DistributionPrice {

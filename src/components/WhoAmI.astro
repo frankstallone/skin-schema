@@ -12,12 +12,23 @@ const { class: className } = Astro.props;
   <ul class="grid" data-layout="50-50" role="list">
     <li class="flex flex-col justify-start items-center flow prose">
       <h2 class="-rotate-2 mb-xl">
-        <mark><span>Hi, I'm Kseniya 👋🏻</span></mark>
+        <mark><span>Meet Kseniya 👋🏻</span></mark>
       </h2>
       <p class="text-step-2 leading-snug">
         I'm an experienced photographer and videographer, and created Skin
         Schema to showcase my passion for beauty and skincare through a lens of
         authenticity and elegance.
+      </p>
+      <p class="text-step-0 leading-snug">
+        Having developed a loyal, trusting following, I'm now opening both my
+        expertise and feed to collaboration opportunities with select brand
+        partners.
+      </p>
+      <p class="text-step-0 leading-snug">
+        Skin Schema creates engaging, visually stunning photography and
+        short-form videos that skincare customers love. Each piece of content is
+        thoughtfully crafted to feel genuine, inspire trust, and boost your
+        brand's connection with real people.
       </p>
       <details-utils close-click-outside class="self-start">
         <details>
@@ -61,6 +72,45 @@ const { class: className } = Astro.props;
         decoding="sync"
         loading="eager"
       />
+    </li>
+  </ul>
+  <div class="box w-fit mx-auto text-center">
+    <h2>Brands partner with me because:</h2>
+  </div>
+  <ul class="grid" role="list" data-layout="thirds">
+    <li
+      class="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip text-center"
+    >
+      <div class="box flow prose">
+        <h3 class="mt-zero text-step-1">Authenticity at scale</h3>
+        <p>
+          Professional-quality visuals with the authentic feel of real customer
+          experiences.
+        </p>
+      </div>
+    </li>
+    <li
+      class="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip text-center"
+    >
+      <div class="box flow prose">
+        <h3 class="mt-zero text-step-1">Time and resource savings</h3>
+        <p>
+          I handle ideation, production, and editing—freeing your team to focus
+          on strategy.
+        </p>
+      </div>
+    </li>
+    <li
+      class="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip text-center"
+    >
+      <div class="box flow prose">
+        <h3 class="mt-zero text-step-1">Proven results</h3>
+        <p>
+          My content consistently delivers increased engagement, builds
+          credibility, and helps skincare brands convert followers into loyal
+          customers.
+        </p>
+      </div>
     </li>
   </ul>
 </section>

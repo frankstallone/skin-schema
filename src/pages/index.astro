@@ -14,6 +14,7 @@ import WorkedWith from '../components/WorkedWith.astro';
 import RateCard from '../components/RateCard.astro';
 import Addons from '../components/Addons.astro';
 import Collabterms from '../components/Collabterms.astro';
+import Agitate from '../components/Agitate.astro';
 ---
 
 <Layout
@@ -27,16 +28,17 @@ import Collabterms from '../components/Collabterms.astro';
   <main>
     <Header />
     <Hero />
-    <WhoAmI class="pt-zero" />
-    <WorkedWith />
+    <Agitate class="pt-zero" />
+    <EngagementHighlights />
+    <WhoAmI />
     <PhotographyExamples />
     <ShortFormExamples />
     <InspirationalExamples />
+    <WorkedWith />
     <Services />
     <RateCard />
     <Addons />
     <Collabterms />
-    <EngagementHighlights />
     <Contact />
   </main>
 </Layout>

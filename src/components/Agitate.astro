@@ -1,0 +1,26 @@
+---
+const { class: className } = Astro.props;
+---
+
+<section
+  class=`wrapper region flow prose ${className ? className : ''}`
+  id="TheProblem"
+>
+  <div class="box w-fit mx-auto text-center">
+    <h2>Struggling to create skincare content that converts?</h2>
+  </div>
+  <div>
+    <h3>
+      Your customers crave authenticity—but traditional ads and stock images
+      just don't cut it anymore.
+    </h3>
+    <p class="text-step-2 leading-snug">
+      Producing consistent, engaging skincare content in-house is expensive,
+      time-consuming, and rarely feels genuine. Every time your posts get
+      scrolled past, you're losing potential customers, credibility, and sales.
+    </p>
+    <p class="text-step-2 leading-snug">
+      <strong>It doesn't have to be this way.</strong>
+    </p>
+  </div>
+</section>
