@@ -3,11 +3,11 @@ import { type Props as PriceCardProps } from '../components/PriceCard';
 export const options: PriceCardProps[] = [
   {
     service: {
-      title: 'Professional Photography of Products',
+      title: 'Product Photo Sets',
       description:
-        'High-quality images showcasing your products in a professional, light, airy, and minimalistic style.',
+        'Refined product photography and texture visuals for skincare, makeup, and wellness brands that need polished assets for social, campaign, and product storytelling.',
       exampleId: 'PhotographyExamples',
-      type: 'Photo',
+      type: 'Photo Set',
       packages: [
         {
           amount: 1,
@@ -38,9 +38,9 @@ export const options: PriceCardProps[] = [
   },
   {
     service: {
-      title: 'Short Form Product Videos',
+      title: 'Short-Form Product Videos',
       description:
-        "Engaging short videos tailored for Instagram & TikTok, designed to captivate and inspire your audience through a feeling of lux serenity. These can be product showcases, unboxings, how-tos, before-and-afters, or any other ideas you'd like to see brought to life.",
+        "Elevated short-form videos for Instagram, TikTok, and paid or organic social. Ideal for product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines that need to feel credible and brand-ready.",
       exampleId: 'ShortFormExamples',
       type: 'UGC Video',
       packages: [
@@ -73,9 +73,9 @@ export const options: PriceCardProps[] = [
   },
   {
     service: {
-      title: 'Inspiration and Vlog Videos',
+      title: 'Premium Product Storytelling Videos',
       description:
-        'Personalized and heartfelt video content produced in studio quality, sharing lifestyle tips, inspiration, self-care routines, and day-to-day product usage.',
+        'More developed beauty video concepts that combine polished production, product context, lifestyle detail, and Skin Schema-style serenity for campaigns, launches, and deeper product education.',
       exampleId: 'InspirationalExamples',
       type: 'UGC Video',
       packages: [
