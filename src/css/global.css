@@ -1,12 +1,15 @@
-@import 'tailwindcss/base';
+@layer theme, base, components, utilities;
 
-@import 'global/reset.css';
-@import 'global/fonts.css';
+@source '../';
 
-@import 'tailwindcss/components';
+@import 'tailwindcss/theme.css' layer(theme);
+@import './generated/tailwind-theme.css';
 
-@import 'global/variables.css';
-@import 'global/global-styles.css';
+@import './global/reset.css' layer(base);
+@import './global/fonts.css' layer(base);
+
+@import './global/variables.css' layer(base);
+@import './global/global-styles.css' layer(base);
 /* 
 See issue: https://github.com/frankstallone/astro-cube-boilerplate/issues/1
 Reference source: https://github.com/Set-Creative-Studio/cube-boilerplate/blob/main/src/css/global.css#L11
@@ -16,26 +19,27 @@ Reference source: https://github.com/Set-Creative-Studio/cube-boilerplate/blob/m
 @import-glob 'utilities/*.css'; 
 */
 
-@import 'blocks/animation.css' layer(components);
-@import 'blocks/button.css' layer(components);
-@import 'blocks/drop.css' layer(components);
-@import 'blocks/infinite-scroll.css' layer(components);
-@import 'blocks/link.css' layer(components);
-@import 'blocks/mark.css' layer(components);
-@import 'blocks/prose.css' layer(components);
-@import 'components/box.css' layer(components);
-@import 'components/cluster.css' layer(components);
-@import 'components/content.css' layer(components);
-@import 'components/flow.css' layer(components);
-@import 'components/grid.css' layer(components);
-@import 'components/icon.css' layer(components);
-@import 'components/reel.css' layer(components);
-@import 'components/repel.css' layer(components);
-@import 'components/sidebar.css' layer(components);
-@import 'components/stack.css' layer(components);
-@import 'components/switcher.css' layer(components);
-@import 'components/wrapper.css' layer(components);
-@import 'utilities/region.css' layer(components);
-@import 'utilities/visually-hidden.css' layer(components);
+@import './blocks/animation.css' layer(components);
+@import './blocks/button.css' layer(components);
+@import './blocks/drop.css' layer(components);
+@import './blocks/infinite-scroll.css' layer(components);
+@import './blocks/link.css' layer(components);
+@import './blocks/mark.css' layer(components);
+@import './blocks/prose.css' layer(components);
+@import './components/box.css' layer(components);
+@import './components/cluster.css' layer(components);
+@import './components/content.css' layer(components);
+@import './components/flow.css' layer(components);
+@import './components/grid.css' layer(components);
+@import './components/icon.css' layer(components);
+@import './components/reel.css' layer(components);
+@import './components/repel.css' layer(components);
+@import './components/sidebar.css' layer(components);
+@import './components/stack.css' layer(components);
+@import './components/switcher.css' layer(components);
+@import './components/wrapper.css' layer(components);
+@import './utilities/region.css' layer(components);
 
-@import 'tailwindcss/utilities';
+@import './generated/tailwind-utilities.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import './utilities/visually-hidden.css' layer(utilities);
