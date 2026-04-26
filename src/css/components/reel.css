@@ -4,7 +4,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-color: var(--color-gray-400) var(--color-gray-1000);
-  gap: var(--space-s-m);
+  gap: var(--spacing-s-m);
 }
 
 .reel::-webkit-scrollbar {

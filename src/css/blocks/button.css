@@ -6,10 +6,10 @@
   color: var(--color-gray-200);
   background-color: var(--color-gray-1200);
   border: none;
-  font-size: var(--size-step-0);
-  font-weight: var(--font-bold);
-  padding-block: var(--space-2xs);
-  padding-inline: var(--space-l);
+  font-size: var(--text-step-0);
+  font-weight: var(--font-weight-bold);
+  padding-block: var(--spacing-2xs);
+  padding-inline: var(--spacing-l);
   text-decoration: none;
   text-align: center;
   cursor: pointer;

@@ -1,6 +1,6 @@
 /* Outcomes mask */
 .infinite-scroll-mask {
-  --default-color: var(--color-light);
+  --default-color: var(--color-gray-100);
 
   mask-image: linear-gradient(
     to right,
@@ -18,6 +18,6 @@
 
 @keyframes infinite-scroll {
   to {
-    transform: translateX(calc(-100% - var(--space-l)));
+    transform: translateX(calc(-100% - var(--spacing-l)));
   }
 }

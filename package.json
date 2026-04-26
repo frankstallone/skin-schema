@@ -5,10 +5,12 @@
   "author": "Frank Stallone <frank@stallone.dev>",
   "description": "Website for Skin Schema",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
+    "tokens:build": "node ./scripts/build-tailwind-theme.mjs",
+    "tokens:test": "node --test src/css-utils/__tests__/tailwind-token-generator.test.js",
+    "dev": "npm run tokens:build && astro dev",
+    "start": "npm run tokens:build && astro dev",
+    "build": "npm run tokens:build && astro check && astro build",
+    "preview": "npm run tokens:build && astro preview",
     "astro": "astro"
   },
   "dependencies": {
@@ -16,7 +18,7 @@
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/react": "^4.3.1",
     "@astrojs/sitemap": "^3.5.1",
-    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/vite": "^4.2.4",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@zachleat/details-utils": "^2.0.2",
@@ -27,7 +29,7 @@
     "react-dom": "^18.3.1",
     "react-select": "^5.8.0",
     "slugify": "^1.6.6",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4.2.4",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
