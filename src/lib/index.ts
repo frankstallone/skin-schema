@@ -73,7 +73,7 @@ export const options: PriceCardProps[] = [
   },
   {
     service: {
-      title: 'Premium Product Storytelling Videos',
+      title: 'Product Storytelling Videos',
       description:
         'More developed beauty video concepts that combine polished production, product context, lifestyle detail, and Skin Schema-style serenity for campaigns, launches, and deeper product education.',
       exampleId: 'InspirationalExamples',

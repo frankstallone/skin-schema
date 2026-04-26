@@ -52,7 +52,7 @@ const PriceCard = () => {
             includes:
           </p>
           <ul>
-            <li>1 Inspiration and vlog videos</li>
+            <li>1 Product Storytelling Video</li>
             <li>2 Short form product videos</li>
             <li>3 Professional Photos</li>
           </ul>
