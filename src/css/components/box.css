@@ -6,5 +6,5 @@ More info: https://every-layout.dev/layouts/box/#the-generator
 .box {
   padding: var(--spacing-s-m);
   color: var(--color-gray-1200);
-  background-color: white;
+  background-color: var(--color-gray-100);
 }
