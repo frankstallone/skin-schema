@@ -9,6 +9,7 @@
     "tokens:test": "node --test src/css-utils/__tests__/tailwind-token-generator.test.js",
     "dev": "npm run tokens:build && astro dev",
     "start": "npm run tokens:build && astro dev",
+    "lint": "npm run tokens:build && astro check",
     "build": "npm run tokens:build && astro check && astro build",
     "preview": "npm run tokens:build && astro preview",
     "astro": "astro"

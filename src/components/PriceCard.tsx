@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import classNames from 'classnames';
-
 export interface DistributionPrice {
   method: 'you' | 'me';
   value: string;
@@ -22,39 +19,7 @@ export interface Props {
   };
 }
 
-const selectClassNamesOptions = {
-  control: (state: any) => {
-    return classNames(
-      'px-2xs border text-step-00 w-fit mx-auto',
-      state.isFocused ? 'border-gray-1200' : 'border-gray-600',
-    );
-  },
-  valueContainer: () => 'pr-2xs',
-  indicatorSeparator: (state: any) =>
-    classNames('bg-gray-600 mr-2xs', state.isFocused ? 'bg-gray-1200' : ''),
-  menu: () => 'mt-3xs border border-gray-1200 bg-[white] text-step-00',
-  option: (state: any) => {
-    return classNames(
-      'p-2xs',
-      state.isFocused ? 'bg-gray-100' : '',
-      state.isSelected ? 'bg-gray-400' : '',
-    );
-  },
-};
-
-const distributionMethods = [
-  { value: 'you', label: 'For Brand Use' },
-  { value: 'me', label: 'Shared by Skin Schema' },
-];
-
 const PriceCard = ({ service }: Props) => {
-  const [chosenPackage] = useState(service.packages[0]);
-  const [distribution, setDistribution] = useState(distributionMethods[0]);
-
-  const handleSetDistribution = (e: any) => {
-    setDistribution(e);
-  };
-
   return (
     <li className="border border-gray-600 flex flex-col justify-between drop rounded-2xl overflow-clip">
       <div className="box flow prose">
