@@ -24,7 +24,7 @@ describe('ShortFormExamples', () => {
     assert.match(component, /preload="none"/);
     assert.match(component, /data-src=\{example\.src\}/);
     assert.match(component, /IntersectionObserver/);
-    assert.match(component, /rootMargin: '300px 0px'/);
+    assert.match(component, /rootMargin: '300px 100%'/);
     assert.doesNotMatch(component, /@media \(min-width:/);
     assert.doesNotMatch(component, /<source\s+src=\{example\.src\}/);
   });
