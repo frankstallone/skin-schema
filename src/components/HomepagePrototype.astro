@@ -144,10 +144,10 @@ const proofPoints = [
     data-prototype-variant="A"
   >
     <header class="prototype-nav prototype-nav--light" aria-label="Primary">
-      <a href="/" class="prototype-brand">Skin Schema</a>
+      <a href="#main" class="prototype-brand">Skin Schema</a>
       <nav>
-        <a href="#Services">Services</a>
-        <a href="#RateCard">Rate Card</a>
+        <a href="#CampaignProcess">Process</a>
+        <a href="#CampaignRates">Rates</a>
         <a href="#Contact">Contact</a>
       </nav>
     </header>
@@ -422,10 +422,10 @@ const proofPoints = [
     hidden
   >
     <header class="prototype-nav prototype-nav--light" aria-label="Primary">
-      <a href="/" class="prototype-brand">Skin Schema</a>
+      <a href="#main" class="prototype-brand">Skin Schema</a>
       <nav>
-        <a href="#Services">Services</a>
-        <a href="#RateCard">Rate Card</a>
+        <a href="#CampaignProcess">Process</a>
+        <a href="#CampaignRates">Rates</a>
         <a href="#Contact">Contact</a>
       </nav>
     </header>
@@ -480,7 +480,7 @@ const proofPoints = [
       </ul>
     </section>
 
-    <section class="variant-d-system" id="Services">
+    <section class="variant-d-system" id="CampaignProcess">
       <h2>Execution, scoped for brand teams</h2>
       <ol>
         <li>
@@ -510,7 +510,7 @@ const proofPoints = [
       </ol>
     </section>
 
-    <section class="variant-d-rates" id="RateCard">
+    <section class="variant-d-rates" id="CampaignRates">
       <div class="variant-d-rates__intro">
         <p class="prototype-kicker">Starting rates</p>
         <h2>Simple entry points, scoped with campaign detail.</h2>
@@ -519,14 +519,18 @@ const proofPoints = [
           quoted after we align on scope.
         </p>
       </div>
-      <div class="variant-d-rates__grid">
+      <div class="variant-d-rate-bands">
         {
           startingRates.map((rate) => (
             <article>
-              <p>{rate.type}</p>
-              <span>{rate.price}</span>
-              <h3>{rate.title}</h3>
-              <p>{rate.text}</p>
+              <div>
+                <p>{rate.type}</p>
+                <span>{rate.price}</span>
+              </div>
+              <div>
+                <h3>{rate.title}</h3>
+                <p>{rate.text}</p>
+              </div>
               <dl>
                 {rate.specs.map(([label, value]) => (
                   <div>
@@ -538,6 +542,13 @@ const proofPoints = [
             </article>
           ))
         }
+      </div>
+      <div class="variant-d-rates__note">
+        <p>
+          Organic brand-use rights are included for approved channels. Paid
+          usage, raw footage, rush delivery, perpetual usage, and extended
+          distribution are quoted separately based on campaign scope.
+        </p>
       </div>
     </section>
   </article>
@@ -727,6 +738,20 @@ const proofPoints = [
       </button>
     </form>
   </section>
+
+  <footer class="prototype-footer" aria-label="Footer">
+    <a href="#main" class="prototype-brand">Skin Schema</a>
+    <nav aria-label="Footer navigation">
+      <a href="#CampaignProcess">Process</a>
+      <a href="#CampaignRates">Rates</a>
+      <a href="#Contact">Contact</a>
+      <a
+        href="https://www.instagram.com/skinschema/"
+        target="_blank"
+        rel="noopener noreferrer">Instagram</a
+      >
+    </nav>
+  </footer>
 
   <div class="prototype-switcher" aria-label="Homepage prototype variants">
     <button type="button" data-prototype-prev aria-label="Previous variant"
@@ -1331,6 +1356,11 @@ const proofPoints = [
   }
 
   .variant-d-system {
+    background: color-mix(
+      in oklab,
+      var(--color-gray-1200) 94%,
+      var(--color-skin-200)
+    );
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
 
@@ -1363,7 +1393,7 @@ const proofPoints = [
   }
 
   .variant-d-rates {
-    background: var(--color-gray-100);
+    background: var(--color-skin-200);
     color: var(--color-gray-1200);
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
@@ -1386,32 +1416,8 @@ const proofPoints = [
     margin: 0;
   }
 
-  .variant-d-rates__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .variant-d-rates__grid article {
-    display: grid;
-    gap: var(--spacing-s);
-    min-block-size: 36rem;
-    padding: var(--spacing-xl) var(--spacing-s-l);
-  }
-
-  .variant-d-rates__grid article:nth-child(1) {
-    background: var(--color-skin-200);
-  }
-
-  .variant-d-rates__grid article:nth-child(2) {
-    background: var(--color-gray-100);
-    border-block: 1px solid var(--color-gray-700);
-  }
-
-  .variant-d-rates__grid article:nth-child(3) {
-    background: var(--color-skin-100);
-  }
-
-  .variant-d-rates__grid article > p:first-child {
+  .variant-d-rate-bands article > div:first-child p {
+    color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-black);
@@ -1420,50 +1426,97 @@ const proofPoints = [
     text-transform: uppercase;
   }
 
-  .variant-d-rates__grid span {
+  .variant-d-rate-bands span {
+    color: var(--color-skin-100);
     font-family: var(--font-mono);
     font-size: clamp(3rem, 7vw, 7rem);
     font-weight: var(--font-weight-black);
     line-height: 0.9;
   }
 
-  .variant-d-rates__grid h3 {
+  .variant-d-rate-bands h3 {
     font-size: var(--text-step-3);
     line-height: 1;
     margin: 0;
   }
 
-  .variant-d-rates__grid article > p:not(:first-child) {
+  .variant-d-rate-bands article p {
     margin: 0;
   }
 
-  .variant-d-rates__grid dl {
+  .variant-d-rate-bands dl {
     align-self: end;
     display: grid;
     gap: var(--spacing-2xs);
-    margin: var(--spacing-m) 0 0;
+    margin: 0;
   }
 
-  .variant-d-rates__grid dl div {
+  .variant-d-rate-bands dl div {
     align-items: baseline;
-    border-block-start: 1px solid rgb(20 20 20 / 0.18);
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
     display: flex;
     gap: var(--spacing-s);
     justify-content: space-between;
     padding-block-start: var(--spacing-2xs);
   }
 
-  .variant-d-rates__grid dt {
+  .variant-d-rate-bands dt {
+    color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-black);
     text-transform: uppercase;
   }
 
-  .variant-d-rates__grid dd {
+  .variant-d-rate-bands dd {
     font-weight: var(--font-weight-bold);
     margin: 0;
     text-align: end;
+  }
+
+  .variant-d-rate-bands {
+    display: grid;
+    margin-block-start: var(--spacing-xl);
+    margin-inline: calc(var(--spacing-s-l) * -1);
+  }
+
+  .variant-d-rate-bands article {
+    background: color-mix(
+      in oklab,
+      var(--color-gray-1200) 96%,
+      var(--color-skin-200)
+    );
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--color-gray-100);
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: minmax(12rem, 0.42fr) minmax(18rem, 0.7fr) minmax(
+        18rem,
+        0.88fr
+      );
+    padding: var(--spacing-l) var(--spacing-s-l);
+  }
+
+  .variant-d-rate-bands article:first-child {
+    border-block-start: 0;
+  }
+
+  .variant-d-rate-bands article > div {
+    display: grid;
+    gap: var(--spacing-xs);
+  }
+
+  .variant-d-rates__note {
+    border-block-start: 1px solid var(--color-gray-800);
+    margin-block-start: var(--spacing-xl);
+    padding-block-start: var(--spacing-s);
+  }
+
+  .variant-d-rates__note p {
+    color: var(--color-gray-1100);
+    font-size: var(--text-step-00);
+    margin: 0;
+    max-inline-size: 75ch;
   }
 
   .variant-e-atelier {
@@ -1624,7 +1677,11 @@ const proofPoints = [
 
   .prototype-contact {
     align-items: start;
-    background: var(--color-gray-1200);
+    background: color-mix(
+      in oklab,
+      var(--color-gray-1200) 97%,
+      var(--color-skin-200)
+    );
     border-block-start: 1px solid rgb(255 255 255 / 0.18);
     color: var(--color-gray-100);
     display: grid;
@@ -1704,6 +1761,41 @@ const proofPoints = [
     background: var(--color-skin-100);
   }
 
+  .prototype-footer {
+    align-items: center;
+    background: color-mix(
+      in oklab,
+      var(--color-gray-1200) 97%,
+      var(--color-skin-200)
+    );
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--color-gray-100);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    gap: var(--spacing-s);
+    justify-content: space-between;
+    padding: var(--spacing-s) var(--spacing-s-l) calc(var(--spacing-s) + 5rem);
+    text-transform: uppercase;
+  }
+
+  .homepage-prototype:not([data-current-variant='D']) .prototype-footer {
+    display: none;
+  }
+
+  .prototype-footer a {
+    color: currentColor;
+    text-decoration: none;
+  }
+
+  .prototype-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs-s);
+    justify-content: end;
+  }
+
   .prototype-switcher {
     align-items: center;
     background: var(--color-gray-1200);
@@ -1749,7 +1841,8 @@ const proofPoints = [
 
   @media (max-width: 900px) {
     .prototype-nav,
-    .variant-f-hero nav {
+    .variant-f-hero nav,
+    .prototype-footer {
       align-items: flex-start;
       flex-direction: column;
     }
@@ -1762,7 +1855,7 @@ const proofPoints = [
     .variant-c-services,
     .variant-d-brief,
     .variant-d-system ol,
-    .variant-d-rates__grid,
+    .variant-d-rate-bands article,
     .variant-e-atelier,
     .variant-e-proof,
     .variant-f-menu,
