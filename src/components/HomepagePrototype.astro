@@ -25,6 +25,8 @@ type BrandLogo = {
   className: string;
 };
 
+const pathname = Astro.url.pathname;
+
 const variants = [
   ['A', 'Editorial Film'],
   ['B', 'Beauty Lab Index'],
@@ -77,6 +79,45 @@ const services = [
     title: 'Product Storytelling Videos',
     price: '$750',
     text: 'More developed beauty video concepts that combine polished production, product context, lifestyle detail, and Skin Schema-style serenity for campaigns, launches, and deeper product education.',
+  },
+];
+
+const startingRates = [
+  {
+    title: 'Product Photo Sets',
+    type: 'Photo Set',
+    price: '$250',
+    text: 'Refined product photography and texture visuals for skincare, makeup, and wellness brands.',
+    specs: [
+      ['Assets', '3'],
+      ['Turnaround', '2 weeks'],
+      ['Revisions', '1'],
+      ['Length', 'N/A'],
+    ],
+  },
+  {
+    title: 'Short-Form Product Videos',
+    type: 'Short Video',
+    price: '$500',
+    text: 'Elevated short-form videos for product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines.',
+    specs: [
+      ['Assets', '1'],
+      ['Turnaround', '2 weeks'],
+      ['Revisions', '1'],
+      ['Length', 'Up to 12 seconds'],
+    ],
+  },
+  {
+    title: 'Product Storytelling Videos',
+    type: 'Storytelling Video',
+    price: '$750',
+    text: 'More developed beauty video concepts with polished production, product context, lifestyle detail, and campaign-style pacing.',
+    specs: [
+      ['Assets', '1'],
+      ['Turnaround', '2 weeks'],
+      ['Revisions', '1'],
+      ['Length', 'Up to 20 seconds'],
+    ],
   },
 ];
 
@@ -421,6 +462,24 @@ const proofPoints = [
       </div>
     </section>
 
+    <section class="variant-d-brands" aria-label="Brands we've worked with">
+      <p class="prototype-kicker">Brands we've worked with</p>
+      <ul role="list">
+        {
+          brandLogos.map((logo) => (
+            <li>
+              <Picture
+                src={logo.src}
+                alt={logo.alt}
+                class={`object-contain w-auto h-auto ${logo.className}`}
+                formats={['avif', 'webp']}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
     <section class="variant-d-system" id="Services">
       <h2>Execution, scoped for brand teams</h2>
       <ol>
@@ -449,6 +508,37 @@ const proofPoints = [
           </p>
         </li>
       </ol>
+    </section>
+
+    <section class="variant-d-rates" id="RateCard">
+      <div class="variant-d-rates__intro">
+        <p class="prototype-kicker">Starting rates</p>
+        <h2>Simple entry points, scoped with campaign detail.</h2>
+        <p>
+          Custom bundles, usage, raw footage, and campaign-specific needs are
+          quoted after we align on scope.
+        </p>
+      </div>
+      <div class="variant-d-rates__grid">
+        {
+          startingRates.map((rate) => (
+            <article>
+              <p>{rate.type}</p>
+              <span>{rate.price}</span>
+              <h3>{rate.title}</h3>
+              <p>{rate.text}</p>
+              <dl>
+                {rate.specs.map(([label, value]) => (
+                  <div>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))
+        }
+      </div>
     </section>
   </article>
 
@@ -595,7 +685,47 @@ const proofPoints = [
         message so we can discuss further.
       </p>
     </div>
-    <a href="mailto:hello@skinschema.com" class="prototype-button">Reach out</a>
+    <form
+      name="prototype-contact"
+      netlify-honeypot="bot-field"
+      method="POST"
+      data-netlify="true"
+      action="/thank-you/"
+      class="prototype-contact__form"
+    >
+      <div class="hidden">
+        <input type="hidden" name="form-name" value="prototype-contact" />
+        <input
+          type="hidden"
+          name="subject"
+          value={`Form submission: skinschema.com${pathname}`}
+        />
+        <span>
+          <label for="prototype-bot-field">Do you like delicious treats?</label>
+          <input name="bot-field" id="prototype-bot-field" />
+        </span>
+      </div>
+      <div class="prototype-contact__fields">
+        <span>
+          <label for="prototype-name">Name</label>
+          <input id="prototype-name" name="name" type="text" required />
+        </span>
+        <span>
+          <label for="prototype-email">Email</label>
+          <input id="prototype-email" name="email" type="email" required />
+        </span>
+        <span class="prototype-contact__message">
+          <label for="prototype-message"
+            >How would you like to work together?</label
+          >
+          <textarea name="message" id="prototype-message" rows="5" required
+          ></textarea>
+        </span>
+      </div>
+      <button type="submit" class="prototype-button prototype-contact__submit">
+        Submit
+      </button>
+    </form>
   </section>
 
   <div class="prototype-switcher" aria-label="Homepage prototype variants">
@@ -1165,8 +1295,42 @@ const proofPoints = [
     margin-block-end: var(--spacing-xl);
   }
 
+  .variant-d-brands {
+    align-items: center;
+    border-block: 1px solid rgb(255 255 255 / 0.16);
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(12rem, 0.32fr) minmax(0, 1fr);
+    padding: var(--spacing-m-l) var(--spacing-s-l);
+  }
+
+  .variant-d-brands .prototype-kicker {
+    color: var(--color-gray-400);
+  }
+
+  .variant-d-brands ul {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-l-xl);
+    justify-content: end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .variant-d-brands li {
+    align-items: center;
+    display: flex;
+    min-block-size: 2.5rem;
+  }
+
+  .variant-d-brands picture {
+    filter: invert(1) grayscale(1);
+    opacity: 0.76;
+  }
+
   .variant-d-system {
-    border-block-start: 1px solid rgb(255 255 255 / 0.18);
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
 
@@ -1196,6 +1360,110 @@ const proofPoints = [
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-black);
+  }
+
+  .variant-d-rates {
+    background: var(--color-gray-100);
+    color: var(--color-gray-1200);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-d-rates__intro {
+    display: grid;
+    gap: var(--spacing-s);
+    margin-block-end: var(--spacing-xl);
+    max-inline-size: 50rem;
+  }
+
+  .variant-d-rates__intro h2 {
+    font-size: clamp(2.75rem, 6vw, 6rem);
+    line-height: 0.96;
+    margin: 0;
+    max-inline-size: 11ch;
+  }
+
+  .variant-d-rates__intro p {
+    margin: 0;
+  }
+
+  .variant-d-rates__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .variant-d-rates__grid article {
+    display: grid;
+    gap: var(--spacing-s);
+    min-block-size: 36rem;
+    padding: var(--spacing-xl) var(--spacing-s-l);
+  }
+
+  .variant-d-rates__grid article:nth-child(1) {
+    background: var(--color-skin-200);
+  }
+
+  .variant-d-rates__grid article:nth-child(2) {
+    background: var(--color-gray-100);
+    border-block: 1px solid var(--color-gray-700);
+  }
+
+  .variant-d-rates__grid article:nth-child(3) {
+    background: var(--color-skin-100);
+  }
+
+  .variant-d-rates__grid article > p:first-child {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    margin: 0;
+    max-inline-size: none;
+    text-transform: uppercase;
+  }
+
+  .variant-d-rates__grid span {
+    font-family: var(--font-mono);
+    font-size: clamp(3rem, 7vw, 7rem);
+    font-weight: var(--font-weight-black);
+    line-height: 0.9;
+  }
+
+  .variant-d-rates__grid h3 {
+    font-size: var(--text-step-3);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .variant-d-rates__grid article > p:not(:first-child) {
+    margin: 0;
+  }
+
+  .variant-d-rates__grid dl {
+    align-self: end;
+    display: grid;
+    gap: var(--spacing-2xs);
+    margin: var(--spacing-m) 0 0;
+  }
+
+  .variant-d-rates__grid dl div {
+    align-items: baseline;
+    border-block-start: 1px solid rgb(20 20 20 / 0.18);
+    display: flex;
+    gap: var(--spacing-s);
+    justify-content: space-between;
+    padding-block-start: var(--spacing-2xs);
+  }
+
+  .variant-d-rates__grid dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+  }
+
+  .variant-d-rates__grid dd {
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    text-align: end;
   }
 
   .variant-e-atelier {
@@ -1355,24 +1623,85 @@ const proofPoints = [
   }
 
   .prototype-contact {
-    align-items: end;
-    border-block-start: 1px solid var(--color-gray-700);
+    align-items: start;
+    background: var(--color-gray-1200);
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--color-gray-100);
     display: grid;
     gap: var(--spacing-xl);
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 0.78fr);
     padding: var(--spacing-2xl) var(--spacing-s-l)
       calc(var(--spacing-2xl) + 5rem);
   }
 
   .prototype-contact h2 {
-    font-size: var(--text-step-4);
-    line-height: 1;
+    font-size: clamp(2.75rem, 6vw, 6rem);
+    line-height: 0.96;
     margin-block: var(--spacing-xs);
-    max-inline-size: 14ch;
+    max-inline-size: 11ch;
   }
 
   .prototype-contact p {
     margin: 0;
+  }
+
+  .prototype-contact__form {
+    align-self: end;
+    display: grid;
+    gap: var(--spacing-m);
+  }
+
+  .prototype-contact__fields {
+    display: grid;
+    gap: var(--spacing-s);
+  }
+
+  .prototype-contact__fields span {
+    display: grid;
+    gap: var(--spacing-2xs);
+  }
+
+  .prototype-contact__fields label {
+    color: var(--color-gray-400);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+  }
+
+  .prototype-contact__fields input,
+  .prototype-contact__fields textarea {
+    background: transparent;
+    border: 0;
+    border-block-end: 1px solid rgb(255 255 255 / 0.36);
+    border-radius: 0;
+    color: var(--color-gray-100);
+    font: inherit;
+    font-size: var(--text-step-1);
+    padding: var(--spacing-2xs) 0;
+  }
+
+  .prototype-contact__fields input:focus,
+  .prototype-contact__fields textarea:focus {
+    border-block-end-color: var(--color-gray-100);
+    outline-color: var(--color-skin-100);
+  }
+
+  .prototype-contact__fields textarea {
+    min-block-size: 9rem;
+    resize: vertical;
+  }
+
+  .prototype-contact__submit {
+    background: var(--color-gray-100);
+    border: 0;
+    color: var(--color-gray-1200);
+    justify-self: start;
+  }
+
+  .prototype-contact__submit:hover,
+  .prototype-contact__submit:focus {
+    background: var(--color-skin-100);
   }
 
   .prototype-switcher {
@@ -1433,6 +1762,7 @@ const proofPoints = [
     .variant-c-services,
     .variant-d-brief,
     .variant-d-system ol,
+    .variant-d-rates__grid,
     .variant-e-atelier,
     .variant-e-proof,
     .variant-f-menu,
