@@ -1,0 +1,1481 @@
+---
+import { Picture } from 'astro:assets';
+import photoExample01 from '../assets/photo-example-01.jpg';
+import photoExample02 from '../assets/photo-example-02.jpg';
+import photoExample03 from '../assets/photo-example-03.jpg';
+import photoExample04 from '../assets/photo-example-04.jpg';
+import photoExample05 from '../assets/photo-example-05.jpg';
+import photoExample06 from '../assets/photo-example-06.jpg';
+import photoExample08 from '../assets/photo-example-08.jpg';
+import heroStill from '../assets/2023-Creative-Minds-38-hero.jpg';
+import creatorPortrait from '../assets/photograph-of-skin-schema.jpg';
+import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
+import partnership01 from '../assets/paid-partnership/2023-Creative-Minds-14.jpg';
+import partnership02 from '../assets/paid-partnership/2023-Creative-Minds-Second-Revision-3.jpg';
+import partnership03 from '../assets/paid-partnership/2023-Creative-Minds-40.jpg';
+import valentino from '../assets/workedwith/valentino@2x.png';
+import armani from '../assets/workedwith/armani-beauty.png';
+import naturopathica from '../assets/workedwith/naturopathica.png';
+import queen from '../assets/workedwith/queen-musia.avif';
+import saya from '../assets/workedwith/saya.webp';
+
+type BrandLogo = {
+  src: ImageMetadata;
+  alt: string;
+  className: string;
+};
+
+const variants = [
+  ['A', 'Editorial Film'],
+  ['B', 'Beauty Lab Index'],
+  ['C', 'Lookbook Mosaic'],
+  ['D', 'Campaign Brief'],
+  ['E', 'Creator Atelier'],
+  ['F', 'Rate-Card Storefront'],
+];
+
+const brandLogos: BrandLogo[] = [
+  {
+    src: valentino,
+    alt: 'Skin Schema has worked with Valentino',
+    className: 'max-h-[20px]',
+  },
+  {
+    src: armani,
+    alt: 'Skin Schema has worked with Armani Beauty',
+    className: 'max-h-[40px]',
+  },
+  {
+    src: naturopathica,
+    alt: 'Skin Schema has worked with Naturopathica',
+    className: 'max-h-[20px]',
+  },
+  {
+    src: queen,
+    alt: 'Skin Schema has worked with Queen Musia',
+    className: 'max-h-[20px]',
+  },
+  {
+    src: saya,
+    alt: 'Skin Schema has worked with Saya',
+    className: 'max-h-[20px]',
+  },
+];
+
+const services = [
+  {
+    title: 'Product Photo Sets',
+    price: '$250',
+    text: 'Refined product photography and texture visuals for skincare, makeup, and wellness brands that need polished assets for social, campaign, and product storytelling.',
+  },
+  {
+    title: 'Short-Form Product Videos',
+    price: '$500',
+    text: 'Elevated short-form videos for Instagram, TikTok, and paid or organic social. Ideal for product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines that need to feel credible and brand-ready.',
+  },
+  {
+    title: 'Product Storytelling Videos',
+    price: '$750',
+    text: 'More developed beauty video concepts that combine polished production, product context, lifestyle detail, and Skin Schema-style serenity for campaigns, launches, and deeper product education.',
+  },
+];
+
+const proofPoints = [
+  {
+    title: 'Authenticity at scale',
+    text: 'Creator-led visuals that feel credible, specific, and true to how beauty customers actually discover products.',
+  },
+  {
+    title: 'Brand-ready polish',
+    text: 'Concepting, shooting, and editing are handled with a refined visual standard your team can use across launches, socials, and campaigns.',
+  },
+  {
+    title: 'Beauty niche fit',
+    text: 'A focused understanding of skincare, makeup, wellness, product textures, routines, and the details that make beauty content convert.',
+  },
+];
+---
+
+<!-- PROTOTYPE - Six homepage variants, switchable via `?variant=`, on the existing `/` route. -->
+<div class="homepage-prototype" id="main" data-current-variant="A">
+  <article
+    class="prototype-variant prototype-variant-a"
+    data-prototype-variant="A"
+  >
+    <header class="prototype-nav prototype-nav--light" aria-label="Primary">
+      <a href="/" class="prototype-brand">Skin Schema</a>
+      <nav>
+        <a href="#Services">Services</a>
+        <a href="#RateCard">Rate Card</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="variant-a-hero">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="/media/skin-schema-hero.webm" type="video/webm" />
+        <source src="/media/skin-schema-hero.mp4" type="video/mp4" />
+      </video>
+      <div class="variant-a-hero__copy">
+        <p class="prototype-kicker">Premium beauty content partner</p>
+        <h1>
+          Premium beauty content that feels polished, authentic, and brand-ready
+        </h1>
+        <p>
+          Skin Schema creates elevated skincare, makeup, and wellness content
+          with the polish of a campaign asset and the trust of a real creator
+          recommendation.
+        </p>
+        <a href="#Contact" class="prototype-button prototype-button--light"
+          >Reach out</a
+        >
+      </div>
+      <div class="variant-a-hero__panel" aria-label="Campaign readiness">
+        <span>20+ brands</span>
+        <span>Approximately 40 campaigns</span>
+        <span>Social, campaign, and brand content</span>
+      </div>
+    </section>
+
+    <section class="prototype-section variant-a-proof">
+      <div>
+        <p class="prototype-kicker">The problem</p>
+        <h2>Generic ads and rushed UGC get spotted fast.</h2>
+      </div>
+      <div class="variant-a-proof__text">
+        <p>
+          I partner with select brands that want content to feel elevated
+          without losing the honesty, texture, and lived-in detail that makes
+          beauty audiences trust a recommendation.
+        </p>
+      </div>
+    </section>
+
+    <section class="variant-a-gallery" aria-label="Photography examples">
+      <Picture
+        src={photoExample08}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={photoExample01}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={photoExample03}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={photoExample05}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+    </section>
+
+    <section class="prototype-section variant-a-services" id="Services">
+      <div>
+        <p class="prototype-kicker">Services</p>
+        <h2>
+          Short-form video, premium product storytelling, texture visuals, and
+          photo sets.
+        </h2>
+      </div>
+      <ul role="list">
+        {
+          services.map((service) => (
+            <li>
+              <span>{service.price}</span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+
+  <article
+    class="prototype-variant prototype-variant-b"
+    data-prototype-variant="B"
+    hidden
+  >
+    <header class="variant-b-shell">
+      <aside class="variant-b-side">
+        <a href="/" class="prototype-brand">Skin Schema</a>
+        <nav aria-label="Primary">
+          <a href="#Services">Services</a>
+          <a href="#RateCard">Rate Card</a>
+          <a href="#Contact">Contact</a>
+        </nav>
+        <p>Premium beauty content for skincare, makeup, and wellness brands</p>
+      </aside>
+
+      <section class="variant-b-hero">
+        <div class="variant-b-spec">
+          <p class="prototype-kicker">Beauty lab index</p>
+          <h1>
+            Need brand-ready beauty content with the trust of a real creator
+            recommendation?
+          </h1>
+          <a href="#Contact" class="prototype-button">Reach out</a>
+        </div>
+        <div class="variant-b-media">
+          <Picture
+            src={photoExample02}
+            alt="Instagram high quality skincare photography example"
+            format="avif"
+            quality={80}
+          />
+          <Picture
+            src={photoExample06}
+            alt="Instagram high quality skincare photography example"
+            format="avif"
+            quality={80}
+          />
+          <video autoplay loop muted playsinline preload="metadata">
+            <source src="/media/videos/short-01.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </section>
+    </header>
+
+    <section class="variant-b-table" id="Services">
+      <h2>Services</h2>
+      <table>
+        <tbody>
+          {
+            services.map((service) => (
+              <tr>
+                <th>{service.title}</th>
+                <td>{service.text}</td>
+                <td>{service.price}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section class="variant-b-proof">
+      <h2>Brands partner with me because:</h2>
+      <div>
+        {
+          proofPoints.map((point) => (
+            <section>
+              <h3>{point.title}</h3>
+              <p>{point.text}</p>
+            </section>
+          ))
+        }
+      </div>
+    </section>
+  </article>
+
+  <article
+    class="prototype-variant prototype-variant-c"
+    data-prototype-variant="C"
+    hidden
+  >
+    <header class="prototype-nav prototype-nav--dark" aria-label="Primary">
+      <a href="/" class="prototype-brand">Skin Schema</a>
+      <nav>
+        <a href="#Services">Services</a>
+        <a href="#RateCard">Rate Card</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="variant-c-lookbook">
+      <div class="variant-c-copy">
+        <p class="prototype-kicker">Lookbook direction</p>
+        <h1>
+          Elevated short-form video, product storytelling, texture visuals, and
+          photo sets
+        </h1>
+        <p>
+          Skin Schema creates short-form video, premium product storytelling,
+          texture visuals, and photo sets designed for social, campaign, and
+          brand content.
+        </p>
+        <a href="#Contact" class="prototype-button prototype-button--light"
+          >Reach out</a
+        >
+      </div>
+      <Picture
+        src={photoExample01}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={heroStill}
+        alt="Premium beauty content campaign still"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={photoExample04}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={photoExample08}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+    </section>
+
+    <section class="variant-c-strip" aria-label="Brands we've worked with">
+      <p>Brands we've worked with</p>
+      <ul role="list">
+        {
+          brandLogos.map((logo) => (
+            <li>
+              <Picture
+                src={logo.src}
+                alt={logo.alt}
+                class={`object-contain w-auto h-auto ${logo.className}`}
+                formats={['avif', 'webp']}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="prototype-section variant-c-services" id="Services">
+      <h2>Collaboration options</h2>
+      <div>
+        <section>
+          <h3>For Brand Use</h3>
+          <p>
+            Receive polished short-form videos, product storytelling, texture
+            visuals, or photo sets created for your social channels, launch
+            moments, campaigns, and product education.
+          </p>
+        </section>
+        <section>
+          <h3>Shared by Skin Schema</h3>
+          <p>
+            For strong brand fits, your product can be introduced through Skin
+            Schema's beauty point of view and shared with an audience that
+            values refined visuals, thoughtful product context, and genuine
+            skincare and makeup recommendations.
+          </p>
+        </section>
+      </div>
+    </section>
+  </article>
+
+  <article
+    class="prototype-variant prototype-variant-d"
+    data-prototype-variant="D"
+    hidden
+  >
+    <header class="prototype-nav prototype-nav--light" aria-label="Primary">
+      <a href="/" class="prototype-brand">Skin Schema</a>
+      <nav>
+        <a href="#Services">Services</a>
+        <a href="#RateCard">Rate Card</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="variant-d-brief">
+      <div class="variant-d-brief__copy">
+        <p class="prototype-kicker">Campaign-ready content</p>
+        <h1>
+          Brand-ready output suitable for campaigns, social content, and product
+          storytelling
+        </h1>
+        <p>
+          I combine beauty specialization, professional equipment, and a minimal
+          visual style to create assets that are ready for launch campaigns,
+          social calendars, product education, and brand storytelling.
+        </p>
+        <a href="#Contact" class="prototype-button prototype-button--light"
+          >Let's connect</a
+        >
+      </div>
+      <div
+        class="variant-d-storyboard"
+        aria-label="Product storytelling video examples"
+      >
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-01.mp4" type="video/mp4" />
+        </video>
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-02.mp4" type="video/mp4" />
+        </video>
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-03.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </section>
+
+    <section class="variant-d-system" id="Services">
+      <h2>Execution, scoped for brand teams</h2>
+      <ol>
+        <li>
+          <span>01</span>
+          <strong>Concepting</strong>
+          <p>
+            Product showcases, unboxings, how-tos, before-and-afters, hooks, and
+            beauty routines.
+          </p>
+        </li>
+        <li>
+          <span>02</span>
+          <strong>Shooting</strong>
+          <p>
+            Polished production, product context, lifestyle detail, and Skin
+            Schema-style serenity.
+          </p>
+        </li>
+        <li>
+          <span>03</span>
+          <strong>Delivery</strong>
+          <p>
+            Content for social channels, launch moments, campaigns, and product
+            education.
+          </p>
+        </li>
+      </ol>
+    </section>
+  </article>
+
+  <article
+    class="prototype-variant prototype-variant-e"
+    data-prototype-variant="E"
+    hidden
+  >
+    <header class="prototype-nav prototype-nav--dark" aria-label="Primary">
+      <a href="/" class="prototype-brand">Skin Schema</a>
+      <nav>
+        <a href="#Services">Services</a>
+        <a href="#RateCard">Rate Card</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="variant-e-atelier">
+      <div class="variant-e-portrait">
+        <Picture
+          src={creatorPortrait}
+          alt="Photograph of the creator of Skin Schema"
+          format="avif"
+          quality={80}
+        />
+      </div>
+      <div class="variant-e-copy">
+        <p class="prototype-kicker">Meet Kseniya</p>
+        <h1>
+          Polish, serenity, and credible product storytelling for beauty brands
+        </h1>
+        <p>
+          I'm an experienced beauty photographer and videographer with work
+          across 20+ brands and approximately 40 campaigns. I created Skin
+          Schema to bring polish, serenity, and credible product storytelling to
+          skincare, makeup, and wellness content.
+        </p>
+        <a href="#Contact" class="prototype-button">Let's connect</a>
+      </div>
+    </section>
+
+    <section class="variant-e-proof">
+      {
+        proofPoints.map((point) => (
+          <section>
+            <h2>{point.title}</h2>
+            <p>{point.text}</p>
+          </section>
+        ))
+      }
+    </section>
+
+    <section class="variant-e-work" id="Services">
+      <Picture
+        src={partnership01}
+        alt="Premium beauty content campaign still"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={partnership02}
+        alt="Premium beauty content campaign still"
+        format="avif"
+        quality={80}
+      />
+      <Picture
+        src={partnership03}
+        alt="Premium beauty content campaign still"
+        format="avif"
+        quality={80}
+      />
+    </section>
+  </article>
+
+  <article
+    class="prototype-variant prototype-variant-f"
+    data-prototype-variant="F"
+    hidden
+  >
+    <header class="variant-f-hero">
+      <nav aria-label="Primary">
+        <a href="/" class="prototype-brand">Skin Schema</a>
+        <a href="#Services">Services</a>
+        <a href="#RateCard">Rate Card</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+      <div>
+        <p class="prototype-kicker">Starting rates</p>
+        <h1>
+          Premium beauty content for skincare, makeup, and wellness brands
+        </h1>
+        <p>
+          Public pricing is intentionally simple. Custom bundles, usage, raw
+          footage, and campaign-specific needs are quoted after we align on
+          scope.
+        </p>
+      </div>
+    </header>
+
+    <section class="variant-f-menu" id="Services">
+      {
+        services.map((service) => (
+          <article>
+            <span>{service.price}</span>
+            <h2>{service.title}</h2>
+            <p>{service.text}</p>
+            <a href="#Contact">Reach out</a>
+          </article>
+        ))
+      }
+    </section>
+
+    <section
+      class="variant-f-media"
+      aria-label="Photography and short form examples"
+    >
+      <Picture
+        src={photoExample03}
+        alt="Instagram high quality skincare photography example"
+        format="avif"
+        quality={80}
+      />
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="/media/videos/short-02.mp4" type="video/mp4" />
+      </video>
+      <Picture
+        src={campaignStill}
+        alt="Premium beauty content campaign still"
+        format="avif"
+        quality={80}
+      />
+    </section>
+  </article>
+
+  <section class="prototype-contact" id="Contact">
+    <div>
+      <p class="prototype-kicker">Let's connect</p>
+      <h2>
+        If our approach to beauty and aesthetics align, I'd love to talk more.
+      </h2>
+      <p>
+        Just pop your details below, letting me know more about how you'd like
+        to work together. I'll be in touch within 24 hours of receiving your
+        message so we can discuss further.
+      </p>
+    </div>
+    <a href="mailto:hello@skinschema.com" class="prototype-button">Reach out</a>
+  </section>
+
+  <div class="prototype-switcher" aria-label="Homepage prototype variants">
+    <button type="button" data-prototype-prev aria-label="Previous variant"
+      >←</button
+    >
+    <p data-prototype-label>A - Editorial Film</p>
+    <button type="button" data-prototype-next aria-label="Next variant"
+      >→</button
+    >
+  </div>
+</div>
+
+<script is:inline define:vars={{ variants }}>
+  const variantPairs = variants;
+  const variantKeys = variantPairs.map(([key]) => key);
+  const labelMap = new Map(variantPairs);
+  const root = document.querySelector('.homepage-prototype');
+  const panels = Array.from(
+    document.querySelectorAll('[data-prototype-variant]'),
+  );
+  const label = document.querySelector('[data-prototype-label]');
+  const previousButton = document.querySelector('[data-prototype-prev]');
+  const nextButton = document.querySelector('[data-prototype-next]');
+
+  const getRequestedVariant = () => {
+    const params = new URLSearchParams(window.location.search);
+    const requested = (params.get('variant') || 'A').toUpperCase();
+    return variantKeys.includes(requested) ? requested : 'A';
+  };
+
+  const setVariant = (nextVariant, updateUrl = true) => {
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.prototypeVariant !== nextVariant;
+    });
+
+    root.dataset.currentVariant = nextVariant;
+    label.textContent = `${nextVariant} - ${labelMap.get(nextVariant)}`;
+
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('variant', nextVariant);
+      window.history.replaceState({}, '', url);
+    }
+  };
+
+  const cycleVariant = (direction) => {
+    const current = root.dataset.currentVariant || getRequestedVariant();
+    const currentIndex = variantKeys.indexOf(current);
+    const nextIndex =
+      (currentIndex + direction + variantKeys.length) % variantKeys.length;
+    setVariant(variantKeys[nextIndex]);
+  };
+
+  previousButton.addEventListener('click', () => cycleVariant(-1));
+  nextButton.addEventListener('click', () => cycleVariant(1));
+
+  document.addEventListener('keydown', (event) => {
+    const target = event.target;
+    const isEditing =
+      target instanceof HTMLElement &&
+      (target.matches('input, textarea, select') || target.isContentEditable);
+
+    if (isEditing) {
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      cycleVariant(-1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      cycleVariant(1);
+    }
+  });
+
+  setVariant(getRequestedVariant(), false);
+</script>
+
+<style>
+  .homepage-prototype {
+    --prototype-ink: var(--color-gray-1200);
+    --prototype-paper: var(--color-gray-100);
+    --prototype-blush: var(--color-skin-100);
+    --prototype-mist: var(--color-skin-200);
+    background: var(--prototype-paper);
+    color: var(--prototype-ink);
+    min-block-size: 100vh;
+  }
+
+  .prototype-variant[hidden] {
+    display: none;
+  }
+
+  .prototype-nav,
+  .variant-f-hero nav {
+    align-items: center;
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    gap: var(--spacing-s);
+    inset-block-start: 0;
+    justify-content: space-between;
+    letter-spacing: 0;
+    padding: var(--spacing-xs) var(--spacing-s-l);
+    position: absolute;
+    text-transform: uppercase;
+    inline-size: 100%;
+    z-index: 4;
+  }
+
+  .prototype-nav nav,
+  .variant-f-hero nav {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+
+  .prototype-nav a,
+  .variant-f-hero nav a {
+    text-decoration: none;
+  }
+
+  .prototype-nav--light,
+  .prototype-nav--light a {
+    color: var(--color-gray-100);
+  }
+
+  .prototype-nav--dark,
+  .prototype-nav--dark a {
+    color: var(--color-gray-1200);
+  }
+
+  .prototype-brand {
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+  }
+
+  .prototype-kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    margin: 0;
+    max-inline-size: none;
+    text-transform: uppercase;
+  }
+
+  .prototype-button {
+    background: var(--color-gray-1200);
+    border-radius: 999px;
+    color: var(--color-gray-100);
+    display: inline-flex;
+    font-weight: var(--font-weight-bold);
+    inline-size: fit-content;
+    padding: var(--spacing-2xs) var(--spacing-l);
+    text-decoration: none;
+  }
+
+  .prototype-button--light {
+    background: var(--color-gray-100);
+    color: var(--color-gray-1200);
+  }
+
+  .prototype-section {
+    padding: var(--spacing-2xl-3xl) var(--spacing-s-l);
+  }
+
+  .prototype-section h2,
+  .prototype-section h3,
+  .prototype-section p {
+    margin: 0;
+  }
+
+  .variant-a-hero {
+    background: var(--color-gray-1200);
+    color: var(--color-gray-100);
+    display: grid;
+    min-block-size: 94vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .variant-a-hero video {
+    block-size: 100%;
+    filter: saturate(0.8) contrast(0.92);
+    grid-area: 1 / 1;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-a-hero::after {
+    background: linear-gradient(90deg, rgb(0 0 0 / 0.62), rgb(0 0 0 / 0.1));
+    content: '';
+    grid-area: 1 / 1;
+    z-index: 1;
+  }
+
+  .variant-a-hero__copy {
+    align-self: end;
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-area: 1 / 1;
+    max-inline-size: 47rem;
+    padding: var(--spacing-3xl) var(--spacing-s-l);
+    z-index: 2;
+  }
+
+  .variant-a-hero__copy h1 {
+    font-size: clamp(3rem, 8vw, 7.75rem);
+    line-height: 0.94;
+    margin: 0;
+    max-inline-size: 11ch;
+  }
+
+  .variant-a-hero__copy p:not(.prototype-kicker) {
+    font-size: var(--text-step-1);
+    margin: 0;
+  }
+
+  .variant-a-hero__panel {
+    align-self: end;
+    border-block-start: 1px solid rgb(255 255 255 / 0.28);
+    display: grid;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    grid-area: 1 / 1;
+    grid-template-columns: repeat(3, 1fr);
+    margin-inline-start: auto;
+    max-inline-size: 48rem;
+    padding: var(--spacing-s-l);
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .variant-a-proof {
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(0, 0.85fr) minmax(18rem, 0.55fr);
+  }
+
+  .variant-a-proof h2 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    max-inline-size: 12ch;
+  }
+
+  .variant-a-proof__text {
+    align-self: end;
+    border-inline-start: 1px solid var(--color-gray-700);
+    padding-inline-start: var(--spacing-m);
+  }
+
+  .variant-a-gallery {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: 1.2fr 0.9fr 1.1fr 0.8fr;
+    padding: 0 var(--spacing-s-l) var(--spacing-2xl);
+  }
+
+  .variant-a-gallery img {
+    aspect-ratio: 4 / 5;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-a-gallery picture:nth-child(even) {
+    margin-block-start: var(--spacing-xl);
+  }
+
+  .variant-a-services {
+    background: var(--color-gray-1200);
+    color: var(--color-gray-100);
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(0, 0.8fr) minmax(20rem, 1fr);
+  }
+
+  .variant-a-services h2 {
+    font-size: var(--text-step-4);
+    max-inline-size: 13ch;
+  }
+
+  .variant-a-services ul {
+    display: grid;
+    gap: var(--spacing-m);
+    list-style: none;
+    margin: 0;
+  }
+
+  .variant-a-services li {
+    border-block-start: 1px solid rgb(255 255 255 / 0.24);
+    display: grid;
+    gap: var(--spacing-2xs);
+    grid-template-columns: 6rem 1fr;
+    padding-block-start: var(--spacing-s);
+  }
+
+  .variant-a-services span {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-2);
+  }
+
+  .variant-a-services li p {
+    grid-column: 2;
+    max-inline-size: 48rem;
+  }
+
+  .variant-b-shell {
+    background: var(--color-gray-200);
+    display: grid;
+    grid-template-columns: minmax(12rem, 18rem) 1fr;
+    min-block-size: 92vh;
+  }
+
+  .variant-b-side {
+    border-inline-end: 1px solid var(--color-gray-700);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l);
+    justify-content: space-between;
+    padding: var(--spacing-s-l);
+  }
+
+  .variant-b-side nav {
+    display: grid;
+    gap: var(--spacing-2xs);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+  }
+
+  .variant-b-side a {
+    text-decoration: none;
+  }
+
+  .variant-b-side p {
+    font-size: var(--text-step-00);
+    margin: 0;
+  }
+
+  .variant-b-hero {
+    display: grid;
+    gap: var(--spacing-s-l);
+    grid-template-columns: minmax(20rem, 0.85fr) minmax(20rem, 1fr);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-b-spec {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-m);
+  }
+
+  .variant-b-spec h1 {
+    font-size: clamp(2.75rem, 6vw, 6rem);
+    line-height: 0.97;
+    margin: 0;
+    max-inline-size: 12ch;
+  }
+
+  .variant-b-media {
+    align-items: end;
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: 0.75fr 1fr;
+  }
+
+  .variant-b-media picture:first-child {
+    grid-row: span 2;
+  }
+
+  .variant-b-media img,
+  .variant-b-media video {
+    aspect-ratio: 4 / 5;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-b-media video {
+    aspect-ratio: 9 / 16;
+  }
+
+  .variant-b-table {
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-b-table h2,
+  .variant-b-proof h2 {
+    font-size: var(--text-step-5);
+    margin-block: 0 var(--spacing-l);
+  }
+
+  .variant-b-table table {
+    border-collapse: collapse;
+    inline-size: 100%;
+  }
+
+  .variant-b-table th,
+  .variant-b-table td {
+    border-block-start: 1px solid var(--color-gray-700);
+    padding: var(--spacing-s) var(--spacing-xs);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  .variant-b-table th {
+    font-size: var(--text-step-2);
+    inline-size: 24%;
+  }
+
+  .variant-b-table td:last-child {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-3);
+    font-weight: var(--font-weight-black);
+    text-align: end;
+  }
+
+  .variant-b-proof {
+    background: var(--color-skin-200);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-b-proof > div {
+    display: grid;
+    gap: var(--spacing-m);
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .variant-b-proof section {
+    border-block-start: 1px solid var(--color-gray-1000);
+    padding-block-start: var(--spacing-s);
+  }
+
+  .prototype-variant-c {
+    background: #f7eeea;
+  }
+
+  .variant-c-lookbook {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: 0.95fr 0.7fr 0.8fr;
+    min-block-size: 100vh;
+    padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
+  }
+
+  .variant-c-copy {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-s);
+    grid-row: span 2;
+    padding-inline-end: var(--spacing-l);
+  }
+
+  .variant-c-copy h1 {
+    font-size: clamp(3rem, 6.5vw, 6.75rem);
+    line-height: 0.95;
+    margin: 0;
+    max-inline-size: 11ch;
+  }
+
+  .variant-c-lookbook picture:nth-of-type(2) {
+    grid-column: span 2;
+  }
+
+  .variant-c-lookbook img {
+    aspect-ratio: 4 / 5;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-c-strip {
+    align-items: center;
+    border-block: 1px solid rgb(20 20 20 / 0.14);
+    display: flex;
+    gap: var(--spacing-xl);
+    justify-content: space-between;
+    padding: var(--spacing-s) var(--spacing-s-l);
+  }
+
+  .variant-c-strip p {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .variant-c-strip ul {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-l);
+    justify-content: end;
+    list-style: none;
+    margin: 0;
+  }
+
+  .variant-c-services {
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(16rem, 0.6fr) 1fr;
+  }
+
+  .variant-c-services h2 {
+    font-size: var(--text-step-5);
+    line-height: 1;
+    max-inline-size: 10ch;
+  }
+
+  .variant-c-services > div {
+    display: grid;
+    gap: var(--spacing-xs);
+  }
+
+  .variant-c-services section {
+    border-block-start: 1px solid rgb(20 20 20 / 0.2);
+    padding-block-start: var(--spacing-s);
+  }
+
+  .prototype-variant-d {
+    background: var(--color-gray-1200);
+    color: var(--color-gray-100);
+  }
+
+  .variant-d-brief {
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(18rem, 0.8fr) minmax(20rem, 1fr);
+    min-block-size: 100vh;
+    padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
+  }
+
+  .variant-d-brief__copy {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-s);
+  }
+
+  .variant-d-brief__copy h1 {
+    font-size: clamp(2.75rem, 6.5vw, 6.5rem);
+    line-height: 0.96;
+    margin: 0;
+    max-inline-size: 11ch;
+  }
+
+  .variant-d-storyboard {
+    align-items: end;
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .variant-d-storyboard video {
+    aspect-ratio: 9 / 16;
+    block-size: 100%;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-d-storyboard video:nth-child(2) {
+    margin-block-end: var(--spacing-xl);
+  }
+
+  .variant-d-system {
+    border-block-start: 1px solid rgb(255 255 255 / 0.18);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-d-system h2 {
+    font-size: var(--text-step-5);
+    margin-block: 0 var(--spacing-xl);
+  }
+
+  .variant-d-system ol {
+    display: grid;
+    gap: var(--spacing-m);
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .variant-d-system li {
+    border-block-start: 1px solid rgb(255 255 255 / 0.22);
+    display: grid;
+    gap: var(--spacing-xs);
+    padding-block-start: var(--spacing-s);
+  }
+
+  .variant-d-system span {
+    color: var(--color-skin-100);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+  }
+
+  .variant-e-atelier {
+    background: var(--color-skin-200);
+    display: grid;
+    gap: var(--spacing-s-l);
+    grid-template-columns: minmax(18rem, 0.85fr) minmax(20rem, 1fr);
+    min-block-size: 100vh;
+    padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
+  }
+
+  .variant-e-portrait {
+    align-self: end;
+  }
+
+  .variant-e-portrait img {
+    aspect-ratio: 4 / 5;
+    block-size: min(72vh, 45rem);
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-e-copy {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-s);
+  }
+
+  .variant-e-copy h1 {
+    font-size: clamp(3rem, 7vw, 7rem);
+    line-height: 0.94;
+    margin: 0;
+    max-inline-size: 10ch;
+  }
+
+  .variant-e-proof {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, 1fr);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
+  }
+
+  .variant-e-proof section {
+    border-inline-start: 1px solid var(--color-gray-700);
+    padding-inline-start: var(--spacing-m);
+  }
+
+  .variant-e-proof h2 {
+    font-size: var(--text-step-2);
+    margin-block-start: 0;
+  }
+
+  .variant-e-work {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 var(--spacing-s-l) var(--spacing-2xl);
+  }
+
+  .variant-e-work img {
+    aspect-ratio: 4 / 5;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-f-hero {
+    background: var(--color-gray-1200);
+    color: var(--color-gray-100);
+    min-block-size: 70vh;
+    padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
+    position: relative;
+  }
+
+  .variant-f-hero a {
+    color: var(--color-gray-100);
+  }
+
+  .variant-f-hero > div {
+    display: grid;
+    gap: var(--spacing-s);
+    max-inline-size: 58rem;
+  }
+
+  .variant-f-hero h1 {
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    line-height: 0.92;
+    margin: 0;
+    max-inline-size: 12ch;
+  }
+
+  .variant-f-hero p:not(.prototype-kicker) {
+    font-size: var(--text-step-1);
+    margin: 0;
+  }
+
+  .variant-f-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .variant-f-menu article {
+    display: grid;
+    gap: var(--spacing-s);
+    min-block-size: 31rem;
+    padding: var(--spacing-xl) var(--spacing-s-l);
+  }
+
+  .variant-f-menu article:nth-child(1) {
+    background: var(--color-skin-200);
+  }
+
+  .variant-f-menu article:nth-child(2) {
+    background: var(--color-gray-100);
+  }
+
+  .variant-f-menu article:nth-child(3) {
+    background: var(--color-skin-100);
+  }
+
+  .variant-f-menu span {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-3);
+    font-weight: var(--font-weight-black);
+  }
+
+  .variant-f-menu h2 {
+    font-size: var(--text-step-3);
+    margin: 0;
+  }
+
+  .variant-f-menu a {
+    align-self: end;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    text-transform: uppercase;
+  }
+
+  .variant-f-media {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: 1fr 0.62fr 1fr;
+    padding: var(--spacing-xs) var(--spacing-s-l) var(--spacing-2xl);
+  }
+
+  .variant-f-media img,
+  .variant-f-media video {
+    aspect-ratio: 4 / 5;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  .variant-f-media video {
+    aspect-ratio: 9 / 16;
+  }
+
+  .prototype-contact {
+    align-items: end;
+    border-block-start: 1px solid var(--color-gray-700);
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: var(--spacing-2xl) var(--spacing-s-l)
+      calc(var(--spacing-2xl) + 5rem);
+  }
+
+  .prototype-contact h2 {
+    font-size: var(--text-step-4);
+    line-height: 1;
+    margin-block: var(--spacing-xs);
+    max-inline-size: 14ch;
+  }
+
+  .prototype-contact p {
+    margin: 0;
+  }
+
+  .prototype-switcher {
+    align-items: center;
+    background: var(--color-gray-1200);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: 999px;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 0.22);
+    color: var(--color-gray-100);
+    display: grid;
+    gap: var(--spacing-2xs);
+    grid-template-columns: 2.5rem minmax(10rem, auto) 2.5rem;
+    inset-block-end: var(--spacing-s);
+    inset-inline-start: 50%;
+    padding: var(--spacing-3xs);
+    position: fixed;
+    transform: translateX(-50%);
+    z-index: 30;
+  }
+
+  .prototype-switcher button {
+    align-items: center;
+    background: rgb(255 255 255 / 0.12);
+    border: 0;
+    border-radius: 999px;
+    color: currentColor;
+    cursor: pointer;
+    display: grid;
+    font-size: var(--text-step-1);
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    place-items: center;
+  }
+
+  .prototype-switcher p {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-black);
+    margin: 0;
+    max-inline-size: none;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .prototype-nav,
+    .variant-f-hero nav {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .variant-a-hero__panel,
+    .variant-a-proof,
+    .variant-a-services,
+    .variant-b-shell,
+    .variant-b-hero,
+    .variant-c-services,
+    .variant-d-brief,
+    .variant-d-system ol,
+    .variant-e-atelier,
+    .variant-e-proof,
+    .variant-f-menu,
+    .prototype-contact {
+      grid-template-columns: 1fr;
+    }
+
+    .variant-a-hero__panel {
+      display: none;
+    }
+
+    .variant-a-gallery,
+    .variant-c-lookbook,
+    .variant-e-work,
+    .variant-f-media {
+      grid-template-columns: 1fr;
+    }
+
+    .variant-a-services li {
+      grid-template-columns: 1fr;
+    }
+
+    .variant-a-services li p {
+      grid-column: auto;
+    }
+
+    .variant-c-copy,
+    .variant-c-lookbook picture:nth-of-type(2) {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .variant-b-table {
+      overflow-x: auto;
+    }
+
+    .variant-b-proof > div {
+      grid-template-columns: 1fr;
+    }
+
+    .variant-d-storyboard {
+      grid-template-columns: repeat(3, minmax(8rem, 1fr));
+      overflow-x: auto;
+    }
+  }
+</style>

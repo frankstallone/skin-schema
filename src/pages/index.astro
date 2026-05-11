@@ -14,6 +14,9 @@ import RateCard from '../components/RateCard.astro';
 import Addons from '../components/Addons.astro';
 import Collabterms from '../components/Collabterms.astro';
 import Agitate from '../components/Agitate.astro';
+import HomepagePrototype from '../components/HomepagePrototype.astro';
+
+const isHomepagePrototype = import.meta.env.DEV;
 ---
 
 <Layout
@@ -25,19 +28,27 @@ import Agitate from '../components/Agitate.astro';
   }}
 >
   <main>
-    <Header />
-    <Hero />
-    <Agitate class="pt-zero" />
-    <EngagementHighlights />
-    <WhoAmI />
-    <PhotographyExamples />
-    <ShortFormExamples />
-    <InspirationalExamples />
-    <WorkedWith />
-    <Services />
-    <RateCard />
-    <Addons />
-    <Collabterms />
-    <Contact />
+    {
+      isHomepagePrototype ? (
+        <HomepagePrototype />
+      ) : (
+        <>
+          <Header />
+          <Hero />
+          <Agitate class="pt-zero" />
+          <EngagementHighlights />
+          <WhoAmI />
+          <PhotographyExamples />
+          <ShortFormExamples />
+          <InspirationalExamples />
+          <WorkedWith />
+          <Services />
+          <RateCard />
+          <Addons />
+          <Collabterms />
+          <Contact />
+        </>
+      )
+    }
   </main>
 </Layout>
