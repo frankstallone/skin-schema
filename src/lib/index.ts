@@ -129,12 +129,12 @@ export type NavigationLink = {
  */
 export const navigationLinks: NavigationLink[] = [
   {
-    href: '/#Services',
-    text: 'Services',
+    href: '/#CampaignProcess',
+    text: 'Process',
   },
   {
-    href: '/#RateCard',
-    text: 'Rate Card',
+    href: '/#CampaignRates',
+    text: 'Rates',
   },
   {
     href: '/#Contact',
