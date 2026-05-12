@@ -1,20 +1,360 @@
 ---
+import { Picture } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
+import creatorPortrait from '../assets/photograph-of-skin-schema.jpg';
+import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 ---
 
 <Layout
   meta={{
-    title: 'Skin Schema Instagram skincare influencer',
-    description: 'Skin Schema',
+    title: 'Thank you | Skin Schema',
+    description:
+      'Thank you for reaching out to Skin Schema. Kseniya will be in touch within the next business day.',
   }}
+  hideFooter
 >
-  <main>
-    <Header />
-    <Hero
-      heading="Thank you!"
-      subHeading="Thank you for your note! I'm SO excited to connect. I'll be in touch within the next business day so we can talk about your ideal partnership 😊"
-    />
+  <main class="thank-you-page" id="main">
+    <header class="thank-you-nav" aria-label="Primary">
+      <a href="/" class="thank-you-brand">Skin Schema</a>
+      <nav>
+        <a href="/#CampaignProcess">Process</a>
+        <a href="/#CampaignRates">Rates</a>
+        <a href="/#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="thank-you-hero" aria-labelledby="thank-you-title">
+      <div class="thank-you-hero__copy">
+        <p class="thank-you-kicker">Inquiry received</p>
+        <h1 id="thank-you-title">
+          Thank you. I’ll be in touch within the next business day.
+        </h1>
+        <p>
+          I’m looking forward to learning more about your product, campaign, and
+          where the content needs to live. If our approach aligns, we’ll shape a
+          thoughtful scope from there.
+        </p>
+        <div class="thank-you-actions" aria-label="Next steps">
+          <a href="/" class="thank-you-button thank-you-button--light"
+            >Return home</a
+          >
+          <a href="/#CampaignRates" class="thank-you-text-link">View rates</a>
+        </div>
+      </div>
+
+      <div class="thank-you-editorial" aria-label="Skin Schema editorial work">
+        <figure class="thank-you-editorial__portrait">
+          <Picture
+            src={creatorPortrait}
+            alt="Photograph of Kseniya, the creator behind Skin Schema"
+            widths={[320, 640, creatorPortrait.width]}
+            sizes="(max-width: 900px) 72vw, 34vw"
+            quality={80}
+            format="avif"
+          />
+        </figure>
+        <figure class="thank-you-editorial__still">
+          <Picture
+            src={campaignStill}
+            alt="Beauty campaign still by Skin Schema"
+            widths={[220, 440, 680]}
+            sizes="(max-width: 900px) 38vw, 18vw"
+            quality={80}
+            format="avif"
+          />
+          <figcaption>Campaign-ready beauty content</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="thank-you-note" aria-label="What happens next">
+      <p class="thank-you-kicker">Next step</p>
+      <p>
+        Your note is in the right place. I’ll review the details and reply with
+        the cleanest path for timing, deliverables, usage, and creative fit.
+      </p>
+    </section>
   </main>
 </Layout>
+
+<style>
+  :global(html),
+  :global(body) {
+    background: var(--color-gray-1200);
+  }
+
+  .thank-you-page {
+    --thank-you-ink: var(--color-gray-1200);
+    --thank-you-paper: var(--color-gray-100);
+    --thank-you-warm: var(--color-skin-200);
+    --thank-you-soft: var(--color-skin-100);
+    background: var(--thank-you-ink);
+    color: var(--thank-you-paper);
+    min-block-size: 100vh;
+  }
+
+  .thank-you-nav {
+    align-items: center;
+    color: var(--thank-you-paper);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    gap: var(--spacing-s);
+    inset-block-start: 0;
+    justify-content: space-between;
+    letter-spacing: 0;
+    padding: var(--spacing-xs) var(--spacing-s-l);
+    position: absolute;
+    text-transform: uppercase;
+    inline-size: 100%;
+    z-index: 3;
+  }
+
+  .thank-you-nav nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs-s);
+    justify-content: end;
+  }
+
+  .thank-you-nav a,
+  .thank-you-text-link {
+    color: currentColor;
+    text-decoration: none;
+  }
+
+  .thank-you-nav a:focus-visible,
+  .thank-you-button:focus-visible,
+  .thank-you-text-link:focus-visible {
+    outline: 2px solid var(--thank-you-soft);
+    outline-offset: 0.25rem;
+  }
+
+  .thank-you-brand,
+  .thank-you-kicker {
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+  }
+
+  .thank-you-kicker {
+    color: var(--thank-you-soft);
+    font-size: var(--text-step-000);
+    margin: 0;
+    max-inline-size: none;
+  }
+
+  .thank-you-hero {
+    background:
+      linear-gradient(rgb(10 9 8 / 0.3), rgb(10 9 8 / 0)),
+      color-mix(in oklab, var(--thank-you-ink) 96%, var(--thank-you-warm));
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(19rem, 0.82fr) minmax(18rem, 0.68fr);
+    min-block-size: 100vh;
+    overflow: hidden;
+    padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
+  }
+
+  .thank-you-hero__copy {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-s);
+    max-inline-size: 58rem;
+  }
+
+  .thank-you-hero h1 {
+    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.045em;
+    line-height: 0.94;
+    margin: 0;
+    max-inline-size: 10.5ch;
+  }
+
+  .thank-you-hero__copy > p:not(.thank-you-kicker) {
+    color: var(--color-gray-300);
+    font-size: var(--text-step-1);
+    margin: 0;
+    max-inline-size: 42rem;
+  }
+
+  .thank-you-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+    margin-block-start: var(--spacing-xs);
+  }
+
+  .thank-you-button {
+    background: var(--thank-you-ink);
+    border-radius: 999px;
+    color: var(--thank-you-paper);
+    display: inline-flex;
+    font-weight: var(--font-weight-bold);
+    inline-size: fit-content;
+    padding: var(--spacing-2xs) var(--spacing-l);
+    text-decoration: none;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .thank-you-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .thank-you-button--light {
+    background: var(--thank-you-paper);
+    color: var(--thank-you-ink);
+  }
+
+  .thank-you-button--light:hover,
+  .thank-you-button--light:focus {
+    background: var(--thank-you-soft);
+  }
+
+  .thank-you-text-link {
+    border-block-end: 1px solid currentColor;
+    color: var(--color-gray-300);
+    font-weight: var(--font-weight-bold);
+    text-underline-offset: 0.22em;
+    transition: color 180ms ease;
+  }
+
+  .thank-you-text-link:hover,
+  .thank-you-text-link:focus {
+    color: var(--thank-you-paper);
+  }
+
+  .thank-you-editorial {
+    align-self: end;
+    display: grid;
+    grid-template-columns: minmax(0, 0.84fr) minmax(7rem, 0.36fr);
+    min-block-size: 68vh;
+  }
+
+  .thank-you-editorial figure {
+    margin: 0;
+    min-inline-size: 0;
+  }
+
+  .thank-you-editorial picture,
+  .thank-you-editorial img {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .thank-you-editorial img {
+    display: block;
+    object-fit: cover;
+  }
+
+  .thank-you-editorial__portrait {
+    border: 1px solid rgb(255 255 255 / 0.18);
+  }
+
+  .thank-you-editorial__portrait img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .thank-you-editorial__still {
+    align-self: center;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    display: grid;
+    grid-template-areas: 'stack';
+    transform: translateX(calc(-1 * var(--spacing-l)))
+      translateY(var(--spacing-xl));
+  }
+
+  .thank-you-editorial__still > * {
+    grid-area: stack;
+  }
+
+  .thank-you-editorial__still img {
+    aspect-ratio: 3 / 4;
+  }
+
+  .thank-you-editorial__still figcaption {
+    align-self: end;
+    background: linear-gradient(
+      to top,
+      rgb(10 9 8 / 0.8),
+      rgb(10 9 8 / 0)
+    );
+    color: var(--thank-you-paper);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    padding: var(--spacing-xs);
+    text-transform: uppercase;
+  }
+
+  .thank-you-note {
+    align-items: center;
+    background: var(--thank-you-warm);
+    color: var(--thank-you-ink);
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: var(--spacing-m) var(--spacing-s-l);
+  }
+
+  .thank-you-note .thank-you-kicker {
+    color: currentColor;
+  }
+
+  .thank-you-note p:last-child {
+    font-size: var(--text-step-1);
+    margin: 0;
+    max-inline-size: 54rem;
+  }
+
+  @media (max-width: 900px) {
+    .thank-you-hero,
+    .thank-you-note {
+      grid-template-columns: 1fr;
+    }
+
+    .thank-you-hero h1 {
+      max-inline-size: none;
+    }
+
+    .thank-you-editorial {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 0.28fr);
+      min-block-size: auto;
+    }
+
+    .thank-you-editorial__portrait img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .thank-you-editorial__still {
+      transform: translateX(calc(-1 * var(--spacing-l)))
+        translateY(calc(-1 * var(--spacing-xl)));
+    }
+
+    .thank-you-note {
+      gap: var(--spacing-xs);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .thank-you-nav nav {
+      justify-content: start;
+    }
+
+    .thank-you-hero {
+      padding-block-start: var(--spacing-3xl);
+    }
+
+    .thank-you-actions {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+</style>
