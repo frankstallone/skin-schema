@@ -505,7 +505,7 @@ const startingRates = [
   }
 
   .campaign-storyboard video:nth-child(2) {
-    margin-block-end: var(--spacing-xl);
+    transform: translateY(calc(-1 * var(--spacing-xl)));
   }
 
   .campaign-brands {
@@ -537,12 +537,17 @@ const startingRates = [
   .campaign-brands li {
     align-items: center;
     display: flex;
+    justify-content: center;
     min-block-size: 2.5rem;
   }
 
   .campaign-brands picture {
     filter: invert(1) grayscale(1);
     opacity: 0.76;
+  }
+
+  .campaign-brands img {
+    max-inline-size: 100%;
   }
 
   .campaign-creator {
@@ -919,10 +924,26 @@ const startingRates = [
       grid-template-columns: 1fr;
     }
 
+    .campaign-hero__copy h1 {
+      max-inline-size: none;
+    }
+
+    .campaign-creator h2 {
+      max-inline-size: none;
+    }
+
     .campaign-storyboard {
       grid-template-columns: repeat(3, minmax(8rem, 1fr));
       overflow-x: auto;
+      padding-block-start: var(--spacing-xl);
       padding-block-end: var(--spacing-2xs);
+    }
+
+    .campaign-brands ul {
+      display: grid;
+      gap: var(--spacing-l) var(--spacing-m);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      justify-content: stretch;
     }
 
     .campaign-range {
@@ -938,6 +959,14 @@ const startingRates = [
 
     .campaign-hero {
       padding-block-start: var(--spacing-3xl);
+    }
+
+    .campaign-brands ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .campaign-brands li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
     }
 
     .campaign-range {
