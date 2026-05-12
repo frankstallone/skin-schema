@@ -106,15 +106,15 @@ const startingRates = [
     ],
   },
   {
-    title: 'Product Storytelling Videos',
-    type: 'Storytelling Video',
+    title: 'Premium Product Videos',
+    type: 'Premium Video',
     price: '$750',
     text: 'More developed beauty video concepts with polished production, product context, lifestyle detail, and campaign-style pacing.',
     specs: [
       ['Assets', '1'],
       ['Turnaround', '2 weeks'],
       ['Revisions', '1'],
-      ['Length', 'Up to 20 seconds'],
+      ['Length', 'Up to 30 seconds'],
     ],
   },
 ];
@@ -301,7 +301,10 @@ const startingRates = [
       <p>
         Organic brand-use rights are included for approved channels. Paid usage,
         raw footage, rush delivery, perpetual usage, and extended distribution
-        are quoted separately based on campaign scope.
+        are quoted separately based on campaign scope.<a
+          href="#CollaborationTerms"
+          aria-label="View collaboration terms">*</a
+        >
       </p>
     </div>
   </section>
@@ -362,17 +365,30 @@ const startingRates = [
   </section>
 
   <footer class="campaign-footer" aria-label="Footer">
-    <a href="#main" class="campaign-brand">Skin Schema</a>
-    <nav aria-label="Footer navigation">
-      <a href="#CampaignProcess">Process</a>
-      <a href="#CampaignRates">Rates</a>
-      <a href="#Contact">Contact</a>
-      <a
-        href="https://www.instagram.com/skinschema/"
-        target="_blank"
-        rel="noopener noreferrer">Instagram</a
-      >
-    </nav>
+    <div class="campaign-footer__main">
+      <a href="#main" class="campaign-brand">Skin Schema</a>
+      <nav aria-label="Footer navigation">
+        <a href="#CampaignProcess">Process</a>
+        <a href="#CampaignRates">Rates</a>
+        <a href="#Contact">Contact</a>
+        <a
+          href="https://www.instagram.com/skinschema/"
+          target="_blank"
+          rel="noopener noreferrer">Instagram</a
+        >
+      </nav>
+    </div>
+    <div class="campaign-footer__terms" id="CollaborationTerms">
+      <p>
+        * Payment due NET 30 upon invoice. Invoices are sent via email through
+        Stripe. All services include one revision, with additional revisions
+        available as an add-on.
+      </p>
+      <p>
+        Cancelation policy: full refund if canceled within 48 hours of making a
+        booking; 50% refund if canceled within one week of making a booking.
+      </p>
+    </div>
   </footer>
 </div>
 
@@ -393,7 +409,7 @@ const startingRates = [
   }
 
   .campaign-nav,
-  .campaign-footer {
+  .campaign-footer__main {
     align-items: center;
     display: flex;
     font-family: var(--font-mono);
@@ -415,7 +431,7 @@ const startingRates = [
   }
 
   .campaign-nav nav,
-  .campaign-footer nav {
+  .campaign-footer__main nav {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-xs-s);
@@ -826,9 +842,7 @@ const startingRates = [
   }
 
   .campaign-rates__note {
-    border-block-start: 1px solid var(--color-gray-800);
     margin-block-start: var(--spacing-xl);
-    padding-block-start: var(--spacing-s);
   }
 
   .campaign-rates__note p {
@@ -836,6 +850,14 @@ const startingRates = [
     font-size: var(--text-step-00);
     margin: 0;
     max-inline-size: 75ch;
+  }
+
+  .campaign-rates__note a {
+    color: currentColor;
+    font-weight: var(--font-weight-bold);
+    margin-inline-start: 0.12em;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
   }
 
   .campaign-contact {
@@ -928,7 +950,25 @@ const startingRates = [
     );
     border-block-start: 1px solid rgb(255 255 255 / 0.18);
     color: var(--campaign-paper);
+    display: grid;
+    gap: var(--spacing-s);
     padding: var(--spacing-s) var(--spacing-s-l);
+  }
+
+  .campaign-footer__terms {
+    border-block-start: 1px solid rgb(255 255 255 / 0.16);
+    color: var(--color-gray-400);
+    display: grid;
+    font-size: var(--text-step-000);
+    gap: var(--spacing-2xs);
+    margin-inline: calc(var(--spacing-s-l) * -1);
+    padding-block-start: var(--spacing-s);
+    padding-inline: var(--spacing-s-l);
+  }
+
+  .campaign-footer__terms p {
+    margin: 0;
+    max-inline-size: 82ch;
   }
 
   @media (max-width: 900px) {
@@ -991,14 +1031,17 @@ const startingRates = [
       min-block-size: 2.75rem;
     }
 
+    .campaign-brands .campaign-kicker {
+      display: none;
+    }
+
     .campaign-range {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 560px) {
-    .campaign-nav nav,
-    .campaign-footer nav {
+    .campaign-nav nav {
       justify-content: start;
     }
 

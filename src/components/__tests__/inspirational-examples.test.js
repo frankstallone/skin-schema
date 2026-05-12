@@ -65,7 +65,7 @@ describe('InspirationalExamples', () => {
     const component = await readFile(componentPath, 'utf8');
 
     assert.match(component, /id="InspirationalExamples"/);
-    assert.match(component, /Product Storytelling Video examples/);
+    assert.match(component, /Premium Product Video examples/);
     assert.match(component, /premium-01\.mp4/);
     assert.match(component, /premium-02\.mp4/);
     assert.match(component, /premium-03\.mp4/);
