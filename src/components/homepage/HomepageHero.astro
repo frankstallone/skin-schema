@@ -1,10 +1,41 @@
 <style is:inline>
-  .homepage-hero[data-animation-stage='0'] [data-hero-animate] {
-    opacity: 0;
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage-hero[data-animation-stage='0'] [data-hero-animate],
+    .homepage-hero[data-animation-stage='1']
+      :is(
+        [data-hero-line],
+        [data-hero-body],
+        [data-hero-cta],
+        [data-hero-video]
+      ),
+    .homepage-hero[data-animation-stage='2']
+      :is([data-hero-body], [data-hero-cta], [data-hero-video]),
+    .homepage-hero[data-animation-stage='3'] [data-hero-video] {
+      opacity: 0;
+    }
+
+    .homepage-hero:is(
+        [data-animation-stage='0'],
+        [data-animation-stage='1'],
+        [data-animation-stage='2'],
+        [data-animation-stage='3']
+      )
+      .homepage-storyboard__reveal {
+      clip-path: inset(100% 0 0 0);
+    }
   }
 
-  .homepage-hero[data-animation-stage='0'] .homepage-storyboard__reveal {
-    clip-path: inset(100% 0 0 0);
+  @media (prefers-reduced-motion: reduce) {
+    .homepage-hero [data-hero-animate] {
+      clip-path: none;
+      filter: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .homepage-hero .homepage-storyboard__reveal {
+      clip-path: inset(0 0 0 0);
+    }
   }
 </style>
 
@@ -127,8 +158,8 @@
    *
    * Read top-to-bottom. Each "at" value is ms after page load.
    *
-   *    0ms   hero holds dark, text and videos prepared offscreen
-   *  120ms   kicker fades up, blur 10px -> 0
+   *    0ms   hero holds dark, groups hidden until their reveal stage
+   *  120ms   kicker fades up, blur 16px -> 0
    *  260ms   headline lines rise in (staggered 85ms)
    *  620ms   supporting copy and CTA settle in
    *  780ms   video frames unmask, y 52px -> 0 (staggered 130ms)
@@ -354,16 +385,28 @@
       );
     };
 
-    if (prefersReducedMotion.matches) {
-      enterStage(STAGE.complete);
-    } else {
-      startAnimation();
-    }
+    const syncMotionPreference = () => {
+      cleanup();
+      resetAnimationStyles();
+
+      if (prefersReducedMotion.matches) {
+        enterStage(STAGE.complete);
+      } else {
+        startAnimation();
+      }
+    };
+
+    prefersReducedMotion.addEventListener('change', syncMotionPreference);
+    syncMotionPreference();
 
     document.addEventListener(
       'astro:before-swap',
       () => {
         cleanup();
+        prefersReducedMotion.removeEventListener(
+          'change',
+          syncMotionPreference,
+        );
       },
       { once: true },
     );

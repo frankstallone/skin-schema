@@ -134,8 +134,29 @@ const pathname = Astro.url.pathname;
     padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
   }
 
-  .homepage-hero[data-animation-stage='0'] [data-hero-animate] {
-    opacity: 0;
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage-hero[data-animation-stage='0'] [data-hero-animate],
+    .homepage-hero[data-animation-stage='1']
+      :is(
+        [data-hero-line],
+        [data-hero-body],
+        [data-hero-cta],
+        [data-hero-video]
+      ),
+    .homepage-hero[data-animation-stage='2']
+      :is([data-hero-body], [data-hero-cta], [data-hero-video]),
+    .homepage-hero[data-animation-stage='3'] [data-hero-video] {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .homepage-hero [data-hero-animate] {
+      clip-path: none;
+      filter: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .homepage-hero[data-animation-stage='5'] [data-hero-animate] {
@@ -212,6 +233,12 @@ const pathname = Astro.url.pathname;
 
   .homepage-hero[data-animation-stage='5'] .homepage-storyboard__reveal {
     clip-path: inset(0 0 0 0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .homepage-hero .homepage-storyboard__reveal {
+      clip-path: inset(0 0 0 0);
+    }
   }
 
   .homepage-brands {
