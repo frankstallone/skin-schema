@@ -530,9 +530,9 @@ const startingRates = [
     border-block: 1px solid rgb(255 255 255 / 0.16);
     color: var(--campaign-paper);
     display: grid;
-    gap: var(--spacing-xl);
-    grid-template-columns: minmax(12rem, 0.32fr) minmax(0, 1fr);
-    padding: var(--spacing-m-l) var(--spacing-s-l);
+    gap: var(--spacing-l-xl);
+    grid-template-columns: auto minmax(0, 1fr);
+    padding: var(--spacing-m) var(--spacing-s-l);
   }
 
   .campaign-brands .campaign-kicker {
@@ -541,10 +541,10 @@ const startingRates = [
 
   .campaign-brands ul {
     align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-l-xl);
-    justify-content: end;
+    display: grid;
+    gap: var(--spacing-m-l);
+    grid-template-columns: repeat(5, minmax(6.5rem, 1fr));
+    justify-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -554,15 +554,19 @@ const startingRates = [
     align-items: center;
     display: flex;
     justify-content: center;
-    min-block-size: 2.5rem;
+    min-block-size: 3rem;
   }
 
   .campaign-brands picture {
-    filter: invert(1) grayscale(1);
-    opacity: 0.76;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    opacity: 0.86;
   }
 
   .campaign-brands img {
+    display: block;
+    filter: invert(1) grayscale(1);
     max-inline-size: 100%;
   }
 
@@ -639,7 +643,7 @@ const startingRates = [
     display: grid;
     gap: var(--spacing-xs);
     grid-template-columns: 1fr 0.62fr 1fr 0.82fr;
-    padding: var(--spacing-xs) var(--spacing-s-l) var(--spacing-2xl);
+    padding: var(--spacing-xl) var(--spacing-s-l);
   }
 
   .campaign-range img,
@@ -979,10 +983,12 @@ const startingRates = [
     }
 
     .campaign-brands ul {
-      display: grid;
-      gap: var(--spacing-l) var(--spacing-m);
+      gap: var(--spacing-m) var(--spacing-l);
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      justify-content: stretch;
+    }
+
+    .campaign-brands li {
+      min-block-size: 2.75rem;
     }
 
     .campaign-range {
@@ -1006,6 +1012,7 @@ const startingRates = [
 
     .campaign-brands li:last-child:nth-child(odd) {
       grid-column: 1 / -1;
+      justify-content: center;
     }
 
     .campaign-range {
