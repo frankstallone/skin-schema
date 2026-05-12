@@ -414,7 +414,7 @@ const startingRates = [
     display: flex;
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     gap: var(--spacing-s);
     justify-content: space-between;
     letter-spacing: 0;
@@ -453,14 +453,14 @@ const startingRates = [
 
   .campaign-brand {
     font-family: var(--font-mono);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     text-transform: uppercase;
   }
 
   .campaign-kicker {
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     margin: 0;
     max-inline-size: none;
     text-transform: uppercase;
@@ -510,6 +510,8 @@ const startingRates = [
 
   .campaign-hero__copy h1 {
     font-size: clamp(2.75rem, 6.5vw, 6.5rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.045em;
     line-height: 0.96;
     margin: 0;
     max-inline-size: 11ch;
@@ -623,8 +625,9 @@ const startingRates = [
   .campaign-creator h2,
   .campaign-system h2,
   .campaign-contact h2 {
-    font-size: clamp(2.75rem, 6vw, 6rem);
-    line-height: 0.96;
+    font-size: var(--text-step-5);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     margin: 0;
     max-inline-size: 12ch;
   }
@@ -708,7 +711,7 @@ const startingRates = [
     color: var(--campaign-soft);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
   }
 
   .campaign-system p {
@@ -730,8 +733,9 @@ const startingRates = [
   }
 
   .campaign-rates__intro h2 {
-    font-size: clamp(2.75rem, 6vw, 6rem);
-    line-height: 0.96;
+    font-size: var(--text-step-5);
+    letter-spacing: -0.03em;
+    line-height: 1.02;
     margin: 0;
     max-inline-size: 11ch;
   }
@@ -787,7 +791,7 @@ const startingRates = [
     color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     margin: 0;
     max-inline-size: none;
     text-transform: uppercase;
@@ -797,7 +801,7 @@ const startingRates = [
     color: var(--campaign-soft);
     font-family: var(--font-mono);
     font-size: clamp(3rem, 7vw, 7rem);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     line-height: 0.9;
   }
 
@@ -831,7 +835,7 @@ const startingRates = [
     color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     text-transform: uppercase;
   }
 
@@ -903,7 +907,7 @@ const startingRates = [
     color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-weight-bold);
     text-transform: uppercase;
   }
 
@@ -960,7 +964,8 @@ const startingRates = [
     color: var(--color-gray-400);
     display: grid;
     font-size: var(--text-step-000);
-    gap: var(--spacing-2xs);
+    gap: var(--spacing-m);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-inline: calc(var(--spacing-s-l) * -1);
     padding-block-start: var(--spacing-s);
     padding-inline: var(--spacing-s-l);
@@ -968,7 +973,7 @@ const startingRates = [
 
   .campaign-footer__terms p {
     margin: 0;
-    max-inline-size: 82ch;
+    max-inline-size: 75ch;
   }
 
   @media (max-width: 900px) {
@@ -979,6 +984,10 @@ const startingRates = [
     .campaign-system ol,
     .campaign-rate-bands article,
     .campaign-contact {
+      grid-template-columns: 1fr;
+    }
+
+    .campaign-footer__terms {
       grid-template-columns: 1fr;
     }
 
