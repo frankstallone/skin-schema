@@ -3,8 +3,6 @@ import { Picture } from 'astro:assets';
 import creatorPortrait from '../assets/photograph-of-skin-schema.jpg';
 import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 import photoExample03 from '../assets/photo-example-03.jpg';
-import photoExample04 from '../assets/photo-example-04.jpg';
-import partnership01 from '../assets/paid-partnership/2023-Creative-Minds-14.jpg';
 import valentino from '../assets/workedwith/valentino@2x.png';
 import armani from '../assets/workedwith/armani-beauty.png';
 import naturopathica from '../assets/workedwith/naturopathica.png';
@@ -118,6 +116,43 @@ const startingRates = [
     ],
   },
 ];
+
+const rangeExamples = [
+  {
+    kind: 'image',
+    src: photoExample03,
+    label: 'Photo set',
+    alt: 'Skincare product photography by Skin Schema',
+    columnWeight: 0.8,
+    aspectRatio: '4 / 5',
+    objectPosition: 'center',
+    mediaTransform: 'none',
+  },
+  {
+    kind: 'video',
+    src: '/media/videos/short-02.mp4',
+    label: 'Short-form video',
+    alt: 'Short-form beauty routine product video by Skin Schema',
+    columnWeight: 0.5625,
+    aspectRatio: '9 / 16',
+    objectPosition: 'center',
+    mediaTransform: 'none',
+  },
+  {
+    kind: 'video',
+    src: '/media/videos/premium-02.mp4',
+    label: 'Premium video',
+    alt: 'Premium beauty product video by Skin Schema',
+    columnWeight: 0.5625,
+    aspectRatio: '9 / 16',
+    objectPosition: 'center',
+    mediaTransform: 'none',
+  },
+] as const;
+
+const rangeColumnTemplate = rangeExamples
+  .map((example) => `minmax(0, ${example.columnWeight}fr)`)
+  .join(' ');
 ---
 
 <div class="campaign-homepage" id="main">
@@ -225,28 +260,54 @@ const startingRates = [
     </div>
   </section>
 
-  <section class="campaign-range" aria-label="Content range">
-    <Picture
-      src={photoExample03}
-      alt="Skincare product photography by Skin Schema"
-      format="avif"
-      quality={80}
-    />
-    <video autoplay loop muted playsinline preload="metadata">
-      <source src="/media/videos/short-02.mp4" type="video/mp4" />
-    </video>
-    <Picture
-      src={photoExample04}
-      alt="Editorial lipstick product photography by Skin Schema"
-      format="avif"
-      quality={80}
-    />
-    <Picture
-      src={partnership01}
-      alt="Beauty product partnership image by Skin Schema"
-      format="avif"
-      quality={80}
-    />
+  <section class="campaign-range" aria-labelledby="campaign-range-title">
+    <div class="campaign-range__intro">
+      <div>
+        <p class="campaign-kicker">Content range</p>
+        <h2 id="campaign-range-title">
+          Photo sets, short-form videos, and Premium videos.
+        </h2>
+      </div>
+      <p>
+        Scoped individually or built into a campaign-ready content suite.
+      </p>
+    </div>
+    <div
+      class="campaign-range__grid"
+      style={`--campaign-range-columns: ${rangeColumnTemplate};`}
+    >
+      {
+        rangeExamples.map((example) => (
+          <figure
+            class={`campaign-range__item campaign-range__item--${example.kind}`}
+            style={`--campaign-range-aspect-ratio: ${example.aspectRatio}; --campaign-range-object-position: ${example.objectPosition}; --campaign-range-media-transform: ${example.mediaTransform};`}
+          >
+            {example.kind === 'image' ? (
+              <Picture
+                src={example.src}
+                alt={example.alt}
+                format="avif"
+                quality={80}
+              />
+            ) : (
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                aria-label={example.alt}
+              >
+                <source src={example.src} type="video/mp4" />
+              </video>
+            )}
+            <figcaption>
+              <span>{example.label}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
   </section>
 
   <section class="campaign-system" id="CampaignProcess">
@@ -659,22 +720,102 @@ const startingRates = [
 
   .campaign-range {
     background: var(--campaign-ink);
+    color: var(--campaign-paper);
     display: grid;
-    gap: var(--spacing-xs);
-    grid-template-columns: 1fr 0.62fr 1fr 0.82fr;
+    gap: var(--spacing-l);
     padding: var(--spacing-xl) var(--spacing-s-l);
   }
 
-  .campaign-range img,
-  .campaign-range video {
-    aspect-ratio: 4 / 5;
+  .campaign-range__intro {
+    align-items: end;
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.44fr);
+  }
+
+  .campaign-range__intro div {
+    display: grid;
+    gap: var(--spacing-xs);
+  }
+
+  .campaign-range__intro h2 {
+    font-size: var(--text-step-4);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0;
+    max-inline-size: 16ch;
+  }
+
+  .campaign-range__intro > p {
+    color: var(--color-gray-300);
+    font-size: var(--text-step-1);
+    margin: 0;
+    max-inline-size: 29rem;
+  }
+
+  .campaign-range__grid {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: var(
+      --campaign-range-columns,
+      repeat(3, minmax(0, 1fr))
+    );
+  }
+
+  .campaign-range__item {
+    aspect-ratio: var(--campaign-range-aspect-ratio, 4 / 5);
+    display: grid;
+    grid-template-areas: 'stack';
+    margin: 0;
+    min-inline-size: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .campaign-range__item picture,
+  .campaign-range__item img,
+  .campaign-range__item video {
+    aspect-ratio: var(--campaign-range-aspect-ratio, 4 / 5);
     block-size: 100%;
+    display: block;
     inline-size: 100%;
     object-fit: cover;
   }
 
-  .campaign-range video {
-    aspect-ratio: 9 / 16;
+  .campaign-range__item img,
+  .campaign-range__item video {
+    object-position: var(--campaign-range-object-position, center);
+    transform: var(--campaign-range-media-transform, none);
+  }
+
+  .campaign-range__item > *,
+  .campaign-range__item figcaption {
+    grid-area: stack;
+  }
+
+  .campaign-range__item figcaption {
+    align-self: start;
+    background: linear-gradient(
+      to bottom,
+      rgb(10 9 8 / 0.74),
+      rgb(10 9 8 / 0)
+    );
+    display: flex;
+    min-block-size: 42%;
+    padding: var(--spacing-xs);
+    pointer-events: none;
+  }
+
+  .campaign-range__item figcaption span {
+    align-self: start;
+    background: rgb(255 255 255 / 0.88);
+    color: var(--campaign-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    padding: var(--spacing-3xs) var(--spacing-2xs);
+    text-transform: uppercase;
   }
 
   .campaign-system {
@@ -981,6 +1122,7 @@ const startingRates = [
     .campaign-brands,
     .campaign-creator,
     .campaign-creator ul,
+    .campaign-range__intro,
     .campaign-system ol,
     .campaign-rate-bands article,
     .campaign-contact {
@@ -1044,7 +1186,7 @@ const startingRates = [
       display: none;
     }
 
-    .campaign-range {
+    .campaign-range__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -1067,7 +1209,7 @@ const startingRates = [
       justify-content: center;
     }
 
-    .campaign-range {
+    .campaign-range__grid {
       grid-template-columns: 1fr;
     }
   }
