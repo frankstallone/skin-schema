@@ -3,6 +3,7 @@ import { Picture } from 'astro:assets';
 import creatorPortrait from '../assets/photograph-of-skin-schema.jpg';
 import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 import photoExample03 from '../assets/photo-example-03.jpg';
+import photoExample04 from '../assets/photo-example-04.jpg';
 import partnership01 from '../assets/paid-partnership/2023-Creative-Minds-14.jpg';
 import valentino from '../assets/workedwith/valentino@2x.png';
 import armani from '../assets/workedwith/armani-beauty.png';
@@ -184,8 +185,18 @@ const startingRates = [
       <Picture
         src={creatorPortrait}
         alt="Photograph of Kseniya, the creator behind Skin Schema"
+        class="campaign-creator__primary-image"
         widths={[320, 640, creatorPortrait.width]}
-        sizes="(max-width: 760px) 100vw, 34vw"
+        sizes="(max-width: 900px) 68vw, 34vw"
+        quality={80}
+        format="avif"
+      />
+      <Picture
+        src={campaignStill}
+        alt="Beauty campaign still by Skin Schema"
+        class="campaign-creator__supporting-image"
+        widths={[180, 360, 640]}
+        sizes="(max-width: 900px) 28vw, 1px"
         quality={80}
         format="avif"
       />
@@ -225,8 +236,8 @@ const startingRates = [
       <source src="/media/videos/short-02.mp4" type="video/mp4" />
     </video>
     <Picture
-      src={campaignStill}
-      alt="Premium beauty content campaign still"
+      src={photoExample04}
+      alt="Editorial lipstick product photography by Skin Schema"
       format="avif"
       quality={80}
     />
@@ -366,6 +377,11 @@ const startingRates = [
 </div>
 
 <style>
+  :global(html),
+  :global(body) {
+    background: var(--color-gray-1200);
+  }
+
   .campaign-homepage {
     --campaign-ink: var(--color-gray-1200);
     --campaign-paper: var(--color-gray-100);
@@ -572,6 +588,10 @@ const startingRates = [
   .campaign-creator__portrait img {
     aspect-ratio: 4 / 5;
     object-fit: cover;
+  }
+
+  .campaign-creator__supporting-image {
+    display: none;
   }
 
   .campaign-creator__copy {
@@ -908,12 +928,6 @@ const startingRates = [
   }
 
   @media (max-width: 900px) {
-    .campaign-nav,
-    .campaign-footer {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
     .campaign-hero,
     .campaign-brands,
     .campaign-creator,
@@ -924,12 +938,37 @@ const startingRates = [
       grid-template-columns: 1fr;
     }
 
-    .campaign-hero__copy h1 {
+    .campaign-hero__copy h1,
+    .campaign-creator h2,
+    .campaign-system h2,
+    .campaign-rates__intro h2,
+    .campaign-contact h2 {
       max-inline-size: none;
     }
 
-    .campaign-creator h2 {
-      max-inline-size: none;
+    .campaign-creator__portrait {
+      align-items: start;
+      display: grid;
+      gap: var(--spacing-xs);
+      grid-template-columns: minmax(0, 0.68fr) minmax(0, 0.32fr);
+    }
+
+    .campaign-creator__portrait picture,
+    .campaign-creator__portrait img {
+      block-size: auto;
+    }
+
+    .campaign-creator__primary-image img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .campaign-creator__supporting-image {
+      display: block;
+      transform: translateY(calc(-1 * var(--spacing-xl)));
+    }
+
+    .campaign-creator__supporting-image img {
+      aspect-ratio: 3 / 4;
     }
 
     .campaign-storyboard {
