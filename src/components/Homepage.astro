@@ -123,6 +123,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-hero {
+    --homepage-hero-video-lift: var(--spacing-xl);
     background: var(--homepage-ink);
     color: var(--homepage-paper);
     display: grid;
@@ -133,6 +134,17 @@ const pathname = Astro.url.pathname;
     padding: var(--spacing-3xl) var(--spacing-s-l) var(--spacing-xl);
   }
 
+  .homepage-hero[data-animation-stage='0'] [data-hero-animate] {
+    opacity: 0;
+  }
+
+  .homepage-hero[data-animation-stage='5'] [data-hero-animate] {
+    clip-path: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
   .homepage-hero__copy {
     align-self: center;
     display: grid;
@@ -141,18 +153,29 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-hero__copy h1 {
-    font-size: clamp(2.75rem, 6.5vw, 6.5rem);
+    font-size: clamp(2.75rem, 4.8vw, 5.25rem);
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.045em;
-    line-height: 0.96;
+    line-height: 0.98;
     margin: 0;
     max-inline-size: 11ch;
+  }
+
+  .homepage-hero__line {
+    display: block;
+    will-change: opacity, transform, filter;
   }
 
   .homepage-hero__copy p:not(.homepage-kicker) {
     font-size: var(--text-step-1);
     margin: 0;
     max-inline-size: 42rem;
+    will-change: opacity, transform, filter;
+  }
+
+  .homepage-hero__copy .homepage-kicker,
+  .homepage-hero__copy .homepage-button {
+    will-change: opacity, transform, filter;
   }
 
   .homepage-storyboard {
@@ -162,16 +185,33 @@ const pathname = Astro.url.pathname;
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .homepage-storyboard video {
+  .homepage-storyboard__frame {
+    block-size: 100%;
+    overflow: hidden;
+  }
+
+  .homepage-storyboard__frame:nth-child(2) {
+    transform: translateY(calc(-1 * var(--homepage-hero-video-lift)));
+  }
+
+  .homepage-storyboard__reveal {
+    block-size: 100%;
+    clip-path: inset(100% 0 0 0);
+    will-change: opacity, transform, clip-path;
+  }
+
+  .homepage-storyboard__reveal video {
     aspect-ratio: 9 / 16;
     block-size: 100%;
     border: 1px solid rgb(255 255 255 / 0.18);
     inline-size: 100%;
     object-fit: cover;
+    transform-origin: center;
+    will-change: transform;
   }
 
-  .homepage-storyboard video:nth-child(2) {
-    transform: translateY(calc(-1 * var(--spacing-xl)));
+  .homepage-hero[data-animation-stage='5'] .homepage-storyboard__reveal {
+    clip-path: inset(0 0 0 0);
   }
 
   .homepage-brands {
@@ -366,11 +406,7 @@ const pathname = Astro.url.pathname;
 
   .homepage-range__item figcaption {
     align-self: start;
-    background: linear-gradient(
-      to bottom,
-      rgb(10 9 8 / 0.74),
-      rgb(10 9 8 / 0)
-    );
+    background: linear-gradient(to bottom, rgb(10 9 8 / 0.74), rgb(10 9 8 / 0));
     display: flex;
     min-block-size: 42%;
     padding: var(--spacing-xs);
