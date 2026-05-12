@@ -1,0 +1,56 @@
+---
+import { Picture } from 'astro:assets';
+import { rangeExamples } from './data';
+
+const rangeColumnTemplate = rangeExamples
+  .map((example) => `minmax(0, ${example.columnWeight}fr)`)
+  .join(' ');
+---
+
+<section class="homepage-range" aria-labelledby="homepage-range-title">
+  <div class="homepage-range__intro">
+    <div>
+      <p class="homepage-kicker">Content range</p>
+      <h2 id="homepage-range-title">
+        Photo sets, short-form videos, and Premium videos.
+      </h2>
+    </div>
+    <p>Scoped individually or built into a campaign-ready content suite.</p>
+  </div>
+  <div
+    class="homepage-range__grid"
+    style={`--homepage-range-columns: ${rangeColumnTemplate};`}
+  >
+    {
+      rangeExamples.map((example) => (
+        <figure
+          class={`homepage-range__item homepage-range__item--${example.kind}`}
+          style={`--homepage-range-aspect-ratio: ${example.aspectRatio}; --homepage-range-object-position: ${example.objectPosition}; --homepage-range-media-transform: ${example.mediaTransform};`}
+        >
+          {example.kind === 'image' ? (
+            <Picture
+              src={example.src}
+              alt={example.alt}
+              format="avif"
+              quality={80}
+            />
+          ) : (
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+              aria-label={example.alt}
+            >
+              <source src={example.src} type="video/mp4" />
+            </video>
+          )}
+          <figcaption>
+            <span>{example.label}</span>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>

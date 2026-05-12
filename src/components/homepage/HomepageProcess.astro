@@ -1,0 +1,18 @@
+---
+import { processSteps } from './data';
+---
+
+<section class="homepage-system" id="Process">
+  <h2>Execution, scoped for brand teams</h2>
+  <ol>
+    {
+      processSteps.map((step) => (
+        <li>
+          <span>{step.number}</span>
+          <strong>{step.title}</strong>
+          <p>{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

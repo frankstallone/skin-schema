@@ -1,0 +1,22 @@
+---
+import { Picture } from 'astro:assets';
+import { brandLogos } from './data';
+---
+
+<section class="homepage-brands" aria-label="Brands we've worked with">
+  <p class="homepage-kicker">Brands we've worked with</p>
+  <ul role="list">
+    {
+      brandLogos.map((logo) => (
+        <li>
+          <Picture
+            src={logo.src}
+            alt={logo.alt}
+            class={`object-contain w-auto h-auto ${logo.className}`}
+            formats={['avif', 'webp']}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>

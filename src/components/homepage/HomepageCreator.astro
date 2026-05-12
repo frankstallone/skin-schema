@@ -1,0 +1,49 @@
+---
+import { Picture } from 'astro:assets';
+import { creatorImages, proofPoints } from './data';
+---
+
+<section class="homepage-creator" aria-labelledby="homepage-creator-title">
+  <div class="homepage-creator__portrait">
+    <Picture
+      src={creatorImages.portrait}
+      alt="Photograph of Kseniya, the creator behind Skin Schema"
+      class="homepage-creator__primary-image"
+      widths={[320, 640, creatorImages.portrait.width]}
+      sizes="(max-width: 900px) 68vw, 34vw"
+      quality={80}
+      format="avif"
+    />
+    <Picture
+      src={creatorImages.campaignStill}
+      alt="Beauty campaign still by Skin Schema"
+      class="homepage-creator__supporting-image"
+      widths={[180, 360, 640]}
+      sizes="(max-width: 900px) 28vw, 1px"
+      quality={80}
+      format="avif"
+    />
+  </div>
+  <div class="homepage-creator__copy">
+    <p class="homepage-kicker">Meet Kseniya</p>
+    <h2 id="homepage-creator-title">
+      Creator-led beauty production with campaign-level polish.
+    </h2>
+    <p>
+      I'm an experienced beauty photographer and videographer with work across
+      20+ brands and approximately 40 campaigns. I created Skin Schema to bring
+      polish, serenity, and credible product storytelling to skincare, makeup,
+      and wellness content.
+    </p>
+    <ul role="list">
+      {
+        proofPoints.map((point) => (
+          <li>
+            <strong>{point.title}</strong>
+            <p>{point.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

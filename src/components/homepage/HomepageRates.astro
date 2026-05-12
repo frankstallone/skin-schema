@@ -1,0 +1,48 @@
+---
+import { startingRates } from './data';
+---
+
+<section class="homepage-rates" id="Rates">
+  <div class="homepage-rates__intro">
+    <p class="homepage-kicker">Starting rates</p>
+    <h2>Simple entry points, scoped with campaign detail.</h2>
+    <p>
+      Custom bundles, usage, raw footage, and campaign-specific needs are quoted
+      after we align on scope.
+    </p>
+  </div>
+  <div class="homepage-rate-bands">
+    {
+      startingRates.map((rate) => (
+        <article>
+          <div>
+            <p>{rate.type}</p>
+            <span>{rate.price}</span>
+          </div>
+          <div>
+            <h3>{rate.title}</h3>
+            <p>{rate.text}</p>
+          </div>
+          <dl>
+            {rate.specs.map(([label, value]) => (
+              <div>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))
+    }
+  </div>
+  <div class="homepage-rates__note">
+    <p>
+      Organic brand-use rights are included for approved channels. Paid usage,
+      raw footage, rush delivery, perpetual usage, and extended distribution are
+      quoted separately based on campaign scope.<a
+        href="#CollaborationTerms"
+        aria-label="View collaboration terms">*</a
+      >
+    </p>
+  </div>
+</section>
