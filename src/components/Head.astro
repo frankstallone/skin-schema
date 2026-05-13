@@ -6,10 +6,17 @@ interface Props {
   canonicalURL?: URL | string;
   image?: string;
   themeColor?: string;
+  statusBarStyle?: 'default' | 'black' | 'black-translucent';
 }
 
-const { title, description, canonicalURL, image, themeColor = '#ffffff' } =
-  Astro.props;
+const {
+  title,
+  description,
+  canonicalURL,
+  image,
+  themeColor = '#ffffff',
+  statusBarStyle = 'default',
+} = Astro.props;
 
 const metaDescription =
   description ||
@@ -24,8 +31,12 @@ const canonical = canonicalURL || Astro.url.toString();
 <head>
   <meta charset="UTF-8" />
   <meta name="description" content={metaDescription} />
-  <meta name="viewport" content="width=device-width" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
   <meta name="theme-color" content={themeColor} />
+  <meta name="apple-mobile-web-app-status-bar-style" content={statusBarStyle} />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
