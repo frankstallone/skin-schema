@@ -288,6 +288,7 @@ const pathname = Astro.url.pathname;
     display: grid;
     grid-template-areas: 'stack';
     font: inherit;
+    isolation: isolate;
     margin: 0;
     min-inline-size: 0;
     overflow: hidden;
@@ -305,8 +306,11 @@ const pathname = Astro.url.pathname;
     aspect-ratio: var(--homepage-range-aspect-ratio, 4 / 5);
     block-size: 100%;
     display: block;
+    grid-area: stack;
     inline-size: 100%;
     object-fit: cover;
+    position: relative;
+    z-index: 0;
   }
 
   .homepage-range__item img,
@@ -335,9 +339,13 @@ const pathname = Astro.url.pathname;
     align-self: start;
     background: linear-gradient(to bottom, rgb(10 9 8 / 0.74), rgb(10 9 8 / 0));
     display: flex;
+    inset: 0;
     min-block-size: 42%;
     padding: var(--spacing-xs);
     pointer-events: none;
+    position: absolute;
+    transform: translateZ(0);
+    z-index: 1;
   }
 
   .homepage-range__caption span {
