@@ -60,7 +60,6 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-hero__copy h1 {
-    font-size: clamp(2.75rem, 4.8vw, 5.25rem);
     font-weight: var(--font-weight-medium);
     letter-spacing: -0.045em;
     line-height: 0.98;
@@ -196,14 +195,14 @@ const pathname = Astro.url.pathname;
   .homepage-creator h2,
   .homepage-system h2,
   .homepage-contact h2 {
-    font-size: var(--text-step-5);
+    font-size: var(--text-step-3);
     letter-spacing: -0.03em;
     line-height: 1.02;
     margin: 0;
     max-inline-size: 12ch;
   }
 
-  .homepage-creator__copy > p {
+  .homepage-creator__copy > p:not([class]) {
     font-size: var(--text-step-1);
     margin: 0;
     max-inline-size: 56rem;
@@ -249,7 +248,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range__intro h2 {
-    font-size: var(--text-step-4);
+    font-size: var(--text-step-3);
     letter-spacing: -0.03em;
     line-height: 1;
     margin: 0;
@@ -380,7 +379,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-rates__intro h2 {
-    font-size: var(--text-step-5);
+    font-size: var(--text-step-3);
     letter-spacing: -0.03em;
     line-height: 1.02;
     margin: 0;
