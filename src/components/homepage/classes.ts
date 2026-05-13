@@ -8,6 +8,6 @@ export const homepageKicker =
 
 export const homepageButton = `inline-flex w-fit rounded-full px-l py-2xs font-bold no-underline transition-[background,color,transform] duration-[180ms] ease-in-out hover:-translate-y-px ${focusRing}`;
 
-export const homepageButtonLight = `${homepageButton} bg-gray-100 text-gray-1200`;
+export const homepageButtonLight = `${homepageButton} bg-skin-100 text-gray-1200 hover:bg-skin-500 focus:bg-skin-500`;
 
 export const homepageNavLink = `text-current no-underline ${focusRing}`;
