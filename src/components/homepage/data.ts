@@ -1,5 +1,13 @@
+import type { ImageMetadata } from 'astro';
+
 import campaignStill from '../../assets/2023-Creative-Minds-29-web.jpg';
+import photoExample01 from '../../assets/photo-example-01.jpg';
+import photoExample02 from '../../assets/photo-example-02.jpg';
 import photoExample03 from '../../assets/photo-example-03.jpg';
+import photoExample04 from '../../assets/photo-example-04.jpg';
+import photoExample05 from '../../assets/photo-example-05.jpg';
+import photoExample06 from '../../assets/photo-example-06.jpg';
+import photoExample08 from '../../assets/photo-example-08.jpg';
 import creatorPortrait from '../../assets/photograph-of-skin-schema.jpg';
 import armani from '../../assets/workedwith/armani-beauty.png';
 import naturopathica from '../../assets/workedwith/naturopathica.png';
@@ -112,35 +120,138 @@ export const startingRates = [
   },
 ];
 
+type RangeMedia =
+  | {
+      kind: 'image';
+      src: ImageMetadata;
+      alt: string;
+    }
+  | {
+      kind: 'video';
+      src: string;
+      alt: string;
+    };
+
+type RangeExample = {
+  id: string;
+  kind: 'image' | 'video';
+  src: ImageMetadata | string;
+  label: string;
+  carouselTitle: string;
+  alt: string;
+  columnWeight: number;
+  aspectRatio: string;
+  objectPosition: string;
+  mediaTransform: string;
+  carouselMedia: RangeMedia[];
+};
+
 export const rangeExamples = [
   {
+    id: 'photo-set',
     kind: 'image',
     src: photoExample03,
     label: 'Photo set',
+    carouselTitle: 'Photography examples',
     alt: 'Skincare product photography by Skin Schema',
     columnWeight: 0.8,
     aspectRatio: '4 / 5',
     objectPosition: 'center',
     mediaTransform: 'none',
+    carouselMedia: [
+      {
+        kind: 'image',
+        src: photoExample08,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample01,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample02,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample03,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample04,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample05,
+        alt: 'Instagram high quality skincare photography example',
+      },
+      {
+        kind: 'image',
+        src: photoExample06,
+        alt: 'Instagram high quality skincare photography example',
+      },
+    ],
   },
   {
+    id: 'short-form-video',
     kind: 'video',
     src: '/media/videos/short-02.mp4',
     label: 'Short-form video',
+    carouselTitle: 'Short form product examples',
     alt: 'Short-form beauty routine product video by Skin Schema',
     columnWeight: 0.5625,
     aspectRatio: '9 / 16',
     objectPosition: 'center',
     mediaTransform: 'none',
+    carouselMedia: [
+      {
+        kind: 'video',
+        src: '/media/videos/short-01.mp4',
+        alt: 'Short-form skincare product texture video',
+      },
+      {
+        kind: 'video',
+        src: '/media/videos/short-02.mp4',
+        alt: 'Short-form beauty routine product video',
+      },
+      {
+        kind: 'video',
+        src: '/media/videos/short-03.mp4',
+        alt: 'Short-form makeup and skincare product video',
+      },
+    ],
   },
   {
+    id: 'premium-video',
     kind: 'video',
     src: '/media/videos/premium-02.mp4',
     label: 'Premium video',
+    carouselTitle: 'Product Storytelling Video examples',
     alt: 'Premium beauty product video by Skin Schema',
     columnWeight: 0.5625,
     aspectRatio: '9 / 16',
     objectPosition: 'center',
     mediaTransform: 'none',
+    carouselMedia: [
+      {
+        kind: 'video',
+        src: '/media/videos/premium-01.mp4',
+        alt: 'Premium skincare product storytelling video',
+      },
+      {
+        kind: 'video',
+        src: '/media/videos/premium-02.mp4',
+        alt: 'Premium beauty product routine video',
+      },
+      {
+        kind: 'video',
+        src: '/media/videos/premium-03.mp4',
+        alt: 'Premium skincare campaign storytelling video',
+      },
+    ],
   },
-] as const;
+] satisfies RangeExample[];

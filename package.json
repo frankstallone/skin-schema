@@ -18,12 +18,17 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@astrojs/partytown": "^2.1.7",
+    "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.2.4",
     "@zachleat/details-utils": "^2.0.2",
     "@zachleat/table-saw": "^1.0.7",
     "astro": "^6.1.9",
+    "embla-carousel-react": "^8.6.0",
+    "lucide-react": "^1.14.0",
     "motion": "^12.38.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "slugify": "^1.6.9",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"

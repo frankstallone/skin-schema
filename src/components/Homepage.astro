@@ -273,12 +273,22 @@ const pathname = Astro.url.pathname;
 
   .homepage-range__item {
     aspect-ratio: var(--homepage-range-aspect-ratio, 4 / 5);
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
     display: grid;
     grid-template-areas: 'stack';
+    font: inherit;
     margin: 0;
     min-inline-size: 0;
     overflow: hidden;
+    padding: 0;
     position: relative;
+    text-align: inherit;
+    transition:
+      filter 180ms ease,
+      transform 180ms ease;
   }
 
   .homepage-range__item picture,
@@ -298,11 +308,22 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range__item > *,
-  .homepage-range__item figcaption {
+  .homepage-range__caption {
     grid-area: stack;
   }
 
-  .homepage-range__item figcaption {
+  .homepage-range__item:hover,
+  .homepage-range__item:focus-visible {
+    filter: brightness(1.06);
+    transform: translateY(-0.125rem);
+  }
+
+  .homepage-range__item:focus-visible {
+    outline: 2px solid var(--homepage-soft);
+    outline-offset: 0.25rem;
+  }
+
+  .homepage-range__caption {
     align-self: start;
     background: linear-gradient(to bottom, rgb(10 9 8 / 0.74), rgb(10 9 8 / 0));
     display: flex;
@@ -311,7 +332,7 @@ const pathname = Astro.url.pathname;
     pointer-events: none;
   }
 
-  .homepage-range__item figcaption span {
+  .homepage-range__caption span {
     align-self: start;
     background: rgb(255 255 255 / 0.88);
     color: var(--homepage-ink);
@@ -320,6 +341,149 @@ const pathname = Astro.url.pathname;
     font-weight: var(--font-weight-bold);
     line-height: 1;
     padding: var(--spacing-3xs) var(--spacing-2xs);
+    text-transform: uppercase;
+  }
+
+  .homepage-range-carousel {
+    align-items: center;
+    background: rgb(10 9 8 / 0.86);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding: var(--spacing-s-l);
+    position: fixed;
+    z-index: 50;
+  }
+
+  .homepage-range-carousel__panel {
+    background: var(--homepage-ink);
+    border: 1px solid rgb(255 255 255 / 0.18);
+    color: var(--homepage-paper);
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-rows: auto minmax(0, 1fr);
+    inline-size: min(100%, 76rem);
+    max-block-size: calc(100dvh - var(--spacing-s-l) * 2);
+    overflow: hidden;
+    padding: var(--spacing-s);
+  }
+
+  .homepage-range-carousel__header,
+  .homepage-range-carousel__controls {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-s);
+    justify-content: space-between;
+  }
+
+  .homepage-range-carousel__header > div {
+    display: grid;
+    gap: var(--spacing-3xs);
+  }
+
+  .homepage-range-carousel__header p {
+    color: var(--homepage-soft);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    margin: 0;
+    max-inline-size: none;
+    text-transform: uppercase;
+  }
+
+  .homepage-range-carousel__header h2 {
+    font-size: var(--text-step-1);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .homepage-range-carousel__carousel {
+    display: grid;
+    gap: var(--spacing-s);
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-block-size: 0;
+  }
+
+  .homepage-range-carousel__track {
+    align-items: center;
+  }
+
+  .homepage-range-carousel__slide {
+    display: grid;
+    place-items: center;
+  }
+
+  .homepage-range-carousel__media-frame {
+    align-items: center;
+    background: rgb(0 0 0 / 0.46);
+    block-size: min(64dvh, 42rem);
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .homepage-range-carousel__media-frame img,
+  .homepage-range-carousel__media-frame video {
+    block-size: 100%;
+    display: block;
+    inline-size: 100%;
+    object-fit: contain;
+  }
+
+  .homepage-range-carousel__media-frame--video video {
+    aspect-ratio: 9 / 16;
+    inline-size: auto;
+    max-inline-size: 100%;
+  }
+
+  .homepage-range-carousel__icon-button {
+    align-items: center;
+    aspect-ratio: 1;
+    background: rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(255 255 255 / 0.22);
+    color: var(--homepage-paper);
+    cursor: pointer;
+    display: inline-flex;
+    inline-size: 2.75rem;
+    justify-content: center;
+    padding: 0;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .homepage-range-carousel__icon-button:hover,
+  .homepage-range-carousel__icon-button:focus-visible {
+    background: var(--homepage-paper);
+    border-color: var(--homepage-paper);
+    color: var(--homepage-ink);
+  }
+
+  .homepage-range-carousel__icon-button:focus-visible {
+    outline: 2px solid var(--homepage-soft);
+    outline-offset: 0.25rem;
+  }
+
+  .homepage-range-carousel__icon-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+  }
+
+  .homepage-range-carousel__icon-button svg {
+    block-size: 1.15rem;
+    inline-size: 1.15rem;
+  }
+
+  .homepage-range-carousel__controls {
+    color: var(--color-gray-300);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    justify-content: center;
     text-transform: uppercase;
   }
 
@@ -704,6 +868,21 @@ const pathname = Astro.url.pathname;
 
     .homepage-range__grid {
       grid-template-columns: 1fr;
+    }
+
+    .homepage-range-carousel {
+      align-items: stretch;
+      padding: var(--spacing-2xs);
+    }
+
+    .homepage-range-carousel__panel {
+      inline-size: 100%;
+      max-block-size: calc(100dvh - var(--spacing-2xs) * 2);
+      padding: var(--spacing-xs);
+    }
+
+    .homepage-range-carousel__media-frame {
+      block-size: min(62dvh, 38rem);
     }
   }
 </style>
