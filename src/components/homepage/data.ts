@@ -2,7 +2,6 @@ import type { ImageMetadata } from 'astro';
 
 import campaignStill from '../../assets/2023-Creative-Minds-29-web.jpg';
 import photoExample01 from '../../assets/photo-example-01.jpg';
-import photoExample02 from '../../assets/photo-example-02.jpg';
 import photoExample03 from '../../assets/photo-example-03.jpg';
 import photoExample04 from '../../assets/photo-example-04.jpg';
 import photoExample05 from '../../assets/photo-example-05.jpg';
@@ -167,11 +166,6 @@ export const rangeExamples = [
       {
         kind: 'image',
         src: photoExample01,
-        alt: 'Instagram high quality skincare photography example',
-      },
-      {
-        kind: 'image',
-        src: photoExample02,
         alt: 'Instagram high quality skincare photography example',
       },
       {
