@@ -1,10 +1,11 @@
 ---
 import { startingRates } from './data';
+import { homepageKicker } from './classes';
 ---
 
 <section class="homepage-rates" id="Rates">
   <div class="homepage-rates__intro">
-    <p class="homepage-kicker">Starting rates</p>
+    <p class={homepageKicker}>Starting rates</p>
     <h2>Simple entry points, scoped with campaign detail.</h2>
     <p>
       Custom bundles, usage, raw footage, and campaign-specific needs are quoted
@@ -14,7 +15,10 @@ import { startingRates } from './data';
   <div class="homepage-rate-bands">
     {
       startingRates.map((rate) => (
-        <article>
+        <a
+          href="#Contact"
+          aria-label={`Contact Skin Schema about ${rate.title}`}
+        >
           <div>
             <p>{rate.type}</p>
             <span>{rate.price}</span>
@@ -31,7 +35,7 @@ import { startingRates } from './data';
               </div>
             ))}
           </dl>
-        </article>
+        </a>
       ))
     }
   </div>

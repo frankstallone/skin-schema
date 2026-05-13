@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import { rangeExamples } from './data';
+import { homepageKicker } from './classes';
 
 const rangeColumnTemplate = rangeExamples
   .map((example) => `minmax(0, ${example.columnWeight}fr)`)
@@ -10,7 +11,7 @@ const rangeColumnTemplate = rangeExamples
 <section class="homepage-range" aria-labelledby="homepage-range-title">
   <div class="homepage-range__intro">
     <div>
-      <p class="homepage-kicker">Content range</p>
+      <p class={homepageKicker}>Content range</p>
       <h2 id="homepage-range-title">
         Photo sets, short-form videos, and Premium videos.
       </h2>

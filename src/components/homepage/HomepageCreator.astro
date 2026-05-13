@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import { creatorImages, proofPoints } from './data';
+import { homepageKicker } from './classes';
 ---
 
 <section class="homepage-creator" aria-labelledby="homepage-creator-title">
@@ -25,7 +26,7 @@ import { creatorImages, proofPoints } from './data';
     />
   </div>
   <div class="homepage-creator__copy">
-    <p class="homepage-kicker">Meet Kseniya</p>
+    <p class={homepageKicker}>Meet Kseniya</p>
     <h2 id="homepage-creator-title">
       Creator-led beauty production with campaign-level polish.
     </h2>

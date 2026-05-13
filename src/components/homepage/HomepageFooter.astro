@@ -1,14 +1,24 @@
+---
+import { homepageBrand, homepageNavLink } from './classes';
+---
+
 <footer class="homepage-footer" aria-label="Footer">
-  <div class="homepage-footer__main">
-    <a href="#main" class="homepage-brand">Skin Schema</a>
-    <nav aria-label="Footer navigation">
-      <a href="#Process">Process</a>
-      <a href="#Rates">Rates</a>
-      <a href="#Contact">Contact</a>
+  <div
+    class="flex items-center justify-between gap-s font-mono text-step-000 font-bold uppercase"
+  >
+    <a href="#main" class={homepageBrand}>Skin Schema</a>
+    <nav
+      class="flex flex-wrap justify-end gap-xs-s"
+      aria-label="Footer navigation"
+    >
+      <a href="#Process" class={homepageNavLink}>Process</a>
+      <a href="#Rates" class={homepageNavLink}>Rates</a>
+      <a href="#Contact" class={homepageNavLink}>Contact</a>
       <a
         href="https://www.instagram.com/skinschema/"
         target="_blank"
-        rel="noopener noreferrer">Instagram</a
+        rel="noopener noreferrer"
+        class={homepageNavLink}>Instagram</a
       >
     </nav>
   </div>

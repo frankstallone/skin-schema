@@ -1,3 +1,7 @@
+---
+import { homepageButtonLight, homepageKicker } from './classes';
+---
+
 <style is:inline>
   @media (prefers-reduced-motion: no-preference) {
     .homepage-hero[data-animation-stage='0'] [data-hero-animate],
@@ -37,6 +41,17 @@
       clip-path: inset(0 0 0 0);
     }
   }
+
+  .homepage-hero[data-animation-stage='5'] [data-hero-animate] {
+    clip-path: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .homepage-hero[data-animation-stage='5'] .homepage-storyboard__reveal {
+    clip-path: inset(0 0 0 0);
+  }
 </style>
 
 <section
@@ -46,7 +61,11 @@
   data-animation-stage="0"
 >
   <div class="homepage-hero__copy">
-    <p class="homepage-kicker" data-hero-kicker data-hero-animate>
+    <p
+      class={`${homepageKicker} max-[560px]:hidden`}
+      data-hero-kicker
+      data-hero-animate
+    >
       Campaign-ready content
     </p>
     <h1
@@ -93,7 +112,7 @@
     </p>
     <a
       href="#Contact"
-      class="homepage-button homepage-button--light"
+      class={homepageButtonLight}
       data-hero-cta
       data-hero-animate
     >

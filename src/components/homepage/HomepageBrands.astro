@@ -1,10 +1,13 @@
 ---
 import { Picture } from 'astro:assets';
 import { brandLogos } from './data';
+import { homepageKicker } from './classes';
 ---
 
 <section class="homepage-brands" aria-label="Brands we've worked with">
-  <p class="homepage-kicker">Brands we've worked with</p>
+  <p class={`${homepageKicker} text-gray-400 max-[900px]:hidden`}>
+    Brands we've worked with
+  </p>
   <ul role="list">
     {
       brandLogos.map((logo) => (

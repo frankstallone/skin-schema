@@ -1,10 +1,12 @@
 ---
+import { homepageButtonLight, homepageKicker } from './classes';
+
 const { pathname } = Astro.props;
 ---
 
 <section class="homepage-contact" id="Contact">
   <div>
-    <p class="homepage-kicker">Let's connect</p>
+    <p class={homepageKicker}>Let's connect</p>
     <h2>
       If our approach to beauty and aesthetics align, I'd love to talk more.
     </h2>
@@ -51,7 +53,10 @@ const { pathname } = Astro.props;
         ></textarea>
       </span>
     </div>
-    <button type="submit" class="homepage-button homepage-contact__submit">
+    <button
+      type="submit"
+      class={`${homepageButtonLight} border-0 hover:bg-skin-100 focus:bg-skin-100`}
+    >
       Submit
     </button>
   </form>
