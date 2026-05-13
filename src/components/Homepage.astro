@@ -345,27 +345,25 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range-carousel {
-    align-items: center;
-    background: rgb(10 9 8 / 0.86);
+    align-items: stretch;
+    background: rgb(10 9 8 / 0.92);
     display: flex;
     inset: 0;
     justify-content: center;
-    padding: var(--spacing-s-l);
     position: fixed;
     z-index: 50;
   }
 
   .homepage-range-carousel__panel {
     background: var(--homepage-ink);
-    border: 1px solid rgb(255 255 255 / 0.18);
     color: var(--homepage-paper);
     display: grid;
     gap: var(--spacing-s);
     grid-template-rows: auto minmax(0, 1fr);
-    inline-size: min(100%, 76rem);
-    max-block-size: calc(100dvh - var(--spacing-s-l) * 2);
+    block-size: 100dvh;
+    inline-size: 100vw;
     overflow: hidden;
-    padding: var(--spacing-s);
+    padding: var(--spacing-s-l);
   }
 
   .homepage-range-carousel__header,
@@ -405,19 +403,26 @@ const pathname = Astro.url.pathname;
     min-block-size: 0;
   }
 
+  .homepage-range-carousel__carousel > .overflow-hidden {
+    block-size: 100%;
+    min-block-size: 0;
+  }
+
   .homepage-range-carousel__track {
     align-items: center;
+    block-size: 100%;
   }
 
   .homepage-range-carousel__slide {
+    block-size: 100%;
     display: grid;
+    min-block-size: 0;
     place-items: center;
   }
 
   .homepage-range-carousel__media-frame {
     align-items: center;
-    background: rgb(0 0 0 / 0.46);
-    block-size: min(64dvh, 42rem);
+    block-size: 100%;
     display: flex;
     inline-size: 100%;
     justify-content: center;
@@ -444,6 +449,7 @@ const pathname = Astro.url.pathname;
     aspect-ratio: 1;
     background: rgb(255 255 255 / 0.1);
     border: 1px solid rgb(255 255 255 / 0.22);
+    border-radius: 999px;
     color: var(--homepage-paper);
     cursor: pointer;
     display: inline-flex;
@@ -871,18 +877,15 @@ const pathname = Astro.url.pathname;
     }
 
     .homepage-range-carousel {
-      align-items: stretch;
-      padding: var(--spacing-2xs);
+      padding: 0;
     }
 
     .homepage-range-carousel__panel {
-      inline-size: 100%;
-      max-block-size: calc(100dvh - var(--spacing-2xs) * 2);
       padding: var(--spacing-xs);
     }
 
     .homepage-range-carousel__media-frame {
-      block-size: min(62dvh, 38rem);
+      block-size: 100%;
     }
   }
 </style>

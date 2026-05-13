@@ -88,11 +88,13 @@ const Carousel = React.forwardRef<
       (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
+          event.stopPropagation();
           scrollPrev();
         }
 
         if (event.key === 'ArrowRight') {
           event.preventDefault();
+          event.stopPropagation();
           scrollNext();
         }
       },
