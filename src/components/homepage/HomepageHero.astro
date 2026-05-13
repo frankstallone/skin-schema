@@ -1,5 +1,7 @@
 ---
 import { homepageButtonLight, homepageKicker } from './classes';
+
+const { id } = Astro.props;
 ---
 
 <style is:inline>
@@ -56,6 +58,7 @@ import { homepageButtonLight, homepageKicker } from './classes';
 
 <section
   class="homepage-hero"
+  id={id}
   aria-labelledby="homepage-hero-title"
   data-homepage-hero
   data-animation-stage="0"
