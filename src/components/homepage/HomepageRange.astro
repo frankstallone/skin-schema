@@ -1,0 +1,86 @@
+---
+import { Picture } from 'astro:assets';
+import { rangeExamples } from './data';
+import { homepageKicker } from './classes';
+import HomepageRangeCarousel from './HomepageRangeCarousel';
+
+const rangeColumnTemplate = rangeExamples
+  .map((example) => `minmax(0, ${example.columnWeight}fr)`)
+  .join(' ');
+
+const carouselSections = rangeExamples.map((example) => ({
+  id: example.id,
+  label: example.label,
+  title: example.carouselTitle,
+  media: example.carouselMedia.map((media) => {
+    if (media.kind === 'image') {
+      return {
+        kind: media.kind,
+        src: media.src.src,
+        alt: media.alt,
+        width: media.src.width,
+        height: media.src.height,
+      };
+    }
+
+    return {
+      kind: media.kind,
+      src: media.src,
+      alt: media.alt,
+    };
+  }),
+}));
+---
+
+<section class="homepage-range" aria-labelledby="homepage-range-title">
+  <div class="homepage-range__intro">
+    <div>
+      <p class={homepageKicker}>Content range</p>
+      <h2 id="homepage-range-title">
+        Photo sets, short-form videos, and Premium videos.
+      </h2>
+    </div>
+    <p>Scoped individually or built into a campaign-ready content suite.</p>
+  </div>
+  <div
+    class="homepage-range__grid"
+    style={`--homepage-range-columns: ${rangeColumnTemplate};`}
+  >
+    {
+      rangeExamples.map((example) => (
+        <button
+          type="button"
+          class={`homepage-range__item homepage-range__item--${example.kind}`}
+          style={`--homepage-range-aspect-ratio: ${example.aspectRatio}; --homepage-range-object-position: ${example.objectPosition}; --homepage-range-media-transform: ${example.mediaTransform};`}
+          data-range-carousel-trigger={example.id}
+          aria-label={`Open ${example.label} carousel`}
+          aria-haspopup="dialog"
+        >
+          {example.kind === 'image' ? (
+            <Picture
+              src={example.src as ImageMetadata}
+              alt={example.alt}
+              format="avif"
+              quality={80}
+            />
+          ) : (
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="metadata"
+              aria-label={example.alt}
+            >
+              <source src={example.src} type="video/mp4" />
+            </video>
+          )}
+          <span class="homepage-range__caption" aria-hidden="true">
+            <span>{example.label}</span>
+          </span>
+        </button>
+      ))
+    }
+  </div>
+  <HomepageRangeCarousel client:load sections={carouselSections} />
+</section>

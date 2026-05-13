@@ -1,0 +1,36 @@
+---
+import { homepageBrand, homepageNavLink } from './classes';
+---
+
+<footer class="homepage-footer" aria-label="Footer">
+  <div
+    class="flex items-center justify-between gap-s font-mono text-step-000 font-bold uppercase"
+  >
+    <a href="#main" class={homepageBrand}>Skin Schema</a>
+    <nav
+      class="flex flex-wrap justify-end gap-xs-s"
+      aria-label="Footer navigation"
+    >
+      <a href="#Process" class={homepageNavLink}>Process</a>
+      <a href="#Rates" class={homepageNavLink}>Rates</a>
+      <a href="#Contact" class={homepageNavLink}>Contact</a>
+      <a
+        href="https://www.instagram.com/skinschema/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class={homepageNavLink}>Instagram</a
+      >
+    </nav>
+  </div>
+  <div class="homepage-footer__terms" id="CollaborationTerms">
+    <p>
+      * Payment due NET 30 upon invoice. Invoices are sent via email through
+      Stripe. All services include one revision, with additional revisions
+      available as an add-on.
+    </p>
+    <p>
+      Cancelation policy: full refund if canceled within 48 hours of making a
+      booking; 50% refund if canceled within one week of making a booking.
+    </p>
+  </div>
+</footer>

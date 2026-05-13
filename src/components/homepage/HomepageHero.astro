@@ -1,0 +1,449 @@
+---
+import { homepageButtonLight, homepageKicker } from './classes';
+
+const { id } = Astro.props;
+---
+
+<style is:inline>
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage-hero[data-animation-stage='0'] [data-hero-animate],
+    .homepage-hero[data-animation-stage='1']
+      :is(
+        [data-hero-line],
+        [data-hero-body],
+        [data-hero-cta],
+        [data-hero-video]
+      ),
+    .homepage-hero[data-animation-stage='2']
+      :is([data-hero-body], [data-hero-cta], [data-hero-video]),
+    .homepage-hero[data-animation-stage='3'] [data-hero-video] {
+      opacity: 0;
+    }
+
+    .homepage-hero:is(
+        [data-animation-stage='0'],
+        [data-animation-stage='1'],
+        [data-animation-stage='2'],
+        [data-animation-stage='3']
+      )
+      .homepage-storyboard__reveal {
+      clip-path: inset(100% 0 0 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .homepage-hero [data-hero-animate] {
+      clip-path: none;
+      filter: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .homepage-hero .homepage-storyboard__reveal {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .homepage-hero[data-animation-stage='5'] [data-hero-animate] {
+    clip-path: none;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .homepage-hero[data-animation-stage='5'] .homepage-storyboard__reveal {
+    clip-path: inset(0 0 0 0);
+  }
+</style>
+
+<section
+  class="homepage-hero"
+  id={id}
+  aria-labelledby="homepage-hero-title"
+  data-homepage-hero
+  data-animation-stage="0"
+>
+  <div class="homepage-hero__copy">
+    <p
+      class={`${homepageKicker} max-[560px]:hidden`}
+      data-hero-kicker
+      data-hero-animate
+    >
+      Campaign-ready content
+    </p>
+    <h1 class="text-step-5" id="homepage-hero-title">
+      <span
+        class="homepage-hero__heading-set homepage-hero__heading-set--desktop"
+        data-hero-copy="desktop"
+      >
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          Brand-ready output
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          suitable for campaigns,
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          social content, and
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          product storytelling
+        </span>
+      </span>
+      <span
+        class="homepage-hero__heading-set homepage-hero__heading-set--mobile"
+        data-hero-copy="mobile"
+      >
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          Premium beauty
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          content
+        </span>
+      </span>
+    </h1>
+    <p data-hero-body data-hero-copy="desktop" data-hero-animate>
+      Skin Schema creates elevated skincare, makeup, and wellness content with
+      the polish of a campaign asset and the trust of a real creator
+      recommendation.
+    </p>
+    <p data-hero-body data-hero-copy="mobile" data-hero-animate>
+      Campaign-ready visuals for skincare, makeup, and wellness brands.
+    </p>
+    <a
+      href="#Contact"
+      class={homepageButtonLight}
+      data-hero-cta
+      data-hero-animate
+    >
+      Let's connect
+    </a>
+  </div>
+  <div
+    class="homepage-storyboard"
+    aria-label="Product storytelling video examples"
+  >
+    <div class="homepage-storyboard__frame">
+      <div
+        class="homepage-storyboard__reveal"
+        data-hero-video
+        data-hero-animate
+      >
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-01.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+    <div class="homepage-storyboard__frame">
+      <div
+        class="homepage-storyboard__reveal"
+        data-hero-video
+        data-hero-animate
+      >
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-02.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+    <div class="homepage-storyboard__frame">
+      <div
+        class="homepage-storyboard__reveal"
+        data-hero-video
+        data-hero-animate
+      >
+        <video autoplay loop muted playsinline preload="metadata">
+          <source src="/media/videos/premium-03.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </div>
+  <noscript>
+    <style>
+      .homepage-hero [data-hero-animate] {
+        clip-path: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+</section>
+
+<script>
+  import { animate, stagger } from 'motion';
+
+  /*
+   * ANIMATION STORYBOARD
+   *
+   * Read top-to-bottom. Each "at" value is ms after page load.
+   *
+   *    0ms   hero holds dark, groups hidden until their reveal stage
+   *  120ms   kicker fades up, blur 16px -> 0
+   *  260ms   headline lines rise in (staggered 85ms)
+   *  620ms   supporting copy and CTA settle in
+   *  780ms   video frames unmask, y 52px -> 0 (staggered 130ms)
+   * 1350ms   entrance completes; idle drift is disabled
+   */
+  const TIMING = {
+    kickerReveal: 120, // kicker fades up first
+    headlineReveal: 260, // headline lines begin their stagger
+    supportReveal: 620, // body copy and CTA enter together
+    videoReveal: 780, // video cards unmask and settle
+    idleDrift: 1350, // entrance is considered complete
+  };
+
+  const STAGE = {
+    ready: 0, // initial hidden state before the entrance starts
+    kicker: 1, // kicker has started revealing
+    headline: 2, // headline lines have started revealing
+    support: 3, // supporting copy and CTA have started revealing
+    videos: 4, // video frames have started revealing
+    complete: 5, // entrance is complete and idle motion can loop
+  };
+
+  const KICKER = {
+    offsetY: 14, // px the kicker starts below its resting spot
+    blur: 16, // px starting blur before the reveal
+    finalBlur: 0, // px resting blur
+    spring: { type: 'spring' as const, stiffness: 180, damping: 50 },
+  };
+
+  const HEADLINE = {
+    offsetY: 58, // px each line rises from
+    blur: 20, // px starting blur for the line reveal
+    finalBlur: 0, // px resting blur
+    stagger: 0.085, // seconds between each line
+    spring: { type: 'spring' as const, stiffness: 200, damping: 43 },
+  };
+
+  const SUPPORT = {
+    offsetY: 22, // px supporting elements rise from
+    blur: 20, // px starting blur for supporting elements
+    finalBlur: 0, // px resting blur
+    stagger: 0.08, // seconds between body copy and CTA
+    spring: { type: 'spring' as const, stiffness: 180, damping: 43 },
+  };
+
+  const VIDEO = {
+    offsetY: 52, // px video masks rise from
+    initialScale: 0.94, // scale before the frame appears
+    finalScale: 1, // resting scale after reveal
+    hiddenClip: 'inset(100% 0 0 0)', // mask before reveal
+    visibleClip: 'inset(0% 0 0 0)', // mask after reveal
+    stagger: 0.13, // seconds between video frames
+    spring: { type: 'spring' as const, stiffness: 160, damping: 43 },
+  };
+
+  const IDLE = {
+    enabled: false, // ambient loop after entrance
+    offsetY: -6, // px of gentle vertical drift
+    initialScale: 1, // scale before idle drift
+    peakScale: 1.025, // scale at the top of the drift
+    duration: 7.5, // seconds for one ambient loop
+    stagger: 0.65, // seconds between each video loop start
+    easing: 'easeInOut' as const,
+  };
+
+  const HERO_SELECTOR = '[data-homepage-hero]';
+  const MOBILE_HERO_COPY_QUERY = '(max-width: 560px)';
+  const hero = document.querySelector<HTMLElement>(HERO_SELECTOR);
+
+  if (hero && hero.dataset.animationBound !== 'true') {
+    hero.dataset.animationBound = 'true';
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
+    const mobileHeroCopy = window.matchMedia(MOBILE_HERO_COPY_QUERY);
+    const kicker = hero.querySelector<HTMLElement>('[data-hero-kicker]');
+    const videoReveals =
+      hero.querySelectorAll<HTMLElement>('[data-hero-video]');
+    const videos = hero.querySelectorAll<HTMLElement>(
+      '.homepage-storyboard video',
+    );
+    let timers: number[] = [];
+    let controls: ReturnType<typeof animate>[] = [];
+
+    const enterStage = (stage: number) => {
+      hero.dataset.animationStage = String(stage);
+    };
+
+    const play = (
+      target: Element | Element[] | NodeListOf<HTMLElement>,
+      keyframes: Parameters<typeof animate>[1],
+      options: Parameters<typeof animate>[2],
+    ) => {
+      controls.push(animate(target, keyframes, options));
+    };
+
+    const getActiveHeroCopy = () =>
+      mobileHeroCopy.matches ? 'mobile' : 'desktop';
+
+    const getHeadlineLines = () =>
+      hero.querySelectorAll<HTMLElement>(
+        `[data-hero-copy="${getActiveHeroCopy()}"] [data-hero-line]`,
+      );
+
+    const getSupport = () => [
+      ...hero.querySelectorAll<HTMLElement>(
+        `[data-hero-copy="${getActiveHeroCopy()}"][data-hero-body]`,
+      ),
+      ...hero.querySelectorAll<HTMLElement>('[data-hero-cta]'),
+    ];
+
+    const cleanup = () => {
+      timers.forEach(window.clearTimeout);
+      controls.forEach((control) => control.stop());
+      timers = [];
+      controls = [];
+    };
+
+    const resetAnimationStyles = () => {
+      const animatedElements = hero.querySelectorAll<HTMLElement>(
+        '[data-hero-animate], .homepage-storyboard video',
+      );
+
+      animatedElements.forEach((element) => {
+        element.removeAttribute('style');
+      });
+    };
+
+    const startAnimation = () => {
+      cleanup();
+      enterStage(STAGE.ready);
+      resetAnimationStyles();
+
+      const headlineLines = getHeadlineLines();
+      const support = getSupport();
+
+      if (kicker) {
+        timers.push(
+          window.setTimeout(() => {
+            enterStage(STAGE.kicker);
+            play(
+              kicker,
+              {
+                opacity: [0, 1],
+                y: [KICKER.offsetY, 0],
+                filter: [
+                  `blur(${KICKER.blur}px)`,
+                  `blur(${KICKER.finalBlur}px)`,
+                ],
+              },
+              KICKER.spring,
+            );
+          }, TIMING.kickerReveal),
+        );
+      }
+
+      timers.push(
+        window.setTimeout(() => {
+          enterStage(STAGE.headline);
+          play(
+            headlineLines,
+            {
+              opacity: [0, 1],
+              y: [HEADLINE.offsetY, 0],
+              filter: [
+                `blur(${HEADLINE.blur}px)`,
+                `blur(${HEADLINE.finalBlur}px)`,
+              ],
+            },
+            {
+              ...HEADLINE.spring,
+              delay: stagger(HEADLINE.stagger),
+            },
+          );
+        }, TIMING.headlineReveal),
+      );
+
+      timers.push(
+        window.setTimeout(() => {
+          enterStage(STAGE.support);
+          play(
+            support,
+            {
+              opacity: [0, 1],
+              y: [SUPPORT.offsetY, 0],
+              filter: [
+                `blur(${SUPPORT.blur}px)`,
+                `blur(${SUPPORT.finalBlur}px)`,
+              ],
+            },
+            {
+              ...SUPPORT.spring,
+              delay: stagger(SUPPORT.stagger),
+            },
+          );
+        }, TIMING.supportReveal),
+      );
+
+      timers.push(
+        window.setTimeout(() => {
+          enterStage(STAGE.videos);
+          play(
+            videoReveals,
+            {
+              opacity: [0, 1],
+              y: [VIDEO.offsetY, 0],
+              scale: [VIDEO.initialScale, VIDEO.finalScale],
+              clipPath: [VIDEO.hiddenClip, VIDEO.visibleClip],
+            },
+            {
+              ...VIDEO.spring,
+              delay: stagger(VIDEO.stagger),
+            },
+          );
+        }, TIMING.videoReveal),
+      );
+
+      timers.push(
+        window.setTimeout(() => {
+          enterStage(STAGE.complete);
+          if (IDLE.enabled) {
+            play(
+              videos,
+              {
+                y: [0, IDLE.offsetY, 0],
+                scale: [IDLE.initialScale, IDLE.peakScale, IDLE.initialScale],
+              },
+              {
+                delay: stagger(IDLE.stagger),
+                duration: IDLE.duration,
+                ease: IDLE.easing,
+                repeat: Infinity,
+              },
+            );
+          }
+        }, TIMING.idleDrift),
+      );
+    };
+
+    const syncMotionPreference = () => {
+      cleanup();
+      resetAnimationStyles();
+
+      if (prefersReducedMotion.matches) {
+        enterStage(STAGE.complete);
+      } else {
+        startAnimation();
+      }
+    };
+
+    prefersReducedMotion.addEventListener('change', syncMotionPreference);
+    mobileHeroCopy.addEventListener('change', syncMotionPreference);
+    syncMotionPreference();
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        cleanup();
+        prefersReducedMotion.removeEventListener(
+          'change',
+          syncMotionPreference,
+        );
+        mobileHeroCopy.removeEventListener('change', syncMotionPreference);
+      },
+      { once: true },
+    );
+  }
+</script>

@@ -1,0 +1,15 @@
+---
+import { homepageBrand, homepageNavLink } from './classes';
+---
+
+<header
+  class="absolute top-0 z-[4] flex w-full items-center justify-between gap-s px-s-l py-xs font-mono text-step-000 font-bold uppercase text-gray-100"
+  aria-label="Primary"
+>
+  <a href="#main" class={homepageBrand}>Skin Schema</a>
+  <nav class="flex flex-wrap justify-end gap-xs-s max-[560px]:justify-start">
+    <a href="#Process" class={homepageNavLink}>Process</a>
+    <a href="#Rates" class={homepageNavLink}>Rates</a>
+    <a href="#Contact" class={homepageNavLink}>Contact</a>
+  </nav>
+</header>

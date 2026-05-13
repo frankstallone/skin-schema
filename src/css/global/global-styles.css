@@ -6,21 +6,24 @@
 */
 
 body {
-  @apply font-medium text-gray-1200 m-zero;
+  @apply font-medium text-gray-1200;
   background: var(--color-gray-100);
   color: var(--color-gray-1200);
   font-size: var(--text-step-0);
   font-family: var(--font-base);
   line-height: var(--leading-standard);
+  margin: 0;
 }
 
 h1,
-h2,
-h3,
 h4,
 h5,
 h6 {
   @apply font-bold tracking-tight;
+}
+
+h2 {
+  @apply font-medium tracking-tight;
 }
 
 h1 {
@@ -33,7 +36,7 @@ h2 {
 }
 
 h3 {
-  @apply text-step-3;
+  @apply text-step-3 font-semibold;
 }
 
 /* Baseline for default links */

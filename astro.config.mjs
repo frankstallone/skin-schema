@@ -11,8 +11,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
-    sitemap(),
     react(),
+    sitemap(),
     partytown({
       // Example: Add dataLayer.push as a forwarding-event.
       config: {

@@ -1,0 +1,63 @@
+---
+import { homepageButtonLight, homepageKicker } from './classes';
+
+const { pathname } = Astro.props;
+---
+
+<section class="homepage-contact" id="Contact">
+  <div>
+    <p class={homepageKicker}>Let's connect</p>
+    <h2>
+      If our approach to beauty and aesthetics align, I'd love to talk more.
+    </h2>
+    <p>
+      Send a few details about the product, launch, timeline, and where the
+      content needs to live. I'll be in touch within 24 hours so we can shape
+      the right scope.
+    </p>
+  </div>
+  <form
+    name="homepage-contact"
+    netlify-honeypot="bot-field"
+    method="POST"
+    data-netlify="true"
+    action="/thank-you/"
+    class="homepage-contact__form"
+  >
+    <div class="hidden">
+      <input type="hidden" name="form-name" value="homepage-contact" />
+      <input
+        type="hidden"
+        name="subject"
+        value={`Form submission: skinschema.com${pathname}`}
+      />
+      <span>
+        <label for="homepage-bot-field">Do you like delicious treats?</label>
+        <input name="bot-field" id="homepage-bot-field" />
+      </span>
+    </div>
+    <div class="homepage-contact__fields">
+      <span>
+        <label for="homepage-name">Name</label>
+        <input id="homepage-name" name="name" type="text" required />
+      </span>
+      <span>
+        <label for="homepage-email">Email</label>
+        <input id="homepage-email" name="email" type="email" required />
+      </span>
+      <span class="homepage-contact__message">
+        <label for="homepage-message">
+          How would you like to work together?
+        </label>
+        <textarea name="message" id="homepage-message" rows="5" required
+        ></textarea>
+      </span>
+    </div>
+    <button
+      type="submit"
+      class={`${homepageButtonLight} border-0`}
+    >
+      Submit
+    </button>
+  </form>
+</section>

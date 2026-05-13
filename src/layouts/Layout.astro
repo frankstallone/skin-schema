@@ -1,7 +1,7 @@
 ---
 import Footer from '../components/Footer.astro';
 import Head from '../components/Head.astro';
-const { meta } = Astro.props;
+const { meta, hideFooter = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,6 +10,6 @@ const { meta } = Astro.props;
   <body>
     <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
     <slot />
-    <Footer />
+    {!hideFooter && <Footer />}
   </body>
 </html>

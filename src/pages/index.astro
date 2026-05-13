@@ -1,43 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import ShortFormExamples from '../components/ShortFormExamples.astro';
-import PhotographyExamples from '../components/PhotographyExamples.astro';
-import EngagementHighlights from '../components/EngagementHighlights.astro';
-import WhoAmI from '../components/WhoAmI.astro';
-import Services from '../components/Services.astro';
-import Hero from '../components/Hero.astro';
-import Contact from '../components/Contact.astro';
-import InspirationalExamples from '../components/InspirationalExamples.astro';
-import WorkedWith from '../components/WorkedWith.astro';
-import RateCard from '../components/RateCard.astro';
-import Addons from '../components/Addons.astro';
-import Collabterms from '../components/Collabterms.astro';
-import Agitate from '../components/Agitate.astro';
+import Homepage from '../components/Homepage.astro';
 ---
 
 <Layout
   meta={{
-    title:
-      'Skin Schema | Premium beauty content for skincare, makeup, and wellness brands',
+    title: 'Skin Schema | Premium Beauty Content for Skincare Brands',
     description:
-      'Elevated short-form video, product storytelling, texture visuals, and photo sets for beauty brands that need polished, brand-ready content.',
+      'Premium short-form video, product storytelling, texture visuals, and photo sets for skincare, makeup, and wellness brands.',
+    themeColor: '#171717',
+    statusBarStyle: 'black-translucent',
   }}
+  hideFooter
 >
   <main>
-    <Header />
-    <Hero />
-    <Agitate class="pt-zero" />
-    <EngagementHighlights />
-    <WhoAmI />
-    <PhotographyExamples />
-    <ShortFormExamples />
-    <InspirationalExamples />
-    <WorkedWith />
-    <Services />
-    <RateCard />
-    <Addons />
-    <Collabterms />
-    <Contact />
+    <Homepage />
   </main>
 </Layout>
