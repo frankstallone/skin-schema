@@ -67,6 +67,15 @@ const pathname = Astro.url.pathname;
     max-inline-size: 11ch;
   }
 
+  .homepage-hero__heading-set {
+    display: block;
+  }
+
+  .homepage-hero__heading-set--mobile,
+  .homepage-hero__copy [data-hero-body][data-hero-copy='mobile'] {
+    display: none;
+  }
+
   .homepage-hero__line {
     display: block;
     will-change: opacity, transform, filter;
@@ -861,6 +870,16 @@ const pathname = Astro.url.pathname;
   @media (max-width: 560px) {
     .homepage-hero {
       padding-block-start: var(--spacing-2xl);
+    }
+
+    .homepage-hero__heading-set--desktop,
+    .homepage-hero__copy [data-hero-body][data-hero-copy='desktop'] {
+      display: none;
+    }
+
+    .homepage-hero__heading-set--mobile,
+    .homepage-hero__copy [data-hero-body][data-hero-copy='mobile'] {
+      display: block;
     }
 
     .homepage-brands ul {

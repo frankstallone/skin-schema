@@ -68,48 +68,43 @@ import { homepageButtonLight, homepageKicker } from './classes';
     >
       Campaign-ready content
     </p>
-    <h1
-      class="text-step-5"
-      id="homepage-hero-title"
-      aria-label="Brand-ready output suitable for campaigns, social content, and product storytelling"
-    >
+    <h1 class="text-step-5" id="homepage-hero-title">
       <span
-        class="homepage-hero__line"
-        aria-hidden="true"
-        data-hero-line
-        data-hero-animate
+        class="homepage-hero__heading-set homepage-hero__heading-set--desktop"
+        data-hero-copy="desktop"
       >
-        Brand-ready output
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          Brand-ready output
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          suitable for campaigns,
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          social content, and
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          product storytelling
+        </span>
       </span>
       <span
-        class="homepage-hero__line"
-        aria-hidden="true"
-        data-hero-line
-        data-hero-animate
+        class="homepage-hero__heading-set homepage-hero__heading-set--mobile"
+        data-hero-copy="mobile"
       >
-        suitable for campaigns,
-      </span>
-      <span
-        class="homepage-hero__line"
-        aria-hidden="true"
-        data-hero-line
-        data-hero-animate
-      >
-        social content, and
-      </span>
-      <span
-        class="homepage-hero__line"
-        aria-hidden="true"
-        data-hero-line
-        data-hero-animate
-      >
-        product storytelling
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          Premium beauty
+        </span>
+        <span class="homepage-hero__line" data-hero-line data-hero-animate>
+          content
+        </span>
       </span>
     </h1>
-    <p data-hero-body data-hero-animate>
+    <p data-hero-body data-hero-copy="desktop" data-hero-animate>
       Skin Schema creates elevated skincare, makeup, and wellness content with
       the polish of a campaign asset and the trust of a real creator
       recommendation.
+    </p>
+    <p data-hero-body data-hero-copy="mobile" data-hero-animate>
+      Campaign-ready visuals for skincare, makeup, and wellness brands.
     </p>
     <a
       href="#Contact"
@@ -246,6 +241,7 @@ import { homepageButtonLight, homepageKicker } from './classes';
   };
 
   const HERO_SELECTOR = '[data-homepage-hero]';
+  const MOBILE_HERO_COPY_QUERY = '(max-width: 560px)';
   const hero = document.querySelector<HTMLElement>(HERO_SELECTOR);
 
   if (hero && hero.dataset.animationBound !== 'true') {
@@ -254,12 +250,8 @@ import { homepageButtonLight, homepageKicker } from './classes';
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     );
+    const mobileHeroCopy = window.matchMedia(MOBILE_HERO_COPY_QUERY);
     const kicker = hero.querySelector<HTMLElement>('[data-hero-kicker]');
-    const headlineLines =
-      hero.querySelectorAll<HTMLElement>('[data-hero-line]');
-    const support = hero.querySelectorAll<HTMLElement>(
-      '[data-hero-body], [data-hero-cta]',
-    );
     const videoReveals =
       hero.querySelectorAll<HTMLElement>('[data-hero-video]');
     const videos = hero.querySelectorAll<HTMLElement>(
@@ -279,6 +271,21 @@ import { homepageButtonLight, homepageKicker } from './classes';
     ) => {
       controls.push(animate(target, keyframes, options));
     };
+
+    const getActiveHeroCopy = () =>
+      mobileHeroCopy.matches ? 'mobile' : 'desktop';
+
+    const getHeadlineLines = () =>
+      hero.querySelectorAll<HTMLElement>(
+        `[data-hero-copy="${getActiveHeroCopy()}"] [data-hero-line]`,
+      );
+
+    const getSupport = () => [
+      ...hero.querySelectorAll<HTMLElement>(
+        `[data-hero-copy="${getActiveHeroCopy()}"][data-hero-body]`,
+      ),
+      ...hero.querySelectorAll<HTMLElement>('[data-hero-cta]'),
+    ];
 
     const cleanup = () => {
       timers.forEach(window.clearTimeout);
@@ -301,6 +308,9 @@ import { homepageButtonLight, homepageKicker } from './classes';
       cleanup();
       enterStage(STAGE.ready);
       resetAnimationStyles();
+
+      const headlineLines = getHeadlineLines();
+      const support = getSupport();
 
       if (kicker) {
         timers.push(
@@ -417,6 +427,7 @@ import { homepageButtonLight, homepageKicker } from './classes';
     };
 
     prefersReducedMotion.addEventListener('change', syncMotionPreference);
+    mobileHeroCopy.addEventListener('change', syncMotionPreference);
     syncMotionPreference();
 
     document.addEventListener(
@@ -427,6 +438,7 @@ import { homepageButtonLight, homepageKicker } from './classes';
           'change',
           syncMotionPreference,
         );
+        mobileHeroCopy.removeEventListener('change', syncMotionPreference);
       },
       { once: true },
     );
