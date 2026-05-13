@@ -5,9 +5,11 @@ interface Props {
   description?: string;
   canonicalURL?: URL | string;
   image?: string;
+  themeColor?: string;
 }
 
-const { title, description, canonicalURL, image } = Astro.props;
+const { title, description, canonicalURL, image, themeColor = '#ffffff' } =
+  Astro.props;
 
 const metaDescription =
   description ||
@@ -23,7 +25,7 @@ const canonical = canonicalURL || Astro.url.toString();
   <meta charset="UTF-8" />
   <meta name="description" content={metaDescription} />
   <meta name="viewport" content="width=device-width" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content={themeColor} />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
