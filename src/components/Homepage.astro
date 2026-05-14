@@ -552,82 +552,80 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-rates {
-    background: var(--homepage-warm);
-    color: var(--homepage-ink);
+    align-items: start;
+    background: color-mix(
+      in oklab,
+      var(--homepage-ink) 94%,
+      var(--homepage-warm)
+    );
+    color: var(--homepage-paper);
+    display: grid;
+    gap: var(--spacing-xl);
+    grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 0.66fr);
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
 
-  .homepage-rates__intro {
+  .rates-ladder__aside {
     display: grid;
     gap: var(--spacing-s);
-    margin-block-end: var(--spacing-xl);
-    max-inline-size: 50rem;
+    position: sticky;
+    top: var(--spacing-l);
   }
 
-  .homepage-rates__intro h2 {
+  .rates-ladder__aside h2 {
     font-size: var(--text-step-3);
     letter-spacing: -0.03em;
     line-height: 1.02;
     margin: 0;
-    max-inline-size: 11ch;
   }
 
-  .homepage-rates__intro p {
+  .rates-ladder__aside p,
+  .rates-ladder p,
+  .rates-ladder span {
     margin: 0;
   }
 
-  .homepage-rate-bands {
-    display: grid;
-    margin-block-start: var(--spacing-xl);
-    margin-inline: calc(var(--spacing-s-l) * -1);
+  .rates-ladder__aside p,
+  .rates-ladder__copy > span {
+    color: var(--color-gray-300);
   }
 
-  .homepage-rate-bands a {
-    background: color-mix(
-      in oklab,
-      var(--homepage-ink) 96%,
-      var(--homepage-warm)
-    );
+  .rates-ladder {
+    display: grid;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .rates-ladder li {
     border-block-start: 1px solid rgb(255 255 255 / 0.18);
-    color: var(--homepage-paper);
-    cursor: pointer;
-    display: grid;
-    gap: var(--spacing-l);
-    grid-template-columns: minmax(12rem, 0.42fr) minmax(18rem, 0.7fr) minmax(
-        18rem,
-        0.88fr
-      );
-    padding: var(--spacing-l) var(--spacing-s-l);
-    text-decoration: none;
-    transition:
-      background 180ms ease,
-      transform 180ms ease;
   }
 
-  .homepage-rate-bands a:hover,
-  .homepage-rate-bands a:focus-visible {
-    background: color-mix(
-      in oklab,
-      var(--homepage-ink) 92%,
-      var(--homepage-warm)
-    );
-  }
-
-  .homepage-rate-bands a:focus-visible {
-    outline: 2px solid var(--homepage-soft);
-    outline-offset: -0.25rem;
-  }
-
-  .homepage-rate-bands a:first-child {
+  .rates-ladder li:first-child {
     border-block-start: 0;
   }
 
-  .homepage-rate-bands a > div {
+  .rates-ladder__item {
+    color: var(--homepage-paper);
+    display: grid;
+    gap: var(--spacing-l);
+    grid-template-columns: minmax(16rem, 0.6fr) minmax(14rem, 0.34fr) minmax(
+        7rem,
+        0.18fr
+      );
+    margin-inline: calc(var(--spacing-s) * -1);
+    padding: var(--spacing-l) var(--spacing-s);
+  }
+
+  .rates-ladder__copy,
+  .rates-ladder__price {
     display: grid;
     gap: var(--spacing-xs);
   }
 
-  .homepage-rate-bands a > div:first-child p {
+  .rates-ladder__copy p,
+  .rates-ladder dt,
+  .rates-ladder__price span {
     color: var(--color-gray-400);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
@@ -637,32 +635,24 @@ const pathname = Astro.url.pathname;
     text-transform: uppercase;
   }
 
-  .homepage-rate-bands span {
-    color: var(--homepage-soft);
-    font-family: var(--font-mono);
-    font-size: clamp(3rem, 7vw, 7rem);
-    font-weight: var(--font-weight-bold);
-    line-height: 0.9;
-  }
-
-  .homepage-rate-bands h3 {
-    font-size: var(--text-step-3);
+  .rates-ladder h3 {
+    font-size: var(--text-step-2);
     line-height: 1;
     margin: 0;
   }
 
-  .homepage-rate-bands a p {
-    margin: 0;
+  .rates-ladder__copy > span {
+    display: block;
+    max-inline-size: 36rem;
   }
 
-  .homepage-rate-bands dl {
-    align-self: end;
+  .rates-ladder dl {
     display: grid;
     gap: var(--spacing-2xs);
     margin: 0;
   }
 
-  .homepage-rate-bands dl div {
+  .rates-ladder dl div {
     align-items: baseline;
     border-block-start: 1px solid rgb(255 255 255 / 0.18);
     display: flex;
@@ -671,37 +661,23 @@ const pathname = Astro.url.pathname;
     padding-block-start: var(--spacing-2xs);
   }
 
-  .homepage-rate-bands dt {
-    color: var(--color-gray-400);
-    font-family: var(--font-mono);
-    font-size: var(--text-step-000);
-    font-weight: var(--font-weight-bold);
-    text-transform: uppercase;
-  }
-
-  .homepage-rate-bands dd {
+  .rates-ladder dd {
     font-weight: var(--font-weight-bold);
     margin: 0;
     text-align: end;
   }
 
-  .homepage-rates__note {
-    margin-block-start: var(--spacing-xl);
+  .rates-ladder__price {
+    align-self: start;
+    justify-items: end;
   }
 
-  .homepage-rates__note p {
-    color: var(--color-gray-1100);
-    font-size: var(--text-step-00);
-    margin: 0;
-    max-inline-size: 75ch;
-  }
-
-  .homepage-rates__note a {
-    color: currentColor;
+  .rates-ladder__price strong {
+    color: var(--homepage-soft);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-1);
     font-weight: var(--font-weight-bold);
-    margin-inline-start: 0.12em;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
+    line-height: 1;
   }
 
   .homepage-contact {
@@ -811,9 +787,28 @@ const pathname = Astro.url.pathname;
     .homepage-creator ul,
     .homepage-range__intro,
     .homepage-system ol,
-    .homepage-rate-bands a,
+    .homepage-rates,
+    .rates-ladder__item,
     .homepage-contact {
       grid-template-columns: 1fr;
+    }
+
+    .rates-ladder__aside {
+      position: static;
+    }
+
+    .rates-ladder__price {
+      align-items: baseline;
+      border-block-start: 1px solid rgb(255 255 255 / 0.18);
+      display: flex;
+      justify-content: space-between;
+      justify-items: stretch;
+      order: 3;
+      padding-block-start: var(--spacing-s);
+    }
+
+    .rates-ladder dl {
+      order: 2;
     }
 
     .homepage-footer__terms {
@@ -823,7 +818,7 @@ const pathname = Astro.url.pathname;
     .homepage-hero__copy h1,
     .homepage-creator h2,
     .homepage-system h2,
-    .homepage-rates__intro h2,
+    .rates-ladder__aside h2,
     .homepage-contact h2 {
       max-inline-size: none;
     }
