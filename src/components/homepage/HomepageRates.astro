@@ -1,52 +1,58 @@
 ---
 import { startingRates } from './data';
-import { homepageKicker } from './classes';
+import { homepageButtonLight } from './classes';
+
+const rates = startingRates.map((rate, index) => ({
+  ...rate,
+  outcome:
+    index === 0
+      ? 'Polished stills for launches, product pages, and social proof.'
+      : index === 1
+        ? 'A concise motion asset built for hooks, texture, and routine detail.'
+        : 'A more developed campaign-style story with polished pacing and lifestyle context.',
+  bestFor:
+    index === 0
+      ? 'Launch details'
+      : index === 1
+        ? 'Social conversion'
+        : 'Campaign storytelling',
+}));
 ---
 
-<section class="homepage-rates" id="Rates">
-  <div class="homepage-rates__intro">
-    <p class={homepageKicker}>Starting rates</p>
-    <h2>Simple entry points, scoped with campaign detail.</h2>
+<section class="homepage-rates" id="Rates" aria-labelledby="rates-title">
+  <div class="rates-ladder__aside">
+    <h2 id="rates-title">Simple entry points, scoped with campaign detail.</h2>
     <p>
-      Custom bundles, usage, raw footage, and campaign-specific needs are quoted
-      after we align on scope.
+      Start with the asset type that fits the campaign, then align on usage, raw
+      footage, and any campaign-specific needs.
     </p>
+    <a href="#Contact" class={homepageButtonLight}>Discuss scope</a>
   </div>
-  <div class="homepage-rate-bands">
+  <ol class="rates-ladder" aria-label="Starting rate progression">
     {
-      startingRates.map((rate) => (
-        <a
-          href="#Contact"
-          aria-label={`Contact Skin Schema about ${rate.title}`}
-        >
-          <div>
-            <p>{rate.type}</p>
-            <span>{rate.price}</span>
+      rates.map((rate) => (
+        <li>
+          <div class="rates-ladder__item">
+            <div class="rates-ladder__copy">
+              <p>{rate.bestFor}</p>
+              <h3>{rate.title}</h3>
+              <span>{rate.outcome}</span>
+            </div>
+            <dl>
+              {rate.specs.map(([label, value]) => (
+                <div>
+                  <dt>{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div class="rates-ladder__price">
+              <span>Starts at</span>
+              <strong>{rate.price}</strong>
+            </div>
           </div>
-          <div>
-            <h3>{rate.title}</h3>
-            <p>{rate.text}</p>
-          </div>
-          <dl>
-            {rate.specs.map(([label, value]) => (
-              <div>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </a>
+        </li>
       ))
     }
-  </div>
-  <div class="homepage-rates__note">
-    <p>
-      Organic brand-use rights are included for approved channels. Paid usage,
-      raw footage, rush delivery, perpetual usage, and extended distribution are
-      quoted separately based on campaign scope.<a
-        href="#CollaborationTerms"
-        aria-label="View collaboration terms">*</a
-      >
-    </p>
-  </div>
+  </ol>
 </section>
