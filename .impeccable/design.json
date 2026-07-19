@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-19T13:32:07Z",
+  "title": "Design System: Skin Schema",
+  "extensions": {
+    "colorMeta": {
+      "studio-black": {
+        "role": "primary",
+        "displayName": "Studio Black",
+        "canonical": "oklch(20.5% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "gallery-white": {
+        "role": "neutral",
+        "displayName": "Gallery White",
+        "canonical": "oklch(99.1% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "soft-white": {
+        "role": "neutral",
+        "displayName": "Soft White",
+        "canonical": "oklch(96.1% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "silver-mist": {
+        "role": "neutral",
+        "displayName": "Silver Mist",
+        "canonical": "oklch(83% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "quiet-gray": {
+        "role": "neutral",
+        "displayName": "Quiet Gray",
+        "canonical": "oklch(65% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "structure-gray": {
+        "role": "neutral",
+        "displayName": "Structure Gray",
+        "canonical": "oklch(54.2% 0 89.9)",
+        "tonalRamp": ["oklch(15% 0 89.9)", "oklch(27% 0 89.9)", "oklch(39% 0 89.9)", "oklch(51% 0 89.9)", "oklch(63% 0 89.9)", "oklch(75% 0 89.9)", "oklch(87% 0 89.9)", "oklch(95% 0 89.9)"]
+      },
+      "skin-veil": {
+        "role": "primary",
+        "displayName": "Skin Veil",
+        "canonical": "oklch(84.5% 0.042 34.8)",
+        "tonalRamp": ["oklch(15% 0.042 34.8)", "oklch(27% 0.042 34.8)", "oklch(39% 0.042 34.8)", "oklch(51% 0.042 34.8)", "oklch(63% 0.042 34.8)", "oklch(75% 0.042 34.8)", "oklch(87% 0.042 34.8)", "oklch(95% 0.042 34.8)"]
+      },
+      "mineral-veil": {
+        "role": "secondary",
+        "displayName": "Mineral Veil",
+        "canonical": "oklch(91.7% 0.016 99)",
+        "tonalRamp": ["oklch(15% 0.016 99)", "oklch(27% 0.016 99)", "oklch(39% 0.016 99)", "oklch(51% 0.016 99)", "oklch(63% 0.016 99)", "oklch(75% 0.016 99)", "oklch(87% 0.016 99)", "oklch(95% 0.016 99)"]
+      },
+      "orchid-powder": {
+        "role": "tertiary",
+        "displayName": "Orchid Powder",
+        "canonical": "oklch(82.2% 0.068 338.2)",
+        "tonalRamp": ["oklch(15% 0.068 338.2)", "oklch(27% 0.068 338.2)", "oklch(39% 0.068 338.2)", "oklch(51% 0.068 338.2)", "oklch(63% 0.068 338.2)", "oklch(75% 0.068 338.2)", "oklch(87% 0.068 338.2)", "oklch(95% 0.068 338.2)"]
+      },
+      "petal-pink": {
+        "role": "secondary",
+        "displayName": "Petal Pink",
+        "canonical": "oklch(84.7% 0.053 22.6)",
+        "tonalRamp": ["oklch(15% 0.053 22.6)", "oklch(27% 0.053 22.6)", "oklch(39% 0.053 22.6)", "oklch(51% 0.053 22.6)", "oklch(63% 0.053 22.6)", "oklch(75% 0.053 22.6)", "oklch(87% 0.053 22.6)", "oklch(95% 0.053 22.6)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero statements only; balance line breaks deliberately." },
+      "headline": { "displayName": "Headline", "purpose": "Major section statements with a concise measure." },
+      "title": { "displayName": "Title", "purpose": "Rates, modal headings, and compact hierarchy." },
+      "body": { "displayName": "Body", "purpose": "Explanatory copy with a readable 50–70 character measure." },
+      "label": { "displayName": "Production Label", "purpose": "Navigation, field labels, pricing, and metadata." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "state-quick", "value": "180ms ease", "purpose": "Hover, focus, brightness, and one-pixel lift transitions." },
+      { "name": "state-base", "value": "250ms ease", "purpose": "Default interface state transitions." },
+      { "name": "reduced-motion", "value": "instant or crossfade", "purpose": "Required alternative to transforms, clips, and staggered reveals." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "330px" },
+      { "name": "md", "value": "760px" },
+      { "name": "lg", "value": "1230px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Skin Veil Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "The primary pill action on dark campaign surfaces.",
+      "html": "<button class=\"ds-button-light\">Discuss scope</button>",
+      "css": ".ds-button-light { display: inline-flex; width: fit-content; border: 0; border-radius: 999px; background: var(--color-skin-100, #e6c3ba); color: var(--color-gray-1200, #171717); padding: var(--spacing-2xs, 0.75rem) var(--spacing-l, 3rem); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; cursor: pointer; transition: background 180ms ease, color 180ms ease, transform 180ms ease; } .ds-button-light:hover { background: var(--color-skin-500, #eec0bd); transform: translateY(-1px); } .ds-button-light:focus-visible { outline: 2px solid var(--color-skin-100, #e6c3ba); outline-offset: 4px; } .ds-button-light:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Dark Contact Field",
+      "kind": "input",
+      "refersTo": "field-dark",
+      "description": "A square, transparent field that preserves the dark tonal surface.",
+      "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" placeholder=\"name@brand.com\"></label>",
+      "css": ".ds-field { display: grid; gap: var(--spacing-2xs, 0.75rem); color: var(--color-gray-100, #fcfcfc); } .ds-field span { color: var(--color-gray-800, #c7c7c7); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-field input { border: 0; border-bottom: 1px solid rgb(255 255 255 / 0.36); border-radius: 0; background: transparent; color: inherit; padding: var(--spacing-2xs, 0.75rem) 0; font: 300 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1.5 Geist, sans-serif; } .ds-field input::placeholder { color: var(--color-gray-800, #c7c7c7); opacity: 1; } .ds-field input:focus-visible { border-bottom-color: var(--color-gray-100, #fcfcfc); outline: 2px solid var(--color-skin-100, #e6c3ba); outline-offset: 3px; }"
+    },
+    {
+      "name": "Campaign Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-dark",
+      "description": "Compact mono navigation designed to sit directly over dark hero media.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\">Skin Schema</a><span><a href=\"#process\">Process</a><a href=\"#rates\">Rates</a><a href=\"#contact\">Contact</a></span></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-s, 1.5rem); background: var(--color-gray-1200, #171717); color: var(--color-gray-100, #fcfcfc); padding: var(--spacing-xs, 1.125rem) var(--spacing-s-l, 3rem); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-nav span { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--spacing-xs-s, 1.5rem); } .ds-nav a { color: inherit; text-decoration: none; } .ds-nav a:hover { text-decoration: underline; text-underline-offset: 0.2em; } .ds-nav a:focus-visible { outline: 2px solid var(--color-skin-100, #e6c3ba); outline-offset: 4px; }"
+    },
+    {
+      "name": "Rate Ladder Row",
+      "kind": "custom",
+      "description": "A rule-separated service row that compares outcome, scope, and price without becoming a card.",
+      "html": "<article class=\"ds-rate-row\"><div><small>Campaign storytelling</small><h3>Premium video</h3><p>A developed product story with polished pacing.</p></div><dl><div><dt>Deliverable</dt><dd>1 video</dd></div><div><dt>Revision</dt><dd>1 round</dd></div></dl><strong>Starts at $—</strong></article>",
+      "css": ".ds-rate-row { display: grid; grid-template-columns: minmax(12rem, 1fr) minmax(10rem, 0.6fr) auto; gap: var(--spacing-l, 3rem); border-top: 1px solid rgb(255 255 255 / 0.18); background: var(--color-gray-1200, #171717); color: var(--color-gray-100, #fcfcfc); padding: var(--spacing-l, 3rem) var(--spacing-s, 1.5rem); font-family: Geist, sans-serif; } .ds-rate-row h3, .ds-rate-row p, .ds-rate-row dl { margin: 0; } .ds-rate-row h3 { margin-block: var(--spacing-2xs, 0.75rem); font-size: clamp(1.62rem, 1.50rem + 0.59vw, 1.953125rem); font-weight: 400; line-height: 1; } .ds-rate-row p { color: var(--color-gray-300, #f2f2f2); } .ds-rate-row small, .ds-rate-row dt { color: var(--color-gray-800, #c7c7c7); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-rate-row dl { display: grid; gap: var(--spacing-2xs, 0.75rem); } .ds-rate-row dl div { display: flex; justify-content: space-between; gap: var(--spacing-s, 1.5rem); border-top: 1px solid rgb(255 255 255 / 0.18); padding-top: var(--spacing-2xs, 0.75rem); } .ds-rate-row dd { margin: 0; font-weight: 500; } .ds-rate-row > strong { color: var(--color-skin-100, #e6c3ba); font: 500 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1 'Geist Mono', sans-serif; }"
+    },
+    {
+      "name": "Carousel Icon Button",
+      "kind": "button",
+      "description": "A circular translucent control that inverts on interaction.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Next item\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; aspect-ratio: 1; border: 1px solid rgb(255 255 255 / 0.22); border-radius: 999px; background: rgb(255 255 255 / 0.1); color: var(--color-gray-100, #fcfcfc); cursor: pointer; transition: background 180ms ease, border-color 180ms ease, color 180ms ease; } .ds-icon-button svg { width: 1.15rem; height: 1.15rem; } .ds-icon-button:hover, .ds-icon-button:focus-visible { border-color: var(--color-gray-100, #fcfcfc); background: var(--color-gray-100, #fcfcfc); color: var(--color-gray-1200, #171717); } .ds-icon-button:focus-visible { outline: 2px solid var(--color-skin-100, #e6c3ba); outline-offset: 4px; } .ds-icon-button:active { opacity: 0.82; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Beauty Archive",
+    "overview": "Skin Schema presents beauty content as an enduring collection rather than a disposable feed. The system is serene, art-directed, and exact: dark gallery-like fields give imagery authority, pale skin tones guide action, and disciplined spacing makes the collaboration feel as organized as the finished work.\n\nThe visual language is image-led and flat. Depth comes from tonal shifts, full-bleed media, asymmetric overlap, and fine dividers—not ornamental shadows or decorative containers. It must never feel discount-oriented, cold, unapproachable, cheap, messy, or generically luxurious.",
+    "keyCharacteristics": [
+      "Near-black campaign surfaces with restrained skin-toned accents.",
+      "Large, tightly composed Geist headlines paired with compact Geist Mono labels.",
+      "Fluid type and spacing that scale continuously from mobile to wide screens.",
+      "Square image frames and structural rules contrasted with pill-shaped actions.",
+      "Purposeful motion that reveals media without withholding content."
+    ],
+    "rules": [
+      { "name": "The Archive Rule", "body": "Every visual decision must help the work feel worth saving, reusing, and returning to.", "section": "overview" },
+      { "name": "The Darkroom Rule", "body": "Studio Black carries the composition; pale accents illuminate only decisions, proof, and useful detail.", "section": "colors" },
+      { "name": "The Skin-Tone Rule", "body": "Never scatter all cosmetic hues across one surface. Skin Veil is the default accent; the remaining tones require a specific art-direction purpose.", "section": "colors" },
+      { "name": "The Single-Family Rule", "body": "Geist earns distinction through scale, weight, spacing, and composition; do not add a decorative display face to manufacture luxury.", "section": "typography" },
+      { "name": "The Mono-as-Structure Rule", "body": "Geist Mono communicates organization and metadata. It is not a decorative shorthand for technical sophistication.", "section": "typography" },
+      { "name": "The Flat Archive Rule", "body": "Surfaces remain flat at rest. If an element needs distinction, change its tone, boundary, crop, or position before considering a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do lead with real photography and video; the work must prove quality before the copy claims it.",
+      "Do use Studio Black, Gallery White, and Skin Veil as the dominant working palette.",
+      "Do preserve the fluid type and spacing scales from 330px through 1230px viewports.",
+      "Do use exact alignment, hairline rules, and purposeful whitespace to make the service feel organized.",
+      "Do keep motion purposeful, fast, and safe for reduced-motion preferences.",
+      "Do make customization visible through content structure and specific examples, not vague luxury language."
+    ],
+    "donts": [
+      "Don't make Skin Schema feel discount-oriented, cold, unapproachable, cheap, or messy.",
+      "Don't use generic luxury signals that make the creator or collaboration feel impersonal.",
+      "Don't break the flat tonal system with decorative shadows, glass panels, or nested cards.",
+      "Don't scatter the full cosmetic palette across a page; reserve color for art direction and action.",
+      "Don't add a decorative serif or use monospace as a costume for sophistication.",
+      "Don't round sections, media frames, rate rows, or input fields; pills belong to actions and circular controls.",
+      "Don't hide content behind animation or omit a reduced-motion path."
+    ]
+  }
+}
