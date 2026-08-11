@@ -23,11 +23,45 @@ const {
 const metaDescription =
   description ||
   'Committed to uncovering the best in authentic, minimalistic beauty. Tips, routines, and product reviews for a serene self-care experience.';
-const ogImage = image || '/media/og-image.png';
-const ogImageUrl = new URL(ogImage, Astro.site || Astro.url).toString();
+const siteUrl = new URL('/', Astro.site || Astro.url);
+const usesDefaultImage = !image;
+const ogImage = image || '/media/og-image-2026-08.jpg';
+const ogImageUrl = new URL(ogImage, siteUrl).toString();
 
 // If canonicalURL is not provided, use the current URL
-const canonical = (canonicalURL || Astro.url).toString();
+const canonicalUrl = new URL(canonicalURL || Astro.url, siteUrl);
+const canonical = canonicalUrl.toString();
+const isHomepage = canonicalUrl.pathname === '/';
+const websiteId = new URL('#website', siteUrl).toString();
+const organizationId = new URL('#organization', siteUrl).toString();
+const structuredData = isHomepage
+  ? {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': websiteId,
+          url: siteUrl.toString(),
+          name: 'Skin Schema',
+          publisher: { '@id': organizationId },
+        },
+        {
+          '@type': 'Organization',
+          '@id': organizationId,
+          name: 'Skin Schema',
+          url: siteUrl.toString(),
+          description: metaDescription,
+          logo: {
+            '@type': 'ImageObject',
+            url: new URL('/web-app-manifest-512x512.png', siteUrl).toString(),
+            width: 512,
+            height: 512,
+          },
+          sameAs: ['https://www.instagram.com/skinschema/'],
+        },
+      ],
+    }
+  : undefined;
 ---
 
 <head>
@@ -48,29 +82,41 @@ const canonical = (canonicalURL || Astro.url).toString();
 
   <!-- Sitemap -->
   <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="describedby" href="/llms.txt" />
 
   <!-- Canonical -->
   <link rel="canonical" href={canonical} />
   <meta name="generator" content={Astro.generator} />
 
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:domain" content="skinschema.com" />
-  <meta property="twitter:url" content={canonical} />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={metaDescription} />
-  <meta name="twitter:image" content={ogImageUrl} />
-
   <!-- Open Graph -->
+  <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Skin Schema" />
   <meta property="og:url" content={canonical} />
   <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={metaDescription} />
   <meta property="og:image" content={ogImageUrl} />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  {usesDefaultImage && <meta property="og:image:type" content="image/jpeg" />}
+  {usesDefaultImage && <meta property="og:image:width" content="1200" />}
+  {usesDefaultImage && <meta property="og:image:height" content="630" />}
   <meta property="og:image:alt" content={imageAlt} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={metaDescription} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={imageAlt} />
+
+  {
+    structuredData && (
+      <script
+        type="application/ld+json"
+        is:inline
+        set:html={JSON.stringify(structuredData)}
+      />
+    )
+  }
   <meta name="title" content={title} />
 
   <!-- Google tag (gtag.js) -->
