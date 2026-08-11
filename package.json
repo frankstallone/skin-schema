@@ -7,7 +7,7 @@
   "scripts": {
     "tokens:build": "node ./scripts/build-tailwind-theme.mjs",
     "tokens:test": "node --test src/css-utils/__tests__/tailwind-token-generator.test.js",
-    "test": "node --test src/css-utils/__tests__/*.test.js",
+    "test": "tsx --test src/css-utils/__tests__/*.test.js src/lib/storefront/**/*.test.ts",
     "dev": "npm run tokens:build && astro dev",
     "start": "npm run tokens:build && astro dev",
     "lint": "npm run tokens:build && astro check",
@@ -17,9 +17,12 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
+    "@astrojs/netlify": "^7.0.13",
     "@astrojs/partytown": "^2.1.7",
     "@astrojs/react": "^5.0.4",
     "@astrojs/sitemap": "^3.7.2",
+    "@aws-sdk/client-s3": "^3.1107.0",
+    "@aws-sdk/s3-request-presigner": "^3.1107.0",
     "@tailwindcss/vite": "^4.2.4",
     "@zachleat/details-utils": "^2.0.2",
     "@zachleat/table-saw": "^1.0.7",
@@ -30,12 +33,14 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "slugify": "^1.6.9",
+    "stripe": "^22.5.0",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "prettier": "^3.8.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.23.12"
   },
   "engines": {
     "node": ">=22.12.0"
