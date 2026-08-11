@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {
+  getVerifiedPurchase,
+  isCheckoutSessionId,
+} from '../../lib/storefront/server';
+
+export const prerender = false;
+
+const sessionId = Astro.url.searchParams.get('session_id');
+let purchase: Awaited<ReturnType<typeof getVerifiedPurchase>> | undefined;
+let unavailable = false;
+
+if (isCheckoutSessionId(sessionId)) {
+  try {
+    purchase = await getVerifiedPurchase(sessionId);
+  } catch {
+    unavailable = true;
+  }
+}
+
+const canDownload = purchase?.eligible && sessionId;
+const productName = purchase?.eligible ? purchase.product.name : undefined;
+const downloadUrl = canDownload
+  ? `/store/download?session_id=${encodeURIComponent(sessionId)}`
+  : undefined;
+---
+
+<Layout
+  meta={{
+    title: 'Purchase status | Skin Schema',
+    description: 'Your Skin Schema purchase status and download link.',
+    themeColor: '#171717',
+    statusBarStyle: 'black-translucent',
+  }}
+>
+  <main id="main" class="purchase-status">
+    <p class="purchase-status__eyebrow">Skin Schema store</p>
+    {
+      canDownload ? (
+        <>
+          <h1>Payment confirmed.</h1>
+          <p>
+            Your {productName} download is ready. The link opens a fresh,
+            five-minute download URL.
+          </p>
+          <a class="purchase-status__button" href={downloadUrl}>
+            Download package
+          </a>
+        </>
+      ) : unavailable ? (
+        <>
+          <h1>We could not verify your purchase.</h1>
+          <p>Please wait a moment, then reload this page.</p>
+        </>
+      ) : (
+        <>
+          <h1>This purchase is not eligible for download.</h1>
+          <p>
+            Check that you completed payment, or contact Skin Schema with your
+            Stripe receipt.
+          </p>
+        </>
+      )
+    }
+    <a class="purchase-status__back" href="/store">Return to the store</a>
+  </main>
+</Layout>
+
+<style>
+  .purchase-status {
+    background: var(--color-gray-1200);
+    color: var(--color-gray-100);
+    display: grid;
+    gap: var(--spacing-m);
+    min-block-size: 100vh;
+    padding: var(--spacing-3xl) var(--spacing-s-l);
+    place-content: center start;
+  }
+
+  .purchase-status h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.05em;
+    line-height: 0.94;
+    margin: 0;
+    max-inline-size: 9ch;
+  }
+
+  .purchase-status p {
+    font-size: var(--text-step-1);
+    margin: 0;
+    max-inline-size: 35rem;
+  }
+
+  .purchase-status__eyebrow {
+    color: var(--color-gray-400);
+    font-size: var(--text-step-000) !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .purchase-status__button,
+  .purchase-status__back {
+    color: inherit;
+    inline-size: fit-content;
+  }
+
+  .purchase-status__button {
+    background: var(--color-gray-100);
+    color: var(--color-gray-1200);
+    font-weight: var(--font-weight-bold);
+    margin-block-start: var(--spacing-xs);
+    padding: var(--spacing-2xs) var(--spacing-m);
+    text-decoration: none;
+  }
+
+  .purchase-status__back {
+    margin-block-start: var(--spacing-s);
+  }
+
+  .purchase-status a:focus-visible {
+    outline: 2px solid var(--color-skin-100);
+    outline-offset: 0.25rem;
+  }
+</style>
