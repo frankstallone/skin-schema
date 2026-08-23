@@ -84,7 +84,7 @@ export const startingRates = [
   {
     title: 'Product Photo Sets',
     type: 'Photo Set',
-    price: '$250',
+    price: '$150',
     text: 'Refined product photography and texture visuals for skincare, makeup, and wellness brands.',
     specs: [
       ['Assets', '3'],
@@ -96,7 +96,7 @@ export const startingRates = [
   {
     title: 'Short-Form Product Videos',
     type: 'Short Video',
-    price: '$500',
+    price: '$350',
     text: 'Elevated short-form videos for product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines.',
     specs: [
       ['Assets', '1'],
@@ -108,7 +108,7 @@ export const startingRates = [
   {
     title: 'Premium Product Videos',
     type: 'Premium Video',
-    price: '$750',
+    price: '$500',
     text: 'More developed beauty video concepts with polished production, product context, lifestyle detail, and campaign-style pacing.',
     specs: [
       ['Assets', '1'],
