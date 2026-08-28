@@ -5,9 +5,13 @@
   project: https://cube.fyi/css.html
 */
 
+html,
+body {
+  background: var(--color-surface-auxiliary-background-color);
+}
+
 body {
   @apply font-medium;
-  background: var(--color-surface-auxiliary-background-color);
   color: var(--color-surface-auxiliary-foreground-color);
   font-size: var(--text-step-0);
   font-family: var(--font-base);
