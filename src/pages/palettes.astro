@@ -78,7 +78,8 @@ const keyTokens = new Map(
   approvedSwatches.map(({ keyType, token }) => [token, keyType]),
 );
 
-const darkSurfaceNote = colors.roles['inverse-raised-paper'].note;
+const darkSurfaceNote =
+  colors.modes.dark['surface-secondary-background-color'].note;
 
 const meta = {
   title: 'Brand Palettes | Skin Schema',
@@ -110,6 +111,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <p>
         Mineral Pine 750 remains the approved key swatch and light-mode type
         color.
+      </p>
+      <p>
+        Interface colors use purpose–priority–property intents. Light and dark
+        modes assign the same intent set at their scope boundary.
       </p>
       <p>
         Lower weights are lighter. Higher weights are darker. Scroll the table
@@ -206,7 +211,6 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   .palette-page {
     --palette-label-width: 8rem;
     --palette-column-width: 4.25rem;
-    --palette-rule: var(--color-rule);
     --wrapper-max-width: 100%;
   }
 
@@ -220,7 +224,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .approved {
-    border-block-start: 1px solid var(--palette-rule);
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
     margin-block-end: var(--spacing-xl);
     padding-block-start: var(--spacing-m);
   }
@@ -245,7 +249,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   .approved-swatch__color {
     aspect-ratio: 3 / 2;
     background: var(--swatch-color);
-    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 12%,
+        transparent
+      );
   }
 
   .approved-swatch h3 {
@@ -281,16 +290,17 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .palette-table {
-    border-block: 1px solid var(--palette-rule);
+    border-block: 1px solid var(--color-surface-auxiliary-border-color);
     overflow-x: auto;
     overscroll-behavior-inline: contain;
     padding-block-end: var(--spacing-s);
-    scrollbar-color: var(--color-accent) var(--color-bone-100);
+    scrollbar-color: var(--color-figure-1st-color)
+      var(--color-surface-secondary-background-color);
     scrollbar-width: thin;
   }
 
   .palette-table:focus-visible {
-    outline-color: var(--color-focus);
+    outline-color: currentColor;
     outline-offset: var(--spacing-2xs);
   }
 
@@ -307,7 +317,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   .row-label {
     align-content: center;
-    background: var(--color-paper);
+    background: var(--color-surface-auxiliary-background-color);
     left: 0;
     margin: 0;
     padding-inline-end: var(--spacing-xs);
@@ -316,7 +326,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .legend {
-    border-block-end: 1px solid var(--palette-rule);
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
     padding-block: var(--spacing-s);
   }
 
@@ -328,7 +338,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   .category {
     align-content: end;
-    border-inline-start: 1px solid var(--palette-rule);
+    border-inline-start: 1px solid var(--color-surface-auxiliary-border-color);
     display: grid;
     grid-column: span var(--category-span);
     line-height: var(--leading-fine);
@@ -336,13 +346,21 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .category span {
-    color: var(--color-muted-ink);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
     font-variant-numeric: tabular-nums;
   }
 
   .weight-row {
-    border-block-end: 1px solid var(--palette-rule);
-    color: var(--color-muted-ink);
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
     padding-block: var(--spacing-xs);
@@ -350,7 +368,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .palette {
-    border-block-end: 1px solid var(--palette-rule);
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
     padding-block: var(--spacing-m);
   }
 
@@ -372,12 +390,21 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   .swatch {
     aspect-ratio: 1;
     background: var(--swatch-color);
-    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 12%,
+        transparent
+      );
     inline-size: 100%;
   }
 
   .swatch-item code {
-    color: var(--color-muted-ink);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
     display: block;
     font-size: 0.75rem;
     margin-block-start: var(--spacing-2xs);
@@ -386,7 +413,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   }
 
   .swatch-item--key .swatch {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-figure-1st-color);
     outline-offset: -3px;
   }
 

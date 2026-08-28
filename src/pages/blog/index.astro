@@ -24,11 +24,12 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
     <Header />
     <div
       class="bg-cover bg-center bg-blend-overlay py-l-xl text-balance"
+      data-mode="dark"
       style={`background-image: url(${optimizedBackground.src}), linear-gradient(color-mix(in srgb, var(--color-pine-900) 50%, transparent), color-mix(in srgb, var(--color-pine-900) 50%, transparent));`}
     >
       <div class="wrapper region">
         <h1
-          class="mt-zero text-inverse-ink tracking-tighter font-mono"
+          class="mt-zero text-surface-secondary-foreground-color tracking-tighter font-mono"
           style="max-inline-size: 18ch;"
         >
           Natural beauty routine tips
@@ -42,7 +43,7 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
             class="region flow prose"
             style="--region-space: var(--spacing-s-m);"
           >
-            <div class="border border-rule flex flex-col justify-between drop w-fit mx-auto rounded-2xl overflow-clip">
+            <div class="border border-surface-secondary-border-color flex flex-col justify-between drop w-fit mx-auto rounded-2xl overflow-clip">
               <div class="box">
                 <h2 class="text-step-3 mt-zero">
                   <a class="link" href={`/${post.id}/`}>
@@ -50,8 +51,8 @@ const optimizedBackground = await getImage({ src: hero, format: 'webp' });
                   </a>
                 </h2>
                 <p class="mt-3xs">
-                  <small class="font-mono text-muted-ink text-step-000">
-                    <span class="bg-rose-250 py-3xs px-2xs rounded-full">
+                  <small class="font-mono text-step-000 [color:color-mix(in_srgb,var(--color-surface-secondary-foreground-color)_65%,transparent)]">
+                    <span class="bg-[color-mix(in_srgb,var(--color-figure-1st-color)_35%,var(--color-surface-secondary-background-color))] py-3xs px-2xs rounded-full">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 512 512"

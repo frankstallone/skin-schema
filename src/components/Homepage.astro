@@ -27,25 +27,19 @@ const pathname = Astro.url.pathname;
 <style is:global>
   html,
   body {
-    background: var(--color-inverse-paper);
+    background: var(--color-surface-auxiliary-background-color);
   }
 
   .homepage {
-    --homepage-surface: var(--color-inverse-paper);
-    --homepage-surface-raised: var(--color-inverse-raised-paper);
-    --homepage-text: var(--color-inverse-ink);
-    --homepage-muted-text: var(--color-inverse-muted-ink);
-    --homepage-soft: var(--color-rose-250);
-    --homepage-energy: var(--color-accent);
-    background: var(--homepage-surface);
-    color: var(--homepage-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     min-block-size: 100vh;
   }
 
   .homepage-hero {
     --homepage-hero-video-lift: var(--spacing-xl);
-    background: var(--homepage-surface);
-    color: var(--homepage-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: minmax(18rem, 0.8fr) minmax(20rem, 1fr);
@@ -128,10 +122,14 @@ const pathname = Astro.url.pathname;
 
   .homepage-brands {
     align-items: center;
-    background: var(--homepage-surface);
+    background: var(--color-surface-auxiliary-background-color);
     border-block: 1px solid
-      color-mix(in srgb, var(--homepage-text) 16%, transparent);
-    color: var(--homepage-text);
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 16%,
+        transparent
+      );
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-l-xl);
     grid-template-columns: auto minmax(0, 1fr);
@@ -139,7 +137,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-brands > p {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
   }
 
   .homepage-brands ul {
@@ -174,8 +172,8 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-creator {
-    background: var(--homepage-surface-raised);
-    color: var(--homepage-text);
+    background: var(--color-surface-secondary-background-color);
+    color: var(--color-surface-secondary-foreground-color);
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: minmax(16rem, 0.42fr) minmax(22rem, 0.78fr);
@@ -229,19 +227,18 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-creator li {
-    border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 22%, transparent);
+    border-block-start: 1px solid var(--color-surface-secondary-border-color);
     padding-block-start: var(--spacing-s);
   }
 
   .homepage-creator li p {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-secondary-foreground-color);
     margin-block-end: 0;
   }
 
   .homepage-range {
-    background: var(--homepage-surface);
-    color: var(--homepage-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-l);
     padding: var(--spacing-xl) var(--spacing-s-l);
@@ -268,7 +265,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range__intro > p {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-size: var(--text-step-1);
     margin: 0;
     max-inline-size: 29rem;
@@ -335,7 +332,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range__item:focus-visible {
-    outline: 2px solid var(--homepage-energy);
+    outline: 2px solid currentColor;
     outline-offset: 0.25rem;
   }
 
@@ -358,8 +355,12 @@ const pathname = Astro.url.pathname;
 
   .homepage-range__caption span {
     align-self: start;
-    background: color-mix(in srgb, var(--homepage-text) 88%, transparent);
-    color: var(--homepage-surface);
+    background: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 88%,
+      transparent
+    );
+    color: var(--color-surface-auxiliary-background-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -379,8 +380,8 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range-carousel__panel {
-    background: var(--homepage-surface);
-    color: var(--homepage-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-s);
     grid-template-rows: auto minmax(0, 1fr);
@@ -404,7 +405,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range-carousel__header p {
-    color: var(--homepage-soft);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -471,10 +472,10 @@ const pathname = Astro.url.pathname;
   .homepage-range-carousel__icon-button {
     align-items: center;
     aspect-ratio: 1;
-    background: color-mix(in srgb, var(--homepage-text) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--homepage-text) 22%, transparent);
+    background: var(--color-action-auxiliary-background-color);
+    border: 1px solid var(--color-action-auxiliary-border-color);
     border-radius: 999px;
-    color: var(--homepage-text);
+    color: var(--color-action-auxiliary-foreground-color);
     cursor: pointer;
     display: inline-flex;
     inline-size: 2.75rem;
@@ -488,13 +489,12 @@ const pathname = Astro.url.pathname;
 
   .homepage-range-carousel__icon-button:hover,
   .homepage-range-carousel__icon-button:focus-visible {
-    background: var(--homepage-text);
-    border-color: var(--homepage-text);
-    color: var(--homepage-surface);
+    filter: brightness(1.08);
+    transform: translateY(-1px);
   }
 
   .homepage-range-carousel__icon-button:focus-visible {
-    outline: 2px solid var(--homepage-energy);
+    outline: 2px solid currentColor;
     outline-offset: 0.25rem;
   }
 
@@ -509,7 +509,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-range-carousel__controls {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -518,8 +518,8 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-system {
-    background: var(--homepage-surface-raised);
-    color: var(--homepage-text);
+    background: var(--color-surface-secondary-background-color);
+    color: var(--color-surface-secondary-foreground-color);
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
 
@@ -537,29 +537,28 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-system li {
-    border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 22%, transparent);
+    border-block-start: 1px solid var(--color-surface-secondary-border-color);
     display: grid;
     gap: var(--spacing-xs);
     padding-block-start: var(--spacing-s);
   }
 
   .homepage-system span {
-    color: var(--homepage-energy);
+    color: var(--color-surface-secondary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
   }
 
   .homepage-system p {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-secondary-foreground-color);
     margin: 0;
   }
 
   .homepage-rates {
     align-items: start;
-    background: var(--homepage-surface);
-    color: var(--homepage-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 0.66fr);
@@ -588,7 +587,7 @@ const pathname = Astro.url.pathname;
 
   .rates-ladder__aside p,
   .rates-ladder__copy > span {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
   }
 
   .rates-ladder {
@@ -600,7 +599,11 @@ const pathname = Astro.url.pathname;
 
   .rates-ladder li {
     border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 18%, transparent);
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 18%,
+        transparent
+      );
   }
 
   .rates-ladder li:first-child {
@@ -608,7 +611,7 @@ const pathname = Astro.url.pathname;
   }
 
   .rates-ladder__item {
-    color: var(--homepage-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-l);
     grid-template-columns: minmax(16rem, 0.6fr) minmax(14rem, 0.34fr) minmax(
@@ -628,7 +631,7 @@ const pathname = Astro.url.pathname;
   .rates-ladder__copy p,
   .rates-ladder dt,
   .rates-ladder__price span {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -657,7 +660,11 @@ const pathname = Astro.url.pathname;
   .rates-ladder dl div {
     align-items: baseline;
     border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 18%, transparent);
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 18%,
+        transparent
+      );
     display: flex;
     gap: var(--spacing-s);
     justify-content: space-between;
@@ -676,7 +683,7 @@ const pathname = Astro.url.pathname;
   }
 
   .rates-ladder__price strong {
-    color: var(--homepage-energy);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-1);
     font-weight: var(--font-weight-bold);
@@ -685,10 +692,9 @@ const pathname = Astro.url.pathname;
 
   .homepage-contact {
     align-items: start;
-    background: var(--homepage-surface-raised);
-    border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 18%, transparent);
-    color: var(--homepage-text);
+    background: var(--color-surface-secondary-background-color);
+    border-block-start: 1px solid var(--color-surface-secondary-border-color);
+    color: var(--color-surface-secondary-foreground-color);
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 0.78fr);
@@ -720,7 +726,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-contact__fields label {
-    color: var(--homepage-muted-text);
+    color: var(--color-surface-secondary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -729,12 +735,11 @@ const pathname = Astro.url.pathname;
 
   .homepage-contact__fields input,
   .homepage-contact__fields textarea {
-    background: transparent;
+    background: var(--color-control-background-color);
     border: 0;
-    border-block-end: 1px solid
-      color-mix(in srgb, var(--homepage-text) 42%, transparent);
+    border-block-end: 1px solid var(--color-control-border-color);
     border-radius: 0;
-    color: var(--homepage-text);
+    color: var(--color-control-foreground-color);
     font: inherit;
     font-size: var(--text-step-1);
     padding: var(--spacing-2xs) 0;
@@ -742,8 +747,8 @@ const pathname = Astro.url.pathname;
 
   .homepage-contact__fields input:focus,
   .homepage-contact__fields textarea:focus {
-    border-block-end-color: var(--homepage-text);
-    outline-color: var(--homepage-energy);
+    border-block-end-color: currentColor;
+    outline-color: currentColor;
   }
 
   .homepage-contact__fields textarea {
@@ -752,10 +757,14 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-footer {
-    background: var(--homepage-surface);
+    background: var(--color-surface-auxiliary-background-color);
     border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 18%, transparent);
-    color: var(--homepage-text);
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 18%,
+        transparent
+      );
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     gap: var(--spacing-s);
     padding: var(--spacing-s) var(--spacing-s-l);
@@ -763,8 +772,12 @@ const pathname = Astro.url.pathname;
 
   .homepage-footer__terms {
     border-block-start: 1px solid
-      color-mix(in srgb, var(--homepage-text) 16%, transparent);
-    color: var(--homepage-muted-text);
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 16%,
+        transparent
+      );
+    color: var(--color-surface-auxiliary-foreground-color);
     display: grid;
     font-size: var(--text-step-000);
     gap: var(--spacing-m);
@@ -799,7 +812,11 @@ const pathname = Astro.url.pathname;
     .rates-ladder__price {
       align-items: baseline;
       border-block-start: 1px solid
-        color-mix(in srgb, var(--homepage-text) 18%, transparent);
+        color-mix(
+          in srgb,
+          var(--color-surface-auxiliary-foreground-color) 18%,
+          transparent
+        );
       display: flex;
       justify-content: space-between;
       justify-items: stretch;

@@ -1,6 +1,6 @@
 ---
 import { startingRates } from './data';
-import { homepageButtonLight } from './classes';
+import { homepagePrimaryAction } from './classes';
 
 const rates = startingRates.map((rate, index) => ({
   ...rate,
@@ -26,7 +26,7 @@ const rates = startingRates.map((rate, index) => ({
       Start with the asset type that fits the campaign, then align on usage, raw
       footage, and any campaign-specific needs.
     </p>
-    <a href="#Contact" class={homepageButtonLight}>Discuss scope</a>
+    <a href="#Contact" class={homepagePrimaryAction}>Discuss scope</a>
   </div>
   <ol class="rates-ladder" aria-label="Starting rate progression">
     {

@@ -1,5 +1,5 @@
 ---
-import { homepageButtonLight, homepageKicker } from './classes';
+import { homepageKicker, homepagePrimaryAction } from './classes';
 
 const { pathname } = Astro.props;
 ---
@@ -53,10 +53,7 @@ const { pathname } = Astro.props;
         ></textarea>
       </span>
     </div>
-    <button
-      type="submit"
-      class={`${homepageButtonLight} border-0`}
-    >
+    <button type="submit" class={`${homepagePrimaryAction} border-0`}>
       Submit
     </button>
   </form>

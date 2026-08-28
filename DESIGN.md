@@ -2,83 +2,83 @@
 name: Skin Schema
 description: A serene, art-directed system for presenting enduring beauty content with precision.
 colors:
-  mineral-pine: "#213F37"
-  pine-page: "#071310"
-  pine-raised: "#0D1E1A"
-  warm-bone: "#F2EDE6"
-  warm-bone-muted: "#EEE9E2"
-  translucent-rose: "#E6A0B5"
-  serum-pink: "#D85B7D"
+  mineral-pine: '#213F37'
+  pine-page: '#071310'
+  pine-raised: '#0D1E1A'
+  warm-bone: '#F2EDE6'
+  warm-bone-muted: '#EEE9E2'
+  translucent-rose: '#E6A0B5'
+  serum-pink: '#D85B7D'
 typography:
   display:
-    fontFamily: "Geist, sans-serif"
-    fontSize: "clamp(2.799375rem, 2.43rem + 1.81vw, 3.815rem)"
+    fontFamily: 'Geist, sans-serif'
+    fontSize: 'clamp(2.799375rem, 2.43rem + 1.81vw, 3.815rem)'
     fontWeight: 300
     lineHeight: 0.94
-    letterSpacing: "-0.04em"
+    letterSpacing: '-0.04em'
   headline:
-    fontFamily: "Geist, sans-serif"
-    fontSize: "clamp(1.94375rem, 1.76rem + 0.88vw, 2.44125rem)"
+    fontFamily: 'Geist, sans-serif'
+    fontSize: 'clamp(1.94375rem, 1.76rem + 0.88vw, 2.44125rem)'
     fontWeight: 300
     lineHeight: 1.02
-    letterSpacing: "-0.03em"
+    letterSpacing: '-0.03em'
   title:
-    fontFamily: "Geist, sans-serif"
-    fontSize: "clamp(1.62rem, 1.50rem + 0.59vw, 1.953125rem)"
+    fontFamily: 'Geist, sans-serif'
+    fontSize: 'clamp(1.62rem, 1.50rem + 0.59vw, 1.953125rem)'
     fontWeight: 400
     lineHeight: 1
   body:
-    fontFamily: "Geist, sans-serif"
-    fontSize: "clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem)"
+    fontFamily: 'Geist, sans-serif'
+    fontSize: 'clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem)'
     fontWeight: 300
     lineHeight: 1.5
   label:
-    fontFamily: "Geist Mono, sans-serif"
-    fontSize: "clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)"
+    fontFamily: 'Geist Mono, sans-serif'
+    fontSize: 'clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)'
     fontWeight: 500
     lineHeight: 1
-    letterSpacing: "normal"
+    letterSpacing: 'normal'
 rounded:
-  none: "0"
-  control: "0.75rem"
-  pill: "999px"
+  none: '0'
+  control: '0.75rem'
+  pill: '999px'
 spacing:
-  3xs: "clamp(0.3125rem, 0.29rem + 0.11vw, 0.375rem)"
-  2xs: "clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem)"
-  xs: "clamp(0.875rem, 0.78rem + 0.44vw, 1.125rem)"
-  s: "clamp(1.125rem, 0.99rem + 0.67vw, 1.5rem)"
-  m: "clamp(1.6875rem, 1.48rem + 1vw, 2.25rem)"
-  l: "clamp(2.25rem, 1.98rem + 1.33vw, 3rem)"
-  xl: "clamp(3.375rem, 2.96rem + 2vw, 4.5rem)"
-  2xl: "clamp(4.5rem, 3.95rem + 2.67vw, 6rem)"
-  3xl: "clamp(6.75rem, 5.92rem + 4vw, 9rem)"
-  4xl: "clamp(9rem, 7.90rem + 5.33vw, 12rem)"
-  gutter: "clamp(1.125rem, 0.44rem + 3.33vw, 3rem)"
+  3xs: 'clamp(0.3125rem, 0.29rem + 0.11vw, 0.375rem)'
+  2xs: 'clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem)'
+  xs: 'clamp(0.875rem, 0.78rem + 0.44vw, 1.125rem)'
+  s: 'clamp(1.125rem, 0.99rem + 0.67vw, 1.5rem)'
+  m: 'clamp(1.6875rem, 1.48rem + 1vw, 2.25rem)'
+  l: 'clamp(2.25rem, 1.98rem + 1.33vw, 3rem)'
+  xl: 'clamp(3.375rem, 2.96rem + 2vw, 4.5rem)'
+  2xl: 'clamp(4.5rem, 3.95rem + 2.67vw, 6rem)'
+  3xl: 'clamp(6.75rem, 5.92rem + 4vw, 9rem)'
+  4xl: 'clamp(9rem, 7.90rem + 5.33vw, 12rem)'
+  gutter: 'clamp(1.125rem, 0.44rem + 3.33vw, 3rem)'
 components:
   button-primary:
-    backgroundColor: "{colors.serum-pink}"
-    textColor: "#0D1E1A"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) clamp(2.25rem, 1.98rem + 1.33vw, 3rem)"
+    backgroundColor: '{colors.serum-pink}'
+    textColor: '#0D1E1A'
+    typography: '{typography.label}'
+    rounded: '{rounded.pill}'
+    padding: 'clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) clamp(2.25rem, 1.98rem + 1.33vw, 3rem)'
   button-primary-hover:
-    backgroundColor: "#DC6D8C"
-    textColor: "#0D1E1A"
-    typography: "{typography.label}"
-    rounded: "{rounded.pill}"
-    padding: "clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) clamp(2.25rem, 1.98rem + 1.33vw, 3rem)"
+    backgroundColor: '{colors.serum-pink}'
+    textColor: '#0D1E1A'
+    typography: '{typography.label}'
+    rounded: '{rounded.pill}'
+    padding: 'clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) clamp(2.25rem, 1.98rem + 1.33vw, 3rem)'
   field-dark:
-    backgroundColor: "#00000000"
-    textColor: "{colors.warm-bone}"
-    typography: "{typography.body}"
-    rounded: "{rounded.none}"
-    padding: "clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) 0"
+    backgroundColor: '#00000000'
+    textColor: '{colors.warm-bone}'
+    typography: '{typography.body}'
+    rounded: '{rounded.none}'
+    padding: 'clamp(0.5625rem, 0.49rem + 0.33vw, 0.75rem) 0'
   navigation-dark:
-    backgroundColor: "{colors.pine-page}"
-    textColor: "{colors.warm-bone}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "clamp(0.875rem, 0.78rem + 0.44vw, 1.125rem) clamp(1.125rem, 0.44rem + 3.33vw, 3rem)"
+    backgroundColor: '{colors.pine-page}'
+    textColor: '{colors.warm-bone}'
+    typography: '{typography.label}'
+    rounded: '{rounded.none}'
+    padding: 'clamp(0.875rem, 0.78rem + 0.44vw, 1.125rem) clamp(1.125rem, 0.44rem + 3.33vw, 3rem)'
 ---
 
 # Design System: Skin Schema
@@ -115,10 +115,6 @@ The palette is a living system, grounded in mineral green and translucent, skin-
 - **Translucent Rose** (`#E6A0B5`, `rose-250`): large soft fields and low-energy warmth.
 - **Serum Pink** (`#D85B7D`, `rose-450`): actions, focus, prices, process markers, and short moments of emphasis. Use Pine 900 text on Serum Pink.
 
-### Tertiary
-
-- **Rose 400** (`#DC6D8C`): interactive hover state. It stays brighter than Serum Pink while retaining strong contrast with Pine 900.
-
 ### Neutral
 
 - Canonical scale values, key names and order, destination gamut, and tween model live in `src/design-tokens/colors.json`.
@@ -133,7 +129,20 @@ The palette is a living system, grounded in mineral green and translucent, skin-
 
 **The Darkroom Rule.** Pine 950 and the approved Pine 900 exception carry the main composition; Bone supplies text; Serum Pink illuminates decisions, proof, and useful detail. Pine 750 remains a key swatch, not a dark surface token.
 
-**The Reversal Rule.** Dark sections use Pine surfaces with Bone text. Light sections reverse to Bone surfaces with Pine text. Do not invent a neutral theme between them.
+### Intent architecture
+
+Color primitives keep stable `scale-weight` names. Interface code uses intents that describe why an element exists: `control-property`, `action-priority-property`, or `surface-priority-property`. Properties are background, foreground, and border color. Text does not own a color intent; it inherits the foreground chosen with its containing surface, action, or control.
+
+- **Auxiliary surface:** the necessary page or section field.
+- **Secondary surface:** raised or temporarily more important content.
+- **Primary surface:** the highest-focus content or a deliberate soft field.
+- **Primary action:** the action the interface most wants the visitor to take.
+- **Secondary action:** a clear alternative with less priority.
+- **Auxiliary action:** low-emphasis navigation or supporting action.
+
+Light and dark modes assign the same complete intent set. A `data-mode` boundary changes the values for every descendant through CSS inheritance; nested dark sections do not need `inverse-*` tokens or component variants. Components keep their intent assignments when they move between modes.
+
+**The Placement in Mode Rule.** Dark sections use the dark mode; light sections use the light mode. Never create parallel inverse tokens or page-owned color aliases.
 
 **The Rose Rule.** Serum Pink is the energetic accent, not the default heading color. Most headings stay Bone or Pine. Translucent Rose belongs to soft fields, not primary actions.
 
@@ -173,7 +182,7 @@ Components are polished and precise. Most are structurally square and restrained
 
 - **Shape:** full pill for homepage actions (`999px`); general-purpose controls may use a gently curved `0.75rem` radius.
 - **Primary:** Serum Pink background with Pine 900 text and fluid `2xs` by `l` padding.
-- **Hover / Focus:** shift to Rose 400 and lift by one pixel over `180ms`; focus uses a two-pixel Serum Pink outline with a four-pixel offset.
+- **Hover / Focus:** lift by one pixel over `180ms` and derive any tonal shift from the assigned action color. Focus uses a clear current-color outline rather than a separate focus token.
 - **Secondary:** text links remain unfilled and underline on hover when additional emphasis is needed.
 
 ### Cards / Containers
@@ -187,7 +196,7 @@ Components are polished and precise. Most are structurally square and restrained
 ### Inputs / Fields
 
 - **Style:** transparent dark-field controls with no outer box, square corners, and a single translucent bottom rule.
-- **Focus:** strengthen the bottom rule to Warm Bone and use Serum Pink for the visible outline.
+- **Focus:** strengthen the bottom rule and keep a visible current-color outline.
 - **Error / Disabled:** preserve readable contrast and communicate state with text and structure, never color alone.
 
 ### Navigation

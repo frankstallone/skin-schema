@@ -13,6 +13,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
     themeColor: '#071310',
     statusBarStyle: 'black-translucent',
   }}
+  mode="dark"
   hideFooter
 >
   <main class="thank-you-page" id="main">
@@ -82,23 +83,18 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 <style>
   :global(html),
   :global(body) {
-    background: var(--color-inverse-paper);
+    background: var(--color-surface-auxiliary-background-color);
   }
 
   .thank-you-page {
-    --thank-you-surface: var(--color-inverse-paper);
-    --thank-you-text: var(--color-inverse-ink);
-    --thank-you-muted-text: var(--color-inverse-muted-ink);
-    --thank-you-soft: var(--color-rose-250);
-    --thank-you-energy: var(--color-accent);
-    background: var(--thank-you-surface);
-    color: var(--thank-you-text);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     min-block-size: 100vh;
   }
 
   .thank-you-nav {
     align-items: center;
-    color: var(--thank-you-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     display: flex;
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
@@ -130,7 +126,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   .thank-you-nav a:focus-visible,
   .thank-you-button:focus-visible,
   .thank-you-text-link:focus-visible {
-    outline: 2px solid var(--thank-you-energy);
+    outline: 2px solid currentColor;
     outline-offset: 0.25rem;
   }
 
@@ -142,7 +138,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-kicker {
-    color: var(--thank-you-energy);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-size: var(--text-step-000);
     margin: 0;
     max-inline-size: none;
@@ -154,7 +150,11 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
         color-mix(in srgb, var(--color-pine-900) 30%, transparent),
         transparent
       ),
-      color-mix(in oklab, var(--thank-you-surface) 96%, var(--thank-you-soft));
+      color-mix(
+        in oklab,
+        var(--color-surface-auxiliary-background-color) 96%,
+        var(--color-surface-primary-background-color)
+      );
     display: grid;
     gap: var(--spacing-xl);
     grid-template-columns: minmax(19rem, 0.82fr) minmax(18rem, 0.68fr);
@@ -180,7 +180,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-hero__copy > p:not(.thank-you-kicker) {
-    color: var(--thank-you-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-size: var(--text-step-1);
     margin: 0;
     max-inline-size: 42rem;
@@ -195,9 +195,9 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-button {
-    background: var(--thank-you-surface);
+    background: var(--color-action-secondary-background-color);
     border-radius: 999px;
-    color: var(--thank-you-text);
+    color: var(--color-action-secondary-foreground-color);
     display: inline-flex;
     font-weight: var(--font-weight-bold);
     inline-size: fit-content;
@@ -214,18 +214,18 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-button--light {
-    background: var(--thank-you-energy);
-    color: var(--color-pine-900);
+    background: var(--color-action-primary-background-color);
+    color: var(--color-action-primary-foreground-color);
   }
 
   .thank-you-button--light:hover,
   .thank-you-button--light:focus {
-    background: var(--color-accent-hover);
+    filter: brightness(1.08);
   }
 
   .thank-you-text-link {
     border-block-end: 1px solid currentColor;
-    color: var(--thank-you-muted-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-weight: var(--font-weight-bold);
     text-underline-offset: 0.22em;
     transition: color 180ms ease;
@@ -233,7 +233,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 
   .thank-you-text-link:hover,
   .thank-you-text-link:focus {
-    color: var(--thank-you-text);
+    color: var(--color-surface-auxiliary-foreground-color);
   }
 
   .thank-you-editorial {
@@ -260,7 +260,12 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-editorial__portrait {
-    border: 1px solid color-mix(in srgb, var(--thank-you-text) 18%, transparent);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 18%,
+        transparent
+      );
   }
 
   .thank-you-editorial__portrait img {
@@ -269,7 +274,12 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 
   .thank-you-editorial__still {
     align-self: center;
-    border: 1px solid color-mix(in srgb, var(--thank-you-text) 18%, transparent);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 18%,
+        transparent
+      );
     display: grid;
     grid-template-areas: 'stack';
     transform: translateX(calc(-1 * var(--spacing-l)))
@@ -291,7 +301,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
       color-mix(in srgb, var(--color-pine-900) 80%, transparent),
       transparent
     );
-    color: var(--thank-you-text);
+    color: var(--color-surface-auxiliary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
@@ -302,8 +312,8 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
 
   .thank-you-note {
     align-items: center;
-    background: var(--thank-you-soft);
-    color: var(--color-pine-900);
+    background: var(--color-surface-primary-background-color);
+    color: var(--color-surface-primary-foreground-color);
     display: grid;
     gap: var(--spacing-l);
     grid-template-columns: auto minmax(0, 1fr);

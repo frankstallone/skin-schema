@@ -73,17 +73,28 @@
   --color-rose-900: #331019;
   --color-rose-950: #22080f;
   --color-rose-999: #000000;
-  --color-paper: var(--color-bone-050);
-  --color-ink: var(--color-pine-750);
-  --color-muted-ink: var(--color-pine-650);
-  --color-rule: var(--color-pine-200);
-  --color-accent: var(--color-rose-450);
-  --color-accent-hover: var(--color-rose-400);
-  --color-focus: var(--color-rose-450);
-  --color-inverse-paper: var(--color-pine-950);
-  --color-inverse-raised-paper: var(--color-pine-900);
-  --color-inverse-ink: var(--color-bone-050);
-  --color-inverse-muted-ink: var(--color-bone-075);
+  --color-control-background-color: var(--color-bone-025);
+  --color-control-foreground-color: var(--color-pine-750);
+  --color-control-border-color: var(--color-pine-450);
+  --color-action-primary-background-color: var(--color-rose-450);
+  --color-action-primary-foreground-color: var(--color-pine-900);
+  --color-action-primary-border-color: var(--color-rose-450);
+  --color-action-secondary-background-color: var(--color-pine-750);
+  --color-action-secondary-foreground-color: var(--color-bone-050);
+  --color-action-secondary-border-color: var(--color-pine-750);
+  --color-action-auxiliary-background-color: transparent;
+  --color-action-auxiliary-foreground-color: var(--color-pine-750);
+  --color-action-auxiliary-border-color: var(--color-pine-750);
+  --color-surface-primary-background-color: var(--color-rose-250);
+  --color-surface-primary-foreground-color: var(--color-pine-900);
+  --color-surface-primary-border-color: var(--color-rose-250);
+  --color-surface-secondary-background-color: var(--color-bone-025);
+  --color-surface-secondary-foreground-color: var(--color-pine-750);
+  --color-surface-secondary-border-color: var(--color-pine-200);
+  --color-surface-auxiliary-background-color: var(--color-bone-050);
+  --color-surface-auxiliary-foreground-color: var(--color-pine-750);
+  --color-surface-auxiliary-border-color: var(--color-pine-200);
+  --color-figure-1st-color: var(--color-rose-450);
 
   /* Spacing */
   --spacing-zero: clamp(0rem, -0.02rem + 0.11vw, 0.0625rem);
@@ -144,4 +155,54 @@
   --breakpoint-sm: 330px;
   --breakpoint-md: 760px;
   --breakpoint-lg: 1230px;
+}
+
+[data-mode~='light'] {
+  --color-control-background-color: var(--color-bone-025);
+  --color-control-foreground-color: var(--color-pine-750);
+  --color-control-border-color: var(--color-pine-450);
+  --color-action-primary-background-color: var(--color-rose-450);
+  --color-action-primary-foreground-color: var(--color-pine-900);
+  --color-action-primary-border-color: var(--color-rose-450);
+  --color-action-secondary-background-color: var(--color-pine-750);
+  --color-action-secondary-foreground-color: var(--color-bone-050);
+  --color-action-secondary-border-color: var(--color-pine-750);
+  --color-action-auxiliary-background-color: transparent;
+  --color-action-auxiliary-foreground-color: var(--color-pine-750);
+  --color-action-auxiliary-border-color: var(--color-pine-750);
+  --color-surface-primary-background-color: var(--color-rose-250);
+  --color-surface-primary-foreground-color: var(--color-pine-900);
+  --color-surface-primary-border-color: var(--color-rose-250);
+  --color-surface-secondary-background-color: var(--color-bone-025);
+  --color-surface-secondary-foreground-color: var(--color-pine-750);
+  --color-surface-secondary-border-color: var(--color-pine-200);
+  --color-surface-auxiliary-background-color: var(--color-bone-050);
+  --color-surface-auxiliary-foreground-color: var(--color-pine-750);
+  --color-surface-auxiliary-border-color: var(--color-pine-200);
+  --color-figure-1st-color: var(--color-rose-450);
+}
+
+[data-mode~='dark'] {
+  --color-control-background-color: transparent;
+  --color-control-foreground-color: var(--color-bone-050);
+  --color-control-border-color: var(--color-bone-300);
+  --color-action-primary-background-color: var(--color-rose-450);
+  --color-action-primary-foreground-color: var(--color-pine-900);
+  --color-action-primary-border-color: var(--color-rose-450);
+  --color-action-secondary-background-color: var(--color-bone-050);
+  --color-action-secondary-foreground-color: var(--color-pine-950);
+  --color-action-secondary-border-color: var(--color-bone-050);
+  --color-action-auxiliary-background-color: transparent;
+  --color-action-auxiliary-foreground-color: var(--color-bone-050);
+  --color-action-auxiliary-border-color: var(--color-bone-050);
+  --color-surface-primary-background-color: var(--color-rose-250);
+  --color-surface-primary-foreground-color: var(--color-pine-900);
+  --color-surface-primary-border-color: var(--color-rose-250);
+  --color-surface-secondary-background-color: var(--color-pine-900);
+  --color-surface-secondary-foreground-color: var(--color-bone-050);
+  --color-surface-secondary-border-color: var(--color-bone-075);
+  --color-surface-auxiliary-background-color: var(--color-pine-950);
+  --color-surface-auxiliary-foreground-color: var(--color-bone-050);
+  --color-surface-auxiliary-border-color: var(--color-bone-075);
+  --color-figure-1st-color: var(--color-rose-450);
 }

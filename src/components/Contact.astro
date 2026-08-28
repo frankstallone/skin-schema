@@ -24,7 +24,7 @@ const message = content?.message
       </p>
     </div>
     <div
-      class="border border-rule flex flex-col justify-between drop rounded-2xl overflow-clip"
+      class="border border-surface-secondary-border-color flex flex-col justify-between drop rounded-2xl overflow-clip"
     >
       <div class="box">
         <form
@@ -45,7 +45,7 @@ const message = content?.message
               <input
                 name="bot-field"
                 id="bot-field"
-                class="border-rule border-1 border-solid"
+                class="border-control-border-color border-1 border-solid"
               />
             </span>
           </div>
@@ -59,7 +59,7 @@ const message = content?.message
                 name="name"
                 type="text"
                 required
-                class="border-rule border-1 border-solid"
+                class="border-control-border-color border-1 border-solid"
               />
             </span>
             <span class="stack">
@@ -71,7 +71,7 @@ const message = content?.message
                 name="email"
                 type="email"
                 required
-                class="border-rule border-1 border-solid"
+                class="border-control-border-color border-1 border-solid"
               />
             </span>
             <span class="stack">
@@ -83,7 +83,8 @@ const message = content?.message
                 id="message"
                 rows="6"
                 required
-                class="border-rule border-1 border-solid"></textarea>
+                class="border-control-border-color border-1 border-solid"
+              ></textarea>
             </span>
             <button type="submit" class="button max-w-full">Submit</button>
           </div>

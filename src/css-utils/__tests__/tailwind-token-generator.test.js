@@ -25,6 +25,31 @@ const textSizes = readTokenJson('src/design-tokens/text-sizes.json');
 const textWeights = readTokenJson('src/design-tokens/text-weights.json');
 const viewports = readTokenJson('src/design-tokens/viewports.json');
 
+const expectedColorIntents = [
+  'control-background-color',
+  'control-foreground-color',
+  'control-border-color',
+  'action-primary-background-color',
+  'action-primary-foreground-color',
+  'action-primary-border-color',
+  'action-secondary-background-color',
+  'action-secondary-foreground-color',
+  'action-secondary-border-color',
+  'action-auxiliary-background-color',
+  'action-auxiliary-foreground-color',
+  'action-auxiliary-border-color',
+  'surface-primary-background-color',
+  'surface-primary-foreground-color',
+  'surface-primary-border-color',
+  'surface-secondary-background-color',
+  'surface-secondary-foreground-color',
+  'surface-secondary-border-color',
+  'surface-auxiliary-background-color',
+  'surface-auxiliary-foreground-color',
+  'surface-auxiliary-border-color',
+  'figure-1st-color',
+];
+
 describe('tailwind token generator', () => {
   it('slugifies token names the same way as the existing Tailwind bridge', () => {
     assert.equal(slugTokenName('2XS - XS'), '2xs-xs');
@@ -58,19 +83,34 @@ describe('tailwind token generator', () => {
     assert.match(themeCss, /--color-bone-050: #f2ede6;/);
     assert.match(themeCss, /--color-rose-250: #e6a0b5;/);
     assert.match(themeCss, /--color-rose-450: #d85b7d;/);
-    assert.match(themeCss, /--color-paper: var\(--color-bone-050\);/);
-    assert.match(themeCss, /--color-ink: var\(--color-pine-750\);/);
-    assert.match(themeCss, /--color-inverse-paper: var\(--color-pine-950\);/);
     assert.match(
       themeCss,
-      /--color-inverse-raised-paper: var\(--color-pine-900\);/,
+      /--color-surface-auxiliary-background-color: var\(--color-bone-050\);/,
     );
-    assert.match(themeCss, /--color-inverse-ink: var\(--color-bone-050\);/);
     assert.match(
       themeCss,
-      /--color-inverse-muted-ink: var\(--color-bone-075\);/,
+      /--color-surface-primary-background-color: var\(--color-rose-250\);/,
     );
-    assert.doesNotMatch(themeCss, /--color-(?:gray|skin)-/);
+    assert.match(
+      themeCss,
+      /\[data-mode~='dark'\][\s\S]*--color-surface-secondary-background-color: var\(--color-pine-900\);/,
+    );
+    assert.match(
+      themeCss,
+      /\[data-mode~='dark'\][\s\S]*--color-surface-auxiliary-background-color: var\(--color-pine-950\);/,
+    );
+    assert.match(
+      themeCss,
+      /--color-action-primary-background-color: var\(--color-rose-450\);/,
+    );
+    assert.match(
+      themeCss,
+      /--color-action-primary-foreground-color: var\(--color-pine-900\);/,
+    );
+    assert.doesNotMatch(
+      themeCss,
+      /--color-(?:gray|skin)-|--color-(?:paper|ink|muted-ink|rule|accent|accent-hover|focus|inverse(?:-[a-z-]+)?):/,
+    );
     assert.match(
       themeCss,
       /--spacing-2xs-xs: clamp\(0\.5625rem, 0\.36rem \+ 1\.00vw, 1\.125rem\);/,
@@ -115,6 +155,16 @@ describe('tailwind token generator', () => {
     });
   });
 
+  it('defines the same complete intent set for every color mode', () => {
+    assert.equal(colors.defaultMode, 'light');
+    assert.deepEqual(colors.intents, expectedColorIntents);
+    assert.deepEqual(Object.keys(colors.modes), ['light', 'dark']);
+
+    Object.values(colors.modes).forEach((mode) => {
+      assert.deepEqual(Object.keys(mode), colors.intents);
+    });
+  });
+
   it('rejects an incomplete color scale', () => {
     const incompleteColors = structuredClone(colors);
     delete incompleteColors.scales.pine['450'];
@@ -134,9 +184,12 @@ describe('tailwind token generator', () => {
     );
   });
 
-  it('rejects a semantic role that references an unknown color', () => {
+  it('rejects a color intent that references an unknown color', () => {
     const invalidColors = structuredClone(colors);
-    invalidColors.roles.focus = { scale: 'rose', tone: '475' };
+    invalidColors.modes.dark['action-primary-background-color'] = {
+      scale: 'rose',
+      tone: '475',
+    };
 
     assert.throws(
       () =>
@@ -149,7 +202,66 @@ describe('tailwind token generator', () => {
           textWeightTokens: textWeights.items,
           viewportTokens: viewports,
         }),
-      /Color role "focus" references unknown color "rose\.475"\./,
+      /Color intent "action-primary-background-color" references unknown color "rose\.475"\./,
+    );
+  });
+
+  it('rejects a color mode with incomplete intent coverage', () => {
+    const incompleteMode = structuredClone(colors);
+    delete incompleteMode.modes.dark['control-border-color'];
+
+    assert.throws(
+      () =>
+        buildTailwindCssArtifacts({
+          colorTokens: incompleteMode,
+          fontTokens: fonts.items,
+          spacingTokens: spacing.items,
+          textSizeTokens: textSizes.items,
+          textLeadingTokens: textLeading.items,
+          textWeightTokens: textWeights.items,
+          viewportTokens: viewports,
+        }),
+      /Color mode "dark" is invalid: missing control-border-color\./,
+    );
+  });
+
+  it('rejects color mode names that collide after slugification', () => {
+    const collidingModes = structuredClone(colors);
+    collidingModes.modes.DARK = structuredClone(colors.modes.dark);
+
+    assert.throws(
+      () =>
+        buildTailwindCssArtifacts({
+          colorTokens: collidingModes,
+          fontTokens: fonts.items,
+          spacingTokens: spacing.items,
+          textSizeTokens: textSizes.items,
+          textLeadingTokens: textLeading.items,
+          textWeightTokens: textWeights.items,
+          viewportTokens: viewports,
+        }),
+      /Color mode names must be unique after slugification\./,
+    );
+  });
+
+  it('rejects assignment names that collide after slugification', () => {
+    const collidingAssignments = structuredClone(colors);
+    collidingAssignments.modes.dark['Control Background Color'] = {
+      value: 'transparent',
+    };
+
+    assert.throws(
+      () =>
+        buildTailwindCssArtifacts({
+          colorTokens: collidingAssignments,
+          fontTokens: fonts.items,
+          spacingTokens: spacing.items,
+          textSizeTokens: textSizes.items,
+          textLeadingTokens: textLeading.items,
+          textWeightTokens: textWeights.items,
+          viewportTokens: viewports,
+        }),
+      /Color mode "dark" assignment names must be unique after slugification\./,
     );
   });
 });

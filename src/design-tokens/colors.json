@@ -1,6 +1,6 @@
 {
   "title": "Brand colors",
-  "description": "Pine, Bone, and Rose tonal scales generated with F4 Tonal Foundry. Semantic roles reference exact scale tones.",
+  "description": "Stable Pine, Bone, and Rose primitives generated with F4 Tonal Foundry. Complete light and dark modes assign those primitives to Mise en Mode color intents.",
   "foundry": {
     "destination": "srgb",
     "tween": "oklch",
@@ -99,21 +99,83 @@
       "999": "#000000"
     }
   },
-  "roles": {
-    "paper": { "scale": "bone", "tone": "050" },
-    "ink": { "scale": "pine", "tone": "750" },
-    "muted-ink": { "scale": "pine", "tone": "650" },
-    "rule": { "scale": "pine", "tone": "200" },
-    "accent": { "scale": "rose", "tone": "450" },
-    "accent-hover": { "scale": "rose", "tone": "400" },
-    "focus": { "scale": "rose", "tone": "450" },
-    "inverse-paper": { "scale": "pine", "tone": "950" },
-    "inverse-raised-paper": {
-      "scale": "pine",
-      "tone": "900",
-      "note": "Brand exception: Pine 900 is an approved dark surface alongside Pine 950. Although 900 is a three-quarter tone, it retains the brand's mineral character and provides strong contrast with Bone text. Do not replace it with Pine 999."
+  "defaultMode": "light",
+  "intents": [
+    "control-background-color",
+    "control-foreground-color",
+    "control-border-color",
+    "action-primary-background-color",
+    "action-primary-foreground-color",
+    "action-primary-border-color",
+    "action-secondary-background-color",
+    "action-secondary-foreground-color",
+    "action-secondary-border-color",
+    "action-auxiliary-background-color",
+    "action-auxiliary-foreground-color",
+    "action-auxiliary-border-color",
+    "surface-primary-background-color",
+    "surface-primary-foreground-color",
+    "surface-primary-border-color",
+    "surface-secondary-background-color",
+    "surface-secondary-foreground-color",
+    "surface-secondary-border-color",
+    "surface-auxiliary-background-color",
+    "surface-auxiliary-foreground-color",
+    "surface-auxiliary-border-color",
+    "figure-1st-color"
+  ],
+  "modes": {
+    "light": {
+      "control-background-color": { "scale": "bone", "tone": "025" },
+      "control-foreground-color": { "scale": "pine", "tone": "750" },
+      "control-border-color": { "scale": "pine", "tone": "450" },
+      "action-primary-background-color": { "scale": "rose", "tone": "450" },
+      "action-primary-foreground-color": { "scale": "pine", "tone": "900" },
+      "action-primary-border-color": { "scale": "rose", "tone": "450" },
+      "action-secondary-background-color": { "scale": "pine", "tone": "750" },
+      "action-secondary-foreground-color": { "scale": "bone", "tone": "050" },
+      "action-secondary-border-color": { "scale": "pine", "tone": "750" },
+      "action-auxiliary-background-color": { "value": "transparent" },
+      "action-auxiliary-foreground-color": { "scale": "pine", "tone": "750" },
+      "action-auxiliary-border-color": { "scale": "pine", "tone": "750" },
+      "surface-primary-background-color": { "scale": "rose", "tone": "250" },
+      "surface-primary-foreground-color": { "scale": "pine", "tone": "900" },
+      "surface-primary-border-color": { "scale": "rose", "tone": "250" },
+      "surface-secondary-background-color": { "scale": "bone", "tone": "025" },
+      "surface-secondary-foreground-color": { "scale": "pine", "tone": "750" },
+      "surface-secondary-border-color": { "scale": "pine", "tone": "200" },
+      "surface-auxiliary-background-color": { "scale": "bone", "tone": "050" },
+      "surface-auxiliary-foreground-color": { "scale": "pine", "tone": "750" },
+      "surface-auxiliary-border-color": { "scale": "pine", "tone": "200" },
+      "figure-1st-color": { "scale": "rose", "tone": "450" }
     },
-    "inverse-ink": { "scale": "bone", "tone": "050" },
-    "inverse-muted-ink": { "scale": "bone", "tone": "075" }
+    "dark": {
+      "control-background-color": { "value": "transparent" },
+      "control-foreground-color": { "scale": "bone", "tone": "050" },
+      "control-border-color": { "scale": "bone", "tone": "300" },
+      "action-primary-background-color": { "scale": "rose", "tone": "450" },
+      "action-primary-foreground-color": { "scale": "pine", "tone": "900" },
+      "action-primary-border-color": { "scale": "rose", "tone": "450" },
+      "action-secondary-background-color": { "scale": "bone", "tone": "050" },
+      "action-secondary-foreground-color": { "scale": "pine", "tone": "950" },
+      "action-secondary-border-color": { "scale": "bone", "tone": "050" },
+      "action-auxiliary-background-color": { "value": "transparent" },
+      "action-auxiliary-foreground-color": { "scale": "bone", "tone": "050" },
+      "action-auxiliary-border-color": { "scale": "bone", "tone": "050" },
+      "surface-primary-background-color": { "scale": "rose", "tone": "250" },
+      "surface-primary-foreground-color": { "scale": "pine", "tone": "900" },
+      "surface-primary-border-color": { "scale": "rose", "tone": "250" },
+      "surface-secondary-background-color": {
+        "scale": "pine",
+        "tone": "900",
+        "note": "Brand exception: Pine 900 is an approved dark surface alongside Pine 950. It retains the mineral character that Pine 999 loses and keeps strong contrast with Bone foregrounds."
+      },
+      "surface-secondary-foreground-color": { "scale": "bone", "tone": "050" },
+      "surface-secondary-border-color": { "scale": "bone", "tone": "075" },
+      "surface-auxiliary-background-color": { "scale": "pine", "tone": "950" },
+      "surface-auxiliary-foreground-color": { "scale": "bone", "tone": "050" },
+      "surface-auxiliary-border-color": { "scale": "bone", "tone": "075" },
+      "figure-1st-color": { "scale": "rose", "tone": "450" }
+    }
   }
 }

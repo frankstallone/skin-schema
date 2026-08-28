@@ -68,13 +68,17 @@ const createEntries = (items, valueBuilder) =>
     value: valueBuilder(item),
   }));
 
-const createColorEntries = ({ scales, roles }) => {
+const createColorEntries = ({ scales, intents, modes, defaultMode }) => {
   if (!scales || typeof scales !== 'object' || Array.isArray(scales)) {
     throw new TypeError('Color tokens must define a scales object.');
   }
 
-  if (!roles || typeof roles !== 'object' || Array.isArray(roles)) {
-    throw new TypeError('Color tokens must define a roles object.');
+  if (!Array.isArray(intents) || intents.length === 0) {
+    throw new TypeError('Color tokens must define a non-empty intents array.');
+  }
+
+  if (!modes || typeof modes !== 'object' || Array.isArray(modes)) {
+    throw new TypeError('Color tokens must define a modes object.');
   }
 
   const normalizedScales = new Map();
@@ -132,29 +136,126 @@ const createColorEntries = ({ scales, roles }) => {
     },
   );
 
-  const roleEntries = Object.entries(roles).map(([roleName, reference]) => {
+  const normalizedIntents = intents.map(slugTokenName);
+
+  if (
+    normalizedIntents.some((intent) => !intent) ||
+    new Set(normalizedIntents).size !== normalizedIntents.length
+  ) {
+    throw new Error('Color intents must be unique after slugification.');
+  }
+
+  const resolveModeValue = (intent, reference) => {
+    if (reference?.value === 'transparent') {
+      return reference.value;
+    }
+
     const scaleName = slugTokenName(reference?.scale ?? '');
     const tone = `${reference?.tone ?? ''}`;
 
     if (!normalizedScales.has(scaleName) || !COLOR_TONES.includes(tone)) {
       throw new Error(
-        `Color role "${roleName}" references unknown color "${scaleName}.${tone}".`,
+        `Color intent "${intent}" references unknown color "${scaleName}.${tone}".`,
       );
     }
 
-    return {
-      name: slugTokenName(roleName),
-      value: `var(--color-${scaleName}-${tone})`,
-    };
+    return `var(--color-${scaleName}-${tone})`;
+  };
+
+  const normalizedModeNames = Object.keys(modes).map(slugTokenName);
+
+  if (
+    normalizedModeNames.some((modeName) => !modeName) ||
+    new Set(normalizedModeNames).size !== normalizedModeNames.length
+  ) {
+    throw new Error('Color mode names must be unique after slugification.');
+  }
+
+  const modeEntries = Object.entries(modes).map(([modeName, assignments]) => {
+    const normalizedModeName = slugTokenName(modeName);
+
+    if (
+      !assignments ||
+      typeof assignments !== 'object' ||
+      Array.isArray(assignments)
+    ) {
+      throw new TypeError(`Color mode "${modeName}" must be an object.`);
+    }
+
+    const assignmentNames = Object.keys(assignments).map(slugTokenName);
+
+    if (
+      assignmentNames.some((intent) => !intent) ||
+      new Set(assignmentNames).size !== assignmentNames.length
+    ) {
+      throw new Error(
+        `Color mode "${normalizedModeName}" assignment names must be unique after slugification.`,
+      );
+    }
+
+    const missingIntents = normalizedIntents.filter(
+      (intent) => !assignmentNames.includes(intent),
+    );
+    const unknownIntents = assignmentNames.filter(
+      (intent) => !normalizedIntents.includes(intent),
+    );
+
+    if (missingIntents.length > 0 || unknownIntents.length > 0) {
+      const details = [
+        missingIntents.length > 0 && `missing ${missingIntents.join(', ')}`,
+        unknownIntents.length > 0 && `unknown ${unknownIntents.join(', ')}`,
+      ]
+        .filter(Boolean)
+        .join('; ');
+      throw new Error(
+        `Color mode "${normalizedModeName}" is invalid: ${details}.`,
+      );
+    }
+
+    const entries = Object.entries(assignments).map(([intent, reference]) => {
+      const normalizedIntent = slugTokenName(intent);
+
+      return {
+        name: normalizedIntent,
+        value: resolveModeValue(normalizedIntent, reference),
+      };
+    });
+
+    return { name: normalizedModeName, entries };
   });
 
-  const names = [...scaleEntries, ...roleEntries].map(({ name }) => name);
+  const normalizedDefaultMode = slugTokenName(defaultMode ?? '');
+  const defaultModeEntry = modeEntries.find(
+    ({ name }) => name === normalizedDefaultMode,
+  );
+
+  if (!defaultModeEntry) {
+    throw new Error(`Unknown default color mode "${normalizedDefaultMode}".`);
+  }
+
+  const intentEntries = defaultModeEntry.entries;
+
+  const names = [...scaleEntries, ...intentEntries].map(({ name }) => name);
   if (new Set(names).size !== names.length) {
     throw new Error('Color token names must be unique after slugification.');
   }
 
-  return [...scaleEntries, ...roleEntries];
+  return {
+    entries: [...scaleEntries, ...intentEntries],
+    modes: modeEntries,
+  };
 };
+
+const formatColorModes = (modes) =>
+  modes
+    .map(({ name, entries }) => {
+      const declarations = entries.map(
+        ({ name: intent, value }) => `  --color-${intent}: ${value};`,
+      );
+
+      return [`[data-mode~='${name}'] {`, ...declarations, '}'].join('\n');
+    })
+    .join('\n\n');
 
 const formatThemeSection = (title, prefix, entries) => {
   const lines = entries.map(
@@ -190,7 +291,7 @@ export const buildTailwindCssArtifacts = ({
   textWeightTokens,
   viewportTokens,
 }) => {
-  const colors = createColorEntries(colorTokens);
+  const colorData = createColorEntries(colorTokens);
   const fonts = createEntries(fontTokens, ({ value }) => value);
   const spacing = createEntries(spacingTokens, (token) =>
     createClampValue(token, viewportTokens),
@@ -207,7 +308,7 @@ export const buildTailwindCssArtifacts = ({
   ];
 
   const themeSections = [
-    formatThemeSection('Colors', 'color', colors),
+    formatThemeSection('Colors', 'color', colorData.entries),
     formatThemeSection('Spacing', 'spacing', spacing),
     formatThemeSection('Typography', 'text', textSizes),
     formatThemeSection('Line Heights', 'leading', lineHeights),
@@ -224,6 +325,8 @@ export const buildTailwindCssArtifacts = ({
       '@theme static {',
       themeSections.join('\n\n'),
       '}',
+      '',
+      formatColorModes(colorData.modes),
       '',
     ].join('\n'),
     utilitiesCss: [

@@ -9,5 +9,5 @@
 }
 
 .link:visited {
-  color: var(--color-ink);
+  color: var(--color-action-auxiliary-foreground-color);
 }
