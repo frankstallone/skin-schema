@@ -39,7 +39,7 @@ const main = async () => {
   await mkdir(outputDir, { recursive: true });
 
   const { themeCss, utilitiesCss } = buildTailwindCssArtifacts({
-    colorTokens: colorTokens.items,
+    colorTokens,
     fontTokens: fontTokens.items,
     spacingTokens: spacingTokens.items,
     textSizeTokens: textSizeTokens.items,

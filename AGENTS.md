@@ -73,7 +73,7 @@ This repo uses a single-context domain-doc layout. See `docs/agents/domain.md`.
 ### Tailwind 4 Usage
 
 - Tailwind classes are driven by the generated `@theme` file in `src/css/generated/tailwind-theme.css`.
-- Prefer token-backed Tailwind utilities such as `bg-gray-100`, `text-step-3`, `font-mono`, `font-bold`, `gap-s`, and `px-l`.
+- Prefer token-backed Tailwind utilities such as `bg-paper`, `text-ink`, `text-step-3`, `font-mono`, `font-bold`, `gap-s`, and `px-l`.
 - Generated custom utilities live in `src/css/generated/tailwind-utilities.css`:
   - `flow-space-*`
   - `region-space-*`

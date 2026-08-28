@@ -1,74 +1,92 @@
 {
-  "title": "Colors",
-  "description": "Hex color codes that can be shared, cross-platform. They can be converted at point of usage, such as HSL for web or CMYK for print.",
-  "items": [
-    {
-      "name": "Gray 100",
-      "value": "hsl(0, 0%, 99%)"
+  "title": "Brand colors",
+  "description": "Pine, Bone, and Rose tonal scales generated with F4 Tonal Foundry. Semantic roles reference exact scale tones.",
+  "scales": {
+    "pine": {
+      "000": "#ffffff",
+      "025": "#f7f8f8",
+      "050": "#eff1f1",
+      "075": "#e7ebea",
+      "100": "#e0e4e3",
+      "150": "#cfd5d3",
+      "200": "#bfc8c5",
+      "250": "#b0bbb8",
+      "300": "#a2aeaa",
+      "350": "#92a09c",
+      "400": "#83948f",
+      "450": "#758882",
+      "500": "#667a74",
+      "550": "#5a7069",
+      "600": "#4b635c",
+      "650": "#3e5750",
+      "700": "#314c44",
+      "750": "#213f37",
+      "800": "#1b352e",
+      "850": "#142924",
+      "900": "#0d1e1a",
+      "950": "#071310",
+      "999": "#000000"
     },
-    {
-      "name": "Gray 200",
-      "value": "hsl(0, 0%, 97.3%)"
+    "bone": {
+      "000": "#ffffff",
+      "025": "#faf8f5",
+      "050": "#f2ede6",
+      "075": "#eee9e2",
+      "100": "#e6e1db",
+      "150": "#d8d4cd",
+      "200": "#cac6c0",
+      "250": "#bcb8b3",
+      "300": "#afaba6",
+      "350": "#a09d98",
+      "400": "#93908c",
+      "450": "#86837f",
+      "500": "#797672",
+      "550": "#6d6a67",
+      "600": "#605e5b",
+      "650": "#54524f",
+      "700": "#484644",
+      "750": "#3d3b39",
+      "800": "#32302f",
+      "850": "#272624",
+      "900": "#1c1b1a",
+      "950": "#121110",
+      "999": "#000000"
     },
-    {
-      "name": "Gray 300",
-      "value": "hsl(0, 0%, 95.1%)"
-    },
-    {
-      "name": "Gray 400",
-      "value": "hsl(0, 0%, 93%)"
-    },
-    {
-      "name": "Gray 500",
-      "value": "hsl(0, 0%, 90.9%)"
-    },
-    {
-      "name": "Gray 600",
-      "value": "hsl(0, 0%, 88.7%)"
-    },
-    {
-      "name": "Gray 700",
-      "value": "hsl(0, 0%, 85.8%)"
-    },
-    {
-      "name": "Gray 800",
-      "value": "hsl(0, 0%, 78%)"
-    },
-    {
-      "name": "Gray 900",
-      "value": "hsl(0, 0%, 56.1%)"
-    },
-    {
-      "name": "Gray 1000",
-      "value": "hsl(0, 0%, 52.3%)"
-    },
-    {
-      "name": "Gray 1100",
-      "value": "hsl(0, 0%, 43.5%)"
-    },
-    {
-      "name": "Gray 1200",
-      "value": "hsl(0, 0%, 9%)"
-    },
-    {
-      "name": "Skin 100",
-      "value": "#e6c3ba"
-    },
-    {
-      "name": "Skin 200",
-      "value": "#e6e4d8"
-    },
-    {
-      "name": "Skin 300",
-      "value": "#f2f2f2"
-    },
-    {
-      "name": "Skin 400",
-      "value": "#e3b4d4"
-    },
-    {
-      "name": "Skin 500",
-      "value": "#eec0bd"
+    "rose": {
+      "000": "#ffffff",
+      "025": "#fdf6f8",
+      "050": "#fcedf1",
+      "075": "#fae4ea",
+      "100": "#f7dbe3",
+      "150": "#f3cad5",
+      "200": "#eeb9c8",
+      "250": "#e6a0b5",
+      "300": "#e494ac",
+      "350": "#e0819c",
+      "400": "#dc6d8c",
+      "450": "#d85b7d",
+      "500": "#c1506f",
+      "550": "#ae4864",
+      "600": "#9b3f58",
+      "650": "#88374d",
+      "700": "#762e42",
+      "750": "#642637",
+      "800": "#531e2d",
+      "850": "#421723",
+      "900": "#331019",
+      "950": "#22080f",
+      "999": "#000000"
     }
-  ]
+  },
+  "roles": {
+    "paper": { "scale": "bone", "tone": "050" },
+    "ink": { "scale": "pine", "tone": "750" },
+    "muted-ink": { "scale": "pine", "tone": "650" },
+    "rule": { "scale": "pine", "tone": "200" },
+    "accent": { "scale": "rose", "tone": "450" },
+    "accent-hover": { "scale": "rose", "tone": "400" },
+    "focus": { "scale": "rose", "tone": "450" },
+    "inverse-paper": { "scale": "pine", "tone": "950" },
+    "inverse-ink": { "scale": "bone", "tone": "050" }
+  }
 }

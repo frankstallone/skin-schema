@@ -14,6 +14,32 @@ const GENERATED_FILE_HEADER = [
 const UTILITY_COMMENT =
   '/* Generated custom utilities backed by theme tokens */';
 
+export const COLOR_TONES = [
+  '000',
+  '025',
+  '050',
+  '075',
+  '100',
+  '150',
+  '200',
+  '250',
+  '300',
+  '350',
+  '400',
+  '450',
+  '500',
+  '550',
+  '600',
+  '650',
+  '700',
+  '750',
+  '800',
+  '850',
+  '900',
+  '950',
+  '999',
+];
+
 export const slugTokenName = (name) => slugify(name, { lower: true });
 
 export const normalizeTokenValue = (value) =>
@@ -41,6 +67,94 @@ const createEntries = (items, valueBuilder) =>
     name: slugTokenName(item.name),
     value: valueBuilder(item),
   }));
+
+const createColorEntries = ({ scales, roles }) => {
+  if (!scales || typeof scales !== 'object' || Array.isArray(scales)) {
+    throw new TypeError('Color tokens must define a scales object.');
+  }
+
+  if (!roles || typeof roles !== 'object' || Array.isArray(roles)) {
+    throw new TypeError('Color tokens must define a roles object.');
+  }
+
+  const normalizedScales = new Map();
+
+  Object.entries(scales).forEach(([scaleName, tones]) => {
+    const normalizedScaleName = slugTokenName(scaleName);
+
+    if (!tones || typeof tones !== 'object' || Array.isArray(tones)) {
+      throw new TypeError(`Color scale "${scaleName}" must be an object.`);
+    }
+
+    if (!normalizedScaleName || normalizedScales.has(normalizedScaleName)) {
+      throw new Error('Color scale names must be unique after slugification.');
+    }
+
+    normalizedScales.set(normalizedScaleName, tones);
+  });
+
+  const scaleEntries = [...normalizedScales].flatMap(
+    ([normalizedScaleName, tones]) => {
+      const toneNames = Object.keys(tones);
+      const missingTones = COLOR_TONES.filter(
+        (tone) => !toneNames.includes(tone),
+      );
+      const unknownTones = toneNames.filter(
+        (tone) => !COLOR_TONES.includes(tone),
+      );
+
+      if (missingTones.length > 0 || unknownTones.length > 0) {
+        const details = [
+          missingTones.length > 0 && `missing ${missingTones.join(', ')}`,
+          unknownTones.length > 0 && `unknown ${unknownTones.join(', ')}`,
+        ]
+          .filter(Boolean)
+          .join('; ');
+        throw new Error(
+          `Color scale "${normalizedScaleName}" is invalid: ${details}.`,
+        );
+      }
+
+      return COLOR_TONES.map((tone) => {
+        const value = tones[tone];
+
+        if (!/^#[0-9a-f]{6}$/i.test(value)) {
+          throw new Error(
+            `Color scale "${normalizedScaleName}" tone "${tone}" must be a six-digit hex color.`,
+          );
+        }
+
+        return {
+          name: `${normalizedScaleName}-${tone}`,
+          value,
+        };
+      });
+    },
+  );
+
+  const roleEntries = Object.entries(roles).map(([roleName, reference]) => {
+    const scaleName = slugTokenName(reference?.scale ?? '');
+    const tone = `${reference?.tone ?? ''}`;
+
+    if (!normalizedScales.has(scaleName) || !COLOR_TONES.includes(tone)) {
+      throw new Error(
+        `Color role "${roleName}" references unknown color "${scaleName}.${tone}".`,
+      );
+    }
+
+    return {
+      name: slugTokenName(roleName),
+      value: `var(--color-${scaleName}-${tone})`,
+    };
+  });
+
+  const names = [...scaleEntries, ...roleEntries].map(({ name }) => name);
+  if (new Set(names).size !== names.length) {
+    throw new Error('Color token names must be unique after slugification.');
+  }
+
+  return [...scaleEntries, ...roleEntries];
+};
 
 const formatThemeSection = (title, prefix, entries) => {
   const lines = entries.map(
@@ -76,7 +190,7 @@ export const buildTailwindCssArtifacts = ({
   textWeightTokens,
   viewportTokens,
 }) => {
-  const colors = createEntries(colorTokens, ({ value }) => value);
+  const colors = createColorEntries(colorTokens);
   const fonts = createEntries(fontTokens, ({ value }) => value);
   const spacing = createEntries(spacingTokens, (token) =>
     createClampValue(token, viewportTokens),
