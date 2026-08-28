@@ -10,9 +10,9 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-mode={mode}>
   <Head {...meta} />
-  <body data-mode={mode}>
+  <body>
     {
       designContract && (
         <Fragment set:html={`<!-- Design contract: ${designContract} -->`} />
