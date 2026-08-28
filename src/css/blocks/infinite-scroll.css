@@ -1,12 +1,10 @@
 /* Outcomes mask */
 .infinite-scroll-mask {
-  --default-color: var(--color-gray-100);
-
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    var(--mask-color, var(--default-color)) 128px,
-    var(--mask-color, var(--default-color)) calc(100% - 200px),
+    currentColor 128px,
+    currentColor calc(100% - 200px),
     transparent 100%
   );
 }

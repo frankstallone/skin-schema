@@ -13,11 +13,12 @@ const { heading, subHeading } = Astro.props;
     <source src="/media/skin-schema-hero.mp4" type="video/mp4" />
   </video>
   <div
-    class="wrapper region z-20 absolute left-[0px] bottom-[10px] w-full h-full bg-gray-1200/40 flow"
+    class="wrapper region z-20 absolute left-[0px] bottom-[10px] w-full h-full bg-surface-secondary-background-color/50 text-surface-secondary-foreground-color flow"
+    data-mode="dark"
     style="--gutter: var(--spacing-s-l);"
   >
     <h1
-      class="text-step-1 md:text-step-5 mt-zero text-gray-100 tracking-tight text-balance font-mono"
+      class="text-step-1 md:text-step-5 mt-zero tracking-tight text-balance font-mono"
       style="max-inline-size: 18ch;"
     >
       {
@@ -26,11 +27,11 @@ const { heading, subHeading } = Astro.props;
           : 'Premium beauty content that feels polished, authentic, and brand-ready'
       }
     </h1>
-    <a href="/#Contact" class="button reverse mx-auto"> Reach out </a>
+    <a href="/#Contact" class="button secondary mx-auto"> Reach out </a>
     {
       subHeading && (
         <h2
-          class="text-gray-100 tracking-tight text-balance text-step-2"
+          class="tracking-tight text-balance text-step-2"
           style="max-inline-size: 18ch;"
         >
           {subHeading}

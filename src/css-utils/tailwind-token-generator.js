@@ -14,6 +14,32 @@ const GENERATED_FILE_HEADER = [
 const UTILITY_COMMENT =
   '/* Generated custom utilities backed by theme tokens */';
 
+export const COLOR_TONES = [
+  '000',
+  '025',
+  '050',
+  '075',
+  '100',
+  '150',
+  '200',
+  '250',
+  '300',
+  '350',
+  '400',
+  '450',
+  '500',
+  '550',
+  '600',
+  '650',
+  '700',
+  '750',
+  '800',
+  '850',
+  '900',
+  '950',
+  '999',
+];
+
 export const slugTokenName = (name) => slugify(name, { lower: true });
 
 export const normalizeTokenValue = (value) =>
@@ -41,6 +67,195 @@ const createEntries = (items, valueBuilder) =>
     name: slugTokenName(item.name),
     value: valueBuilder(item),
   }));
+
+const createColorEntries = ({ scales, intents, modes, defaultMode }) => {
+  if (!scales || typeof scales !== 'object' || Array.isArray(scales)) {
+    throw new TypeError('Color tokens must define a scales object.');
+  }
+
+  if (!Array.isArray(intents) || intents.length === 0) {
+    throw new TypeError('Color tokens must define a non-empty intents array.');
+  }
+
+  if (!modes || typeof modes !== 'object' || Array.isArray(modes)) {
+    throw new TypeError('Color tokens must define a modes object.');
+  }
+
+  const normalizedScales = new Map();
+
+  Object.entries(scales).forEach(([scaleName, tones]) => {
+    const normalizedScaleName = slugTokenName(scaleName);
+
+    if (!tones || typeof tones !== 'object' || Array.isArray(tones)) {
+      throw new TypeError(`Color scale "${scaleName}" must be an object.`);
+    }
+
+    if (!normalizedScaleName || normalizedScales.has(normalizedScaleName)) {
+      throw new Error('Color scale names must be unique after slugification.');
+    }
+
+    normalizedScales.set(normalizedScaleName, tones);
+  });
+
+  const scaleEntries = [...normalizedScales].flatMap(
+    ([normalizedScaleName, tones]) => {
+      const toneNames = Object.keys(tones);
+      const missingTones = COLOR_TONES.filter(
+        (tone) => !toneNames.includes(tone),
+      );
+      const unknownTones = toneNames.filter(
+        (tone) => !COLOR_TONES.includes(tone),
+      );
+
+      if (missingTones.length > 0 || unknownTones.length > 0) {
+        const details = [
+          missingTones.length > 0 && `missing ${missingTones.join(', ')}`,
+          unknownTones.length > 0 && `unknown ${unknownTones.join(', ')}`,
+        ]
+          .filter(Boolean)
+          .join('; ');
+        throw new Error(
+          `Color scale "${normalizedScaleName}" is invalid: ${details}.`,
+        );
+      }
+
+      return COLOR_TONES.map((tone) => {
+        const value = tones[tone];
+
+        if (!/^#[0-9a-f]{6}$/i.test(value)) {
+          throw new Error(
+            `Color scale "${normalizedScaleName}" tone "${tone}" must be a six-digit hex color.`,
+          );
+        }
+
+        return {
+          name: `${normalizedScaleName}-${tone}`,
+          value,
+        };
+      });
+    },
+  );
+
+  const normalizedIntents = intents.map(slugTokenName);
+
+  if (
+    normalizedIntents.some((intent) => !intent) ||
+    new Set(normalizedIntents).size !== normalizedIntents.length
+  ) {
+    throw new Error('Color intents must be unique after slugification.');
+  }
+
+  const resolveModeValue = (intent, reference) => {
+    if (reference?.value === 'transparent') {
+      return reference.value;
+    }
+
+    const scaleName = slugTokenName(reference?.scale ?? '');
+    const tone = `${reference?.tone ?? ''}`;
+
+    if (!normalizedScales.has(scaleName) || !COLOR_TONES.includes(tone)) {
+      throw new Error(
+        `Color intent "${intent}" references unknown color "${scaleName}.${tone}".`,
+      );
+    }
+
+    return `var(--color-${scaleName}-${tone})`;
+  };
+
+  const normalizedModeNames = Object.keys(modes).map(slugTokenName);
+
+  if (
+    normalizedModeNames.some((modeName) => !modeName) ||
+    new Set(normalizedModeNames).size !== normalizedModeNames.length
+  ) {
+    throw new Error('Color mode names must be unique after slugification.');
+  }
+
+  const modeEntries = Object.entries(modes).map(([modeName, assignments]) => {
+    const normalizedModeName = slugTokenName(modeName);
+
+    if (
+      !assignments ||
+      typeof assignments !== 'object' ||
+      Array.isArray(assignments)
+    ) {
+      throw new TypeError(`Color mode "${modeName}" must be an object.`);
+    }
+
+    const assignmentNames = Object.keys(assignments).map(slugTokenName);
+
+    if (
+      assignmentNames.some((intent) => !intent) ||
+      new Set(assignmentNames).size !== assignmentNames.length
+    ) {
+      throw new Error(
+        `Color mode "${normalizedModeName}" assignment names must be unique after slugification.`,
+      );
+    }
+
+    const missingIntents = normalizedIntents.filter(
+      (intent) => !assignmentNames.includes(intent),
+    );
+    const unknownIntents = assignmentNames.filter(
+      (intent) => !normalizedIntents.includes(intent),
+    );
+
+    if (missingIntents.length > 0 || unknownIntents.length > 0) {
+      const details = [
+        missingIntents.length > 0 && `missing ${missingIntents.join(', ')}`,
+        unknownIntents.length > 0 && `unknown ${unknownIntents.join(', ')}`,
+      ]
+        .filter(Boolean)
+        .join('; ');
+      throw new Error(
+        `Color mode "${normalizedModeName}" is invalid: ${details}.`,
+      );
+    }
+
+    const entries = Object.entries(assignments).map(([intent, reference]) => {
+      const normalizedIntent = slugTokenName(intent);
+
+      return {
+        name: normalizedIntent,
+        value: resolveModeValue(normalizedIntent, reference),
+      };
+    });
+
+    return { name: normalizedModeName, entries };
+  });
+
+  const normalizedDefaultMode = slugTokenName(defaultMode ?? '');
+  const defaultModeEntry = modeEntries.find(
+    ({ name }) => name === normalizedDefaultMode,
+  );
+
+  if (!defaultModeEntry) {
+    throw new Error(`Unknown default color mode "${normalizedDefaultMode}".`);
+  }
+
+  const intentEntries = defaultModeEntry.entries;
+
+  const names = [...scaleEntries, ...intentEntries].map(({ name }) => name);
+  if (new Set(names).size !== names.length) {
+    throw new Error('Color token names must be unique after slugification.');
+  }
+
+  return {
+    entries: [...scaleEntries, ...intentEntries],
+    modes: modeEntries,
+  };
+};
+
+const formatColorModes = (modes) =>
+  modes
+    .map(({ name, entries }) => {
+      const declarations = entries.map(
+        ({ name: intent, value }) => `  --color-${intent}: ${value};`,
+      );
+
+      return [`[data-mode~='${name}'] {`, ...declarations, '}'].join('\n');
+    })
+    .join('\n\n');
 
 const formatThemeSection = (title, prefix, entries) => {
   const lines = entries.map(
@@ -76,7 +291,7 @@ export const buildTailwindCssArtifacts = ({
   textWeightTokens,
   viewportTokens,
 }) => {
-  const colors = createEntries(colorTokens, ({ value }) => value);
+  const colorData = createColorEntries(colorTokens);
   const fonts = createEntries(fontTokens, ({ value }) => value);
   const spacing = createEntries(spacingTokens, (token) =>
     createClampValue(token, viewportTokens),
@@ -93,7 +308,7 @@ export const buildTailwindCssArtifacts = ({
   ];
 
   const themeSections = [
-    formatThemeSection('Colors', 'color', colors),
+    formatThemeSection('Colors', 'color', colorData.entries),
     formatThemeSection('Spacing', 'spacing', spacing),
     formatThemeSection('Typography', 'text', textSizes),
     formatThemeSection('Line Heights', 'leading', lineHeights),
@@ -110,6 +325,8 @@ export const buildTailwindCssArtifacts = ({
       '@theme static {',
       themeSections.join('\n\n'),
       '}',
+      '',
+      formatColorModes(colorData.modes),
       '',
     ].join('\n'),
     utilitiesCss: [

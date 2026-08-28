@@ -10,8 +10,8 @@ const [product] = storefrontProducts;
     title: 'Bathroom Rituals Preview | Skin Schema',
     description:
       'A watermarked Skin Schema preview for Bathroom Rituals. POC only; licensing is pending.',
-    themeColor: '#171717',
-    statusBarStyle: 'black-translucent',
+    themeColor: '#F2EDE6',
+    statusBarStyle: 'default',
   }}
 >
   <main id="main" class="storefront">
@@ -81,6 +81,7 @@ const [product] = storefrontProducts;
     <section
       id="license"
       class="storefront__purchase"
+      data-mode="dark"
       aria-labelledby="purchase-title"
     >
       <div>
@@ -101,11 +102,8 @@ const [product] = storefrontProducts;
 
 <style>
   .storefront {
-    --storefront-ink: var(--color-gray-1200);
-    --storefront-paper: var(--color-gray-100);
-    --storefront-muted: var(--color-gray-1000);
-    background: var(--storefront-paper);
-    color: var(--storefront-ink);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
     min-block-size: 100vh;
   }
 
@@ -118,7 +116,7 @@ const [product] = storefrontProducts;
 
   .storefront__header {
     align-items: baseline;
-    border-block-end: 1px solid var(--color-gray-500);
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
     display: flex;
     justify-content: space-between;
     padding-block: var(--spacing-xs);
@@ -149,7 +147,11 @@ const [product] = storefrontProducts;
   }
 
   .storefront__eyebrow {
-    color: var(--storefront-muted);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
     font-size: var(--text-step-000);
     letter-spacing: 0.08em;
     margin: 0 0 var(--spacing-s);
@@ -180,7 +182,7 @@ const [product] = storefrontProducts;
   }
 
   .storefront__media video {
-    background: var(--storefront-ink);
+    background: var(--color-surface-secondary-background-color);
     display: block;
     inline-size: 100%;
     max-block-size: 78vh;
@@ -188,14 +190,18 @@ const [product] = storefrontProducts;
   }
 
   .storefront__media figcaption {
-    color: var(--storefront-muted);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
     font-size: var(--text-step-000);
     margin-block-start: var(--spacing-2xs);
   }
 
   .storefront__details,
   .storefront__purchase {
-    border-block-start: 1px solid var(--color-gray-500);
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
     display: grid;
     gap: var(--spacing-l-xl);
     grid-template-columns: minmax(0, 0.8fr) minmax(16rem, 0.5fr);
@@ -209,13 +215,13 @@ const [product] = storefrontProducts;
   }
 
   .storefront__details dl {
-    border-block-start: 1px solid var(--color-gray-500);
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
     margin: 0;
   }
 
   .storefront__details dl div {
     align-items: baseline;
-    border-block-end: 1px solid var(--color-gray-500);
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
     display: flex;
     gap: var(--spacing-s);
     justify-content: space-between;
@@ -228,17 +234,25 @@ const [product] = storefrontProducts;
   }
 
   .storefront__details dt {
-    color: var(--storefront-muted);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
   }
 
   .storefront__purchase {
-    background: var(--storefront-ink);
-    color: var(--storefront-paper);
+    background: var(--color-surface-auxiliary-background-color);
+    color: var(--color-surface-auxiliary-foreground-color);
   }
 
   .storefront__purchase .storefront__eyebrow,
   .storefront__purchase p {
-    color: var(--color-gray-700);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
   }
 
   .storefront__purchase p:not(.storefront__eyebrow) {
@@ -250,9 +264,9 @@ const [product] = storefrontProducts;
   }
 
   .storefront__purchase button {
-    background: var(--storefront-paper);
-    border: 1px solid var(--storefront-paper);
-    color: var(--storefront-ink);
+    background: var(--color-action-primary-background-color);
+    border: 1px solid var(--color-action-primary-border-color);
+    color: var(--color-action-primary-foreground-color);
     cursor: pointer;
     font: inherit;
     font-weight: var(--font-weight-bold);
@@ -261,8 +275,7 @@ const [product] = storefrontProducts;
 
   .storefront__purchase button:hover,
   .storefront__purchase button:focus-visible {
-    background: var(--color-skin-200);
-    border-color: var(--color-skin-200);
+    filter: brightness(1.08);
   }
 
   @media (max-width: 700px) {

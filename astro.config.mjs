@@ -14,7 +14,10 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        new URL(page).pathname.replace(/\/+$/, '') !== '/palettes',
+    }),
     partytown({
       // Example: Add dataLayer.push as a forwarding-event.
       config: {

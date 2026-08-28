@@ -1,0 +1,445 @@
+---
+import Layout from '../layouts/Layout.astro';
+import colors from '../design-tokens/colors.json';
+
+const tonalWeights = [
+  '000',
+  '025',
+  '050',
+  '075',
+  '100',
+  '150',
+  '200',
+  '250',
+  '300',
+  '350',
+  '400',
+  '450',
+  '500',
+  '550',
+  '600',
+  '650',
+  '700',
+  '750',
+  '800',
+  '850',
+  '900',
+  '950',
+  '999',
+] as const;
+
+const tonalCategories = [
+  { name: 'Highlights', range: '000–075', span: 4 },
+  { name: 'Quarter tones', range: '100–350', span: 6 },
+  { name: 'Mid tones', range: '400–600', span: 5 },
+  { name: 'Three-quarter tones', range: '650–900', span: 6 },
+  { name: 'Shadows', range: '950–999', span: 2 },
+] as const;
+
+const foundryScaleNames = Object.keys(
+  colors.foundry.scales,
+) as (keyof typeof colors.foundry.scales)[];
+
+const paletteScales = foundryScaleNames.map((id) => ({
+  id,
+  ...colors.foundry.scales[id],
+  values: colors.scales[id],
+}));
+
+const tonalPalettes = paletteScales.map(({ name, values }) => ({
+  name,
+  colors: tonalWeights.map((weight) => ({
+    token: `${name.toLowerCase()}-${weight}`,
+    weight,
+    value: values[weight],
+  })),
+}));
+
+const colorValues = new Map(
+  tonalPalettes.flatMap((palette) =>
+    palette.colors.map(({ token, value }) => [token, value]),
+  ),
+);
+
+const approvedSwatches = paletteScales.flatMap(({ id, keys }) =>
+  keys.map(({ name, tone }, index) => {
+    const token = `${id}-${tone}`;
+
+    return {
+      keyType: index === 0 ? 'Anchor key' : 'Supporting key',
+      name,
+      token,
+      value: colorValues.get(token),
+    };
+  }),
+);
+
+const keyTokens = new Map(
+  approvedSwatches.map(({ keyType, token }) => [token, keyType]),
+);
+
+const darkSurfaceNote =
+  colors.modes.dark['surface-secondary-background-color'].note;
+
+const meta = {
+  title: 'Brand Palettes | Skin Schema',
+  description:
+    'A private reference for the current Skin Schema Pine, Bone, and Rose tonal scales.',
+  robots: 'noindex,nofollow',
+};
+
+const designContract = `
+THESIS: Make the three approved Tonal Foundry ramps readable as one living brand system; refuse a decorative swatch gallery.
+OWN-WORLD: Warm Bone, Mineral Pine, hairline rules, square swatches, and compact Geist Mono measurement labels.
+STORY: Start with the four approved source swatches, then compare Pine, Bone, and Rose at matching tonal weights.
+FIRST VIEWPORT: A concise brand header leads into the approved swatches and one aligned tonal-category legend.
+FORM: Code-led working color reference; manual-palettes-20260827.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+`;
+---
+
+<Layout meta={meta} hideFooter designContract={designContract}>
+  <main id="main" class="palette-page wrapper region">
+    <header class="page-header">
+      <h1>Brand color system</h1>
+      <p>
+        Three production ramps generated in F4 Tonal Foundry. Pine supplies
+        structure, Bone carries light and text, and Rose holds softness and
+        energy.
+      </p>
+      <p>{darkSurfaceNote}</p>
+      <p>
+        Mineral Pine 750 remains the approved key swatch and light-mode type
+        color.
+      </p>
+      <p>
+        Interface colors use purpose–priority–property intents. Light and dark
+        modes assign the same intent set at their scope boundary.
+      </p>
+      <p>
+        Lower weights are lighter. Higher weights are darker. Scroll the table
+        horizontally on narrow screens.
+      </p>
+    </header>
+
+    <section class="approved" aria-labelledby="approved-title">
+      <h2 id="approved-title">Approved source swatches</h2>
+      <div class="approved-grid">
+        {
+          approvedSwatches.map((swatch) => (
+            <article class="approved-swatch">
+              <div
+                class="approved-swatch__color"
+                style={`--swatch-color: ${swatch.value}`}
+                role="img"
+                aria-label={`${swatch.name}: ${swatch.value}`}
+              />
+              <div>
+                <h3>{swatch.name}</h3>
+                <code>{swatch.keyType}</code>
+                <code>{swatch.token}</code>
+                <code>{swatch.value}</code>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <div
+      class="palette-table"
+      role="region"
+      aria-label="Tonal color palettes"
+      tabindex="0"
+    >
+      <div class="palette-grid legend" aria-label="Tonal categories">
+        <div class="row-label legend-label">Category</div>
+        {
+          tonalCategories.map((category) => (
+            <div class="category" style={`--category-span: ${category.span}`}>
+              <strong>{category.name}</strong>
+              <span>{category.range}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="palette-grid weight-row" aria-hidden="true">
+        <div class="row-label">Weight</div>
+        {tonalWeights.map((weight) => <span>{weight}</span>)}
+      </div>
+
+      {
+        tonalPalettes.map((palette) => (
+          <section
+            class="palette-grid palette"
+            aria-labelledby={`palette-${palette.name.toLowerCase().replaceAll(' ', '-')}`}
+          >
+            <h2
+              class="row-label"
+              id={`palette-${palette.name.toLowerCase().replaceAll(' ', '-')}`}
+            >
+              {palette.name}
+            </h2>
+            {palette.colors.map((color) => (
+              <div
+                class:list={[
+                  'swatch-item',
+                  { 'swatch-item--key': keyTokens.has(color.token) },
+                ]}
+              >
+                <div
+                  class="swatch"
+                  style={`--swatch-color: ${color.value}`}
+                  aria-label={`${palette.name} ${color.weight}: ${color.value}`}
+                  role="img"
+                />
+                <code>{color.value}</code>
+                {keyTokens.has(color.token) && (
+                  <strong>{keyTokens.get(color.token)}</strong>
+                )}
+              </div>
+            ))}
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .palette-page {
+    --palette-label-width: 8rem;
+    --palette-column-width: 4.25rem;
+    --wrapper-max-width: 100%;
+  }
+
+  .page-header {
+    display: grid;
+    gap: var(--spacing-xs);
+    margin-block-end: var(--spacing-xl);
+    max-inline-size: 72ch;
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .approved {
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
+    margin-block-end: var(--spacing-xl);
+    padding-block-start: var(--spacing-m);
+  }
+
+  .approved > h2 {
+    font-size: var(--text-step-1);
+    margin-block: 0 var(--spacing-s);
+  }
+
+  .approved-grid {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .approved-swatch {
+    display: grid;
+    gap: var(--spacing-xs);
+    margin: 0;
+  }
+
+  .approved-swatch__color {
+    aspect-ratio: 3 / 2;
+    background: var(--swatch-color);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 12%,
+        transparent
+      );
+  }
+
+  .approved-swatch h3 {
+    font-size: var(--text-step-0);
+    margin: 0 0 var(--spacing-3xs);
+  }
+
+  .approved-swatch code {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .page-header h1,
+  .page-header p {
+    margin: 0;
+  }
+
+  .page-header p {
+    max-inline-size: 70ch;
+  }
+
+  .page-header code,
+  .swatch-item code {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .page-header code {
+    word-break: break-word;
+  }
+
+  .palette-table {
+    border-block: 1px solid var(--color-surface-auxiliary-border-color);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-block-end: var(--spacing-s);
+    scrollbar-color: var(--color-figure-1st-color)
+      var(--color-surface-secondary-background-color);
+    scrollbar-width: thin;
+  }
+
+  .palette-table:focus-visible {
+    outline-color: currentColor;
+    outline-offset: var(--spacing-2xs);
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: var(--palette-label-width) repeat(
+        23,
+        var(--palette-column-width)
+      );
+    min-inline-size: calc(
+      var(--palette-label-width) + 23 * var(--palette-column-width)
+    );
+  }
+
+  .row-label {
+    align-content: center;
+    background: var(--color-surface-auxiliary-background-color);
+    left: 0;
+    margin: 0;
+    padding-inline-end: var(--spacing-xs);
+    position: sticky;
+    z-index: 1;
+  }
+
+  .legend {
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
+    padding-block: var(--spacing-s);
+  }
+
+  .legend-label,
+  .weight-row,
+  .category {
+    font-size: var(--text-step-000);
+  }
+
+  .category {
+    align-content: end;
+    border-inline-start: 1px solid var(--color-surface-auxiliary-border-color);
+    display: grid;
+    grid-column: span var(--category-span);
+    line-height: var(--leading-fine);
+    padding-inline: var(--spacing-2xs);
+  }
+
+  .category span {
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
+    font-variant-numeric: tabular-nums;
+  }
+
+  .weight-row {
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    padding-block: var(--spacing-xs);
+    text-align: center;
+  }
+
+  .palette {
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
+    padding-block: var(--spacing-m);
+  }
+
+  .palette:last-child {
+    border-block-end: 0;
+  }
+
+  .palette .row-label {
+    font-size: var(--text-step-0);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-fine);
+  }
+
+  .swatch-item {
+    min-inline-size: 0;
+    padding-inline: 1px;
+  }
+
+  .swatch {
+    aspect-ratio: 1;
+    background: var(--swatch-color);
+    border: 1px solid
+      color-mix(
+        in srgb,
+        var(--color-surface-auxiliary-foreground-color) 12%,
+        transparent
+      );
+    inline-size: 100%;
+  }
+
+  .swatch-item code {
+    color: color-mix(
+      in srgb,
+      var(--color-surface-auxiliary-foreground-color) 78%,
+      transparent
+    );
+    display: block;
+    font-size: 0.75rem;
+    margin-block-start: var(--spacing-2xs);
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .swatch-item--key .swatch {
+    outline: 2px solid var(--color-figure-1st-color);
+    outline-offset: -3px;
+  }
+
+  .swatch-item strong {
+    color: var(--color-rose-600);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    line-height: 1;
+    margin-block-start: var(--spacing-3xs);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 40rem) {
+    .palette-page {
+      --palette-label-width: 7rem;
+      --palette-column-width: 3.75rem;
+    }
+
+    .page-header {
+      margin-block-end: var(--spacing-l);
+    }
+
+    .approved-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
