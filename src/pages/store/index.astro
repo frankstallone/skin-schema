@@ -10,8 +10,8 @@ const [product] = storefrontProducts;
     title: 'Bathroom Rituals Preview | Skin Schema',
     description:
       'A watermarked Skin Schema preview for Bathroom Rituals. POC only; licensing is pending.',
-    themeColor: '#171717',
-    statusBarStyle: 'black-translucent',
+    themeColor: '#F2EDE6',
+    statusBarStyle: 'default',
   }}
 >
   <main id="main" class="storefront">
@@ -101,9 +101,9 @@ const [product] = storefrontProducts;
 
 <style>
   .storefront {
-    --storefront-ink: var(--color-gray-1200);
-    --storefront-paper: var(--color-gray-100);
-    --storefront-muted: var(--color-gray-1000);
+    --storefront-ink: var(--color-ink);
+    --storefront-paper: var(--color-paper);
+    --storefront-muted: var(--color-muted-ink);
     background: var(--storefront-paper);
     color: var(--storefront-ink);
     min-block-size: 100vh;
@@ -118,7 +118,7 @@ const [product] = storefrontProducts;
 
   .storefront__header {
     align-items: baseline;
-    border-block-end: 1px solid var(--color-gray-500);
+    border-block-end: 1px solid var(--color-rule);
     display: flex;
     justify-content: space-between;
     padding-block: var(--spacing-xs);
@@ -195,7 +195,7 @@ const [product] = storefrontProducts;
 
   .storefront__details,
   .storefront__purchase {
-    border-block-start: 1px solid var(--color-gray-500);
+    border-block-start: 1px solid var(--color-rule);
     display: grid;
     gap: var(--spacing-l-xl);
     grid-template-columns: minmax(0, 0.8fr) minmax(16rem, 0.5fr);
@@ -209,13 +209,13 @@ const [product] = storefrontProducts;
   }
 
   .storefront__details dl {
-    border-block-start: 1px solid var(--color-gray-500);
+    border-block-start: 1px solid var(--color-rule);
     margin: 0;
   }
 
   .storefront__details dl div {
     align-items: baseline;
-    border-block-end: 1px solid var(--color-gray-500);
+    border-block-end: 1px solid var(--color-rule);
     display: flex;
     gap: var(--spacing-s);
     justify-content: space-between;
@@ -232,13 +232,13 @@ const [product] = storefrontProducts;
   }
 
   .storefront__purchase {
-    background: var(--storefront-ink);
-    color: var(--storefront-paper);
+    background: var(--color-inverse-paper);
+    color: var(--color-inverse-ink);
   }
 
   .storefront__purchase .storefront__eyebrow,
   .storefront__purchase p {
-    color: var(--color-gray-700);
+    color: var(--color-bone-200);
   }
 
   .storefront__purchase p:not(.storefront__eyebrow) {
@@ -250,9 +250,9 @@ const [product] = storefrontProducts;
   }
 
   .storefront__purchase button {
-    background: var(--storefront-paper);
-    border: 1px solid var(--storefront-paper);
-    color: var(--storefront-ink);
+    background: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    color: var(--color-pine-900);
     cursor: pointer;
     font: inherit;
     font-weight: var(--font-weight-bold);
@@ -261,8 +261,8 @@ const [product] = storefrontProducts;
 
   .storefront__purchase button:hover,
   .storefront__purchase button:focus-visible {
-    background: var(--color-skin-200);
-    border-color: var(--color-skin-200);
+    background: var(--color-accent-hover);
+    border-color: var(--color-accent-hover);
   }
 
   @media (max-width: 700px) {

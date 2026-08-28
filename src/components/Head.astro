@@ -8,6 +8,7 @@ interface Props {
   imageAlt?: string;
   themeColor?: string;
   statusBarStyle?: 'default' | 'black' | 'black-translucent';
+  robots?: string;
 }
 
 const {
@@ -16,8 +17,9 @@ const {
   canonicalURL,
   image,
   imageAlt = 'Skin Schema premium beauty content for skincare brands',
-  themeColor = '#ffffff',
+  themeColor = '#F2EDE6',
   statusBarStyle = 'default',
+  robots,
 } = Astro.props;
 
 const metaDescription =
@@ -67,6 +69,7 @@ const structuredData = isHomepage
 <head>
   <meta charset="UTF-8" />
   <meta name="description" content={metaDescription} />
+  {robots && <meta name="robots" content={robots} />}
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"

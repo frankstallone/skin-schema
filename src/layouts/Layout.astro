@@ -1,13 +1,18 @@
 ---
 import Footer from '../components/Footer.astro';
 import Head from '../components/Head.astro';
-const { meta, hideFooter = false } = Astro.props;
+const { meta, hideFooter = false, designContract } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <Head {...meta} />
   <body>
+    {
+      designContract && (
+        <Fragment set:html={`<!-- Design contract: ${designContract} -->`} />
+      )
+    }
     <a href="#main" class="sr-only sr-only-focusable">Skip to content</a>
     <slot />
     {!hideFooter && <Footer />}

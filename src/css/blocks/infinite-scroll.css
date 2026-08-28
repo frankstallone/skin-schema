@@ -1,6 +1,6 @@
 /* Outcomes mask */
 .infinite-scroll-mask {
-  --default-color: var(--color-gray-100);
+  --default-color: var(--color-inverse-ink);
 
   mask-image: linear-gradient(
     to right,

@@ -6,9 +6,9 @@
 */
 
 body {
-  @apply font-medium text-gray-1200;
-  background: var(--color-gray-100);
-  color: var(--color-gray-1200);
+  @apply font-medium text-ink;
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-size: var(--text-step-0);
   font-family: var(--font-base);
   line-height: var(--leading-standard);
@@ -41,7 +41,7 @@ h3 {
 
 /* Baseline for default links */
 a {
-  color: var(--color-gray-1200);
+  color: var(--color-ink);
   text-decoration-line: underline;
 }
 
@@ -62,12 +62,12 @@ blockquote:not([class]) {
 }
 blockquote:not([class]) {
   @apply text-step-2 ml-zero pl-xs-s;
-  border-left: max(0.08em, 1px) solid var(--color-gray-1200);
+  border-left: max(0.08em, 1px) solid var(--color-ink);
 }
 
 input,
 textarea {
-  border: 1px solid var(--color-gray-600);
+  border: 1px solid var(--color-pine-450);
   padding-block: var(--spacing-2xs);
   padding-inline: var(--spacing-xs);
   border-radius: 0;
@@ -75,8 +75,8 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border: 1px solid var(--color-gray-800);
-  outline: 2px solid var(--color-gray-900);
+  border: 1px solid var(--color-muted-ink);
+  outline: 2px solid var(--color-focus);
 }
 
 svg {
@@ -114,8 +114,8 @@ main:focus {
 
 /* Base selection styles that invert whatever colours are rendered */
 ::selection {
-  background: var(--color-gray-1200);
-  color: var(--color-gray-100);
+  background: var(--color-accent);
+  color: var(--color-pine-900);
 }
 
 details:hover {

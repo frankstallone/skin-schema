@@ -30,7 +30,7 @@ const downloadUrl = canDownload
   meta={{
     title: 'Purchase status | Skin Schema',
     description: 'Your Skin Schema purchase status and download link.',
-    themeColor: '#171717',
+    themeColor: '#071310',
     statusBarStyle: 'black-translucent',
   }}
 >
@@ -69,8 +69,8 @@ const downloadUrl = canDownload
 
 <style>
   .purchase-status {
-    background: var(--color-gray-1200);
-    color: var(--color-gray-100);
+    background: var(--color-inverse-paper);
+    color: var(--color-inverse-ink);
     display: grid;
     gap: var(--spacing-m);
     min-block-size: 100vh;
@@ -94,7 +94,7 @@ const downloadUrl = canDownload
   }
 
   .purchase-status__eyebrow {
-    color: var(--color-gray-400);
+    color: var(--color-bone-250);
     font-size: var(--text-step-000) !important;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -107,8 +107,8 @@ const downloadUrl = canDownload
   }
 
   .purchase-status__button {
-    background: var(--color-gray-100);
-    color: var(--color-gray-1200);
+    background: var(--color-accent);
+    color: var(--color-pine-900);
     font-weight: var(--font-weight-bold);
     margin-block-start: var(--spacing-xs);
     padding: var(--spacing-2xs) var(--spacing-m);
@@ -120,7 +120,7 @@ const downloadUrl = canDownload
   }
 
   .purchase-status a:focus-visible {
-    outline: 2px solid var(--color-skin-100);
+    outline: 2px solid var(--color-focus);
     outline-offset: 0.25rem;
   }
 </style>

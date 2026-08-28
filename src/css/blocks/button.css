@@ -3,8 +3,8 @@
 .button {
   display: block;
   max-width: fit-content;
-  color: var(--color-gray-200);
-  background-color: var(--color-gray-1200);
+  color: var(--color-pine-900);
+  background-color: var(--color-accent);
   border: none;
   font-size: var(--text-step-0);
   font-weight: var(--font-weight-bold);
@@ -18,29 +18,29 @@
 .button:hover,
 .button:focus,
 .button:active {
-  background-color: var(--color-skin-100);
-  color: var(--color-gray-1200);
+  background-color: var(--color-accent-hover);
+  color: var(--color-pine-900);
 }
 .button:focus {
-  outline: 2px solid var(--color-gray-900);
+  outline: 2px solid var(--color-focus);
 }
 
 .button:disabled {
-  background-color: var(--color-gray-300);
-  color: var(--color-gray-700);
+  background-color: var(--color-bone-150);
+  color: var(--color-muted-ink);
 }
 .button:disabled:hover {
-  background-color: var(--color-gray-300);
-  color: var(--color-gray-800);
+  background-color: var(--color-bone-150);
+  color: var(--color-muted-ink);
 }
 
 .button.reverse {
-  background-color: var(--color-gray-200);
-  color: var(--color-gray-1200);
+  background-color: var(--color-inverse-ink);
+  color: var(--color-inverse-paper);
 }
 .button.reverse:hover,
 .button.reverse:focus,
 .button.reverse:active {
-  background-color: var(--color-gray-1200);
-  color: var(--color-gray-200);
+  background-color: var(--color-accent);
+  color: var(--color-pine-900);
 }
