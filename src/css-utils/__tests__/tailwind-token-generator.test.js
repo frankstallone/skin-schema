@@ -61,6 +61,10 @@ describe('tailwind token generator', () => {
     assert.match(themeCss, /--color-paper: var\(--color-bone-050\);/);
     assert.match(themeCss, /--color-ink: var\(--color-pine-750\);/);
     assert.match(themeCss, /--color-inverse-paper: var\(--color-pine-950\);/);
+    assert.match(
+      themeCss,
+      /--color-inverse-raised-paper: var\(--color-pine-900\);/,
+    );
     assert.match(themeCss, /--color-inverse-ink: var\(--color-bone-050\);/);
     assert.match(
       themeCss,

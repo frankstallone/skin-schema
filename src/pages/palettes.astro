@@ -78,6 +78,8 @@ const keyTokens = new Map(
   approvedSwatches.map(({ keyType, token }) => [token, keyType]),
 );
 
+const darkSurfaceNote = colors.roles['inverse-raised-paper'].note;
+
 const meta = {
   title: 'Brand Palettes | Skin Schema',
   description:
@@ -104,9 +106,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         structure, Bone carries light and text, and Rose holds softness and
         energy.
       </p>
+      <p>{darkSurfaceNote}</p>
       <p>
-        Dark page surfaces use Pine 950 and Pine 999. Pine 800 and 900 remain
-        three-quarter tones for foregrounds, outlines, and dense supporting UI.
         Mineral Pine 750 remains the approved key swatch and light-mode type
         color.
       </p>

@@ -32,7 +32,7 @@ const pathname = Astro.url.pathname;
 
   .homepage {
     --homepage-surface: var(--color-inverse-paper);
-    --homepage-surface-deep: var(--color-pine-999);
+    --homepage-surface-raised: var(--color-inverse-raised-paper);
     --homepage-text: var(--color-inverse-ink);
     --homepage-muted-text: var(--color-inverse-muted-ink);
     --homepage-soft: var(--color-rose-250);
@@ -174,7 +174,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-creator {
-    background: var(--homepage-surface-deep);
+    background: var(--homepage-surface-raised);
     color: var(--homepage-text);
     display: grid;
     gap: var(--spacing-xl);
@@ -343,7 +343,7 @@ const pathname = Astro.url.pathname;
     align-self: start;
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--color-pine-999) 74%, transparent),
+      color-mix(in srgb, var(--color-pine-900) 74%, transparent),
       transparent
     );
     display: flex;
@@ -370,7 +370,7 @@ const pathname = Astro.url.pathname;
 
   .homepage-range-carousel {
     align-items: stretch;
-    background: color-mix(in srgb, var(--color-pine-999) 92%, transparent);
+    background: color-mix(in srgb, var(--color-pine-900) 92%, transparent);
     display: flex;
     inset: 0;
     justify-content: center;
@@ -518,7 +518,7 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-system {
-    background: var(--homepage-surface-deep);
+    background: var(--homepage-surface-raised);
     color: var(--homepage-text);
     padding: var(--spacing-2xl) var(--spacing-s-l);
   }
@@ -685,7 +685,7 @@ const pathname = Astro.url.pathname;
 
   .homepage-contact {
     align-items: start;
-    background: var(--homepage-surface-deep);
+    background: var(--homepage-surface-raised);
     border-block-start: 1px solid
       color-mix(in srgb, var(--homepage-text) 18%, transparent);
     color: var(--homepage-text);

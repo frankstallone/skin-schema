@@ -4,7 +4,7 @@ description: A serene, art-directed system for presenting enduring beauty conten
 colors:
   mineral-pine: "#213F37"
   pine-page: "#071310"
-  pine-deep: "#000000"
+  pine-raised: "#0D1E1A"
   warm-bone: "#F2EDE6"
   warm-bone-muted: "#EEE9E2"
   translucent-rose: "#E6A0B5"
@@ -93,7 +93,7 @@ The visual language is image-led and flat. Depth comes from tonal shifts, full-b
 
 **Key Characteristics:**
 
-- Pine Shadow campaign surfaces with restrained Rose accents.
+- Pine 900 and 950 campaign surfaces with restrained Rose accents.
 - Large, tightly composed Geist headlines paired with compact Geist Mono labels.
 - Fluid type and spacing that scale continuously from mobile to wide screens.
 - Square image frames and structural rules contrasted with pill-shaped actions.
@@ -128,10 +128,10 @@ The palette is a living system, grounded in mineral green and translucent, skin-
 ### Dark surface ladder
 
 - **Page and standard sections:** Pine 950 (`#071310`).
-- **Deep sections and overlays:** Pine 999 (`#000000`), with transparency when needed.
-- **Foregrounds, outlines, and dense supporting UI:** Pine 800–900. Do not use these three-quarter tones as passive surfaces.
+- **Raised sections and overlays:** Pine 900 (`#0D1E1A`), with transparency when needed.
+- **Brand exception:** Pine 900 is intentionally used as a dark surface despite its three-quarter category. It preserves the mineral character and maintains strong contrast with Bone text. Do not replace it with Pine 999.
 
-**The Darkroom Rule.** Pine Shadow tones carry the main composition; Bone supplies text; Serum Pink illuminates decisions, proof, and useful detail. Pine 750 remains a key swatch, not a dark surface token.
+**The Darkroom Rule.** Pine 950 and the approved Pine 900 exception carry the main composition; Bone supplies text; Serum Pink illuminates decisions, proof, and useful detail. Pine 750 remains a key swatch, not a dark surface token.
 
 **The Reversal Rule.** Dark sections use Pine surfaces with Bone text. Light sections reverse to Bone surfaces with Pine text. Do not invent a neutral theme between them.
 
@@ -179,7 +179,7 @@ Components are polished and precise. Most are structurally square and restrained
 ### Cards / Containers
 
 - **Corner Style:** square (`0`) for sections, rate rows, portfolio media, and modal panels.
-- **Background:** Pine 950 and 999 create section changes without detached card surfaces.
+- **Background:** Pine 950 and 900 create section changes without detached card surfaces.
 - **Shadow Strategy:** none; use hairline dividers, crop, overlap, and tonal contrast.
 - **Border:** translucent Bone rules between ordered or comparable items.
 - **Internal Padding:** use the fluid spacing scale, with `s` for compact rows and `l` or larger for major compositions.
@@ -211,7 +211,7 @@ The carousel is a full-viewport Pine viewing room. Media remains the focal point
 ### Do:
 
 - **Do** lead with real photography and video; the work must prove quality before the copy claims it.
-- **Do** use Pine Shadow surfaces, Warm Bone text, Mineral Pine light-mode type, and Serum Pink action as the dominant working system.
+- **Do** use Pine 900 and 950 surfaces, Warm Bone text, Mineral Pine light-mode type, and Serum Pink action as the dominant working system.
 - **Do** preserve the fluid type and spacing scales from `330px` through `1230px` viewports.
 - **Do** use exact alignment, hairline rules, and purposeful whitespace to make the service feel organized.
 - **Do** keep motion purposeful, fast, and safe for reduced-motion preferences.

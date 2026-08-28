@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-28T14:08:30Z",
+  "generatedAt": "2026-08-28T14:17:20Z",
   "title": "Design System: Skin Schema",
   "extensions": {
     "colorMeta": {
@@ -24,10 +24,10 @@
         "displayName": "Pine Page",
         "canonical": "#071310"
       },
-      "pine-deep": {
+      "pine-raised": {
         "role": "surface",
-        "displayName": "Pine Deep",
-        "canonical": "#000000"
+        "displayName": "Pine Raised",
+        "canonical": "#0d1e1a"
       },
       "warm-bone": {
         "role": "neutral",
@@ -139,7 +139,7 @@
       "name": "Dark Contact Field",
       "kind": "input",
       "refersTo": "field-dark",
-      "description": "A square, transparent field on a Pine Shadow surface.",
+      "description": "A square, transparent field on a Pine dark surface.",
       "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" placeholder=\"name@brand.com\"></label>",
       "css": ".ds-field { display: grid; gap: var(--spacing-2xs, 0.75rem); color: var(--color-inverse-ink, #f2ede6); } .ds-field span { color: var(--color-inverse-muted-ink, #eee9e2); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-field input { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--color-inverse-ink, #f2ede6) 42%, transparent); border-radius: 0; background: transparent; color: inherit; padding: var(--spacing-2xs, 0.75rem) 0; font: 300 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1.5 Geist, sans-serif; } .ds-field input::placeholder { color: var(--color-inverse-muted-ink, #eee9e2); opacity: 1; } .ds-field input:focus-visible { border-bottom-color: var(--color-inverse-ink, #f2ede6); outline: 2px solid var(--color-focus, #d85b7d); outline-offset: 3px; }"
     },
@@ -161,9 +161,9 @@
   ],
   "narrative": {
     "northStar": "The Beauty Archive",
-    "overview": "Skin Schema presents beauty content as an enduring collection rather than a disposable feed. Pine Shadow surfaces give imagery authority, Warm Bone carries clarity, and Rose guides action without becoming decoration.\n\nThe visual language is image-led and flat. Depth comes from Pine 950 and 999 surfaces, full-bleed media, asymmetric overlap, and fine dividers.",
+    "overview": "Skin Schema presents beauty content as an enduring collection rather than a disposable feed. Pine surfaces give imagery authority, Warm Bone carries clarity, and Rose guides action without becoming decoration.\n\nThe visual language is image-led and flat. Depth comes from Pine 950 and the approved Pine 900 surface exception, full-bleed media, asymmetric overlap, and fine dividers.",
     "keyCharacteristics": [
-      "Pine Shadow campaign surfaces with restrained Rose accents.",
+      "Pine 900 and 950 campaign surfaces with restrained Rose accents.",
       "Warm Bone text on dark surfaces and Mineral Pine type on light surfaces.",
       "Large Geist headlines paired with compact Geist Mono labels.",
       "Square image frames contrasted with pill-shaped actions."
@@ -176,7 +176,7 @@
       },
       {
         "name": "The Darkroom Rule",
-        "body": "Pine 950 and 999 carry dark surfaces; Pine 800 and 900 remain foreground, outline, and dense supporting UI tones; Bone supplies text.",
+        "body": "Pine 950 and the approved Pine 900 exception carry dark surfaces; Bone supplies text. Pine 999 remains a scale endpoint, not a branded surface.",
         "section": "colors"
       },
       {
@@ -197,7 +197,7 @@
     ],
     "dos": [
       "Do lead with real photography and video.",
-      "Do use Pine 950 and 999 surfaces for dark mode.",
+      "Do use Pine 950 and the approved Pine 900 exception for dark surfaces.",
       "Do use Pine 750 typography on Warm Bone light surfaces.",
       "Do use Serum Pink for actions, focus, price, and process emphasis.",
       "Do preserve fluid type and spacing from 330px through 1230px."

@@ -108,6 +108,11 @@
     "accent-hover": { "scale": "rose", "tone": "400" },
     "focus": { "scale": "rose", "tone": "450" },
     "inverse-paper": { "scale": "pine", "tone": "950" },
+    "inverse-raised-paper": {
+      "scale": "pine",
+      "tone": "900",
+      "note": "Brand exception: Pine 900 is an approved dark surface alongside Pine 950. Although 900 is a three-quarter tone, it retains the brand's mineral character and provides strong contrast with Bone text. Do not replace it with Pine 999."
+    },
     "inverse-ink": { "scale": "bone", "tone": "050" },
     "inverse-muted-ink": { "scale": "bone", "tone": "075" }
   }

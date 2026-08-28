@@ -81,6 +81,7 @@
   --color-accent-hover: var(--color-rose-400);
   --color-focus: var(--color-rose-450);
   --color-inverse-paper: var(--color-pine-950);
+  --color-inverse-raised-paper: var(--color-pine-900);
   --color-inverse-ink: var(--color-bone-050);
   --color-inverse-muted-ink: var(--color-bone-075);
 
