@@ -6,9 +6,9 @@ const { meta } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-mode="light">
   <Head {...meta} />
-  <body data-mode="light">
+  <body>
     <main>
       <BlogHero title={meta.title} />
       <slot />
