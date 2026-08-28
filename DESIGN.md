@@ -4,9 +4,9 @@ description: A serene, art-directed system for presenting enduring beauty conten
 colors:
   mineral-pine: "#213F37"
   pine-page: "#071310"
-  pine-raised: "#0D1E1A"
-  pine-content: "#1B352E"
+  pine-deep: "#000000"
   warm-bone: "#F2EDE6"
+  warm-bone-muted: "#EEE9E2"
   translucent-rose: "#E6A0B5"
   serum-pink: "#D85B7D"
 typography:
@@ -121,15 +121,15 @@ The palette is a living system, grounded in mineral green and translucent, skin-
 
 ### Neutral
 
+- Canonical scale values, key names and order, destination gamut, and tween model live in `src/design-tokens/colors.json`.
 - The Pine, Bone, and Rose ramps each run from `000` through `999` using the shared Tonal Foundry category model.
 - Supporting text, rules, and disabled states use the nearest tone from their surface family. They do not fall back to unrelated gray.
 
 ### Dark surface ladder
 
-- **Page:** Pine 950 (`#071310`).
-- **Chrome and raised sections:** Pine 900 (`#0D1E1A`).
-- **Content sections:** Pine 800 (`#1B352E`).
-- **Overlays:** Pine 999 (`#000000`), usually with transparency.
+- **Page and standard sections:** Pine 950 (`#071310`).
+- **Deep sections and overlays:** Pine 999 (`#000000`), with transparency when needed.
+- **Foregrounds, outlines, and dense supporting UI:** Pine 800–900. Do not use these three-quarter tones as passive surfaces.
 
 **The Darkroom Rule.** Pine Shadow tones carry the main composition; Bone supplies text; Serum Pink illuminates decisions, proof, and useful detail. Pine 750 remains a key swatch, not a dark surface token.
 
@@ -179,7 +179,7 @@ Components are polished and precise. Most are structurally square and restrained
 ### Cards / Containers
 
 - **Corner Style:** square (`0`) for sections, rate rows, portfolio media, and modal panels.
-- **Background:** Pine 950, 900, and 800 create section changes without detached card surfaces.
+- **Background:** Pine 950 and 999 create section changes without detached card surfaces.
 - **Shadow Strategy:** none; use hairline dividers, crop, overlap, and tonal contrast.
 - **Border:** translucent Bone rules between ordered or comparable items.
 - **Internal Padding:** use the fluid spacing scale, with `s` for compact rows and `l` or larger for major compositions.

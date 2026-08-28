@@ -3,9 +3,29 @@ import Layout from '../layouts/Layout.astro';
 import colors from '../design-tokens/colors.json';
 
 const tonalWeights = [
-  '000', '025', '050', '075', '100', '150', '200', '250', '300', '350',
-  '400', '450', '500', '550', '600', '650', '700', '750', '800', '850',
-  '900', '950', '999',
+  '000',
+  '025',
+  '050',
+  '075',
+  '100',
+  '150',
+  '200',
+  '250',
+  '300',
+  '350',
+  '400',
+  '450',
+  '500',
+  '550',
+  '600',
+  '650',
+  '700',
+  '750',
+  '800',
+  '850',
+  '900',
+  '950',
+  '999',
 ] as const;
 
 const tonalCategories = [
@@ -16,18 +36,15 @@ const tonalCategories = [
   { name: 'Shadows', range: '950–999', span: 2 },
 ] as const;
 
-const keyTokens = new Map([
-  ['pine-750', 'Mineral Pine'],
-  ['bone-050', 'Warm Bone'],
-  ['rose-250', 'Translucent Rose'],
-  ['rose-450', 'Serum Pink'],
-]);
+const foundryScaleNames = Object.keys(
+  colors.foundry.scales,
+) as (keyof typeof colors.foundry.scales)[];
 
-const paletteScales = [
-  { name: 'Pine', values: colors.scales.pine },
-  { name: 'Bone', values: colors.scales.bone },
-  { name: 'Rose', values: colors.scales.rose },
-] as const;
+const paletteScales = foundryScaleNames.map((id) => ({
+  id,
+  ...colors.foundry.scales[id],
+  values: colors.scales[id],
+}));
 
 const tonalPalettes = paletteScales.map(({ name, values }) => ({
   name,
@@ -44,11 +61,22 @@ const colorValues = new Map(
   ),
 );
 
-const approvedSwatches = [...keyTokens].map(([token, name]) => ({
-  name,
-  token,
-  value: colorValues.get(token),
-}));
+const approvedSwatches = paletteScales.flatMap(({ id, keys }) =>
+  keys.map(({ name, tone }, index) => {
+    const token = `${id}-${tone}`;
+
+    return {
+      keyType: index === 0 ? 'Anchor key' : 'Supporting key',
+      name,
+      token,
+      value: colorValues.get(token),
+    };
+  }),
+);
+
+const keyTokens = new Map(
+  approvedSwatches.map(({ keyType, token }) => [token, keyType]),
+);
 
 const meta = {
   title: 'Brand Palettes | Skin Schema',
@@ -77,9 +105,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         energy.
       </p>
       <p>
-        Dark page surfaces use Pine 950, with Pine 900 and 800 for raised and
-        content sections. Pine 999 is reserved for overlays. Mineral Pine 750
-        remains the approved key swatch and light-mode type color.
+        Dark page surfaces use Pine 950 and Pine 999. Pine 800 and 900 remain
+        three-quarter tones for foregrounds, outlines, and dense supporting UI.
+        Mineral Pine 750 remains the approved key swatch and light-mode type
+        color.
       </p>
       <p>
         Lower weights are lighter. Higher weights are darker. Scroll the table
@@ -101,6 +130,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
               />
               <div>
                 <h3>{swatch.name}</h3>
+                <code>{swatch.keyType}</code>
                 <code>{swatch.token}</code>
                 <code>{swatch.value}</code>
               </div>
@@ -146,7 +176,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
               {palette.name}
             </h2>
             {palette.colors.map((color) => (
-              <div class:list={['swatch-item', { 'swatch-item--key': keyTokens.has(color.token) }]}>
+              <div
+                class:list={[
+                  'swatch-item',
+                  { 'swatch-item--key': keyTokens.has(color.token) },
+                ]}
+              >
                 <div
                   class="swatch"
                   style={`--swatch-color: ${color.value}`}
@@ -154,7 +189,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
                   role="img"
                 />
                 <code>{color.value}</code>
-                {keyTokens.has(color.token) && <strong>Key</strong>}
+                {keyTokens.has(color.token) && (
+                  <strong>{keyTokens.get(color.token)}</strong>
+                )}
               </div>
             ))}
           </section>
@@ -207,8 +244,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   .approved-swatch__color {
     aspect-ratio: 3 / 2;
     background: var(--swatch-color);
-    border: 1px solid
-      color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
   }
 
   .approved-swatch h3 {
@@ -335,8 +371,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   .swatch {
     aspect-ratio: 1;
     background: var(--swatch-color);
-    border: 1px solid
-      color-mix(in srgb, var(--color-ink) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
     inline-size: 100%;
   }
 

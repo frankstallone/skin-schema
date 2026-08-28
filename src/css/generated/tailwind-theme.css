@@ -82,6 +82,7 @@
   --color-focus: var(--color-rose-450);
   --color-inverse-paper: var(--color-pine-950);
   --color-inverse-ink: var(--color-bone-050);
+  --color-inverse-muted-ink: var(--color-bone-075);
 
   /* Spacing */
   --spacing-zero: clamp(0rem, -0.02rem + 0.11vw, 0.0625rem);

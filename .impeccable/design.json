@@ -1,45 +1,124 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-28T03:59:04Z",
+  "generatedAt": "2026-08-28T14:08:30Z",
   "title": "Design System: Skin Schema",
   "extensions": {
     "colorMeta": {
       "mineral-pine": {
         "role": "primary",
         "displayName": "Mineral Pine",
-        "tonalRamp": ["#ffffff", "#eff1f1", "#bfc8c5", "#83948f", "#4b635c", "#213f37", "#0d1e1a", "#071310", "#000000"]
+        "tonalRamp": [
+          "#ffffff",
+          "#eff1f1",
+          "#bfc8c5",
+          "#83948f",
+          "#4b635c",
+          "#213f37",
+          "#0d1e1a",
+          "#071310",
+          "#000000"
+        ]
       },
-      "pine-page": { "role": "surface", "displayName": "Pine Page", "canonical": "#071310" },
-      "pine-raised": { "role": "surface", "displayName": "Pine Raised", "canonical": "#0d1e1a" },
-      "pine-content": { "role": "surface", "displayName": "Pine Content", "canonical": "#1b352e" },
+      "pine-page": {
+        "role": "surface",
+        "displayName": "Pine Page",
+        "canonical": "#071310"
+      },
+      "pine-deep": {
+        "role": "surface",
+        "displayName": "Pine Deep",
+        "canonical": "#000000"
+      },
       "warm-bone": {
         "role": "neutral",
         "displayName": "Warm Bone",
-        "tonalRamp": ["#ffffff", "#f2ede6", "#cac6c0", "#93908c", "#605e5b", "#3d3b39", "#1c1b1a", "#121110", "#000000"]
+        "tonalRamp": [
+          "#ffffff",
+          "#f2ede6",
+          "#cac6c0",
+          "#93908c",
+          "#605e5b",
+          "#3d3b39",
+          "#1c1b1a",
+          "#121110",
+          "#000000"
+        ]
+      },
+      "warm-bone-muted": {
+        "role": "neutral",
+        "displayName": "Warm Bone Muted",
+        "canonical": "#eee9e2"
       },
       "translucent-rose": {
         "role": "secondary",
         "displayName": "Translucent Rose",
-        "tonalRamp": ["#ffffff", "#fcedf1", "#eeb9c8", "#e6a0b5", "#dc6d8c", "#d85b7d", "#9b3f58", "#331019", "#000000"]
+        "tonalRamp": [
+          "#ffffff",
+          "#fcedf1",
+          "#eeb9c8",
+          "#e6a0b5",
+          "#dc6d8c",
+          "#d85b7d",
+          "#9b3f58",
+          "#331019",
+          "#000000"
+        ]
       },
       "serum-pink": {
         "role": "primary",
         "displayName": "Serum Pink",
-        "tonalRamp": ["#ffffff", "#fcedf1", "#eeb9c8", "#e6a0b5", "#dc6d8c", "#d85b7d", "#9b3f58", "#331019", "#000000"]
+        "tonalRamp": [
+          "#ffffff",
+          "#fcedf1",
+          "#eeb9c8",
+          "#e6a0b5",
+          "#dc6d8c",
+          "#d85b7d",
+          "#9b3f58",
+          "#331019",
+          "#000000"
+        ]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero statements only; balance line breaks deliberately." },
-      "headline": { "displayName": "Headline", "purpose": "Major section statements with a concise measure." },
-      "title": { "displayName": "Title", "purpose": "Rates, modal headings, and compact hierarchy." },
-      "body": { "displayName": "Body", "purpose": "Explanatory copy with a readable 50–70 character measure." },
-      "label": { "displayName": "Production Label", "purpose": "Navigation, field labels, pricing, and metadata." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero statements only; balance line breaks deliberately."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Major section statements with a concise measure."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Rates, modal headings, and compact hierarchy."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanatory copy with a readable 50–70 character measure."
+      },
+      "label": {
+        "displayName": "Production Label",
+        "purpose": "Navigation, field labels, pricing, and metadata."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "state-quick", "value": "180ms ease", "purpose": "Hover, focus, brightness, and one-pixel lift transitions." },
-      { "name": "state-base", "value": "250ms ease", "purpose": "Default interface state transitions." },
-      { "name": "reduced-motion", "value": "instant or crossfade", "purpose": "Required alternative to transforms, clips, and staggered reveals." }
+      {
+        "name": "state-quick",
+        "value": "180ms ease",
+        "purpose": "Hover, focus, brightness, and one-pixel lift transitions."
+      },
+      {
+        "name": "state-base",
+        "value": "250ms ease",
+        "purpose": "Default interface state transitions."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "instant or crossfade",
+        "purpose": "Required alternative to transforms, clips, and staggered reveals."
+      }
     ],
     "breakpoints": [
       { "name": "sm", "value": "330px" },
@@ -62,7 +141,7 @@
       "refersTo": "field-dark",
       "description": "A square, transparent field on a Pine Shadow surface.",
       "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" placeholder=\"name@brand.com\"></label>",
-      "css": ".ds-field { display: grid; gap: var(--spacing-2xs, 0.75rem); color: var(--color-inverse-ink, #f2ede6); } .ds-field span { color: var(--color-bone-350, #a09d98); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-field input { border: 0; border-bottom: 1px solid var(--color-pine-800, #1b352e); border-radius: 0; background: transparent; color: inherit; padding: var(--spacing-2xs, 0.75rem) 0; font: 300 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1.5 Geist, sans-serif; } .ds-field input::placeholder { color: var(--color-bone-350, #a09d98); opacity: 1; } .ds-field input:focus-visible { border-bottom-color: var(--color-inverse-ink, #f2ede6); outline: 2px solid var(--color-focus, #d85b7d); outline-offset: 3px; }"
+      "css": ".ds-field { display: grid; gap: var(--spacing-2xs, 0.75rem); color: var(--color-inverse-ink, #f2ede6); } .ds-field span { color: var(--color-inverse-muted-ink, #eee9e2); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-field input { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--color-inverse-ink, #f2ede6) 42%, transparent); border-radius: 0; background: transparent; color: inherit; padding: var(--spacing-2xs, 0.75rem) 0; font: 300 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1.5 Geist, sans-serif; } .ds-field input::placeholder { color: var(--color-inverse-muted-ink, #eee9e2); opacity: 1; } .ds-field input:focus-visible { border-bottom-color: var(--color-inverse-ink, #f2ede6); outline: 2px solid var(--color-focus, #d85b7d); outline-offset: 3px; }"
     },
     {
       "name": "Campaign Navigation",
@@ -75,14 +154,14 @@
     {
       "name": "Rate Ladder Row",
       "kind": "custom",
-      "description": "A rule-separated service row on a Pine 900 raised surface.",
+      "description": "A rule-separated service row on a Pine 950 surface.",
       "html": "<article class=\"ds-rate-row\"><div><small>Campaign storytelling</small><h3>Premium video</h3><p>A developed product story with polished pacing.</p></div><dl><div><dt>Deliverable</dt><dd>1 video</dd></div></dl><strong>Starts at $—</strong></article>",
-      "css": ".ds-rate-row { display: grid; grid-template-columns: minmax(12rem, 1fr) minmax(10rem, 0.6fr) auto; gap: var(--spacing-l, 3rem); border-top: 1px solid var(--color-pine-800, #1b352e); background: var(--color-pine-900, #0d1e1a); color: var(--color-inverse-ink, #f2ede6); padding: var(--spacing-l, 3rem) var(--spacing-s, 1.5rem); font-family: Geist, sans-serif; } .ds-rate-row h3, .ds-rate-row p, .ds-rate-row dl { margin: 0; } .ds-rate-row h3 { margin-block: var(--spacing-2xs, 0.75rem); font-size: clamp(1.62rem, 1.50rem + 0.59vw, 1.953125rem); font-weight: 400; line-height: 1; } .ds-rate-row small, .ds-rate-row dt { color: var(--color-bone-350, #a09d98); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-rate-row dl div { display: flex; justify-content: space-between; gap: var(--spacing-s, 1.5rem); border-top: 1px solid var(--color-pine-800, #1b352e); padding-top: var(--spacing-2xs, 0.75rem); } .ds-rate-row dd { margin: 0; font-weight: 500; } .ds-rate-row > strong { color: var(--color-accent, #d85b7d); font: 500 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1 'Geist Mono', sans-serif; }"
+      "css": ".ds-rate-row { display: grid; grid-template-columns: minmax(12rem, 1fr) minmax(10rem, 0.6fr) auto; gap: var(--spacing-l, 3rem); border-top: 1px solid color-mix(in srgb, var(--color-inverse-ink, #f2ede6) 18%, transparent); background: var(--color-pine-950, #071310); color: var(--color-inverse-ink, #f2ede6); padding: var(--spacing-l, 3rem) var(--spacing-s, 1.5rem); font-family: Geist, sans-serif; } .ds-rate-row h3, .ds-rate-row p, .ds-rate-row dl { margin: 0; } .ds-rate-row h3 { margin-block: var(--spacing-2xs, 0.75rem); font-size: clamp(1.62rem, 1.50rem + 0.59vw, 1.953125rem); font-weight: 400; line-height: 1; } .ds-rate-row small, .ds-rate-row dt { color: var(--color-inverse-muted-ink, #eee9e2); font: 500 clamp(0.75rem, 0.70rem + 0.22vw, 0.875rem)/1 'Geist Mono', sans-serif; text-transform: uppercase; } .ds-rate-row dl div { display: flex; justify-content: space-between; gap: var(--spacing-s, 1.5rem); border-top: 1px solid color-mix(in srgb, var(--color-inverse-ink, #f2ede6) 18%, transparent); padding-top: var(--spacing-2xs, 0.75rem); } .ds-rate-row dd { margin: 0; font-weight: 500; } .ds-rate-row > strong { color: var(--color-accent, #d85b7d); font: 500 clamp(1.35rem, 1.27rem + 0.38vw, 1.5625rem)/1 'Geist Mono', sans-serif; }"
     }
   ],
   "narrative": {
     "northStar": "The Beauty Archive",
-    "overview": "Skin Schema presents beauty content as an enduring collection rather than a disposable feed. Pine Shadow surfaces give imagery authority, Warm Bone carries clarity, and Rose guides action without becoming decoration.\n\nThe visual language is image-led and flat. Depth comes from the Pine 950, 900, and 800 surface ladder, full-bleed media, asymmetric overlap, and fine dividers.",
+    "overview": "Skin Schema presents beauty content as an enduring collection rather than a disposable feed. Pine Shadow surfaces give imagery authority, Warm Bone carries clarity, and Rose guides action without becoming decoration.\n\nThe visual language is image-led and flat. Depth comes from Pine 950 and 999 surfaces, full-bleed media, asymmetric overlap, and fine dividers.",
     "keyCharacteristics": [
       "Pine Shadow campaign surfaces with restrained Rose accents.",
       "Warm Bone text on dark surfaces and Mineral Pine type on light surfaces.",
@@ -90,15 +169,35 @@
       "Square image frames contrasted with pill-shaped actions."
     ],
     "rules": [
-      { "name": "The Archive Rule", "body": "Every visual decision must help the work feel worth saving, reusing, and returning to.", "section": "overview" },
-      { "name": "The Darkroom Rule", "body": "Pine 950 carries the page; Pine 900 and 800 separate raised and content surfaces; Bone supplies text.", "section": "colors" },
-      { "name": "The Reversal Rule", "body": "Light sections use Warm Bone surfaces with Mineral Pine typography.", "section": "colors" },
-      { "name": "The Rose Rule", "body": "Serum Pink is for actions and short emphasis; Translucent Rose is for soft fields.", "section": "colors" },
-      { "name": "The Flat Archive Rule", "body": "Surfaces remain flat at rest. Distinguish them through tone, boundary, crop, or position before adding shadow.", "section": "elevation" }
+      {
+        "name": "The Archive Rule",
+        "body": "Every visual decision must help the work feel worth saving, reusing, and returning to.",
+        "section": "overview"
+      },
+      {
+        "name": "The Darkroom Rule",
+        "body": "Pine 950 and 999 carry dark surfaces; Pine 800 and 900 remain foreground, outline, and dense supporting UI tones; Bone supplies text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reversal Rule",
+        "body": "Light sections use Warm Bone surfaces with Mineral Pine typography.",
+        "section": "colors"
+      },
+      {
+        "name": "The Rose Rule",
+        "body": "Serum Pink is for actions and short emphasis; Translucent Rose is for soft fields.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Archive Rule",
+        "body": "Surfaces remain flat at rest. Distinguish them through tone, boundary, crop, or position before adding shadow.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do lead with real photography and video.",
-      "Do use the Pine Shadow surface ladder for dark mode.",
+      "Do use Pine 950 and 999 surfaces for dark mode.",
       "Do use Pine 750 typography on Warm Bone light surfaces.",
       "Do use Serum Pink for actions, focus, price, and process emphasis.",
       "Do preserve fluid type and spacing from 330px through 1230px."

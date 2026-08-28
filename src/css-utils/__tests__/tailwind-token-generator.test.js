@@ -62,6 +62,10 @@ describe('tailwind token generator', () => {
     assert.match(themeCss, /--color-ink: var\(--color-pine-750\);/);
     assert.match(themeCss, /--color-inverse-paper: var\(--color-pine-950\);/);
     assert.match(themeCss, /--color-inverse-ink: var\(--color-bone-050\);/);
+    assert.match(
+      themeCss,
+      /--color-inverse-muted-ink: var\(--color-bone-075\);/,
+    );
     assert.doesNotMatch(themeCss, /--color-(?:gray|skin)-/);
     assert.match(
       themeCss,
@@ -88,6 +92,22 @@ describe('tailwind token generator', () => {
     Object.values(colors.scales).forEach((scale) => {
       assert.equal(Object.keys(scale).length, COLOR_TONES.length);
       assert.deepEqual(Object.keys(scale).sort(), [...COLOR_TONES].sort());
+    });
+  });
+
+  it('keeps Tonal Foundry generation metadata aligned with the scales', () => {
+    assert.equal(colors.foundry.destination, 'srgb');
+    assert.equal(colors.foundry.tween, 'oklch');
+    assert.deepEqual(
+      Object.keys(colors.foundry.scales),
+      Object.keys(colors.scales),
+    );
+
+    Object.entries(colors.foundry.scales).forEach(([scaleName, scale]) => {
+      assert.ok(scale.keys.length > 0);
+      scale.keys.forEach(({ tone }) => {
+        assert.ok(colors.scales[scaleName][tone]);
+      });
     });
   });
 

@@ -1,6 +1,27 @@
 {
   "title": "Brand colors",
   "description": "Pine, Bone, and Rose tonal scales generated with F4 Tonal Foundry. Semantic roles reference exact scale tones.",
+  "foundry": {
+    "destination": "srgb",
+    "tween": "oklch",
+    "scales": {
+      "pine": {
+        "name": "Pine",
+        "keys": [{ "name": "Mineral Pine", "tone": "750" }]
+      },
+      "bone": {
+        "name": "Bone",
+        "keys": [{ "name": "Warm Bone", "tone": "050" }]
+      },
+      "rose": {
+        "name": "Rose",
+        "keys": [
+          { "name": "Translucent Rose", "tone": "250" },
+          { "name": "Serum Pink", "tone": "450" }
+        ]
+      }
+    }
+  },
   "scales": {
     "pine": {
       "000": "#ffffff",
@@ -87,6 +108,7 @@
     "accent-hover": { "scale": "rose", "tone": "400" },
     "focus": { "scale": "rose", "tone": "450" },
     "inverse-paper": { "scale": "pine", "tone": "950" },
-    "inverse-ink": { "scale": "bone", "tone": "050" }
+    "inverse-ink": { "scale": "bone", "tone": "050" },
+    "inverse-muted-ink": { "scale": "bone", "tone": "075" }
   }
 }
