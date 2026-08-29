@@ -65,18 +65,18 @@ export const proofPoints = [
 export const processSteps = [
   {
     number: '01',
-    title: 'Concepting',
-    text: 'Product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines.',
+    title: 'Find the product truth',
+    text: 'We align on the audience, product qualities, brand guardrails, and the result the campaign needs.',
   },
   {
     number: '02',
-    title: 'Shooting',
-    text: 'Polished production, product context, lifestyle detail, and Skin Schema-style serenity.',
+    title: 'Build the story',
+    text: 'I shape a clear concept, shot plan, and review path, then create imagery where the product earns its place.',
   },
   {
     number: '03',
-    title: 'Delivery',
-    text: 'Content for social channels, launch moments, campaigns, and product education.',
+    title: 'Extend the idea',
+    text: 'You receive polished assets for the channels you need now, with a campaign structure the brand can return to.',
   },
 ];
 
