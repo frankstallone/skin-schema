@@ -36,6 +36,67 @@ const pathname = Astro.url.pathname;
     min-block-size: 100vh;
   }
 
+  /*
+   * Scroll entrances follow the brand's ritual rhythm: a small pause, then a
+   * calm return to rest. JavaScript opts the page into these hidden states so
+   * content remains available when scripts do not run.
+   */
+  .homepage [data-section-reveal] {
+    --section-reveal-distance: 1.125rem;
+    --section-reveal-duration: 760ms;
+    --section-reveal-easing: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .homepage [data-section-reveal='quiet'] {
+    --section-reveal-distance: 0rem;
+    --section-reveal-duration: 520ms;
+  }
+
+  .homepage [data-section-reveal='showcase'] {
+    --section-reveal-distance: 1.75rem;
+    --section-reveal-duration: 880ms;
+  }
+
+  .homepage [data-section-reveal='return'] {
+    --section-reveal-distance: 0.875rem;
+    --section-reveal-duration: 680ms;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage[data-section-reveals] [data-section-reveal] {
+      opacity: 0;
+      transform: translate3d(0, var(--section-reveal-distance), 0);
+      transition:
+        opacity var(--section-reveal-duration) var(--section-reveal-easing),
+        transform var(--section-reveal-duration) var(--section-reveal-easing);
+    }
+
+    .homepage[data-section-reveals]
+      [data-section-reveal][data-section-visible] {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .homepage[data-section-reveals] [data-section-reveal] {
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    .homepage[data-section-reveals]
+      [data-section-reveal][data-section-visible] {
+      opacity: 1;
+    }
+  }
+
+  @media print {
+    .homepage [data-section-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
   .homepage-hero {
     --homepage-hero-video-lift: var(--spacing-xl);
     background: var(--color-surface-auxiliary-background-color);
@@ -1034,3 +1095,41 @@ const pathname = Astro.url.pathname;
     }
   }
 </style>
+
+<script>
+  const homepage = document.querySelector<HTMLElement>('.homepage');
+
+  if (homepage && homepage.dataset.sectionReveals !== 'bound') {
+    const sections = [
+      ...homepage.querySelectorAll<HTMLElement>('[data-section-reveal]'),
+    ];
+
+    homepage.dataset.sectionReveals = 'ready';
+
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => {
+        section.dataset.sectionVisible = '';
+      });
+      homepage.dataset.sectionReveals = 'bound';
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const section = entry.target as HTMLElement;
+            section.dataset.sectionVisible = '';
+            observer.unobserve(section);
+          });
+        },
+        {
+          rootMargin: '0px 0px -10% 0px',
+          threshold: 0.08,
+        },
+      );
+
+      sections.forEach((section) => observer.observe(section));
+      homepage.dataset.sectionReveals = 'bound';
+    }
+  }
+</script>
