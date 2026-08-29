@@ -1,18 +1,40 @@
 ---
+import HomepageTourmaline from './HomepageTourmaline.astro';
 import { processSteps } from './data';
 ---
 
-<section class="homepage-system" id="Process">
-  <h2>Execution, scoped for brand teams</h2>
-  <ol>
-    {
-      processSteps.map((step) => (
-        <li>
-          <span>{step.number}</span>
-          <strong>{step.title}</strong>
-          <p>{step.text}</p>
-        </li>
-      ))
-    }
-  </ol>
+<section
+  class="homepage-system"
+  id="Process"
+  aria-labelledby="homepage-system-title"
+>
+  <div class="homepage-system__copy">
+    <h2 id="homepage-system-title">
+      A calm framework for product stories that feel alive.
+    </h2>
+    <p class="homepage-system__intro">
+      We connect real product qualities to a human idea, then carry both through
+      a clear creative process.
+    </p>
+    <ol>
+      {
+        processSteps.map((step) => (
+          <li>
+            <span>{step.number}</span>
+            <strong>{step.title}</strong>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figure class="homepage-system__art">
+    <div class="homepage-system__visual">
+      <HomepageTourmaline />
+    </div>
+    <figcaption>
+      <span>Watermelon tourmaline</span>
+      <span>A living center held by calm structure.</span>
+    </figcaption>
+  </figure>
 </section>

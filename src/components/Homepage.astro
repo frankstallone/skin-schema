@@ -518,22 +518,76 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-system {
+    align-items: center;
     background: var(--color-surface-secondary-background-color);
     color: var(--color-surface-secondary-foreground-color);
-    padding: var(--spacing-2xl) var(--spacing-s-l);
+    column-gap: var(--spacing-xl);
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    min-block-size: min(42rem, 78dvh);
+    overflow: hidden;
+    padding: var(--spacing-xl) var(--spacing-s-l);
+  }
+
+  .homepage-system__copy {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-l);
+    min-inline-size: 0;
   }
 
   .homepage-system h2 {
-    margin-block-end: var(--spacing-xl);
+    margin: 0;
+    max-inline-size: 14ch;
+  }
+
+  .homepage-system__intro {
+    font-size: var(--text-step-1);
+    max-inline-size: 46rem;
   }
 
   .homepage-system ol {
     display: grid;
     gap: var(--spacing-m);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .homepage-system__art {
+    align-self: center;
+    display: grid;
+    gap: var(--spacing-xs);
+    inline-size: 100%;
+    margin: 0;
+    min-inline-size: 0;
+  }
+
+  .homepage-system__visual {
+    min-block-size: 38rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .homepage-system figcaption {
+    align-content: start;
+    align-self: start;
+    display: grid;
+    gap: var(--spacing-3xs);
+    margin-inline: 8%;
+    max-inline-size: 24rem;
+  }
+
+  .homepage-system figcaption span:first-child {
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+  }
+
+  .homepage-system figcaption span:last-child {
+    font-size: var(--text-step-000);
   }
 
   .homepage-system li {
@@ -543,7 +597,7 @@ const pathname = Astro.url.pathname;
     padding-block-start: var(--spacing-s);
   }
 
-  .homepage-system span {
+  .homepage-system li > span {
     color: var(--color-surface-secondary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
@@ -792,6 +846,28 @@ const pathname = Astro.url.pathname;
     max-inline-size: 75ch;
   }
 
+  @media (max-width: 1100px) {
+    .homepage-system {
+      gap: var(--spacing-l);
+      grid-template-columns: minmax(0, 1.12fr) minmax(18rem, 0.88fr);
+      min-block-size: auto;
+      padding: var(--spacing-xl) var(--spacing-s-l);
+    }
+
+    .homepage-system h2 {
+      margin: 0;
+      max-inline-size: none;
+    }
+
+    .homepage-system__copy {
+      gap: var(--spacing-m);
+    }
+
+    .homepage-system__visual {
+      min-block-size: 30rem;
+    }
+  }
+
   @media (max-width: 900px) {
     .homepage-hero,
     .homepage-brands,
@@ -883,6 +959,37 @@ const pathname = Astro.url.pathname;
 
     .homepage-range__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .homepage-system {
+      gap: var(--spacing-xl);
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .homepage-system__visual {
+      block-size: min(78vw, 22rem);
+      min-block-size: 0;
+    }
+
+    .homepage-system__copy {
+      gap: var(--spacing-s);
+    }
+
+    .homepage-system ol {
+      gap: var(--spacing-s);
+    }
+
+    .homepage-system li {
+      gap: var(--spacing-2xs);
+      padding-block-start: var(--spacing-xs);
+    }
+
+    .homepage-system figcaption {
+      justify-self: center;
+      margin-inline: 0;
+      text-align: center;
     }
   }
 
