@@ -6,27 +6,28 @@ const rates = startingRates.map((rate, index) => ({
   ...rate,
   outcome:
     index === 0
-      ? 'Polished stills for launches, product pages, and social proof.'
+      ? 'A focused set of stills for product detail, texture, and use.'
       : index === 1
-        ? 'A concise motion asset built for hooks, texture, and routine detail.'
-        : 'A developed product story with considered pacing and lifestyle context.',
+        ? 'A short film for texture, application, or a beauty routine.'
+        : 'A developed film that connects real product qualities with a moment of care.',
   bestFor:
     index === 0
-      ? 'Launch details'
+      ? 'Product pages and launches'
       : index === 1
-        ? 'Social conversion'
-        : 'Campaign storytelling',
+        ? 'Social stories and routines'
+        : 'Fuller product stories',
 }));
 ---
 
 <section class="homepage-rates" id="Rates" aria-labelledby="rates-title">
   <div class="rates-ladder__aside">
-    <h2 id="rates-title">Simple entry points, scoped with campaign detail.</h2>
+    <h2 id="rates-title">Start with the format that fits your story.</h2>
     <p>
-      Start with the asset type that fits the campaign, then align on usage, raw
-      footage, and any needs unique to the campaign.
+      Tell us where the content needs to live and what you want the audience to
+      notice. We will shape the idea, deliverables, usage, and review process
+      around that.
     </p>
-    <a href="#Contact" class={homepagePrimaryAction}>Discuss scope</a>
+    <a href="#Contact" class={homepagePrimaryAction}>Discuss your project</a>
   </div>
   <ol class="rates-ladder" aria-label="Starting rate progression">
     {
