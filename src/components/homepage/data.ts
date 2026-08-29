@@ -50,10 +50,10 @@ export const brandLogos = [
 export const proofPoints = [
   {
     title: 'Authenticity at scale',
-    text: 'Creator-led visuals that feel credible, specific, and true to how beauty customers actually discover products.',
+    text: 'Visuals made by a real creator that feel credible, specific, and true to how beauty customers actually discover products.',
   },
   {
-    title: 'Brand-ready polish',
+    title: 'Polish for brand use',
     text: 'Concepting, shooting, and editing are handled with a refined visual standard your team can use across launches, socials, and campaigns.',
   },
   {
