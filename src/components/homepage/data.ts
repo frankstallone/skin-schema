@@ -50,10 +50,10 @@ export const brandLogos = [
 export const proofPoints = [
   {
     title: 'Authenticity at scale',
-    text: 'Creator-led visuals that feel credible, specific, and true to how beauty customers actually discover products.',
+    text: 'Visuals made by a real creator that feel credible, specific, and true to how beauty customers actually discover products.',
   },
   {
-    title: 'Brand-ready polish',
+    title: 'Polish for brand use',
     text: 'Concepting, shooting, and editing are handled with a refined visual standard your team can use across launches, socials, and campaigns.',
   },
   {
@@ -94,10 +94,10 @@ export const startingRates = [
     ],
   },
   {
-    title: 'Short-Form Product Videos',
+    title: 'Short Product Videos',
     type: 'Short Video',
     price: '$350',
-    text: 'Elevated short-form videos for product showcases, unboxings, how-tos, before-and-afters, hooks, and beauty routines.',
+    text: 'Short videos for product showcases, unboxings, tutorials, product results, hooks, and beauty routines.',
     specs: [
       ['Assets', '1'],
       ['Turnaround', '2 weeks'],
@@ -106,10 +106,10 @@ export const startingRates = [
     ],
   },
   {
-    title: 'Premium Product Videos',
-    type: 'Premium Video',
+    title: 'Product Story Films',
+    type: 'Product Story Film',
     price: '$500',
-    text: 'More developed beauty video concepts with polished production, product context, lifestyle detail, and campaign-style pacing.',
+    text: 'Developed beauty film concepts with product context, lifestyle detail, sensory focus, and considered pacing.',
     specs: [
       ['Assets', '1'],
       ['Turnaround', '2 weeks'],
@@ -194,9 +194,9 @@ export const rangeExamples = [
     id: 'short-form-video',
     kind: 'video',
     src: '/media/videos/short-02.mp4',
-    label: 'Short-form video',
-    carouselTitle: 'Short form product examples',
-    alt: 'Short-form beauty routine product video by Skin Schema',
+    label: 'Short video',
+    carouselTitle: 'Short product video examples',
+    alt: 'Short beauty routine product video by Skin Schema',
     columnWeight: 0.5625,
     aspectRatio: '9 / 16',
     objectPosition: 'center',
@@ -205,17 +205,17 @@ export const rangeExamples = [
       {
         kind: 'video',
         src: '/media/videos/short-01.mp4',
-        alt: 'Short-form skincare product texture video',
+        alt: 'Short skincare product texture video',
       },
       {
         kind: 'video',
         src: '/media/videos/short-02.mp4',
-        alt: 'Short-form beauty routine product video',
+        alt: 'Short beauty routine product video',
       },
       {
         kind: 'video',
         src: '/media/videos/short-03.mp4',
-        alt: 'Short-form makeup and skincare product video',
+        alt: 'Short makeup and skincare product video',
       },
     ],
   },
@@ -223,9 +223,9 @@ export const rangeExamples = [
     id: 'premium-video',
     kind: 'video',
     src: '/media/videos/premium-02.mp4',
-    label: 'Premium video',
-    carouselTitle: 'Product Storytelling Video examples',
-    alt: 'Premium beauty product video by Skin Schema',
+    label: 'Product story film',
+    carouselTitle: 'Product story film examples',
+    alt: 'Beauty product story film by Skin Schema',
     columnWeight: 0.5625,
     aspectRatio: '9 / 16',
     objectPosition: 'center',
@@ -234,17 +234,17 @@ export const rangeExamples = [
       {
         kind: 'video',
         src: '/media/videos/premium-01.mp4',
-        alt: 'Premium skincare product storytelling video',
+        alt: 'Skincare product story film with sensory detail',
       },
       {
         kind: 'video',
         src: '/media/videos/premium-02.mp4',
-        alt: 'Premium beauty product routine video',
+        alt: 'Beauty product ritual film',
       },
       {
         kind: 'video',
         src: '/media/videos/premium-03.mp4',
-        alt: 'Premium skincare campaign storytelling video',
+        alt: 'Skincare campaign storytelling film',
       },
     ],
   },

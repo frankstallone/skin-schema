@@ -8,12 +8,13 @@ const { pathname } = Astro.props;
   <div>
     <p class={homepageKicker}>Let's connect</p>
     <h2>
-      If our approach to beauty and aesthetics align, I'd love to talk more.
+      If this approach fits your product, I would love to hear what you are
+      building.
     </h2>
     <p>
-      Send a few details about the product, launch, timeline, and where the
-      content needs to live. I'll be in touch within 24 hours so we can shape
-      the right scope.
+      Share a few details about the product, launch, timeline, and where the
+      content needs to live. I will reply within 24 hours so we can shape the
+      right story and scope together.
     </p>
   </div>
   <form
@@ -46,15 +47,13 @@ const { pathname } = Astro.props;
         <input id="homepage-email" name="email" type="email" required />
       </span>
       <span class="homepage-contact__message">
-        <label for="homepage-message">
-          How would you like to work together?
-        </label>
+        <label for="homepage-message">What would you like to create?</label>
         <textarea name="message" id="homepage-message" rows="5" required
         ></textarea>
       </span>
     </div>
     <button type="submit" class={`${homepagePrimaryAction} border-0`}>
-      Submit
+      Send project details
     </button>
   </form>
 </section>
