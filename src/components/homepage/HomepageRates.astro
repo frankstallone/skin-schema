@@ -9,7 +9,7 @@ const rates = startingRates.map((rate, index) => ({
       ? 'A focused set of stills for product detail, texture, and use.'
       : index === 1
         ? 'A short film for texture, application, or a beauty routine.'
-        : 'A developed film that connects real product qualities with a moment of care.',
+        : 'A concise film connecting real product qualities with a moment of care.',
   bestFor:
     index === 0
       ? 'Product pages and launches'
@@ -26,13 +26,18 @@ const rates = startingRates.map((rate, index) => ({
   data-section-reveal="story"
 >
   <div class="rates-ladder__aside">
-    <h2 id="rates-title">Start with the format that fits your story.</h2>
+    <h2 id="rates-title">Start with a focused content package.</h2>
     <p>
-      Tell us where the content needs to live and what you want the audience to
-      notice. We will shape the idea, deliverables, usage, and review process
-      around that.
+      These starting packages offer a clear way to create one polished
+      deliverable. Tell me where the content needs to live and what you want the
+      audience to notice, and I will shape the idea around that.
     </p>
-    <a href="#Contact" class={homepagePrimaryAction}>Discuss your project</a>
+    <a
+      href="#Contact"
+      class={homepagePrimaryAction}
+      data-project-scope="starting-package"
+      >Discuss a starting package</a
+    >
   </div>
   <ol class="rates-ladder" aria-label="Starting rate progression">
     {

@@ -106,10 +106,10 @@ export const startingRates = [
     ],
   },
   {
-    title: 'Product Story Films',
-    type: 'Product Story Film',
+    title: 'Short Product Stories',
+    type: 'Short Product Story',
     price: '$500',
-    text: 'Developed beauty film concepts with product context, lifestyle detail, sensory focus, and considered pacing.',
+    text: 'Concise beauty films with product context, lifestyle detail, sensory focus, and considered pacing.',
     specs: [
       ['Assets', '1'],
       ['Turnaround', '2 weeks'],

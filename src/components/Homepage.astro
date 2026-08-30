@@ -805,10 +805,39 @@ const pathname = Astro.url.pathname;
     line-height: 1;
   }
 
+  @media (max-width: 1200px) {
+    .homepage-rates,
+    .rates-ladder__item {
+      grid-template-columns: 1fr;
+    }
+
+    .rates-ladder__aside {
+      position: static;
+    }
+
+    .rates-ladder__price {
+      align-items: baseline;
+      border-block-start: 1px solid
+        color-mix(
+          in srgb,
+          var(--color-surface-auxiliary-foreground-color) 18%,
+          transparent
+        );
+      display: flex;
+      justify-content: space-between;
+      justify-items: stretch;
+      order: 3;
+      padding-block-start: var(--spacing-s);
+    }
+
+    .rates-ladder dl {
+      order: 2;
+    }
+  }
+
   .homepage-contact {
     align-items: start;
     background: var(--color-surface-secondary-background-color);
-    border-block-start: 1px solid var(--color-surface-secondary-border-color);
     color: var(--color-surface-secondary-foreground-color);
     display: grid;
     gap: var(--spacing-xl);
@@ -817,15 +846,36 @@ const pathname = Astro.url.pathname;
   }
 
   .homepage-contact h2 {
-    margin-block: var(--spacing-xs);
+    margin: 0;
   }
 
   .homepage-contact p {
     margin: 0;
   }
 
+  .homepage-contact__intro {
+    display: grid;
+    gap: var(--spacing-s);
+  }
+
+  .homepage-contact__larger-project {
+    display: grid;
+    gap: var(--spacing-xs);
+    padding-block-start: var(--spacing-m);
+  }
+
+  .homepage-contact__larger-project h3 {
+    font-size: var(--text-step-1);
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .homepage-contact__larger-project p {
+    max-inline-size: 36rem;
+  }
+
   .homepage-contact__form {
-    align-self: end;
+    align-self: start;
     display: grid;
     gap: var(--spacing-m);
   }
@@ -840,7 +890,8 @@ const pathname = Astro.url.pathname;
     gap: var(--spacing-2xs);
   }
 
-  .homepage-contact__fields label {
+  .homepage-contact__fields label,
+  .homepage-contact__scope legend {
     color: var(--color-surface-secondary-foreground-color);
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
@@ -848,7 +899,7 @@ const pathname = Astro.url.pathname;
     text-transform: uppercase;
   }
 
-  .homepage-contact__fields input,
+  .homepage-contact__fields input:not([type='radio']),
   .homepage-contact__fields textarea {
     background: var(--color-control-background-color);
     border: 0;
@@ -860,7 +911,7 @@ const pathname = Astro.url.pathname;
     padding: var(--spacing-2xs) 0;
   }
 
-  .homepage-contact__fields input:focus,
+  .homepage-contact__fields input:not([type='radio']):focus,
   .homepage-contact__fields textarea:focus {
     border-block-end-color: currentColor;
     outline-color: currentColor;
@@ -869,6 +920,43 @@ const pathname = Astro.url.pathname;
   .homepage-contact__fields textarea {
     min-block-size: 9rem;
     resize: vertical;
+  }
+
+  .homepage-contact__scope {
+    border: 0;
+    display: grid;
+    gap: var(--spacing-2xs);
+    margin: 0;
+    padding: 0;
+  }
+
+  .homepage-contact__scope > div {
+    display: grid;
+    gap: var(--spacing-xs);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .homepage-contact__scope label {
+    align-items: center;
+    border-block-end: 1px solid var(--color-control-border-color);
+    cursor: pointer;
+    display: flex;
+    gap: var(--spacing-xs);
+    min-block-size: 2.75rem;
+    padding-block: var(--spacing-2xs);
+  }
+
+  .homepage-contact__scope input {
+    accent-color: var(--color-action-primary-background-color);
+    block-size: 1rem;
+    flex: 0 0 auto;
+    inline-size: 1rem;
+    margin: 0;
+  }
+
+  .homepage-contact__scope label:has(input:focus-visible) {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
 
   .homepage-footer {
@@ -936,33 +1024,12 @@ const pathname = Astro.url.pathname;
     .homepage-creator ul,
     .homepage-range__intro,
     .homepage-system ol,
-    .homepage-rates,
-    .rates-ladder__item,
     .homepage-contact {
       grid-template-columns: 1fr;
     }
 
-    .rates-ladder__aside {
-      position: static;
-    }
-
-    .rates-ladder__price {
-      align-items: baseline;
-      border-block-start: 1px solid
-        color-mix(
-          in srgb,
-          var(--color-surface-auxiliary-foreground-color) 18%,
-          transparent
-        );
-      display: flex;
-      justify-content: space-between;
-      justify-items: stretch;
-      order: 3;
-      padding-block-start: var(--spacing-s);
-    }
-
-    .rates-ladder dl {
-      order: 2;
+    .homepage-contact__scope > div {
+      grid-template-columns: 1fr;
     }
 
     .homepage-footer__terms {

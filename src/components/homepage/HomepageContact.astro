@@ -5,7 +5,7 @@ const { pathname } = Astro.props;
 ---
 
 <section class="homepage-contact" id="Contact" data-section-reveal="return">
-  <div>
+  <div class="homepage-contact__intro">
     <p class={homepageKicker}>Let's connect</p>
     <h2>
       If this approach fits your product, I would love to hear what you are
@@ -16,6 +16,13 @@ const { pathname } = Astro.props;
       content needs to live. I will reply within 24 hours so we can shape the
       right story and scope together.
     </p>
+    <div class="homepage-contact__larger-project">
+      <h3>Planning something larger?</h3>
+      <p>
+        Briefs that need several formats, a broader creative concept, or a more
+        involved production are shaped around the launch and quoted separately.
+      </p>
+    </div>
   </div>
   <form
     name="homepage-contact"
@@ -38,13 +45,50 @@ const { pathname } = Astro.props;
       </span>
     </div>
     <div class="homepage-contact__fields">
+      <fieldset class="homepage-contact__scope" id="homepage-project-scope">
+        <legend>Project type</legend>
+        <div>
+          <label>
+            <input
+              id="homepage-project-starting"
+              name="project-scope"
+              type="radio"
+              value="starting-package"
+              required
+            />
+            <span>Starting package</span>
+          </label>
+          <label>
+            <input
+              id="homepage-project-larger"
+              name="project-scope"
+              type="radio"
+              value="larger-project"
+              required
+            />
+            <span>Larger campaign or production</span>
+          </label>
+        </div>
+      </fieldset>
       <span>
         <label for="homepage-name">Name</label>
-        <input id="homepage-name" name="name" type="text" required />
+        <input
+          id="homepage-name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+        />
       </span>
       <span>
         <label for="homepage-email">Email</label>
-        <input id="homepage-email" name="email" type="email" required />
+        <input
+          id="homepage-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+        />
       </span>
       <span class="homepage-contact__message">
         <label for="homepage-message">What would you like to create?</label>
@@ -57,3 +101,20 @@ const { pathname } = Astro.props;
     </button>
   </form>
 </section>
+
+<script>
+  const projectScopeActions = document.querySelectorAll<HTMLElement>(
+    '[data-project-scope]',
+  );
+
+  projectScopeActions.forEach((action) => {
+    action.addEventListener('click', () => {
+      const value = action.dataset.projectScope;
+      const input = document.querySelector<HTMLInputElement>(
+        `input[name="project-scope"][value="${value}"]`,
+      );
+
+      if (input) input.checked = true;
+    });
+  });
+</script>
