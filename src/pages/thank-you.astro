@@ -204,13 +204,8 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
     padding: var(--spacing-2xs) var(--spacing-l);
     text-decoration: none;
     transition:
-      background 180ms ease,
-      color 180ms ease,
-      transform 180ms ease;
-  }
-
-  .thank-you-button:hover {
-    transform: translateY(-1px);
+      background-color 180ms ease-in-out,
+      color 180ms ease-in-out;
   }
 
   .thank-you-button--light {
@@ -219,8 +214,27 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
   }
 
   .thank-you-button--light:hover,
-  .thank-you-button--light:focus {
+  .thank-you-button--light:focus-visible {
     filter: brightness(1.08);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .thank-you-button {
+      transition:
+        background-color 180ms ease-in-out,
+        color 180ms ease-in-out,
+        transform 180ms ease-in-out;
+    }
+
+    .thank-you-button:focus-visible {
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .thank-you-button:hover {
+      transform: translateY(-1px);
+    }
   }
 
   .thank-you-text-link {
@@ -228,7 +242,7 @@ import campaignStill from '../assets/2023-Creative-Minds-29-web.jpg';
     color: var(--color-surface-auxiliary-foreground-color);
     font-weight: var(--font-weight-bold);
     text-underline-offset: 0.22em;
-    transition: color 180ms ease;
+    transition: color 180ms ease-in-out;
   }
 
   .thank-you-text-link:hover,

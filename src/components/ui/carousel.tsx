@@ -3,6 +3,11 @@ import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import {
+  getReducedMotionServerSnapshot,
+  getReducedMotionSnapshot,
+  subscribeToReducedMotion,
+} from '../../lib/motion-preference';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -19,11 +24,12 @@ type CarouselProps = {
 type CarouselContextProps = {
   carouselRef: UseEmblaCarouselType[0];
   api: CarouselApi;
-  scrollPrev: () => void;
-  scrollNext: () => void;
+  scrollPrev: (jump?: boolean) => void;
+  scrollNext: (jump?: boolean) => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
   orientation: 'horizontal' | 'vertical';
+  reducedMotion: boolean;
 };
 
 const cx = (...classes: Array<string | false | null | undefined>) =>
@@ -66,6 +72,11 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+    const reducedMotion = React.useSyncExternalStore(
+      subscribeToReducedMotion,
+      getReducedMotionSnapshot,
+      getReducedMotionServerSnapshot,
+    );
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -76,29 +87,42 @@ const Carousel = React.forwardRef<
       setCanScrollNext(api.canScrollNext());
     }, []);
 
-    const scrollPrev = React.useCallback(() => {
-      api?.scrollPrev();
-    }, [api]);
+    const scrollPrev = React.useCallback(
+      (jump?: boolean) => {
+        api?.scrollPrev(jump);
+      },
+      [api],
+    );
 
-    const scrollNext = React.useCallback(() => {
-      api?.scrollNext();
-    }, [api]);
+    const scrollNext = React.useCallback(
+      (jump?: boolean) => {
+        api?.scrollNext(jump);
+      },
+      [api],
+    );
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (
+          event.defaultPrevented ||
+          event.target instanceof HTMLVideoElement
+        ) {
+          return;
+        }
+
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
           event.stopPropagation();
-          scrollPrev();
+          scrollPrev(reducedMotion);
         }
 
         if (event.key === 'ArrowRight') {
           event.preventDefault();
           event.stopPropagation();
-          scrollNext();
+          scrollNext(reducedMotion);
         }
       },
-      [scrollNext, scrollPrev],
+      [reducedMotion, scrollNext, scrollPrev],
     );
 
     React.useEffect(() => {
@@ -132,6 +156,7 @@ const Carousel = React.forwardRef<
           canScrollNext,
           canScrollPrev,
           orientation,
+          reducedMotion,
           scrollNext,
           scrollPrev,
         }}
@@ -200,7 +225,7 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { canScrollPrev, scrollPrev } = useCarousel();
+  const { canScrollPrev, reducedMotion, scrollPrev } = useCarousel();
 
   return (
     <button
@@ -208,7 +233,7 @@ const CarouselPrevious = React.forwardRef<
       type="button"
       className={className}
       disabled={!canScrollPrev}
-      onClick={scrollPrev}
+      onClick={() => scrollPrev(reducedMotion)}
       {...props}
     >
       <ArrowLeft aria-hidden="true" />
@@ -222,7 +247,7 @@ const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { canScrollNext, scrollNext } = useCarousel();
+  const { canScrollNext, reducedMotion, scrollNext } = useCarousel();
 
   return (
     <button
@@ -230,7 +255,7 @@ const CarouselNext = React.forwardRef<
       type="button"
       className={className}
       disabled={!canScrollNext}
-      onClick={scrollNext}
+      onClick={() => scrollNext(reducedMotion)}
       {...props}
     >
       <ArrowRight aria-hidden="true" />
