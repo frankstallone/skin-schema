@@ -35,6 +35,7 @@ const carouselSections = rangeExamples.map((example) => ({
 <section
   class="homepage-range"
   aria-labelledby="homepage-range-title"
+  data-homepage-range
   data-section-reveal="showcase"
 >
   <div class="homepage-range__intro">
@@ -71,7 +72,7 @@ const carouselSections = rangeExamples.map((example) => ({
             />
           ) : (
             <video
-              autoplay
+              data-range-preview-video
               loop
               muted
               playsinline
@@ -90,3 +91,44 @@ const carouselSections = rangeExamples.map((example) => ({
   </div>
   <HomepageRangeCarousel client:load sections={carouselSections} />
 </section>
+
+<script>
+  import {
+    getReducedMotionSnapshot,
+    subscribeToReducedMotion,
+  } from '../../lib/motion-preference';
+
+  const ranges = document.querySelectorAll<HTMLElement>(
+    '[data-homepage-range]:not([data-video-motion-bound])',
+  );
+
+  ranges.forEach((range) => {
+    range.dataset.videoMotionBound = 'true';
+
+    const videos = range.querySelectorAll<HTMLVideoElement>(
+      '[data-range-preview-video]',
+    );
+    const syncPlayback = () => {
+      videos.forEach((video) => {
+        if (getReducedMotionSnapshot()) {
+          video.pause();
+          return;
+        }
+
+        video.muted = true;
+        video.play().catch(() => {
+          // Browser playback policies can still decline; the static frame remains.
+        });
+      });
+    };
+    const unsubscribe = subscribeToReducedMotion(syncPlayback);
+    const cleanup = () => {
+      unsubscribe();
+      videos.forEach((video) => video.pause());
+      delete range.dataset.videoMotionBound;
+    };
+
+    syncPlayback();
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  });
+</script>

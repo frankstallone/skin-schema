@@ -8,7 +8,14 @@ const { heading, subHeading } = Astro.props;
 ---
 
 <div class="wrapper relative overflow-clip" style="--gutter: 0px;">
-  <video autoplay loop muted playsinline class="min-w-zero max-w-full">
+  <video
+    loop
+    muted
+    playsinline
+    preload="metadata"
+    class="min-w-zero max-w-full"
+    data-legacy-hero-video
+  >
     <source src="/media/skin-schema-hero.webm" type="video/webm" />
     <source src="/media/skin-schema-hero.mp4" type="video/mp4" />
   </video>
@@ -40,3 +47,39 @@ const { heading, subHeading } = Astro.props;
     }
   </div>
 </div>
+
+<script>
+  import {
+    getReducedMotionSnapshot,
+    subscribeToReducedMotion,
+  } from '../lib/motion-preference';
+
+  const videos = document.querySelectorAll<HTMLVideoElement>(
+    '[data-legacy-hero-video]:not([data-video-motion-bound])',
+  );
+
+  videos.forEach((video) => {
+    video.dataset.videoMotionBound = 'true';
+
+    const syncPlayback = () => {
+      if (getReducedMotionSnapshot()) {
+        video.pause();
+        return;
+      }
+
+      video.muted = true;
+      video.play().catch(() => {
+        // Browser playback policies can still decline; the static frame remains.
+      });
+    };
+    const unsubscribe = subscribeToReducedMotion(syncPlayback);
+    const cleanup = () => {
+      unsubscribe();
+      video.pause();
+      delete video.dataset.videoMotionBound;
+    };
+
+    syncPlayback();
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  });
+</script>

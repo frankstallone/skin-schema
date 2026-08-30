@@ -50,14 +50,19 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
 </homepage-tourmaline>
 
 <style>
+  @property --tourmaline-light-x {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 56%;
+  }
+
+  @property --tourmaline-light-y {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 32%;
+  }
+
   homepage-tourmaline {
-    --tourmaline-light-opacity: 0.18;
-    --tourmaline-light-x: 58%;
-    --tourmaline-light-y: 34%;
-    --tourmaline-rotate-x: 0deg;
-    --tourmaline-rotate-y: 0deg;
-    --tourmaline-shift-x: 0px;
-    --tourmaline-shift-y: 0px;
     block-size: 100%;
     contain: layout style paint;
     display: block;
@@ -80,9 +85,8 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
     inline-size: 100%;
     place-items: center;
     position: relative;
-    transform: perspective(1100px)
-      translate3d(var(--tourmaline-shift-x), var(--tourmaline-shift-y), 0)
-      rotateX(var(--tourmaline-rotate-x)) rotateY(var(--tourmaline-rotate-y));
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg)
+      rotateY(0deg);
     transform-style: preserve-3d;
     will-change: transform;
   }
@@ -126,6 +130,8 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
   }
 
   .homepage-tourmaline__relief {
+    --tourmaline-light-x: 56%;
+    --tourmaline-light-y: 32%;
     filter: brightness(2.05) contrast(1.75) saturate(0.72);
     -webkit-mask-image: radial-gradient(
       ellipse 46% 54% at var(--tourmaline-light-x) var(--tourmaline-light-y),
@@ -140,7 +146,7 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
       transparent 68%
     );
     mix-blend-mode: screen;
-    opacity: var(--tourmaline-light-opacity);
+    opacity: 0.14;
     transform: translateZ(30px);
     will-change: opacity;
     z-index: 3;
@@ -194,53 +200,63 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
     #frameId = 0;
     #motionQuery?: MediaQueryList;
     #observer?: IntersectionObserver;
+    #plane?: HTMLElement;
+    #pointerAbortController?: AbortController;
+    #pointerQuery?: MediaQueryList;
     #pointerX = 0;
     #pointerY = 0;
+    #relief?: HTMLElement;
     #targetX = 0;
     #targetY = 0;
     #visible = false;
 
     connectedCallback() {
-      this.#abortController = new AbortController();
-      const { signal } = this.#abortController;
+      const abortController = new AbortController();
+      this.#abortController = abortController;
+      const { signal } = abortController;
+      this.#plane =
+        this.querySelector<HTMLElement>('.homepage-tourmaline__plane') ??
+        undefined;
+      this.#relief =
+        this.querySelector<HTMLElement>('.homepage-tourmaline__relief') ??
+        undefined;
       this.#motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      this.#pointerQuery = window.matchMedia(
+        '(hover: hover) and (pointer: fine)',
+      );
+      this.#visible = false;
+      this.#resetToNeutral();
+      this.#syncPausedState();
 
-      this.addEventListener(
-        'pointermove',
-        (event) => {
-          const bounds = this.getBoundingClientRect();
-          this.#targetX =
-            clamp((event.clientX - bounds.left) / bounds.width) * 2 - 1;
-          this.#targetY =
-            clamp((event.clientY - bounds.top) / bounds.height) * 2 - 1;
-        },
+      this.#motionQuery.addEventListener('change', this.#handleMotionChange, {
+        signal,
+      });
+      this.#pointerQuery.addEventListener(
+        'change',
+        this.#handlePointerCapabilityChange,
         { signal },
       );
-      this.addEventListener(
-        'pointerleave',
-        () => {
-          this.#targetX = 0;
-          this.#targetY = 0;
-        },
-        { signal },
-      );
+      this.#syncPointerListeners();
 
-      this.#observer = new IntersectionObserver(
+      const observer = new IntersectionObserver(
         ([entry]) => {
+          if (!this.isConnected || this.#observer !== observer) return;
           this.#visible = entry.isIntersecting;
-          this.toggleAttribute('data-paused', !entry.isIntersecting);
-          if (entry.isIntersecting) this.#startAnimation();
+          this.#syncPausedState();
+          if (entry.isIntersecting) this.#wakeAnimation();
           else this.#stopAnimation();
         },
         { rootMargin: '160px' },
       );
-      this.#observer.observe(this);
+      this.#observer = observer;
+      observer.observe(this);
 
       document.addEventListener(
         'visibilitychange',
         () => {
+          this.#syncPausedState();
           if (document.hidden) this.#stopAnimation();
-          else this.#startAnimation();
+          else this.#wakeAnimation();
         },
         { signal },
       );
@@ -251,28 +267,121 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
           images.map(async (image) => {
             if (!image.complete) {
               await new Promise<void>((resolve) => {
-                image.addEventListener('load', () => resolve(), { once: true });
-                image.addEventListener('error', () => resolve(), {
-                  once: true,
-                });
+                const finish = () => {
+                  image.removeEventListener('load', finish);
+                  image.removeEventListener('error', finish);
+                  signal.removeEventListener('abort', finish);
+                  resolve();
+                };
+                image.addEventListener('load', finish, { once: true });
+                image.addEventListener('error', finish, { once: true });
+                signal.addEventListener('abort', finish, { once: true });
               });
             }
+            if (signal.aborted) return;
             await image.decode?.().catch(() => undefined);
           }),
         );
-        if (this.isConnected) this.setAttribute('data-ready', '');
+        if (
+          this.isConnected &&
+          !signal.aborted &&
+          this.#abortController === abortController
+        ) {
+          this.setAttribute('data-ready', '');
+        }
       };
       void reveal();
     }
 
     disconnectedCallback() {
+      this.#pointerAbortController?.abort();
+      this.#pointerAbortController = undefined;
       this.#abortController?.abort();
+      this.#abortController = undefined;
       this.#observer?.disconnect();
-      this.#stopAnimation();
+      this.#observer = undefined;
+      this.#visible = false;
+      this.#resetToNeutral();
+      this.#motionQuery = undefined;
+      this.#pointerQuery = undefined;
+      this.#plane = undefined;
+      this.#relief = undefined;
     }
 
-    #startAnimation = () => {
-      if (this.#frameId || !this.#visible || document.hidden) return;
+    #canAnimate = () =>
+      this.isConnected &&
+      this.#visible &&
+      !document.hidden &&
+      !this.#motionQuery?.matches &&
+      Boolean(this.#pointerQuery?.matches);
+
+    #handleMotionChange = () => {
+      this.#syncPointerListeners();
+      if (this.#motionQuery?.matches) this.#resetToNeutral();
+      else this.#wakeAnimation();
+    };
+
+    #handlePointerCapabilityChange = () => {
+      this.#syncPointerListeners();
+      if (!this.#pointerQuery?.matches) this.#resetToNeutral();
+      else this.#wakeAnimation();
+    };
+
+    #setTarget = (x: number, y: number) => {
+      if (x === this.#targetX && y === this.#targetY) return;
+      this.#targetX = x;
+      this.#targetY = y;
+
+      if (this.#isSettled()) {
+        this.#pointerX = this.#targetX;
+        this.#pointerY = this.#targetY;
+        this.#render(this.#pointerX, this.#pointerY);
+        return;
+      }
+
+      this.#wakeAnimation();
+    };
+
+    #syncPointerListeners = () => {
+      this.#pointerAbortController?.abort();
+      this.#pointerAbortController = undefined;
+      if (
+        !this.isConnected ||
+        !this.#pointerQuery?.matches ||
+        this.#motionQuery?.matches
+      ) {
+        return;
+      }
+
+      this.#pointerAbortController = new AbortController();
+      const { signal } = this.#pointerAbortController;
+      this.addEventListener(
+        'pointermove',
+        (event) => {
+          const bounds = this.getBoundingClientRect();
+          if (bounds.width <= 0 || bounds.height <= 0) return;
+          this.#setTarget(
+            clamp((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+            clamp((event.clientY - bounds.top) / bounds.height) * 2 - 1,
+          );
+        },
+        { signal },
+      );
+      this.addEventListener('pointerleave', () => this.#setTarget(0, 0), {
+        signal,
+      });
+    };
+
+    #syncPausedState = () => {
+      this.toggleAttribute('data-paused', !this.#visible || document.hidden);
+    };
+
+    #isSettled = () =>
+      Math.abs(this.#targetX - this.#pointerX) <= 0.001 &&
+      Math.abs(this.#targetY - this.#pointerY) <= 0.001;
+
+    #wakeAnimation = () => {
+      if (this.#frameId || !this.#canAnimate() || this.#isSettled()) return;
       this.#frameId = requestAnimationFrame(this.#update);
     };
 
@@ -281,27 +390,48 @@ const imageSizes = '(max-width: 700px) 78vw, (max-width: 1100px) 44vw, 42rem';
       this.#frameId = 0;
     };
 
+    #resetToNeutral = () => {
+      this.#stopAnimation();
+      this.#pointerX = 0;
+      this.#pointerY = 0;
+      this.#targetX = 0;
+      this.#targetY = 0;
+      this.#render(0, 0);
+    };
+
+    #render = (x: number, y: number) => {
+      if (this.#plane) {
+        this.#plane.style.transform =
+          `perspective(1100px) translate3d(${x * 9}px, ${y * 7}px, 0) ` +
+          `rotateX(${-y * 2.4}deg) rotateY(${x * 3.2}deg)`;
+      }
+      if (this.#relief) {
+        this.#relief.style.setProperty(
+          '--tourmaline-light-x',
+          `${56 + x * 20}%`,
+        );
+        this.#relief.style.setProperty(
+          '--tourmaline-light-y',
+          `${32 + y * 16}%`,
+        );
+        this.#relief.style.opacity = String(0.14 + Math.hypot(x, y) * 0.08);
+      }
+    };
+
     #update = () => {
       this.#frameId = 0;
-      if (this.#visible && !document.hidden) {
-        const motion = !this.#motionQuery?.matches;
-        this.#pointerX = lerp(this.#pointerX, this.#targetX, 0.085);
-        this.#pointerY = lerp(this.#pointerY, this.#targetY, 0.085);
+      if (!this.#canAnimate()) return;
 
-        const x = motion ? this.#pointerX : 0;
-        const y = motion ? this.#pointerY : 0;
-        this.style.setProperty('--tourmaline-rotate-x', `${-y * 2.4}deg`);
-        this.style.setProperty('--tourmaline-rotate-y', `${x * 3.2}deg`);
-        this.style.setProperty('--tourmaline-shift-x', `${x * 9}px`);
-        this.style.setProperty('--tourmaline-shift-y', `${y * 7}px`);
-        this.style.setProperty('--tourmaline-light-x', `${56 + x * 20}%`);
-        this.style.setProperty('--tourmaline-light-y', `${32 + y * 16}%`);
-        this.style.setProperty(
-          '--tourmaline-light-opacity',
-          String(0.14 + Math.hypot(x, y) * 0.08),
-        );
-        this.#frameId = requestAnimationFrame(this.#update);
+      this.#pointerX = lerp(this.#pointerX, this.#targetX, 0.085);
+      this.#pointerY = lerp(this.#pointerY, this.#targetY, 0.085);
+
+      if (this.#isSettled()) {
+        this.#pointerX = this.#targetX;
+        this.#pointerY = this.#targetY;
       }
+
+      this.#render(this.#pointerX, this.#pointerY);
+      this.#wakeAnimation();
     };
   }
 

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { X } from 'lucide-react';
 import {
+  getReducedMotionServerSnapshot,
+  getReducedMotionSnapshot,
+  subscribeToReducedMotion,
+} from '../../lib/motion-preference';
+import {
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -36,6 +41,11 @@ export default function HomepageRangeCarousel({
   );
   const [api, setApi] = React.useState<CarouselApi>();
   const [currentSlide, setCurrentSlide] = React.useState(0);
+  const reducedMotion = React.useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
   const dialogRef = React.useRef<HTMLDivElement>(null);
   const nextButtonRef = React.useRef<HTMLButtonElement>(null);
   const lastTriggerRef = React.useRef<HTMLElement | null>(null);
@@ -90,7 +100,9 @@ export default function HomepageRangeCarousel({
       }
 
       const sectionId = trigger.dataset.rangeCarouselTrigger;
-      const sectionExists = sections.some((section) => section.id === sectionId);
+      const sectionExists = sections.some(
+        (section) => section.id === sectionId,
+      );
 
       if (!sectionId || !sectionExists) {
         return;
@@ -115,6 +127,10 @@ export default function HomepageRangeCarousel({
     document.body.style.overflow = 'hidden';
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented) {
+        return;
+      }
+
       if (event.key === 'Escape') {
         closeCarousel();
         return;
@@ -122,14 +138,15 @@ export default function HomepageRangeCarousel({
 
       if (
         (event.key === 'ArrowLeft' || event.key === 'ArrowRight') &&
+        !(event.target instanceof HTMLVideoElement) &&
         !(document.activeElement instanceof HTMLVideoElement)
       ) {
         event.preventDefault();
 
         if (event.key === 'ArrowLeft') {
-          api?.scrollPrev();
+          api?.scrollPrev(reducedMotion);
         } else {
-          api?.scrollNext();
+          api?.scrollNext(reducedMotion);
         }
 
         return;
@@ -180,6 +197,7 @@ export default function HomepageRangeCarousel({
     closeCarousel,
     focusNextButton,
     getDialogFocusableElements,
+    reducedMotion,
   ]);
 
   React.useEffect(() => {
@@ -223,18 +241,24 @@ export default function HomepageRangeCarousel({
     const videos =
       dialogRef.current?.querySelectorAll<HTMLVideoElement>('video') ?? [];
 
-    videos.forEach((video, index) => {
-      if (index !== currentSlide) {
+    videos.forEach((video) => {
+      const slide = video.closest<HTMLElement>('[data-range-carousel-slide]');
+      const isActiveSlide =
+        Number(slide?.dataset.rangeCarouselSlide) === currentSlide;
+
+      if (!isActiveSlide || reducedMotion) {
         video.pause();
         return;
       }
 
       video.muted = true;
       video.play().catch(() => {
-        // Autoplay can still be blocked by browser settings; controls remain available.
+        // Playback can still be blocked by browser settings; controls remain available.
       });
     });
-  }, [activeSection, currentSlide]);
+
+    return () => videos.forEach((video) => video.pause());
+  }, [activeSection, currentSlide, reducedMotion]);
 
   if (!activeSection) {
     return null;
@@ -276,10 +300,11 @@ export default function HomepageRangeCarousel({
           className="homepage-range-carousel__carousel"
         >
           <CarouselContent className="homepage-range-carousel__track">
-            {activeSection.media.map((media) => (
+            {activeSection.media.map((media, index) => (
               <CarouselItem
                 className="homepage-range-carousel__slide"
                 key={media.src}
+                data-range-carousel-slide={index}
               >
                 <figure
                   className={`homepage-range-carousel__media-frame homepage-range-carousel__media-frame--${media.kind}`}
@@ -294,7 +319,6 @@ export default function HomepageRangeCarousel({
                     />
                   ) : (
                     <video
-                      autoPlay
                       controls
                       loop
                       muted

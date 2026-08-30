@@ -135,19 +135,12 @@ const pathname = Astro.url.pathname;
 
   .homepage-hero__line {
     display: block;
-    will-change: opacity, transform, filter;
   }
 
   .homepage-hero__copy [data-hero-body] {
     font-size: var(--text-step-1);
     margin: 0;
     max-inline-size: 42rem;
-    will-change: opacity, transform, filter;
-  }
-
-  .homepage-hero__copy [data-hero-kicker],
-  .homepage-hero__copy [data-hero-cta] {
-    will-change: opacity, transform, filter;
   }
 
   .homepage-storyboard {
@@ -168,8 +161,6 @@ const pathname = Astro.url.pathname;
 
   .homepage-storyboard__reveal {
     block-size: 100%;
-    clip-path: inset(100% 0 0 0);
-    will-change: opacity, transform, clip-path;
   }
 
   .homepage-storyboard__reveal video {
@@ -178,7 +169,6 @@ const pathname = Astro.url.pathname;
     inline-size: 100%;
     object-fit: cover;
     transform-origin: center;
-    will-change: transform;
   }
 
   .homepage-brands {
@@ -357,9 +347,7 @@ const pathname = Astro.url.pathname;
     padding: 0;
     position: relative;
     text-align: inherit;
-    transition:
-      filter 180ms ease,
-      transform 180ms ease;
+    transition: filter 180ms ease-in-out;
   }
 
   .homepage-range__item picture,
@@ -386,15 +374,44 @@ const pathname = Astro.url.pathname;
     grid-area: stack;
   }
 
-  .homepage-range__item:hover,
-  .homepage-range__item:focus-visible {
+  .homepage-range__item:not(:disabled):hover,
+  .homepage-range__item:not(:disabled):focus-visible {
     filter: brightness(1.06);
-    transform: translateY(-0.125rem);
   }
 
   .homepage-range__item:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 0.25rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage-range__item {
+      transition:
+        filter 180ms ease-in-out,
+        transform 180ms ease-in-out;
+    }
+
+    .homepage-motion-action {
+      transition-property: background-color, color, transform;
+    }
+
+    .homepage-motion-action:not(:disabled):focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .homepage-range__item:not(:disabled):focus-visible {
+      transform: translateY(-0.125rem);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .homepage-range__item:not(:disabled):hover {
+      transform: translateY(-0.125rem);
+    }
+
+    .homepage-motion-action:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
   }
 
   .homepage-range__caption {
@@ -533,7 +550,7 @@ const pathname = Astro.url.pathname;
   .homepage-range-carousel__icon-button {
     align-items: center;
     aspect-ratio: 1;
-    background: var(--color-action-auxiliary-background-color);
+    background-color: var(--color-action-auxiliary-background-color);
     border: 1px solid var(--color-action-auxiliary-border-color);
     border-radius: 999px;
     color: var(--color-action-auxiliary-foreground-color);
@@ -543,15 +560,16 @@ const pathname = Astro.url.pathname;
     justify-content: center;
     padding: 0;
     transition:
-      background 180ms ease,
-      border-color 180ms ease,
-      color 180ms ease;
+      background-color 180ms ease-in-out,
+      border-color 180ms ease-in-out,
+      color 180ms ease-in-out;
   }
 
-  .homepage-range-carousel__icon-button:hover,
-  .homepage-range-carousel__icon-button:focus-visible {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
+  .homepage-range-carousel__icon-button:not(:disabled):hover,
+  .homepage-range-carousel__icon-button:not(:disabled):focus-visible {
+    background-color: var(--color-action-secondary-background-color);
+    border-color: var(--color-action-secondary-border-color);
+    color: var(--color-action-secondary-foreground-color);
   }
 
   .homepage-range-carousel__icon-button:focus-visible {
@@ -562,6 +580,26 @@ const pathname = Astro.url.pathname;
   .homepage-range-carousel__icon-button:disabled {
     cursor: not-allowed;
     opacity: 0.38;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .homepage-range-carousel__icon-button {
+      transition:
+        background-color 180ms ease-in-out,
+        border-color 180ms ease-in-out,
+        color 180ms ease-in-out,
+        transform 180ms ease-in-out;
+    }
+
+    .homepage-range-carousel__icon-button:not(:disabled):focus-visible {
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .homepage-range-carousel__icon-button:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
   }
 
   .homepage-range-carousel__icon-button svg {
