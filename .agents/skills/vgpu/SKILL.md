@@ -1,10 +1,6 @@
 ---
 name: vgpu
-description: >-
-  Build and optimize WebGPU apps with the vgpu package and entrypoints vgpu/node,
-  vgpu/mock, vgpu/scene, and vgpu/client. Use @vgpu/render/inspect, /utils, /edit,
-  and /perf only as slim tooling subpaths. Bundles performance guides and the API
-  reference; load one doc at a time.
+description: Build, debug, or optimize WebGPU apps and WGSL shaders with vgpu.
 vgpuVersion: 0.3.1
 gitSha: 61779b7d15cc40a0058e4ade0457b8dbf717319e
 generatedAt: 2026-08-26T05:40:09.518Z
@@ -14,6 +10,8 @@ generatedAt: 2026-08-26T05:40:09.518Z
 
 Generated from the vgpu `.docs.md` source. Each entry maps to a file in `references/` and to a
 doc you can load on demand with the CLI — **load only what you need, don't read the whole skill**:
+
+Use `@vgpu/render/inspect`, `/utils`, `/edit`, and `/perf` only as tooling subpaths.
 
 vgpu is layered: vgpu/core (thin WebGPU wrappers) → vgpu (main API with WGSL reflection) → vgpu/scene (geometry/camera helpers). Lower layers are always accessible and interoperable.
 
