@@ -1,6 +1,6 @@
 # Storefront bundle handoff
 
-Audit date: October 2, 2026. This document records the source media and inputs for the private, two-bundle Stripe test storefront. Deployment results belong in the last section.
+Audit date: October 2, 2026. This document records the source media and verification results for the unlisted, two-bundle Stripe test storefront. Original archives are held in private R2 storage.
 
 ## Current offer
 
@@ -47,7 +47,7 @@ The first ten video attachments returned by the authorized message read are byte
 | Files with audio tracks       | 30                                         | 34                                          |
 | Audio codecs                  | 29 PCM tracks and 1 AAC track              | 34 PCM tracks                               |
 
-Source totals exclude ZIP packaging overhead. Confirm the generated archive sizes before reporting exact download sizes. The source files are encoded with H.264 or HEVC. Do not describe either bundle as entirely 4K or uncompressed, or promise an exact constant frame rate.
+Source totals exclude ZIP packaging overhead. Exact archive sizes are recorded below. The source files are encoded with H.264 or HEVC. Do not describe either bundle as entirely 4K or uncompressed, or promise an exact constant frame rate.
 
 The cropped files are:
 
@@ -112,4 +112,37 @@ The sampled frames do not certify the absence of people, products, logos, artwor
 
 ## Deployment and purchase-flow evidence
 
-The source audit is complete. Record the one-off Netlify preview URL, private R2 archive keys and sizes, Stripe test Products and Prices, build result, and test purchase/download results here after verification. Do not store secrets, private Apple URLs, permanent storage access URLs or bearer Checkout Session URLs in this document. A one-off preview publication does not merge or publish these changes to the production site.
+Review the [Netlify branch storefront](https://f4-storefront-video-bundles--skinschema.netlify.app/store/). The branch is `f4/storefront-video-bundles`. These changes have not been merged or deployed to the production site. The storefront has no navigation link, uses `noindex, nofollow`, and is omitted from the sitemap. The preview URL is unlisted, not password protected.
+
+Both products and prices are in Stripe test mode. `STOREFRONT_PRODUCTS_JSON` is set only for this named Netlify branch. The application rejects live Stripe credentials and sessions. Existing production configuration was not changed. Temporary provisioning scripts and the private source-share environment variable were removed after upload verification.
+
+Before deploying this code in another Netlify context, set its `STOREFRONT_PRODUCTS_JSON` from the two Price/object pairs below. The retired `STRIPE_PRICE_ID` and `R2_OBJECT_KEY` variables do not configure this catalog. Production promotion and commercial launch are separate review steps; do not merge this branch assuming production is already configured.
+
+| Package          | R2 object in `skin-schema-storefront-poc` |   ZIP bytes | Stripe test Price                |
+| ---------------- | ----------------------------------------- | ----------: | -------------------------------- |
+| Bathroom Rituals | `bundles/bathroom-rituals.zip`            | 671,085,692 | `price_1UMIzvLpq8LY8QJOJqinlMxz` |
+| Coastal Skin     | `bundles/coastal-skin.zip`                | 503,874,634 | `price_1UMIzwLpq8LY8QJOxzd4Ch7v` |
+
+Stripe test Product IDs are `prod_skin_schema_bathroom_rituals_test` and `prod_skin_schema_coastal_skin_test`. Each Price is 9,900 USD cents. The ZIPs include unchanged source videos, a `clip-index.csv` manifest, and a test-only README.
+
+| Archive          | SHA-256                                                            |
+| ---------------- | ------------------------------------------------------------------ |
+| Bathroom Rituals | `6b2a0e315be557c68ecd70417b5185822e0d0ef477a2ac0d22c50d02b3165dc9` |
+| Coastal Skin     | `82937fdddba74f9013b3bd596de72766e3c609ffb1dc23351e85a2b2245c0354` |
+
+Verification completed:
+
+- Both archives were read back from R2. ZIP integrity checks passed, and every video SHA-256 matched the local source inventory.
+- Both Stripe-hosted Checkout pages showed Sandbox and the correct $99 test product. Each purchase completed with Stripe's `4242 4242 4242 4242` test card and fictional buyer details; payment details were not saved.
+- The server confirmed both paid sessions and issued the correct bundle's download. Each signed R2 link expires after 300 seconds. The complete buyer downloads match the archive sizes and SHA-256 hashes above.
+- Unpaid sessions did not provide downloads. Missing or live session IDs were rejected. Unknown products and sessions were rejected.
+- Changing client query parameters could not switch a paid session to the other bundle. Unsigned requests for both R2 objects were denied (`400 InvalidArgument`); neither returned an archive.
+- Purchase pages send `no-store`, `no-referrer`, and `noindex, nofollow`. They omit analytics and keep the bearer session ID out of canonical and social URLs.
+- `npm test` passed all 27 tests. `npm run build` passed with zero Astro errors, warnings, or hints. The Netlify adapter does not support `astro preview`; deployed branch HTTP checks covered the built routes instead.
+- Separate preview reels decode as portrait 1080 × 1920 H.264, have no audio, and display burned-in Skin Schema watermarks. The Bathroom reel runs 44.267 seconds; Coastal runs 50.400 seconds. The delivered source files were not re-encoded.
+
+The browser rendered and completed Stripe Checkout, but the in-app browser crashed when loading the test deployment's storefront, purchase-status pages, and unchanged home page. Its plain-text `robots.txt` request returned `ERR_BLOCKED_BY_CLIENT`. The existing production storefront did render. Native Chrome and Safari were unavailable behind the Mac's Screen Time limit, which was not changed. The test site returned the expected HTML and headers through HTTP, including paid success pages and working downloads. Desktop/mobile appearance, preview playback, and the visible cancelled state still need a browser check. Do not treat the successful HTTP checks as visual verification.
+
+For manual testing, open the branch storefront and choose either test Checkout. Use `4242 4242 4242 4242`, any future expiration date, any three-digit CVC, and a test email. Disable saving payment information. Save the returned purchase page privately if you want to download again; there is no account or email recovery. A successful test purchase grants access to the original files but no commercial usage rights.
+
+Verified buyer ZIPs are saved in [verified-purchase-downloads](</Users/starlord/Movies/Skin Schema Storefront/2026-10-02/verified-purchase-downloads>). Do not commit secrets, private Apple URLs, signed download URLs, or bearer Checkout Session URLs.

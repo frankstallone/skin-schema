@@ -195,13 +195,25 @@ test('rejects live Stripe sessions, payment intents, and charges', async () => {
 test('rejects an unknown Stripe Checkout Session', async () => {
   const stripe = stripeFor();
   stripe.checkout.sessions.retrieve = async () => {
-    throw new Error('No such checkout session');
+    throw Object.assign(new Error('No such checkout session'), {
+      code: 'resource_missing',
+    });
   };
 
   assert.deepEqual(await verify(stripe), {
     eligible: false,
     reason: 'invalid-session',
   });
+});
+
+test('propagates temporary Stripe lookup failures for retry handling', async () => {
+  const stripe = stripeFor();
+  const failure = new Error('Stripe connection interrupted');
+  stripe.checkout.sessions.retrieve = async () => {
+    throw failure;
+  };
+
+  await assert.rejects(verify(stripe), (error) => error === failure);
 });
 
 test('rejects a purchase without an expanded latest charge', async () => {

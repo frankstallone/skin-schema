@@ -95,8 +95,16 @@ export async function verifyPurchase({
 
   try {
     session = await stripe.checkout.sessions.retrieve(sessionId);
-  } catch {
-    return { eligible: false, reason: 'invalid-session' };
+  } catch (error) {
+    if (
+      error &&
+      typeof error === 'object' &&
+      'code' in error &&
+      error.code === 'resource_missing'
+    ) {
+      return { eligible: false, reason: 'invalid-session' };
+    }
+    throw error;
   }
 
   if (session.livemode !== false) {
