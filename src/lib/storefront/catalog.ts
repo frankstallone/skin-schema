@@ -18,49 +18,49 @@ export interface StorefrontProduct {
   downloadFilename: string;
 }
 
-/** Provisional bundles for the private Stripe test purchase workflow. */
+/** Two collections for the private Stripe test purchase workflow. */
 export const storefrontProducts = [
   {
-    id: 'bathroom-rituals',
-    name: 'Bathroom Rituals',
+    id: 'resort-glow',
+    name: 'Resort Glow',
     description:
-      'Water, soft towels, robes, and quiet moments at the mirror. A collection of everyday bathroom rituals.',
-    previewSrc: '/media/storefront/bathroom-rituals-preview.mp4',
-    posterSrc: '/media/storefront/bathroom-rituals-poster.jpg',
+      'Ocean views, palms, beach walks, and quiet moments around the resort. Coastal details alongside robes and indoor rituals.',
+    previewSrc: '/media/storefront/resort-glow-preview.mp4',
+    posterSrc: '/media/storefront/resort-glow-poster.jpg',
     qualityNote:
-      'Three clips were upscaled from smaller source files. Includes 7 clips also in Coastal Skin.',
+      'Three clips were upscaled from sources below Full HD. Includes 5 clips also in Hotel Bathroom Glow.',
     priceLabel: '$99 USD',
     clipCount: 30,
-    durationLabel: '1 minute 58 seconds',
+    durationLabel: '2 minutes',
     resolution: '1080 × 1920',
     orientation: 'Vertical · 9:16',
     format: 'MP4 · H.264',
     frameRate: '29.97 fps · constant',
     audio: 'Silent · no audio tracks',
     colorSpace: 'SDR · Rec.709',
-    downloadSize: '111 MB · ZIP',
-    downloadFilename: 'skin-schema-bathroom-rituals.zip',
+    downloadSize: '187 MB · ZIP',
+    downloadFilename: 'skin-schema-resort-glow.zip',
   },
   {
-    id: 'coastal-skin',
-    name: 'Coastal Skin',
+    id: 'hotel-bathroom-glow',
+    name: 'Hotel Bathroom Glow',
     description:
-      'Ocean light, slow beach days, and sunlit resort details, alongside quiet bathroom and indoor rituals.',
-    previewSrc: '/media/storefront/coastal-skin-preview.mp4',
-    posterSrc: '/media/storefront/coastal-skin-poster.jpg',
+      'Robes, soft towels, shower details, and mirror routines. A collection of close-up moments from hotel bathrooms.',
+    previewSrc: '/media/storefront/hotel-bathroom-glow-preview.mp4',
+    posterSrc: '/media/storefront/hotel-bathroom-glow-poster.jpg',
     qualityNote:
-      'Three clips were upscaled from smaller source files. Includes 7 clips also in Bathroom Rituals.',
+      'Two clips were upscaled from sources below Full HD. Includes 5 clips also in Resort Glow.',
     priceLabel: '$99 USD',
-    clipCount: 34,
-    durationLabel: '2 minutes 23 seconds',
+    clipCount: 29,
+    durationLabel: '1 minute 56 seconds',
     resolution: '1080 × 1920',
     orientation: 'Vertical · 9:16',
     format: 'MP4 · H.264',
     frameRate: '29.97 fps · constant',
     audio: 'Silent · no audio tracks',
     colorSpace: 'SDR · Rec.709',
-    downloadSize: '191 MB · ZIP',
-    downloadFilename: 'skin-schema-coastal-skin.zip',
+    downloadSize: '160 MB · ZIP',
+    downloadFilename: 'skin-schema-hotel-bathroom-glow.zip',
   },
 ] as const satisfies readonly StorefrontProduct[];
 
