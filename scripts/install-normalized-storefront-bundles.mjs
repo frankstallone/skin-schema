@@ -20,6 +20,7 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import Stripe from 'stripe';
 
 function requireCondition(condition, code) {
   if (!condition) throw new Error(code);
@@ -132,6 +133,26 @@ async function main() {
     if (pending.length) {
       const uploads = [];
       for (const row of pending) {
+        try {
+          const head = await client.send(
+            new HeadObjectCommand({ Bucket, Key: row.stageKey }),
+          );
+          requireCondition(
+            head.ContentLength === row.bytes,
+            'STAGED_SIZE_MISMATCH',
+          );
+          row.staged = await readObject(
+            row.stageKey,
+            join(directory, `${row.id}-staged.zip`),
+          );
+          requireCondition(
+            row.staged.bytes === row.bytes && row.staged.sha256 === row.sha256,
+            'STAGED_HASH_MISMATCH',
+          );
+          continue;
+        } catch (error) {
+          if (error.$metadata?.httpStatusCode !== 404) throw error;
+        }
         const url = await getSignedUrl(
           client,
           new PutObjectCommand({
@@ -140,7 +161,6 @@ async function main() {
             ContentType: 'application/zip',
             ContentLength: row.bytes,
             ContentMD5: row.md5,
-            Metadata: { sha256: row.sha256 },
           }),
           { expiresIn: 900 },
         );
@@ -156,29 +176,32 @@ async function main() {
           },
         });
       }
-      // Only this workstation can decrypt these temporary upload capabilities.
-      const key = randomBytes(32);
-      const iv = randomBytes(12);
-      const cipher = createCipheriv('aes-256-gcm', key, iv);
-      const ciphertext = Buffer.concat([
-        cipher.update(JSON.stringify(uploads)),
-        cipher.final(),
-      ]);
-      console.log(
-        JSON.stringify({
-          kind: 'normalization-upload',
-          wrappedKey: publicEncrypt(
-            { key: plan.publicKey, oaepHash: 'sha256' },
-            key,
-          ).toString('base64'),
-          iv: iv.toString('base64'),
-          tag: cipher.getAuthTag().toString('base64'),
-          ciphertext: ciphertext.toString('base64'),
-        }),
-      );
+      if (uploads.length) {
+        // Only this workstation can decrypt these temporary upload capabilities.
+        const key = randomBytes(32);
+        const iv = randomBytes(12);
+        const cipher = createCipheriv('aes-256-gcm', key, iv);
+        const ciphertext = Buffer.concat([
+          cipher.update(JSON.stringify(uploads)),
+          cipher.final(),
+        ]);
+        console.log(
+          JSON.stringify({
+            kind: 'normalization-upload',
+            wrappedKey: publicEncrypt(
+              { key: plan.publicKey, oaepHash: 'sha256' },
+              key,
+            ).toString('base64'),
+            iv: iv.toString('base64'),
+            tag: cipher.getAuthTag().toString('base64'),
+            ciphertext: ciphertext.toString('base64'),
+          }),
+        );
+      }
 
       const deadline = Date.now() + 10 * 60 * 1000;
       for (const row of pending) {
+        if (row.staged) continue;
         let uploaded = false;
         while (Date.now() < deadline) {
           try {
@@ -186,9 +209,8 @@ async function main() {
               new HeadObjectCommand({ Bucket, Key: row.stageKey }),
             );
             requireCondition(
-              head.ContentLength === row.bytes &&
-                head.Metadata?.sha256 === row.sha256,
-              'INCORRECT_STAGED_UPLOAD',
+              head.ContentLength === row.bytes,
+              'STAGED_SIZE_MISMATCH',
             );
             uploaded = true;
             break;
@@ -248,6 +270,42 @@ async function main() {
         uploaded: pending.some((item) => item.id === row.id),
       });
     }
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    const products = [];
+    for (const [index, row] of plan.bundles.entries()) {
+      const price = await stripe.prices.retrieve(
+        catalog[row.id].stripePriceId,
+        { expand: ['product'] },
+      );
+      const product = price.product;
+      requireCondition(
+        !price.livemode &&
+          price.unit_amount === 9900 &&
+          price.currency === 'usd',
+        'UNEXPECTED_TEST_PRICE',
+      );
+      requireCondition(
+        typeof product === 'object' &&
+          !product.deleted &&
+          !product.livemode &&
+          product.id ===
+            `prod_skin_schema_${row.id.replaceAll('-', '_')}_test` &&
+          product.metadata.storefrontProductId === row.id,
+        'UNEXPECTED_TEST_PRODUCT',
+      );
+      const count = index === 0 ? 30 : 34;
+      const description = `${count} silent Full HD MP4 videos (1080 × 1920, H.264, 29.97 fps, SDR Rec.709). Test purchase only. No commercial license or usage rights. Name and $99 USD price are provisional.`;
+      products.push({ id: product.id, description });
+    }
+    for (const product of products) {
+      const updated = await stripe.products.update(product.id, {
+        description: product.description,
+      });
+      requireCondition(
+        updated.description === product.description && !updated.livemode,
+        'PRODUCT_DESCRIPTION_MISMATCH',
+      );
+    }
     for (const row of plan.bundles) {
       await client.send(new DeleteObjectCommand({ Bucket, Key: row.stageKey }));
     }
@@ -257,6 +315,7 @@ async function main() {
         ok: true,
         stagingRemoved: true,
         archives: verified,
+        testProductDescriptions: products,
       }),
     );
   } finally {
