@@ -9,7 +9,10 @@ export function createStripeClient() {
   return new Stripe(config.stripeSecretKey);
 }
 
-export async function getVerifiedPurchase(sessionId: string) {
+export async function getVerifiedPurchase(
+  sessionId: string,
+  accessToken?: string | null,
+) {
   if (!isCheckoutSessionId(sessionId)) {
     return { eligible: false as const, reason: 'invalid-session' as const };
   }
@@ -19,5 +22,6 @@ export async function getVerifiedPurchase(sessionId: string) {
     stripe: new Stripe(config.stripeSecretKey),
     sessionId,
     products: config.products,
+    accessToken,
   });
 }

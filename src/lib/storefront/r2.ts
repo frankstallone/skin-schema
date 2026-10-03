@@ -12,7 +12,15 @@ export async function createDownloadUrl(
   },
   objectKey: string,
   filename: string,
+  accessExpiresAt: number,
 ) {
+  const signingDate = new Date();
+  const expiresIn = Math.min(
+    DOWNLOAD_TTL_SECONDS,
+    Math.floor(accessExpiresAt - signingDate.getTime() / 1000),
+  );
+  if (!Number.isFinite(expiresIn) || expiresIn < 1) return null;
+
   const client = new S3Client({
     region: r2.region,
     endpoint: r2.endpoint,
@@ -26,6 +34,6 @@ export async function createDownloadUrl(
       Key: objectKey,
       ResponseContentDisposition: `attachment; filename="${filename}"`,
     }),
-    { expiresIn: DOWNLOAD_TTL_SECONDS },
+    { expiresIn, signingDate },
   );
 }

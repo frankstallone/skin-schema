@@ -108,7 +108,7 @@ The sampled frames do not certify the absence of people, products, logos, artwor
 - [UGC B-Roll Storefront Market Scan — B-Roll plan](https://docs.google.com/document/d/1u9_72qoQ2gLJEqKtLEtPca_STNWxiy0ksZpIuIPlP7Y/edit?tab=t.ti5ibikbyp8) proposes a $99 founding price, a later $149 one-brand price, and a $249 Partner tier. These remain ideas. Its earlier product/application concepts differ from the stricter Commercial document.
 - The proposed one-brand license is worldwide, perpetual and nonexclusive, with commercial editing and marketing use. It is not the approved license for these bundles. The storefront must continue to state that license terms are pending.
 - [Issue #17](https://github.com/frankstallone/skin-schema/issues/17) records the simple purchase flow: Stripe-hosted Checkout, server verification of the paid Session, and a short-lived link to a private R2 archive. The current request expands the original one-package catalog to two bundles.
-- Keep Stripe in test mode. Keep the storefront out of public navigation and search indexing. Do not add a cart, accounts, email recovery, a commerce database, webhooks or release versioning.
+- Keep Stripe in test mode. Keep the storefront out of public navigation and search indexing. Do not add a cart, accounts, automated email recovery, a commerce database, webhooks or release versioning. The owner can issue replacement links after a manual support request.
 
 ## Deployment and purchase-flow evidence
 
@@ -134,15 +134,38 @@ Verification completed:
 
 - Both archives were read back from R2. ZIP integrity checks passed, and every video SHA-256 matched the local source inventory.
 - Both Stripe-hosted Checkout pages showed Sandbox and the correct $99 test product. Each purchase completed with Stripe's `4242 4242 4242 4242` test card and fictional buyer details; payment details were not saved.
-- The server confirmed both paid sessions and issued the correct bundle's download. Each signed R2 link expires after 300 seconds. The complete buyer downloads match the archive sizes and SHA-256 hashes above.
+- The server confirmed both paid sessions and issued the correct bundle's download. Each signed R2 link expires within 300 seconds and cannot outlast the purchase window. The complete buyer downloads match the archive sizes and SHA-256 hashes above.
 - Unpaid sessions did not provide downloads. Missing or live session IDs were rejected. Unknown products and sessions were rejected.
 - Changing client query parameters could not switch a paid session to the other bundle. Unsigned requests for both R2 objects were denied (`400 InvalidArgument`); neither returned an archive.
 - Purchase pages send `no-store`, `no-referrer`, and `noindex, nofollow`. They omit analytics and keep the bearer session ID out of canonical and social URLs.
-- `npm test` passed all 27 tests. `npm run build` passed with zero Astro errors, warnings, or hints. The Netlify adapter does not support `astro preview`; deployed branch HTTP checks covered the built routes instead.
+- `npm test` passed all 33 tests, including the exact 24-hour boundary, replacement-token rotation, malformed replacement settings, refund/dispute restrictions, and R2 deadline limits. `npm run build` passed with zero Astro errors, warnings, or hints. The Netlify adapter does not support `astro preview`; deployed branch HTTP checks covered the built routes instead.
 - Separate preview reels decode as portrait 1080 × 1920 H.264, have no audio, and display burned-in Skin Schema watermarks. The Bathroom reel runs 44.267 seconds; Coastal runs 50.400 seconds. The delivered source files were not re-encoded.
 
 The browser rendered and completed Stripe Checkout, but the in-app browser crashed when loading the test deployment's storefront, purchase-status pages, and unchanged home page. Its plain-text `robots.txt` request returned `ERR_BLOCKED_BY_CLIENT`. The existing production storefront did render. Native Chrome and Safari were unavailable behind the Mac's Screen Time limit, which was not changed. The test site returned the expected HTML and headers through HTTP, including paid success pages and working downloads. Desktop/mobile appearance, preview playback, and the visible cancelled state still need a browser check. Do not treat the successful HTTP checks as visual verification.
 
-For manual testing, open the branch storefront and choose either test Checkout. Use `4242 4242 4242 4242`, any future expiration date, any three-digit CVC, and a test email. Disable saving payment information. Save the returned purchase page privately if you want to download again; there is no account or email recovery. A successful test purchase grants access to the original files but no commercial usage rights.
+For manual testing, open the branch storefront and choose either test Checkout. Use `4242 4242 4242 4242`, any future expiration date, any three-digit CVC, and a test email. Disable saving payment information. Download within 24 hours of the successful charge. After that window, email `glow@skinschema.com` from the Checkout email address to request a new timed link. A successful test purchase grants access to the original files but no commercial usage rights.
+
+## Download expiry and manual replacements
+
+The initial purchase page and download route expire 24 hours after Stripe's successful charge was created. Refreshing the page does not extend that deadline. The page displays its deadline in UTC and directs buyers to `glow@skinschema.com` for later downloads. An expired download route returns `410 Gone` without an R2 redirect.
+
+A replacement uses a new random token and an explicit deadline stored on the payment's **PaymentIntent metadata**. It replaces the initial access window completely. Old purchase-page links stay invalid, even while the original 24-hour window would otherwise remain open. Refund and dispute restrictions still apply. Previously issued R2 links remain usable until their own expiry, which is at most five minutes; a download already in progress or a saved file cannot be recalled.
+
+To handle a support request:
+
+1. Find the payment in the Stripe Dashboard. Match the sender to the email in **Checkout summary**, verify the purchased bundle and successful payment, and check for a full refund or dispute. The current deployment accepts only Sandbox payments.
+2. Find the matching Checkout Session ID in the payment's **A Checkout Session was completed** event or the `/v1/payment_pages/cs_test_…/confirm` log. Keep that ID private. Do not reuse a different buyer's session.
+3. Generate 32 cryptographically random bytes and encode them as 64 lowercase hexadecimal characters. Hash the **UTF-8 text of those 64 characters**, without a trailing newline, using SHA-256. Keep the raw token only for the new buyer URL; store its 64-character lowercase hash in Stripe. Codex can prepare these values and the URL for the owner without adding an operator command to the site.
+4. In the payment's **Metadata** editor, preserve unrelated entries and set both fields below. Use a deadline 24 hours from issuance for an ordinary replacement. The deadline must be an explicit UTC timestamp such as `2026-10-05T12:00:00Z`; a timezone-free date is rejected.
+
+| PaymentIntent metadata key         | Value                                                                         |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| `storefront_download_token_sha256` | SHA-256 of the new 64-character token text                                    |
+| `storefront_download_expires_at`   | UTC expiration in `YYYY-MM-DDTHH:mm:ssZ` or `YYYY-MM-DDTHH:mm:ss.sssZ` format |
+
+5. Build the replacement URL on the deployed storefront origin: `/store/success?session_id=<matching Checkout Session ID>&access_token=<new raw token>`. Check that it shows the correct bundle and deadline, and that the old purchase-page URL no longer offers a download. Send the replacement only to the verified purchase email after the owner approves the reply.
+6. For another replacement, rotate the token and update the deadline together. **Keep these metadata fields after expiry.** Deleting both can restore any time remaining in the original 24-hour window. A missing, invalid or incorrect replacement token never falls back to initial access.
+
+Edit the PaymentIntent's metadata, not only the Charge metadata: Stripe copies PaymentIntent metadata to a Charge once, and later updates are not synchronized. See [Stripe's metadata documentation](https://docs.stripe.com/metadata). R2 signed URLs can be reused until they expire; see [Cloudflare's presigned URL documentation](https://developers.cloudflare.com/r2/api/s3/presigned-urls/). Timed links limit ongoing access but do not prevent copying an already downloaded archive.
 
 Verified buyer ZIPs are saved in [verified-purchase-downloads](</Users/starlord/Movies/Skin Schema Storefront/2026-10-02/verified-purchase-downloads>). Do not commit secrets, private Apple URLs, signed download URLs, or bearer Checkout Session URLs.

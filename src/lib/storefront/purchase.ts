@@ -1,3 +1,4 @@
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { getStorefrontProduct, type StorefrontProduct } from './catalog';
 import type { StorefrontProductConfig } from './config';
 
@@ -18,10 +19,12 @@ type LineItem = {
 type PaymentIntent = {
   livemode: boolean;
   status: string;
+  metadata: Record<string, string>;
   latest_charge:
     | string
     | {
         amount: number;
+        created: number;
         amount_refunded: number;
         refunded: boolean;
         disputed: boolean;
@@ -58,6 +61,7 @@ export type PurchaseVerification =
       sessionId: string;
       product: StorefrontProduct;
       objectKey: string;
+      accessExpiresAt: number;
     }
   | {
       eligible: false;
@@ -67,6 +71,7 @@ export type PurchaseVerification =
         | 'fully-refunded'
         | 'disputed'
         | 'not-test-mode'
+        | 'expired'
         | 'invalid-session';
     };
 
@@ -82,10 +87,12 @@ export async function verifyPurchase({
   stripe,
   sessionId,
   products,
+  accessToken,
 }: {
   stripe: StorefrontStripeClient;
   sessionId: string;
   products: Record<string, StorefrontProductConfig>;
+  accessToken?: string | null;
 }): Promise<PurchaseVerification> {
   if (!isCheckoutSessionId(sessionId)) {
     return { eligible: false, reason: 'invalid-session' };
@@ -186,10 +193,60 @@ export async function verifyPurchase({
     return { eligible: false, reason: 'fully-refunded' };
   }
 
+  if (!Number.isSafeInteger(charge.created) || charge.created <= 0) {
+    return { eligible: false, reason: 'invalid-session' };
+  }
+
+  let accessExpiresAt = charge.created + 24 * 60 * 60;
+  const tokenHash = paymentIntent.metadata.storefront_download_token_sha256;
+  const replacementExpiry =
+    paymentIntent.metadata.storefront_download_expires_at;
+
+  // An owner-issued replacement takes over completely, including on invalid
+  // metadata. Never let its old or missing token reopen the original window.
+  if (tokenHash !== undefined || replacementExpiry !== undefined) {
+    if (
+      !tokenHash ||
+      !/^[a-f0-9]{64}$/.test(tokenHash) ||
+      !accessToken ||
+      !/^[a-f0-9]{64}$/.test(accessToken) ||
+      !replacementExpiry ||
+      !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(
+        replacementExpiry,
+      )
+    ) {
+      return { eligible: false, reason: 'invalid-session' };
+    }
+
+    const suppliedHash = createHash('sha256').update(accessToken).digest();
+    if (!timingSafeEqual(suppliedHash, Buffer.from(tokenHash, 'hex'))) {
+      return { eligible: false, reason: 'invalid-session' };
+    }
+
+    const replacementDate = new Date(replacementExpiry);
+    const normalizedExpiry = replacementExpiry.includes('.')
+      ? replacementExpiry
+      : replacementExpiry.replace('Z', '.000Z');
+    if (
+      !Number.isFinite(replacementDate.getTime()) ||
+      replacementDate.toISOString() !== normalizedExpiry
+    ) {
+      return { eligible: false, reason: 'invalid-session' };
+    }
+    accessExpiresAt = Math.floor(replacementDate.getTime() / 1000);
+  } else if (accessToken !== undefined && accessToken !== null) {
+    return { eligible: false, reason: 'invalid-session' };
+  }
+
+  if (Math.floor(Date.now() / 1000) >= accessExpiresAt) {
+    return { eligible: false, reason: 'expired' };
+  }
+
   return {
     eligible: true,
     sessionId: session.id,
     product,
     objectKey: configuredProduct[1].objectKey,
+    accessExpiresAt,
   };
 }

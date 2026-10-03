@@ -12,26 +12,36 @@ Astro.response.headers.set('Referrer-Policy', 'no-referrer');
 Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
 
 const sessionId = Astro.url.searchParams.get('session_id');
+const accessToken = Astro.url.searchParams.get('access_token');
 let purchase: Awaited<ReturnType<typeof getVerifiedPurchase>> | undefined;
 let unavailable = false;
 
 if (isCheckoutSessionId(sessionId)) {
   try {
-    purchase = await getVerifiedPurchase(sessionId);
+    purchase = await getVerifiedPurchase(sessionId, accessToken);
   } catch {
     unavailable = true;
   }
 }
 
 const product = purchase?.eligible ? purchase.product : undefined;
+const purchaseParams = new URLSearchParams();
+if (sessionId) purchaseParams.set('session_id', sessionId);
+if (accessToken) purchaseParams.set('access_token', accessToken);
 const downloadUrl =
-  product && sessionId
-    ? `/store/download?session_id=${encodeURIComponent(sessionId)}`
-    : undefined;
+  product && sessionId ? `/store/download?${purchaseParams}` : undefined;
 const reason = purchase && !purchase.eligible ? purchase.reason : undefined;
 const retryUrl = isCheckoutSessionId(sessionId)
-  ? `/store/success?session_id=${encodeURIComponent(sessionId)}`
+  ? `/store/success?${purchaseParams}`
   : undefined;
+const accessExpiresAt = purchase?.eligible
+  ? new Date(purchase.accessExpiresAt * 1000)
+  : undefined;
+const expiryLabel = accessExpiresAt?.toLocaleString('en-US', {
+  dateStyle: 'medium',
+  timeStyle: 'short',
+  timeZone: 'UTC',
+});
 ---
 
 <Layout
@@ -61,10 +71,19 @@ const retryUrl = isCheckoutSessionId(sessionId)
             Download {product.name}
           </a>
           <p class="purchase-status__note">
-            Each download opens a fresh link that expires after five minutes.
-            Save this purchase page privately to return for another link. Anyone
-            with its URL can access the download while this test purchase
-            remains eligible. There is no email recovery.
+            {accessToken
+              ? 'This replacement link expires on '
+              : 'Your 24-hour download window ends on '}
+            <time datetime={accessExpiresAt?.toISOString()}>
+              {expiryLabel} UTC
+            </time>
+            . Each file link is valid for up to five minutes.
+          </p>
+          <p class="purchase-status__note">
+            Need to download again later? Email{' '}
+            <a href="mailto:glow@skinschema.com">glow@skinschema.com</a> from
+            the email address you used at Checkout. We’ll verify your purchase
+            and send a new timed link.
           </p>
           <p class="purchase-status__note">
             No real payment was taken. Commercial license terms are pending, and
@@ -81,6 +100,15 @@ const retryUrl = isCheckoutSessionId(sessionId)
           <a class="purchase-status__button" href={retryUrl}>
             Check purchase status again
           </a>
+        </>
+      ) : reason === 'expired' ? (
+        <>
+          <h1>This download link has expired.</h1>
+          <p>
+            Email <a href="mailto:glow@skinschema.com">glow@skinschema.com</a>{' '}
+            from the email address you used at Checkout. We’ll verify your
+            purchase and send a new timed link.
+          </p>
         </>
       ) : reason === 'unpaid' ? (
         <>
@@ -131,9 +159,10 @@ const retryUrl = isCheckoutSessionId(sessionId)
         <>
           <h1>This test purchase link is not valid.</h1>
           <p>
-            Open the complete purchase page URL saved after Stripe test
-            Checkout. If you do not have it, return to the preview store and
-            start a new test Checkout.
+            If you already completed Checkout, email{' '}
+            <a href="mailto:glow@skinschema.com">glow@skinschema.com</a> from
+            the email address you used for your purchase. We’ll verify it and
+            send a new timed link.
           </p>
         </>
       )

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { createHash } from 'node:crypto';
+import test, { afterEach, beforeEach, mock } from 'node:test';
 import { storefrontProducts } from './catalog';
 import type { StorefrontProductConfig } from './config';
 import { verifyPurchase, type StorefrontStripeClient } from './purchase';
@@ -15,6 +16,20 @@ const products: Record<string, StorefrontProductConfig> = Object.fromEntries(
 );
 const firstProduct = storefrontProducts[0];
 const firstConfig = products[firstProduct.id];
+const paidAt = Date.parse('2026-10-03T12:00:00Z') / 1000;
+const replacementToken = 'a'.repeat(64);
+const replacementMetadata = {
+  storefront_download_token_sha256: createHash('sha256')
+    .update(replacementToken)
+    .digest('hex'),
+  storefront_download_expires_at: '2026-10-05T12:00:00Z',
+};
+
+beforeEach(() => {
+  mock.timers.enable({ apis: ['Date'], now: paidAt * 1000 });
+});
+
+afterEach(() => mock.timers.reset());
 
 function stripeFor({
   paymentStatus = 'paid',
@@ -26,6 +41,8 @@ function stripeFor({
   liveSession = false,
   liveIntent = false,
   liveCharge = false,
+  chargeCreated = paidAt,
+  intentMetadata = {},
 }: {
   paymentStatus?: string;
   priceId?: string;
@@ -36,6 +53,8 @@ function stripeFor({
   liveSession?: boolean;
   liveIntent?: boolean;
   liveCharge?: boolean;
+  chargeCreated?: number;
+  intentMetadata?: Record<string, string>;
 } = {}): StorefrontStripeClient {
   return {
     checkout: {
@@ -65,7 +84,9 @@ function stripeFor({
         return {
           livemode: liveIntent,
           status: 'succeeded',
+          metadata: intentMetadata,
           latest_charge: {
+            created: chargeCreated,
             amount: 2400,
             amount_refunded: amountRefunded,
             refunded,
@@ -82,8 +103,9 @@ function stripeFor({
 async function verify(
   stripe: StorefrontStripeClient,
   sessionId = 'cs_test_purchase',
+  accessToken?: string,
 ) {
-  return verifyPurchase({ stripe, sessionId, products });
+  return verifyPurchase({ stripe, sessionId, products, accessToken });
 }
 
 for (const product of storefrontProducts) {
@@ -96,6 +118,7 @@ for (const product of storefrontProducts) {
         sessionId: 'cs_test_purchase',
         product,
         objectKey: config.objectKey,
+        accessExpiresAt: Date.parse('2026-10-04T12:00:00Z') / 1000,
       },
     );
   });
@@ -221,6 +244,7 @@ test('rejects a purchase without an expanded latest charge', async () => {
   stripe.paymentIntents.retrieve = async () => ({
     livemode: false,
     status: 'succeeded',
+    metadata: {},
     latest_charge: 'ch_example',
   });
 
@@ -228,4 +252,132 @@ test('rejects a purchase without an expanded latest charge', async () => {
     eligible: false,
     reason: 'invalid-session',
   });
+});
+
+test('purchase access expires exactly 24 hours after the charge and cannot refresh itself', async () => {
+  const stripe = stripeFor();
+  mock.timers.setTime(Date.parse('2026-10-04T11:59:59Z'));
+  assert.equal((await verify(stripe)).eligible, true);
+
+  mock.timers.tick(1000);
+  assert.deepEqual(await verify(stripe), {
+    eligible: false,
+    reason: 'expired',
+  });
+
+  mock.timers.tick(60_000);
+  assert.deepEqual(await verify(stripe), {
+    eligible: false,
+    reason: 'expired',
+  });
+});
+
+test('replacement access requires the current token and expires at its stored deadline', async () => {
+  const stripe = stripeFor({ intentMetadata: replacementMetadata });
+  mock.timers.setTime(Date.parse('2026-10-05T11:59:59Z'));
+
+  for (const token of [undefined, 'b'.repeat(64)]) {
+    assert.deepEqual(await verify(stripe, 'cs_test_purchase', token), {
+      eligible: false,
+      reason: 'invalid-session',
+    });
+  }
+
+  const purchase = await verify(stripe, 'cs_test_purchase', replacementToken);
+  assert.ok(purchase.eligible);
+  assert.equal(
+    purchase.accessExpiresAt,
+    Date.parse('2026-10-05T12:00:00Z') / 1000,
+  );
+
+  mock.timers.tick(1000);
+  assert.deepEqual(await verify(stripe, 'cs_test_purchase', replacementToken), {
+    eligible: false,
+    reason: 'expired',
+  });
+});
+
+test('rotating replacement access invalidates old links without reopening the original page', async () => {
+  const metadata = { ...replacementMetadata };
+  const stripe = stripeFor({ intentMetadata: metadata });
+  assert.equal(
+    (await verify(stripe, 'cs_test_purchase', replacementToken)).eligible,
+    true,
+  );
+
+  const newToken = 'b'.repeat(64);
+  metadata.storefront_download_token_sha256 = createHash('sha256')
+    .update(newToken)
+    .digest('hex');
+
+  for (const token of [undefined, replacementToken]) {
+    assert.deepEqual(await verify(stripe, 'cs_test_purchase', token), {
+      eligible: false,
+      reason: 'invalid-session',
+    });
+  }
+  assert.equal(
+    (await verify(stripe, 'cs_test_purchase', newToken)).eligible,
+    true,
+  );
+});
+
+test('incomplete or malformed replacement settings never fall back to initial access', async () => {
+  const cases: Record<string, string>[] = [
+    {
+      storefront_download_token_sha256:
+        replacementMetadata.storefront_download_token_sha256,
+    },
+    {
+      storefront_download_expires_at:
+        replacementMetadata.storefront_download_expires_at,
+    },
+    { ...replacementMetadata, storefront_download_token_sha256: 'invalid' },
+    { ...replacementMetadata, storefront_download_expires_at: 'invalid' },
+    {
+      ...replacementMetadata,
+      storefront_download_expires_at: '2026-10-05T12:00:00',
+    },
+    {
+      ...replacementMetadata,
+      storefront_download_expires_at: '2027-02-31T12:00:00Z',
+    },
+    {
+      ...replacementMetadata,
+      storefront_download_expires_at: '2026-10-05T24:00:00Z',
+    },
+    { ...replacementMetadata, storefront_download_expires_at: '' },
+  ];
+
+  for (const intentMetadata of cases) {
+    assert.deepEqual(
+      await verify(
+        stripeFor({ intentMetadata }),
+        'cs_test_purchase',
+        replacementToken,
+      ),
+      { eligible: false, reason: 'invalid-session' },
+    );
+  }
+
+  assert.deepEqual(
+    await verify(stripeFor(), 'cs_test_purchase', replacementToken),
+    { eligible: false, reason: 'invalid-session' },
+  );
+});
+
+test('replacement access does not override refund or dispute restrictions', async () => {
+  for (const [state, reason] of [
+    [{ refunded: true }, 'fully-refunded'],
+    [{ disputed: true }, 'disputed'],
+  ] as const) {
+    assert.deepEqual(
+      await verify(
+        stripeFor({ ...state, intentMetadata: replacementMetadata }),
+        'cs_test_purchase',
+        replacementToken,
+      ),
+      { eligible: false, reason },
+    );
+  }
 });
