@@ -7,6 +7,10 @@ import {
 
 export const prerender = false;
 
+Astro.response.headers.set('Cache-Control', 'no-store');
+Astro.response.headers.set('Referrer-Policy', 'no-referrer');
+Astro.response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+
 const sessionId = Astro.url.searchParams.get('session_id');
 let purchase: Awaited<ReturnType<typeof getVerifiedPurchase>> | undefined;
 let unavailable = false;
@@ -19,52 +23,124 @@ if (isCheckoutSessionId(sessionId)) {
   }
 }
 
-const canDownload = purchase?.eligible && sessionId;
-const productName = purchase?.eligible ? purchase.product.name : undefined;
-const downloadUrl = canDownload
-  ? `/store/download?session_id=${encodeURIComponent(sessionId)}`
+const product = purchase?.eligible ? purchase.product : undefined;
+const downloadUrl =
+  product && sessionId
+    ? `/store/download?session_id=${encodeURIComponent(sessionId)}`
+    : undefined;
+const reason = purchase && !purchase.eligible ? purchase.reason : undefined;
+const retryUrl = isCheckoutSessionId(sessionId)
+  ? `/store/success?session_id=${encodeURIComponent(sessionId)}`
   : undefined;
 ---
 
 <Layout
   meta={{
-    title: 'Purchase status | Skin Schema',
-    description: 'Your Skin Schema purchase status and download link.',
+    title: 'Test purchase status | Skin Schema',
+    description: 'Your Skin Schema test purchase status and bundle download.',
+    canonicalURL: '/store/success',
+    robots: 'noindex, nofollow',
+    analytics: false,
     themeColor: '#071310',
     statusBarStyle: 'black-translucent',
   }}
   mode="dark"
+  hideFooter
 >
   <main id="main" class="purchase-status">
-    <p class="purchase-status__eyebrow">Skin Schema store</p>
     {
-      canDownload ? (
+      product && downloadUrl ? (
         <>
-          <h1>Payment confirmed.</h1>
+          <h1>Test payment confirmed.</h1>
           <p>
-            Your {productName} download is ready. The link opens a fresh,
-            five-minute download URL.
+            Your {product.name} bundle is ready: {product.clipCount} source
+            videos,
+            {product.downloadSize}.
           </p>
           <a class="purchase-status__button" href={downloadUrl}>
-            Download package
+            Download {product.name}
           </a>
+          <p class="purchase-status__note">
+            Each download opens a fresh link that expires after five minutes.
+            Save this purchase page privately to return for another link. Anyone
+            with its URL can access the download while this test purchase
+            remains eligible. There is no email recovery.
+          </p>
+          <p class="purchase-status__note">
+            No real payment was taken. Commercial license terms are pending, and
+            this test download grants no usage rights.
+          </p>
         </>
       ) : unavailable ? (
         <>
-          <h1>We could not verify your purchase.</h1>
-          <p>Please wait a moment, then reload this page.</p>
+          <h1>Purchase verification is unavailable.</h1>
+          <p>
+            We could not check your test payment with Stripe. Wait a moment,
+            then check this page again.
+          </p>
+          <a class="purchase-status__button" href={retryUrl}>
+            Check purchase status again
+          </a>
+        </>
+      ) : reason === 'unpaid' ? (
+        <>
+          <h1>Test payment is not confirmed yet.</h1>
+          <p>
+            Stripe has not confirmed a completed test payment. If you just
+            finished Checkout, wait a moment and check again. Downloads become
+            available after confirmation.
+          </p>
+          <a class="purchase-status__button" href={retryUrl}>
+            Check purchase status again
+          </a>
+        </>
+      ) : reason === 'fully-refunded' ? (
+        <>
+          <h1>This test payment was refunded.</h1>
+          <p>
+            The payment was fully refunded in Stripe, so this purchase no longer
+            provides a bundle download. Start a new test Checkout to try the
+            download flow again.
+          </p>
+        </>
+      ) : reason === 'disputed' ? (
+        <>
+          <h1>This test payment is disputed.</h1>
+          <p>
+            Stripe reports a dispute for this payment. The bundle download is
+            unavailable while the payment is disputed.
+          </p>
+        </>
+      ) : reason === 'wrong-price' ? (
+        <>
+          <h1>This test purchase does not match a bundle.</h1>
+          <p>
+            Stripe returned a payment for a different offer. Return to the
+            preview store and start test Checkout for the bundle you want.
+          </p>
+        </>
+      ) : reason === 'not-test-mode' ? (
+        <>
+          <h1>This store accepts test purchases only.</h1>
+          <p>
+            This purchase is outside the Stripe test flow. Return to the preview
+            store to start a test Checkout.
+          </p>
         </>
       ) : (
         <>
-          <h1>This purchase is not eligible for download.</h1>
+          <h1>This test purchase link is not valid.</h1>
           <p>
-            Check that you completed payment, or contact Skin Schema with your
-            Stripe receipt.
+            Open the complete purchase page URL saved after Stripe test
+            Checkout. If you do not have it, return to the preview store and
+            start a new test Checkout.
           </p>
         </>
       )
     }
-    <a class="purchase-status__back" href="/store">Return to the store</a>
+    <a class="purchase-status__back" href="/store"
+      >Return to the preview store</a
+    >
   </main>
 </Layout>
 
@@ -75,57 +151,62 @@ const downloadUrl = canDownload
     display: grid;
     gap: var(--spacing-m);
     min-block-size: 100vh;
-    padding: var(--spacing-3xl) var(--spacing-s-l);
+    padding: var(--spacing-2xl) var(--spacing-s-l);
     place-content: center start;
   }
 
   .purchase-status h1 {
-    font-size: clamp(3rem, 8vw, 7rem);
+    font-size: var(--text-step-5);
     font-weight: var(--font-weight-medium);
-    letter-spacing: -0.05em;
-    line-height: 0.94;
+    letter-spacing: -0.03em;
+    line-height: 1;
     margin: 0;
-    max-inline-size: 9ch;
+    max-inline-size: 17ch;
+    text-wrap: balance;
   }
 
   .purchase-status p {
     font-size: var(--text-step-1);
     margin: 0;
-    max-inline-size: 35rem;
+    max-inline-size: 52ch;
   }
 
-  .purchase-status__eyebrow {
-    color: color-mix(
-      in srgb,
-      var(--color-surface-auxiliary-foreground-color) 78%,
-      transparent
-    );
-    font-size: var(--text-step-000) !important;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .purchase-status .purchase-status__note {
+    font-size: var(--text-step-0);
+    max-inline-size: 65ch;
   }
 
   .purchase-status__button,
   .purchase-status__back {
-    color: inherit;
     inline-size: fit-content;
+    max-inline-size: 100%;
   }
 
   .purchase-status__button {
     background: var(--color-action-primary-background-color);
+    border: 1px solid var(--color-action-primary-border-color);
+    border-radius: 999px;
     color: var(--color-action-primary-foreground-color);
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
     font-weight: var(--font-weight-bold);
-    margin-block-start: var(--spacing-xs);
-    padding: var(--spacing-2xs) var(--spacing-m);
+    min-block-size: 44px;
+    padding: var(--spacing-xs) var(--spacing-m);
     text-decoration: none;
   }
 
+  .purchase-status__button:hover {
+    filter: brightness(1.08);
+  }
+
   .purchase-status__back {
+    color: var(--color-action-auxiliary-foreground-color);
     margin-block-start: var(--spacing-s);
+    text-underline-offset: 0.2em;
   }
 
   .purchase-status a:focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--color-surface-auxiliary-foreground-color);
     outline-offset: 0.25rem;
   }
 </style>

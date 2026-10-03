@@ -4,3 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22.12.0"
+
+# Temporary branch-only preparation; removed once both test bundles are stored.
+[context."f4/storefront-video-bundles"]
+  command = "node scripts/prepare-storefront-test-bundles.mjs && npm run build"

@@ -2,17 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import { storefrontProducts } from '../../lib/storefront/catalog';
 
-const [product] = storefrontProducts;
+export const prerender = true;
 ---
 
 <Layout
   meta={{
-    title: 'Bathroom Rituals Preview | Skin Schema',
+    title: 'B-Roll Bundle Previews | Skin Schema',
     description:
-      'A watermarked Skin Schema preview for Bathroom Rituals. POC only; licensing is pending.',
+      'Watermarked previews of two Skin Schema b-roll bundles. Stripe test mode only; commercial license terms are pending.',
+    canonicalURL: '/store',
+    robots: 'noindex, nofollow',
     themeColor: '#F2EDE6',
     statusBarStyle: 'default',
   }}
+  hideFooter
 >
   <main id="main" class="storefront">
     <header class="storefront__header" aria-label="Store header">
@@ -20,85 +23,133 @@ const [product] = storefrontProducts;
       <p>Preview store</p>
     </header>
 
-    <section class="storefront__hero" aria-labelledby="product-title">
-      <div class="storefront__intro">
-        <p class="storefront__eyebrow">Single offer · POC / demo only</p>
-        <h1 id="product-title">{product.name}</h1>
-        <p class="storefront__lede">
-          A quiet, product-led bathroom study for skincare and wellness brands.
-          This is a watermarked presentation preview.
+    <section class="storefront__intro" aria-labelledby="store-title">
+      <h1 id="store-title">Beauty b-roll, in two collections.</h1>
+      <p class="storefront__lede">
+        Bathroom rituals and coastal moments from the Skin Schema archive.
+        Explore the watermarked previews and source footage details below.
+      </p>
+      <div class="storefront__notice" data-mode="light">
+        <p>
+          <strong>Stripe test mode only.</strong> No real payment is taken. Names
+          and prices are provisional. Commercial license terms are pending; test Checkout
+          does not grant usage rights.
         </p>
       </div>
+      <p
+        id="checkout-cancelled"
+        class="storefront__cancelled"
+        role="status"
+        hidden
+      >
+        Test Checkout was cancelled. No payment was completed. You can preview a
+        bundle or start test Checkout again.
+      </p>
+    </section>
 
-      <figure class="storefront__media">
-        <video
-          controls
-          playsinline
-          preload="metadata"
-          aria-describedby="preview-note"
+    {
+      storefrontProducts.map((product) => (
+        <article
+          class="storefront__bundle"
+          aria-labelledby={`${product.id}-title`}
         >
-          <source
-            src="/media/storefront/bathroom-rituals-preview-hd.mp4"
-            type="video/mp4"
-          />
-          Your browser does not support HTML video.
-        </video>
-        <figcaption id="preview-note">
-          Burned-in Skin Schema watermark. Preview is HD, not 4K.
-        </figcaption>
-      </figure>
-    </section>
+          <div class="storefront__overview">
+            <h2 id={`${product.id}-title`}>{product.name}</h2>
+            <p class="storefront__description">{product.description}</p>
+          </div>
 
-    <section class="storefront__details" aria-label="Offer details">
-      <div>
-        <p class="storefront__eyebrow">The offer</p>
-        <h2>Made to show the ritual, not explain it away.</h2>
-      </div>
-      <dl>
-        <div>
-          <dt>Format</dt>
-          <dd>{product.orientation} {product.format}</dd>
-        </div>
-        <div>
-          <dt>Resolution</dt>
-          <dd>{product.resolution}</dd>
-        </div>
-        <div>
-          <dt>Runtime</dt>
-          <dd>{product.durationLabel}</dd>
-        </div>
-        <div>
-          <dt>Demo price</dt>
-          <dd>{product.priceLabel}</dd>
-        </div>
-        <div>
-          <dt>Download</dt>
-          <dd>{product.downloadSize}</dd>
-        </div>
-      </dl>
-    </section>
+          <figure class="storefront__media">
+            <video
+              controls
+              playsinline
+              preload="none"
+              poster={product.posterSrc}
+              aria-label={`${product.name} watermarked preview`}
+              aria-describedby={`${product.id}-preview-note`}
+            >
+              <source src={product.previewSrc} type="video/mp4" />
+              Your browser does not support HTML video.
+            </video>
+            <figcaption id={`${product.id}-preview-note`}>
+              Watermarked preview reel. The details describe the complete source
+              bundle.
+            </figcaption>
+          </figure>
+
+          <div class="storefront__content">
+            <dl class="storefront__specs">
+              <div>
+                <dt>Source videos</dt>
+                <dd>{product.clipCount}</dd>
+              </div>
+              <div>
+                <dt>Total runtime</dt>
+                <dd>{product.durationLabel}</dd>
+              </div>
+              <div>
+                <dt>Resolution</dt>
+                <dd>{product.resolution}</dd>
+              </div>
+              <div>
+                <dt>Orientation</dt>
+                <dd>{product.orientation}</dd>
+              </div>
+              <div>
+                <dt>Source format</dt>
+                <dd>{product.format}</dd>
+              </div>
+              <div>
+                <dt>Bundle download</dt>
+                <dd>{product.downloadSize}</dd>
+              </div>
+              <div>
+                <dt>Provisional test price</dt>
+                <dd>{product.priceLabel}</dd>
+              </div>
+            </dl>
+
+            <p class="storefront__quality">{product.qualityNote}</p>
+            <form action="/store/checkout" method="post">
+              <input type="hidden" name="product_id" value={product.id} />
+              <button
+                type="submit"
+                aria-label={`Start test Checkout for ${product.name} at ${product.priceLabel}`}
+              >
+                Test Checkout — {product.priceLabel}
+              </button>
+            </form>
+            <p class="storefront__checkout-note">
+              Opens Stripe test Checkout. No real charge or commercial license.
+            </p>
+          </div>
+        </article>
+      ))
+    }
 
     <section
       id="license"
-      class="storefront__purchase"
+      class="storefront__license"
       data-mode="dark"
-      aria-labelledby="purchase-title"
+      aria-labelledby="license-title"
     >
-      <div>
-        <p class="storefront__eyebrow">Availability</p>
-        <h2 id="purchase-title">License details are pending.</h2>
-        <p>
-          This proof of concept is not licensed for commercial use. Checkout is
-          a demo flow only and does not grant usage rights.
-        </p>
-      </div>
-      <form action="/store/checkout" method="post">
-        <input type="hidden" name="product_id" value={product.id} />
-        <button type="submit">Continue to Stripe — {product.priceLabel}</button>
-      </form>
+      <h2 id="license-title">Commercial license terms are pending.</h2>
+      <p>
+        These bundles are available for preview and purchase-flow testing only.
+        Prices are provisional. A test download does not grant permission to
+        publish, advertise with, or redistribute the footage.
+      </p>
     </section>
   </main>
 </Layout>
+
+<script>
+  if (
+    new URLSearchParams(window.location.search).get('checkout') === 'cancelled'
+  ) {
+    const notice = document.getElementById('checkout-cancelled');
+    if (notice) notice.hidden = false;
+  }
+</script>
 
 <style>
   .storefront {
@@ -108,9 +159,9 @@ const [product] = storefrontProducts;
   }
 
   .storefront__header,
-  .storefront__hero,
-  .storefront__details,
-  .storefront__purchase {
+  .storefront__intro,
+  .storefront__bundle,
+  .storefront__license {
     padding-inline: var(--spacing-s-l);
   }
 
@@ -118,179 +169,220 @@ const [product] = storefrontProducts;
     align-items: baseline;
     border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
     display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
     justify-content: space-between;
     padding-block: var(--spacing-xs);
   }
 
   .storefront__header p,
   .storefront__wordmark {
+    font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    letter-spacing: 0.08em;
+    font-weight: var(--font-weight-medium);
     margin: 0;
     text-transform: uppercase;
   }
 
   .storefront__wordmark {
-    font-weight: var(--font-weight-bold);
     text-decoration: none;
   }
 
-  .storefront__hero {
-    display: grid;
-    gap: var(--spacing-xl-2xl);
-    grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 0.5fr);
-    padding-block: var(--spacing-3xl);
-  }
-
   .storefront__intro {
-    align-self: center;
-  }
-
-  .storefront__eyebrow {
-    color: color-mix(
-      in srgb,
-      var(--color-surface-auxiliary-foreground-color) 78%,
-      transparent
-    );
-    font-size: var(--text-step-000);
-    letter-spacing: 0.08em;
-    margin: 0 0 var(--spacing-s);
-    text-transform: uppercase;
+    padding-block: var(--spacing-xl);
   }
 
   .storefront h1,
   .storefront h2 {
-    letter-spacing: -0.045em;
-    line-height: 0.96;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: -0.03em;
     margin: 0;
+    text-wrap: balance;
   }
 
   .storefront h1 {
-    font-size: clamp(3.4rem, 8vw, 7.5rem);
-    font-weight: var(--font-weight-medium);
-    max-inline-size: 8ch;
+    font-size: var(--text-step-5);
+    line-height: 1;
+    max-inline-size: 18ch;
+  }
+
+  .storefront h2 {
+    font-size: var(--text-step-3);
+    line-height: 1.02;
   }
 
   .storefront__lede {
     font-size: var(--text-step-1);
     margin: var(--spacing-m) 0 0;
-    max-inline-size: 32rem;
+    max-inline-size: 52ch;
   }
 
-  .storefront__media {
+  .storefront__notice {
+    background: var(--color-surface-primary-background-color);
+    color: var(--color-surface-primary-foreground-color);
+    margin-block-start: var(--spacing-m);
+    max-inline-size: 72ch;
+    padding: var(--spacing-xs) var(--spacing-s);
+  }
+
+  .storefront__notice p {
     margin: 0;
   }
 
+  .storefront__cancelled {
+    border-block: 1px solid var(--color-surface-auxiliary-border-color);
+    margin: var(--spacing-m) 0 0;
+    max-inline-size: 72ch;
+    padding-block: var(--spacing-xs);
+  }
+
+  .storefront__bundle {
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
+    display: grid;
+    gap: var(--spacing-m) var(--spacing-l-xl);
+    grid-template-areas:
+      'overview media'
+      'content media';
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
+    padding-block: var(--spacing-xl);
+  }
+
+  .storefront__overview {
+    grid-area: overview;
+    min-inline-size: 0;
+  }
+
+  .storefront__content {
+    align-self: start;
+    grid-area: content;
+    min-inline-size: 0;
+  }
+
+  .storefront__description {
+    font-size: var(--text-step-1);
+    margin: var(--spacing-s) 0 0;
+    max-inline-size: 48ch;
+  }
+
+  .storefront__specs {
+    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
+    margin: 0;
+    max-inline-size: 38rem;
+  }
+
+  .storefront__specs div {
+    align-items: baseline;
+    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
+    display: grid;
+    gap: var(--spacing-xs) var(--spacing-s);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    padding-block: var(--spacing-xs);
+  }
+
+  .storefront__specs dt,
+  .storefront__specs dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .storefront__specs dd {
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+    text-align: end;
+  }
+
+  .storefront__quality,
+  .storefront__checkout-note,
+  .storefront__media figcaption {
+    font-size: var(--text-step-000);
+    max-inline-size: 60ch;
+  }
+
+  .storefront__quality {
+    margin: var(--spacing-s) 0 var(--spacing-m);
+  }
+
+  .storefront__checkout-note {
+    margin: var(--spacing-xs) 0 0;
+  }
+
+  .storefront button {
+    background: var(--color-action-primary-background-color);
+    border: 1px solid var(--color-action-primary-border-color);
+    border-radius: 999px;
+    color: var(--color-action-primary-foreground-color);
+    cursor: pointer;
+    font: inherit;
+    font-family: var(--font-mono);
+    font-size: var(--text-step-000);
+    font-weight: var(--font-weight-bold);
+    min-block-size: 44px;
+    padding: var(--spacing-xs) var(--spacing-m);
+  }
+
+  .storefront button:hover {
+    filter: brightness(1.08);
+  }
+
+  .storefront button:focus-visible,
+  .storefront a:focus-visible,
+  .storefront video:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 0.25rem;
+  }
+
+  .storefront__media {
+    align-self: start;
+    grid-area: media;
+    margin: 0;
+    max-inline-size: 28rem;
+  }
+
   .storefront__media video {
+    aspect-ratio: 9 / 16;
     background: var(--color-surface-secondary-background-color);
     display: block;
     inline-size: 100%;
-    max-block-size: 78vh;
     object-fit: contain;
   }
 
   .storefront__media figcaption {
-    color: color-mix(
-      in srgb,
-      var(--color-surface-auxiliary-foreground-color) 78%,
-      transparent
-    );
-    font-size: var(--text-step-000);
-    margin-block-start: var(--spacing-2xs);
+    margin-block-start: var(--spacing-xs);
   }
 
-  .storefront__details,
-  .storefront__purchase {
-    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
-    display: grid;
-    gap: var(--spacing-l-xl);
-    grid-template-columns: minmax(0, 0.8fr) minmax(16rem, 0.5fr);
-    padding-block: var(--spacing-2xl);
-  }
-
-  .storefront h2 {
-    font-size: var(--text-step-3);
-    font-weight: var(--font-weight-medium);
-    max-inline-size: 15ch;
-  }
-
-  .storefront__details dl {
-    border-block-start: 1px solid var(--color-surface-auxiliary-border-color);
-    margin: 0;
-  }
-
-  .storefront__details dl div {
-    align-items: baseline;
-    border-block-end: 1px solid var(--color-surface-auxiliary-border-color);
-    display: flex;
-    gap: var(--spacing-s);
-    justify-content: space-between;
-    padding-block: var(--spacing-xs);
-  }
-
-  .storefront__details dt,
-  .storefront__details dd {
-    margin: 0;
-  }
-
-  .storefront__details dt {
-    color: color-mix(
-      in srgb,
-      var(--color-surface-auxiliary-foreground-color) 78%,
-      transparent
-    );
-  }
-
-  .storefront__purchase {
+  .storefront__license {
     background: var(--color-surface-auxiliary-background-color);
     color: var(--color-surface-auxiliary-foreground-color);
+    display: grid;
+    gap: var(--spacing-m);
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+    padding-block: var(--spacing-xl);
   }
 
-  .storefront__purchase .storefront__eyebrow,
-  .storefront__purchase p {
-    color: color-mix(
-      in srgb,
-      var(--color-surface-auxiliary-foreground-color) 78%,
-      transparent
-    );
+  .storefront__license h2 {
+    max-inline-size: 20ch;
   }
 
-  .storefront__purchase p:not(.storefront__eyebrow) {
-    margin: var(--spacing-s) 0 0;
-  }
-
-  .storefront__purchase form {
-    align-self: center;
-  }
-
-  .storefront__purchase button {
-    background: var(--color-action-primary-background-color);
-    border: 1px solid var(--color-action-primary-border-color);
-    color: var(--color-action-primary-foreground-color);
-    cursor: pointer;
-    font: inherit;
-    font-weight: var(--font-weight-bold);
-    padding: var(--spacing-xs) var(--spacing-m);
-  }
-
-  .storefront__purchase button:hover,
-  .storefront__purchase button:focus-visible {
-    filter: brightness(1.08);
+  .storefront__license p {
+    margin: 0;
+    max-inline-size: 65ch;
   }
 
   @media (max-width: 700px) {
-    .storefront__hero,
-    .storefront__details,
-    .storefront__purchase {
+    .storefront__bundle,
+    .storefront__license {
       grid-template-columns: 1fr;
     }
 
-    .storefront__hero {
-      padding-block: var(--spacing-2xl);
+    .storefront__bundle {
+      grid-template-areas:
+        'overview'
+        'media'
+        'content';
     }
 
     .storefront__media {
-      max-inline-size: 28rem;
+      inline-size: 100%;
     }
   }
 </style>

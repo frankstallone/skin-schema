@@ -9,8 +9,8 @@ export async function createDownloadUrl(
     endpoint: string;
     credentials: { accessKeyId: string; secretAccessKey: string };
     bucket: string;
-    objectKey: string;
   },
+  objectKey: string,
   filename: string,
 ) {
   const client = new S3Client({
@@ -23,7 +23,7 @@ export async function createDownloadUrl(
     client,
     new GetObjectCommand({
       Bucket: r2.bucket,
-      Key: r2.objectKey,
+      Key: objectKey,
       ResponseContentDisposition: `attachment; filename="${filename}"`,
     }),
     { expiresIn: DOWNLOAD_TTL_SECONDS },

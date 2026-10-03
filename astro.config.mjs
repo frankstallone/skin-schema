@@ -15,8 +15,10 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      filter: (page) =>
-        new URL(page).pathname.replace(/\/+$/, '') !== '/palettes',
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\/+$/, '');
+        return pathname !== '/palettes' && !/^\/store(?:\/|$)/.test(pathname);
+      },
     }),
     partytown({
       // Example: Add dataLayer.push as a forwarding-event.

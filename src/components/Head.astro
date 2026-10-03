@@ -9,6 +9,7 @@ interface Props {
   themeColor?: string;
   statusBarStyle?: 'default' | 'black' | 'black-translucent';
   robots?: string;
+  analytics?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   themeColor = '#F2EDE6',
   statusBarStyle = 'default',
   robots,
+  analytics = true,
 } = Astro.props;
 
 const metaDescription =
@@ -29,6 +31,14 @@ const siteUrl = new URL('/', Astro.site || Astro.url);
 const usesDefaultImage = !image;
 const ogImage = image || '/media/og-image-2026-08-29.jpg';
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
+const googleTagScript = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', 'G-R4BV0D0EME');
+`;
 
 // If canonicalURL is not provided, use the current URL
 const canonicalUrl = new URL(canonicalURL || Astro.url, siteUrl);
@@ -122,19 +132,17 @@ const structuredData = isHomepage
   }
   <meta name="title" content={title} />
 
-  <!-- Google tag (gtag.js) -->
-  <script
-    type="text/partytown"
-    is:inline
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-R4BV0D0EME"></script>
-  <script type="text/partytown" is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-R4BV0D0EME');
-  </script>
+  {
+    analytics && (
+      <>
+        <script
+          type="text/partytown"
+          is:inline
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-R4BV0D0EME"
+        />
+        <script type="text/partytown" is:inline set:html={googleTagScript} />
+      </>
+    )
+  }
 </head>
