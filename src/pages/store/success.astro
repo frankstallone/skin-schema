@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { primaryAction } from '../../components/actionClasses';
 import {
   getVerifiedPurchase,
   isCheckoutSessionId,
@@ -67,7 +68,10 @@ const expiryLabel = accessExpiresAt?.toLocaleString('en-US', {
             videos,
             {product.downloadSize}.
           </p>
-          <a class="purchase-status__button" href={downloadUrl}>
+          <a
+            class={`${primaryAction} max-w-full justify-center text-center`}
+            href={downloadUrl}
+          >
             Download {product.name}
           </a>
           <p class="purchase-status__note">
@@ -97,7 +101,10 @@ const expiryLabel = accessExpiresAt?.toLocaleString('en-US', {
             We could not check your test payment with Stripe. Wait a moment,
             then check this page again.
           </p>
-          <a class="purchase-status__button" href={retryUrl}>
+          <a
+            class={`${primaryAction} max-w-full justify-center text-center`}
+            href={retryUrl}
+          >
             Check purchase status again
           </a>
         </>
@@ -118,7 +125,10 @@ const expiryLabel = accessExpiresAt?.toLocaleString('en-US', {
             finished Checkout, wait a moment and check again. Downloads become
             available after confirmation.
           </p>
-          <a class="purchase-status__button" href={retryUrl}>
+          <a
+            class={`${primaryAction} max-w-full justify-center text-center`}
+            href={retryUrl}
+          >
             Check purchase status again
           </a>
         </>
@@ -205,36 +215,16 @@ const expiryLabel = accessExpiresAt?.toLocaleString('en-US', {
     max-inline-size: 65ch;
   }
 
-  .purchase-status__button,
   .purchase-status__back {
     inline-size: fit-content;
     max-inline-size: 100%;
-  }
-
-  .purchase-status__button {
-    background: var(--color-action-primary-background-color);
-    border: 1px solid var(--color-action-primary-border-color);
-    border-radius: 999px;
-    color: var(--color-action-primary-foreground-color);
-    font-family: var(--font-mono);
-    font-size: var(--text-step-000);
-    font-weight: var(--font-weight-bold);
-    min-block-size: 44px;
-    padding: var(--spacing-xs) var(--spacing-m);
-    text-decoration: none;
-  }
-
-  .purchase-status__button:hover {
-    filter: brightness(1.08);
-  }
-
-  .purchase-status__back {
     color: var(--color-action-auxiliary-foreground-color);
     margin-block-start: var(--spacing-s);
     text-underline-offset: 0.2em;
   }
 
-  .purchase-status a:focus-visible {
+  .purchase-status__back:focus-visible,
+  .purchase-status p a:focus-visible {
     outline: 2px solid var(--color-surface-auxiliary-foreground-color);
     outline-offset: 0.25rem;
   }

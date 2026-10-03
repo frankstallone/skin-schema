@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { primaryAction } from '../../components/actionClasses';
 import { storefrontProducts } from '../../lib/storefront/catalog';
 
 export const prerender = true;
@@ -112,10 +113,14 @@ export const prerender = true;
             <form action="/store/checkout" method="post">
               <input type="hidden" name="product_id" value={product.id} />
               <button
+                class={`${primaryAction} max-w-full cursor-pointer justify-center text-center`}
                 type="submit"
                 aria-label={`Start test Checkout for ${product.name} at ${product.priceLabel}`}
               >
-                Test Checkout — {product.priceLabel}
+                <span>
+                  Test Checkout —{' '}
+                  <span class="whitespace-nowrap">{product.priceLabel}</span>
+                </span>
               </button>
             </form>
             <p class="storefront__checkout-note">
@@ -179,7 +184,7 @@ export const prerender = true;
   .storefront__wordmark {
     font-family: var(--font-mono);
     font-size: var(--text-step-000);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-bold);
     margin: 0;
     text-transform: uppercase;
   }
@@ -244,6 +249,7 @@ export const prerender = true;
       'overview media'
       'content media';
     grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.7fr);
+    grid-template-rows: auto 1fr;
     padding-block: var(--spacing-xl);
   }
 
@@ -306,25 +312,6 @@ export const prerender = true;
     margin: var(--spacing-xs) 0 0;
   }
 
-  .storefront button {
-    background: var(--color-action-primary-background-color);
-    border: 1px solid var(--color-action-primary-border-color);
-    border-radius: 999px;
-    color: var(--color-action-primary-foreground-color);
-    cursor: pointer;
-    font: inherit;
-    font-family: var(--font-mono);
-    font-size: var(--text-step-000);
-    font-weight: var(--font-weight-bold);
-    min-block-size: 44px;
-    padding: var(--spacing-xs) var(--spacing-m);
-  }
-
-  .storefront button:hover {
-    filter: brightness(1.08);
-  }
-
-  .storefront button:focus-visible,
   .storefront a:focus-visible,
   .storefront video:focus-visible {
     outline: 2px solid currentColor;
@@ -379,6 +366,7 @@ export const prerender = true;
         'overview'
         'media'
         'content';
+      grid-template-rows: none;
     }
 
     .storefront__media {

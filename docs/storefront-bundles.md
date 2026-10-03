@@ -1,6 +1,6 @@
 # Storefront bundle handoff
 
-Audit date: October 2, 2026. This document records the source media and verification results for the unlisted, two-bundle Stripe test storefront. Original archives are held in private R2 storage.
+Source audit: October 2, 2026. Packaging and design review: October 3, 2026. This document records the source media and verification results for the unlisted, two-bundle Stripe test storefront. Download archives are held in private R2 storage.
 
 ## Current offer
 
@@ -77,9 +77,18 @@ The bundles contain 64 delivered files and 57 unique byte sequences. Each bundle
 | `08-C2587.mov`        | `11-C2587.mov`              |
 | `09-C2587.mov`        | `10-C2587.mov`              |
 
-Preserve the numeric prefixes in archive filenames. Batch 30 has four source names that collide as `C2587.mov` after case folding, plus two as `C1749.mov`. Batch 34 has three as `C2587.mov`. These names refer to different files. Removing prefixes or changing filename case can overwrite footage on a filesystem that ignores case.
+Delivered videos use `skin-schema-<bundle-id>-<three-digit-sequence>.<extension>`, inside the ZIP's `clips/` folder. Use the catalog bundle ID, lowercase kebab case, and a zero-padded sequence starting at `001`. Preserve the original `.mov` or `.mp4` container and normalize the extension to lowercase. Do not put a camera counter, working title punctuation, price, or claimed resolution in the delivered filename.
 
-The file references in this audit use the local inventory numbering. The ZIPs use a separate stable ordering and three-digit prefixes. Use each ZIP's `clip-index.csv` and SHA-256 hashes to match its clips to the local inventory.
+| ZIP download                       | Example video filename                       |
+| ---------------------------------- | -------------------------------------------- |
+| `skin-schema-bathroom-rituals.zip` | `clips/skin-schema-bathroom-rituals-001.mov` |
+| `skin-schema-coastal-skin.zip`     | `clips/skin-schema-coastal-skin-001.mov`     |
+
+The existing ZIP clip order is preserved. Preview reels now follow that order and show the matching three-digit clip number, so `CLIP 001` identifies the delivered `-001` file. Renaming does not change any source video bytes, dimensions, codec, frame rate, audio, or rotation metadata.
+
+Each ZIP includes `clip-index.csv`, which maps the delivered path to the original source name, byte size and SHA-256. The source names alone are not unique: batch 30 has four names that collide as `C2587.mov` after case folding, plus two as `C1749.mov`; batch 34 has three as `C2587.mov`. The delivered sequence prevents these collisions. Retain it when moving clips between folders.
+
+The file references in this audit use the local source inventory numbering. The ZIPs and previews use their own stable ordering. Use the manifest and SHA-256 hashes to match delivered clips to the local inventory. The original source folders and previously verified ZIPs remain intact; renamed ZIPs are also saved in [renamed-bundles](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/renamed-bundles>).
 
 ## Theme and commercial-use review
 
@@ -120,15 +129,15 @@ Before deploying this code in another Netlify context, set its `STOREFRONT_PRODU
 
 | Package          | R2 object in `skin-schema-storefront-poc` |   ZIP bytes | Stripe test Price                |
 | ---------------- | ----------------------------------------- | ----------: | -------------------------------- |
-| Bathroom Rituals | `bundles/bathroom-rituals.zip`            | 671,085,692 | `price_1UMIzvLpq8LY8QJOJqinlMxz` |
-| Coastal Skin     | `bundles/coastal-skin.zip`                | 503,874,634 | `price_1UMIzwLpq8LY8QJOxzd4Ch7v` |
+| Bathroom Rituals | `bundles/bathroom-rituals.zip`            | 671,087,913 | `price_1UMIzvLpq8LY8QJOJqinlMxz` |
+| Coastal Skin     | `bundles/coastal-skin.zip`                | 503,876,746 | `price_1UMIzwLpq8LY8QJOxzd4Ch7v` |
 
 Stripe test Product IDs are `prod_skin_schema_bathroom_rituals_test` and `prod_skin_schema_coastal_skin_test`. Each Price is 9,900 USD cents. The ZIPs include unchanged source videos, a `clip-index.csv` manifest, and a test-only README.
 
 | Archive          | SHA-256                                                            |
 | ---------------- | ------------------------------------------------------------------ |
-| Bathroom Rituals | `6b2a0e315be557c68ecd70417b5185822e0d0ef477a2ac0d22c50d02b3165dc9` |
-| Coastal Skin     | `82937fdddba74f9013b3bd596de72766e3c609ffb1dc23351e85a2b2245c0354` |
+| Bathroom Rituals | `a2759ec9f6479aa350988bfa3d4648817271a23e864cfb97f07fd3ccab9202a0` |
+| Coastal Skin     | `f399b65a2b4366058d451ca80dbd3a6fbdbafe38f3ca105671d2b66c2da021ac` |
 
 Verification completed:
 
