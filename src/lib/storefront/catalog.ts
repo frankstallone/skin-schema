@@ -39,7 +39,7 @@ export const storefrontProducts = [
     id: 'coastal-skin',
     name: 'Coastal Skin',
     description:
-      'Ocean light, slow beach days, and sunlit resort details. A collection of coastal atmosphere and summer routines.',
+      'Ocean light, slow beach days, and sunlit resort details, alongside quiet bathroom and indoor rituals.',
     previewSrc: '/media/storefront/coastal-skin-preview.mp4',
     posterSrc: '/media/storefront/coastal-skin-poster.jpg',
     qualityNote:
