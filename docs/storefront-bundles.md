@@ -64,11 +64,13 @@ Both preview reels were rebuilt from these final files. Every clip appears in or
 | resort-glow         | 1,338  | 44.644600 seconds |
 | hotel-bathroom-glow | 1,286  | 42.909533 seconds |
 
-## Test deployment
+## Deployment on main
 
-Review URL: [Skin Schema preview store](https://f4-storefront-video-bundles--skinschema.netlify.app/store/).
+Test storefront: [Skin Schema store](https://skinschema.com/store/).
 
-The branch is `f4/storefront-video-bundles`. The storefront remains absent from site navigation and the sitemap, and its pages use `noindex, nofollow`. The new catalog replaces the earlier bundle IDs. The branch-specific `STOREFRONT_PRODUCTS_JSON` maps the two current IDs to the Price/object pairs below. Production promotion and commercial launch require separate review; production was not changed by this update.
+The storefront lives on `main` and deploys with the site. It remains unlisted: it is absent from site navigation and the sitemap, and its pages use `noindex, nofollow`. Anyone with the URL can view it; this is not an access-control boundary. The store accepts only Stripe test credentials and test purchases. Real payments, final pricing, and commercial license terms still require a separate launch decision.
+
+The production-context `STOREFRONT_PRODUCTS_JSON` maps the two current bundle IDs to the Price/object pairs below. Existing Stripe test and private R2 credentials remain in Netlify. The earlier [branch preview](https://f4-storefront-video-bundles--skinschema.netlify.app/store/) is retained as a review reference.
 
 | Bundle              | R2 object in `skin-schema-storefront-poc` | Stripe test Price                |
 | ------------------- | ----------------------------------------- | -------------------------------- |
@@ -92,7 +94,7 @@ The installation verified both staged archives before publishing either new cano
 - `npm test` passed all 33 tests, including both renamed products, purchase authorization, the exact 24-hour boundary, replacement-token rotation, malformed settings, refund/dispute restrictions, and R2 deadline limits. `npm run build` passed with zero Astro errors, warnings, or hints.
 - The Netlify adapter does not support `astro preview`. Browser playback, responsive layout, console checks, test purchases, full buyer downloads, and the final deployment identity are recorded in the [completion report](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/glow-bundles/completion-report.json>). Buyer downloads and their hash receipts are retained in [buyer-downloads](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/glow-bundles/buyer-downloads>).
 
-For manual testing, open the branch storefront and choose either test Checkout. Use Stripe's `4242 4242 4242 4242` test card, a future expiration date, a three-digit CVC, and a test email. Disable saving payment information. Download within 24 hours of the successful charge. After that window, contact `glow@skinschema.com` from the Checkout email address to request another timed link. A test purchase grants no commercial usage rights.
+For manual testing, open the storefront on `skinschema.com` and choose either test Checkout. Use Stripe's `4242 4242 4242 4242` test card, a future expiration date, a three-digit CVC, and a test email. Disable saving payment information. Download within 24 hours of the successful charge. After that window, contact `glow@skinschema.com` from the Checkout email address to request another timed link. A test purchase grants no commercial usage rights.
 
 ## Download expiry and manual replacements
 
