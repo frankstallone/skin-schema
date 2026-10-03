@@ -1,0 +1,23 @@
+{
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAzzeLsP9ewGn0Y8gzK63d\nQgSDcyJUOp3k3PmzASD4fc/zpbqkROnMzXcvYlTtfUPHMh6khK2CiZcVQZxg4iDA\n4+N5E/i0YU6D0Uc97/yxu8fsmo688/kDQ4r49+RPXK4ko+Y9uE9i7BTgdwzbZ+Tt\ntS+E/9cf2ogtB3dbsjlH3DJprgsCBmkjqRqol3GwA3Hfhr+MLdgqLiipPh+IqwsA\ncFosv3ypeUACeXDR4RqqvEUiiUreOHdiWSG7nVF+p8HucJ/5PmCRdsLYukr9GuLF\njXNaoOhGDaBIyFBVRW812Vc6ZWPDb1jp57tv516A9ttD0HaeiCGzdoe+xTAglw+d\nlePM0ZF/KavVNPbyDLW0Exgknhh0xnKWM2ZN9Cs8aUe/lUkw67sqy0qlCY2xIr/B\neYMlNzX6G0qrVWsqisXIX2NLE9udAhc0PpuWpLe4FC6ruUo19q29buzUqVw0LJa5\nJt/gAjaxnWvjDr7CwYyp5lkj+e6VboMF1ITPXMOz139ZAgMBAAE=\n-----END PUBLIC KEY-----\n",
+  "bundles": [
+    {
+      "id": "resort-glow",
+      "name": "Resort Glow",
+      "clipCount": 30,
+      "key": "bundles/resort-glow.zip",
+      "bytes": 186898443,
+      "sha256": "d2b6e268177ba629b90ce0b364573d489ae999b02c64b58ef585ced8f3d2e8cb",
+      "md5": "66wOkTLnlD2s8HLU9E1S9A=="
+    },
+    {
+      "id": "hotel-bathroom-glow",
+      "name": "Hotel Bathroom Glow",
+      "clipCount": 29,
+      "key": "bundles/hotel-bathroom-glow.zip",
+      "bytes": 160079484,
+      "sha256": "85faa3fd7ea51ee27f6fa40ea8497728d61c25ef89eadc3bbdf5e36777afcd26",
+      "md5": "2lbPWrnfhO7FYlhSGgPECg=="
+    }
+  ]
+}

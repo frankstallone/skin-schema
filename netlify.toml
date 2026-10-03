@@ -4,3 +4,6 @@
 
 [build.environment]
   NODE_VERSION = "22.12.0"
+
+[context."f4/storefront-video-bundles"]
+  command = "node scripts/install-glow-bundles.mjs && npm run build"
