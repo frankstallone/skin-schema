@@ -28,7 +28,8 @@ export const prerender = true;
       <h1 id="store-title">Beauty b-roll, in two collections.</h1>
       <p class="storefront__lede">
         Bathroom rituals and coastal moments from the Skin Schema archive.
-        Explore the watermarked previews and source footage details below.
+        Explore the watermarked previews. Each bundle includes silent, vertical
+        Full HD clips in MP4 format.
       </p>
       <div class="storefront__notice" data-mode="light">
         <p>
@@ -72,15 +73,15 @@ export const prerender = true;
               Your browser does not support HTML video.
             </video>
             <figcaption id={`${product.id}-preview-note`}>
-              Watermarked preview reel. The details describe the complete source
-              bundle.
+              Preview excerpts from every clip, in download order. The
+              downloaded clips have no added watermark.
             </figcaption>
           </figure>
 
           <div class="storefront__content">
             <dl class="storefront__specs">
               <div>
-                <dt>Source videos</dt>
+                <dt>Video clips</dt>
                 <dd>{product.clipCount}</dd>
               </div>
               <div>
@@ -96,8 +97,20 @@ export const prerender = true;
                 <dd>{product.orientation}</dd>
               </div>
               <div>
-                <dt>Source format</dt>
+                <dt>File format</dt>
                 <dd>{product.format}</dd>
+              </div>
+              <div>
+                <dt>Frame rate</dt>
+                <dd>{product.frameRate}</dd>
+              </div>
+              <div>
+                <dt>Audio</dt>
+                <dd>{product.audio}</dd>
+              </div>
+              <div>
+                <dt>Color</dt>
+                <dd>{product.colorSpace}</dd>
               </div>
               <div>
                 <dt>Bundle download</dt>

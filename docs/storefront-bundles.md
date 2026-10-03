@@ -1,6 +1,6 @@
 # Storefront bundle handoff
 
-Source audit: October 2, 2026. Packaging and design review: October 3, 2026. This document records the source media and verification results for the unlisted, two-bundle Stripe test storefront. Download archives are held in private R2 storage.
+Source audit: October 2, 2026. Packaging, design review, and delivery normalization: October 3, 2026. This document records the archived sources, normalized delivery files, and verification results for the unlisted, two-bundle Stripe test storefront. Download archives are held in private R2 storage.
 
 ## Current offer
 
@@ -11,7 +11,7 @@ Source audit: October 2, 2026. Packaging and design review: October 3, 2026. Thi
 
 The titles and prices await approval. The $99 price comes from a founding-price hypothesis in the earlier bundle plan. It is not evidence of buyer demand or a settled sale price. Final commercial license terms also await approval. Test Checkout takes no real payment and grants no commercial usage rights.
 
-Keep both batches intact, including the seven files that appear in both. The user requested two bundles of 30 and 34 files. These counts describe delivered files, not distinct compositions or unique shots.
+Keep both batches intact, including the seven clips that appear in both. The user requested two bundles of 30 and 34 files. These counts describe delivered files, not distinct compositions or unique shots. Silent, normalized delivery was approved on October 3. Original masters remain archived separately.
 
 ## Local sources and evidence
 
@@ -26,11 +26,32 @@ Keep both batches intact, including the seven files that appear in both. The use
 
 The first browser ZIP's 30 media entries have the same SHA-256 hash multiset as the 30 numbered iCloud downloads. Compare ZIP entries directly; the older loose `batch-30` extraction contains only 28 files and is not canonical.
 
-The audit independently checked all 64 files with `ffprobe` and SHA-256. File sizes, durations and hashes match the inventories. Display dimensions account for the files' ±90° rotation metadata. The sources retain their bytes and rotation metadata; the audit created separate review images only.
+The source audit independently checked all 64 files with `ffprobe` and SHA-256. File sizes, durations and hashes match the inventories. Display dimensions account for the files' ±90° rotation metadata. The archived sources retain their bytes and rotation metadata. Normalized delivery files are separate exports.
 
 The first ten video attachments returned by the authorized message read are byte-identical to the matching 34-file downloads. Their dimensions, durations, codecs and frame rates also match. The comparison retains media facts only.
 
-## Verified media facts
+## Normalized delivery
+
+Every delivered clip is an unwatermarked MP4 with H.264 High Profile video at 1080 × 1920, 9:16, square pixels, progressive 29.97 fps (`30000/1001`), 8-bit 4:2:0, and SDR Rec.709. There are no audio streams. The two bundles retain their original membership, clip numbers, and order.
+
+| Fact                          | Bathroom Rituals                | Coastal Skin                    |
+| ----------------------------- | ------------------------------- | ------------------------------- |
+| Delivered clips               | 30                              | 34                              |
+| Decoded frames                | 3,548                           | 4,300                           |
+| Total runtime                 | 118.384933 seconds              | 143.476667 seconds              |
+| Individual runtimes           | 1.601600–11.778433 seconds      | 1.735067–12.512500 seconds      |
+| ZIP size                      | 111,248,434 bytes; about 111 MB | 191,153,430 bytes; about 191 MB |
+| Upscaled from smaller sources | 3 clips                         | 3 clips                         |
+
+The [reviewed normalization handoff](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/normalization-audit/reviewed-handoff.md>) records the independent audit and color comparisons. The [delivery directory](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/normalized-bundles>) contains both ZIPs, extracted bundles, exact encoding commands, per-file verification, and `bundle-manifest.json`. The builder encodes each of the 57 unique sources once, then maps shared exports into both bundles.
+
+Conversion uses FFmpeg 8.1.2, libx264 CRF 16 with the slow preset, baked-in rotation, source-specific range handling, Lanczos scaling, and the audited per-source frame-rate recipe. All 6,908 unique decoded source pictures remain in order. Each output starts at PTS zero and advances by 1,001 ticks in a 30,000 Hz time base. Both the movie and video track use that time base; setting `-movie_timescale 30000` prevents millisecond rounding in MP4 edit durations. Per-clip runtime changes are between −24.367 and +28.234 ms, less than one output frame.
+
+Container, bitstream, and decoded-frame color descriptions agree on Rec.709 with limited-range signaling. The seven HEVC sources with unspecified transfer metadata use the documented Rec.709 assumption. No player-specific gamma adjustment or creative grade was applied. The audit found that legacy xvYCC tags produce different brightness shifts in Apple and Chrome renderers, so identical appearance to the old files in every player is not promised. Source highlight headroom is retained; this is not a broadcast-legalization pass.
+
+All 57 exports passed full decode, frame-count, every-frame timing, geometry, square-pixel, progressive-scan, codec, color, rotation, fast-start, and zero-audio checks. Both local ZIPs passed integrity and per-entry SHA-256 checks. Remote installation and buyer-download verification are pending in this update.
+
+## Archived source media facts
 
 | Fact                          | Bathroom Rituals                           | Coastal Skin                                |
 | ----------------------------- | ------------------------------------------ | ------------------------------------------- |
@@ -47,7 +68,7 @@ The first ten video attachments returned by the authorized message read are byte
 | Files with audio tracks       | 30                                         | 34                                          |
 | Audio codecs                  | 29 PCM tracks and 1 AAC track              | 34 PCM tracks                               |
 
-Source totals exclude ZIP packaging overhead. Exact archive sizes are recorded below. The source files are encoded with H.264 or HEVC. Do not describe either bundle as entirely 4K or uncompressed, or promise an exact constant frame rate.
+These are archived source facts, not the delivery specifications. Source totals exclude ZIP packaging overhead. The delivered bundles contain normalized Full HD H.264 MP4s at a verified constant frame rate. Do not describe them as 4K, uncompressed, or camera originals.
 
 The cropped files are:
 
@@ -77,18 +98,18 @@ The bundles contain 64 delivered files and 57 unique byte sequences. Each bundle
 | `08-C2587.mov`        | `11-C2587.mov`              |
 | `09-C2587.mov`        | `10-C2587.mov`              |
 
-Delivered videos use `skin-schema-<bundle-id>-<three-digit-sequence>.<extension>`, inside the ZIP's `clips/` folder. Use the catalog bundle ID, lowercase kebab case, and a zero-padded sequence starting at `001`. Preserve the original `.mov` or `.mp4` container and normalize the extension to lowercase. Do not put a camera counter, working title punctuation, price, or claimed resolution in the delivered filename.
+Delivered videos use `skin-schema-<bundle-id>-<three-digit-sequence>.mp4`, inside the ZIP's `clips/` folder. Use the catalog bundle ID, lowercase kebab case, and a zero-padded sequence starting at `001`. The filename stem and sequence remain stable; all normalized deliveries use `.mp4`. Do not put a camera counter, working title punctuation, price, or claimed resolution in the delivered filename.
 
 | ZIP download                       | Example video filename                       |
 | ---------------------------------- | -------------------------------------------- |
-| `skin-schema-bathroom-rituals.zip` | `clips/skin-schema-bathroom-rituals-001.mov` |
-| `skin-schema-coastal-skin.zip`     | `clips/skin-schema-coastal-skin-001.mov`     |
+| `skin-schema-bathroom-rituals.zip` | `clips/skin-schema-bathroom-rituals-001.mp4` |
+| `skin-schema-coastal-skin.zip`     | `clips/skin-schema-coastal-skin-001.mp4`     |
 
-The existing ZIP clip order is preserved. Preview reels now follow that order and show the matching three-digit clip number, so `CLIP 001` identifies the delivered `-001` file. Renaming does not change any source video bytes, dimensions, codec, frame rate, audio, or rotation metadata.
+The existing ZIP clip order is preserved. Preview reels follow that order and show the matching three-digit clip number, so `CLIP 001` identifies the delivered `-001.mp4` file. Previews are generated from the final normalized exports. Only preview excerpts receive an added Skin Schema watermark.
 
-Each ZIP includes `clip-index.csv`, which maps the delivered path to the original source name, byte size and SHA-256. The source names alone are not unique: batch 30 has four names that collide as `C2587.mov` after case folding, plus two as `C1749.mov`; batch 34 has three as `C2587.mov`. The delivered sequence prevents these collisions. Retain it when moving clips between folders.
+Each ZIP includes `clip-index.csv`, which records the original source name, source byte size and `sourceSha256` separately from the delivered path, delivered size and `deliverySha256`. It also records dimensions, frame rate, frame count, runtime, audio status, transfer assumptions, and upscaling. The source names alone are not unique: batch 30 has four names that collide as `C2587.mov` after case folding, plus two as `C1749.mov`; batch 34 has three as `C2587.mov`. The delivered sequence prevents these collisions. Retain it when moving clips between folders.
 
-The file references in this audit use the local source inventory numbering. The ZIPs and previews use their own stable ordering. Use the manifest and SHA-256 hashes to match delivered clips to the local inventory. The original source folders and previously verified ZIPs remain intact; renamed ZIPs are also saved in [renamed-bundles](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/renamed-bundles>).
+The file references in this audit use the local source inventory numbering. The ZIPs and previews use their own stable ordering. Use the manifest and SHA-256 hashes to match delivered clips to the local inventory. The original source folders and previously verified ZIPs remain intact. The preceding source-preserving ZIPs are saved in [renamed-bundles](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/renamed-bundles>); the current MP4 ZIPs are in [normalized-bundles](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/normalized-bundles>).
 
 ## Storefront design alignment
 
@@ -114,9 +135,9 @@ The sampled frames identify these review items:
 | Batch 34 `03-C2596.MOV`                          | Framed “Splash!” artwork is a main subject                           | Confirm permission for the artwork and location use.                                                                                                                                         |
 | Batch 34 `31-C1495.MOV`                          | A person carries a surfboard near the camera; the face is visible    | Confirm the subject's identity and commercial release. Do not assume this is the creator or an unrecognizable bystander.                                                                     |
 | Batch 34 `32-C1491.MOV`, `33-C1475.MOV`          | A book, visible bag markings and a recognizable _The Barbizon_ cover | Review the book artwork, bag branding and whether those elements remain suitable for a reusable pack. The white item in `32-C1491.MOV` appears to be a book, not confirmed beauty packaging. |
-| All files                                        | Source audio tracks                                                  | Original audio is not cleared for commercial reuse. Confirm music, speech, incidental recordings and permissions before licensing or promise a separately prepared silent delivery.          |
+| All files                                        | Source audio tracks                                                  | Silent delivery is approved and implemented. The normalized MP4s and preview reels contain no audio streams; source audio remains only in the archived originals.                            |
 
-The sampled frames do not certify the absence of people, products, logos, artwork or restricted audio elsewhere in a clip. This audit did not review every frame or listen to every audio track. It does not certify copyright ownership, model or property releases, client-contract reuse rights, or camera-original provenance. The test bundles preserve all supplied files; no review flag removes or transforms a source file.
+The sampled frames do not certify the absence of people, products, logos, artwork or restricted audio elsewhere in a clip. This audit did not review every frame or listen to every audio track. It does not certify copyright ownership, model or property releases, client-contract reuse rights, or camera-original provenance. The normalized test bundles preserve all supplied clips and their order. Technical normalization and audio removal do not resolve the visual rights-review items above.
 
 ## Prior planning and current scope
 
@@ -138,7 +159,7 @@ Before deploying this code in another Netlify context, set its `STOREFRONT_PRODU
 | Bathroom Rituals | `bundles/bathroom-rituals.zip`            | 671,087,913 | `price_1UMIzvLpq8LY8QJOJqinlMxz` |
 | Coastal Skin     | `bundles/coastal-skin.zip`                | 503,876,746 | `price_1UMIzwLpq8LY8QJOxzd4Ch7v` |
 
-Stripe test Product IDs are `prod_skin_schema_bathroom_rituals_test` and `prod_skin_schema_coastal_skin_test`. Each Price is 9,900 USD cents. The ZIPs include unchanged source videos, a `clip-index.csv` manifest, and a test-only README.
+Stripe test Product IDs are `prod_skin_schema_bathroom_rituals_test` and `prod_skin_schema_coastal_skin_test`. Each Price is 9,900 USD cents. The normalized ZIPs include silent H.264 MP4 videos, a `clip-index.csv` manifest with separate source and delivery hashes, and a test-only README.
 
 | Archive          | SHA-256                                                            |
 | ---------------- | ------------------------------------------------------------------ |
@@ -160,7 +181,7 @@ Verification completed:
 
 On October 3, Chrome rendered the branch storefront and the initial, replacement and expired purchase pages. After their order and clip labels were updated, both preview videos played to completion at 1080 × 1920 without media errors. Their deployed bytes match the local preview files. The store and purchase pages reported no browser console warnings or errors during these checks. The design pass checked the storefront at 320, 390, 768 and 960 px, including the visible cancelled state, and the dark retry state at 320 px. Final deployed checks confirmed the corrected price wrapping at 320 px, the wide layout at 1280 px, matching homepage/store button metrics at 960 px, and the paid download button's dark focus state at 320 px. There was no horizontal overflow. [Desktop](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/storefront-final-desktop.png>), [mobile storefront](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/storefront-final-mobile-320.png>) and [mobile purchase](</Users/starlord/Movies/Skin Schema Storefront/2026-10-03/purchase-final-mobile-320.png>) screenshots are saved with the local handoff assets. Earlier in-app browser failures and the native browser's Screen Time limit did not recur in this Chrome session; the system limit was not changed.
 
-For manual testing, open the branch storefront and choose either test Checkout. Use `4242 4242 4242 4242`, any future expiration date, any three-digit CVC, and a test email. Disable saving payment information. Download within 24 hours of the successful charge. After that window, email `glow@skinschema.com` from the Checkout email address to request a new timed link. A successful test purchase grants access to the original files but no commercial usage rights.
+For manual testing, open the branch storefront and choose either test Checkout. Use `4242 4242 4242 4242`, any future expiration date, any three-digit CVC, and a test email. Disable saving payment information. Download within 24 hours of the successful charge. After that window, email `glow@skinschema.com` from the Checkout email address to request a new timed link. A successful test purchase grants access to the normalized delivery files but no commercial usage rights.
 
 ## Download expiry and manual replacements
 
